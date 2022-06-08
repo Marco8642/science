@@ -1,0 +1,105 @@
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
+local example = library:CreateWindow({
+  text = "World of Stands"
+})
+example:AddToggle("Auto Farm All Npc's", function(state)
+_G.Autofarm = (state and true or false)
+while _G.Autofarm do
+    wait()
+    pcall(function()
+for a,b in pairs(game:GetService("Workspace"):GetDescendants()) do
+    if b.Name == "HumanoidRootPart" and not b.Parent:FindFirstChild("PlayerHeader")  and b.Parent.Parent.Name ~= "InteractiveNPC" and  b.Parent.Humanoid.MaxHealth ~= 1000000  and b.Parent.Name ~= game.Players.LocalPlayer.Name then
+repeat wait()
+    b.Anchored = true
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b.CFrame*CFrame.new(0,0,3)
+require(game:GetService("ReplicatedStorage").Network):FireServer("TryPunch")
+until b.Parent.Humanoid.Health == 0 or _G.Autofarm == false
+end
+end
+end)
+end
+end)
+example:AddToggle("Auto Collect Collectables", function(state)
+_G.loot = (state and true or false)
+while _G.loot do
+    wait()
+for i,v in pairs(workspace:GetDescendants()) do
+    if v.Name == "Part" and v:FindFirstChild("TouchInterest") and v.Parent.Parent == workspace  then
+        wait()
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v,0)
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v,1)
+end
+end
+end
+end)
+example:AddToggle("Auto Quest Farm", function(state)
+    _G.quest = (state and true or false)
+    while _G.quest do
+        wait()
+        pcall(function()
+        for c,d in pairs(game:GetService("Players").LocalPlayer.PlayerGui.BaseGui:GetDescendants()) do
+            if d.Name == "ValueLabel" and d.Text ~= "Completed!" then
+                wait()
+        local test=d.Text:split("/")
+    local test2 = test[1]:split(":")
+    for a,b in pairs(game:GetService("Workspace"):GetChildren()) do
+        if b.Name == test2[1]  then
+    if _G.busy ~= true then
+        _G.busy2 = true
+    repeat wait()
+        b.HumanoidRootPart.Anchored = true
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b.HumanoidRootPart.CFrame*CFrame.new(0,0,3)
+    require(game:GetService("ReplicatedStorage").Network):FireServer("TryPunch")
+    until b.Humanoid.Health == 0 or _G.quest == false or d.Text == "" or _G.busy == true
+    _G.busy2 = false
+    end
+    end
+    end
+    end
+    end
+    end)
+    end
+end)
+spawn(function()
+while wait() do
+    if _G.quest == true then
+pcall(function()
+for i,v in pairs(game:GetService("Workspace").Terrain:GetDescendants()) do
+    if v.Name == "Marker" then
+for a,b in pairs(workspace:GetDescendants()) do
+    if b.Name == "HumanoidRootPart" and b.Parent:FindFirstChild("Humanoid") and not b.Parent:FindFirstChild("PlayerHeader")  and b.Parent.Parent.Name ~= "InteractiveNPC" and  b.Parent.Humanoid.MaxHealth ~= 1000000 and (b.Position-v.Parent.Position).Magnitude < 50 then
+   if _G.busy2 ~= true then
+       _G.busy = true
+   repeat wait()
+       b.Anchored = true
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b.CFrame*CFrame.new(0,0,3)
+require(game:GetService("ReplicatedStorage").Network):FireServer("TryPunch")
+until b.Parent.Humanoid.Health == 0 or _G.quest == false or _G.busy2 == true
+_G.busy = false
+end
+end
+end
+end
+end
+end)
+end
+end
+end)
+spawn(function()
+    while wait() do
+if _G.quest == true then
+    pcall(function()
+        for i,v in pairs(game:GetService("Workspace").InteractiveNPC:GetDescendants()) do
+            if v.Name == "ID" and v.Parent.Name ~= "Bounty Master" then
+        task.wait()
+        require(game:GetService("ReplicatedStorage").Network):FireServer("OnPromptActivated",v.Value)
+        task.wait()
+        require(game:GetService("ReplicatedStorage").Network):InvokeServer("NPCInteract",v.Value)
+        game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.TextLabel:Destroy()
+        end
+        end
+        wait(10)
+    end)    
+    end
+    end
+end)
