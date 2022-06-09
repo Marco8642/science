@@ -97,12 +97,13 @@ while _G.useskills do
     task.wait()
 if not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack1:FindFirstChild("Attack1") then
     require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack1")
-wait()
+wait(1)
 elseif not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack2:FindFirstChild("Attack2") then
     require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack2")
-wait()
+wait(1)
 elseif not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack3:FindFirstChild("Attack3") then
     require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack3")
+    wait(1)
     end
 end
 end)
