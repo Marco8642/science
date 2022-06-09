@@ -8,13 +8,38 @@ local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", tru
 local example = library:CreateWindow({
   text = "World of Stands"
 })
+example:AddBox("Npc Name", function(object, focus)
+    if focus then
+   
+     _G.enemyselect = tostring(object.Text)
+    end
+  end)
+  example:AddToggle("Auto Farm Npc's", function(state)
+  _G.SelAutofarm = (state and true or false)
+  while _G.SelAutofarm do
+      wait()
+      pcall(function()
+  for a,b in pairs(game:GetService("Workspace"):GetChildren()) do
+      if b.Name == _G.enemyselect  and b:FindFirstChild("HumanoidRootPart") then
+  repeat wait()
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b.HumanoidRootPart.CFrame*CFrame.new(0,0,5)
+      task.wait()
+      b.HumanoidRootPart.Anchored = true
+  require(game:GetService("ReplicatedStorage").Network):FireServer("TryPunch")
+  until b.Humanoid.Health == 0 or _G.Autofarm == false
+  b.HumanoidRootPart.Anchored = false
+  end
+  end
+  end)
+  end
+end)
 example:AddToggle("Auto Farm All Npc's", function(state)
 _G.Autofarm = (state and true or false)
 while _G.Autofarm do
     wait()
     pcall(function()
 for a,b in pairs(game:GetService("Workspace"):GetDescendants()) do
-    if b.Name == "HumanoidRootPart" and not b.Parent:FindFirstChild("PlayerHeader")  and b.Parent.Parent.Name ~= "InteractiveNPC" and  b.Parent.Humanoid.MaxHealth ~= 1000000  and b.Parent.Name ~= game.Players.LocalPlayer.Name then
+    if b.Name == "HumanoidRootPart" and not b.Parent:FindFirstChild("PlayerHeader")  and b.Parent.Parent.Name ~= "InteractiveNPC" and  b.Parent.Humanoid.MaxHealth < 999999  and b.Parent.Name ~= game.Players.LocalPlayer.Name then
 repeat wait()
     b.Anchored = true
     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=b.CFrame*CFrame.new(0,0,3)
@@ -66,6 +91,40 @@ example:AddToggle("Auto Quest Farm", function(state)
     end)
     end
 end)
+example:AddToggle("Auto Use Skills", function(state)
+_G.useskills = (state and true or false)
+while _G.useskills do
+    task.wait()
+if not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack1:FindFirstChild("Attack1") then
+    require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack1")
+wait()
+elseif not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack2:FindFirstChild("Attack2") then
+    require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack2")
+wait()
+elseif not game:GetService("Players").LocalPlayer.PlayerGui.BaseGui.Overlay.BarFrame.ActionFrame.Attack3:FindFirstChild("Attack3") then
+    require(game:GetService("ReplicatedStorage").Network):FireServer("TryAttack","Attack3")
+    end
+end
+end)
+spawn(function()
+    while wait() do
+    if _G.useskills == true then
+        pcall(function()
+    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Model") then
+    for i,v in pairs(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Model"):GetDescendants()) do
+        if v.Name == "BladeWeld" and v.Enabled == true then
+        wait()
+        require(game:GetService("ReplicatedStorage").Network):FireServer("StandSummon")
+        elseif v.Name == "Head" and v.Transparency == 1 then
+            wait()
+        require(game:GetService("ReplicatedStorage").Network):FireServer("StandSummon")
+    end
+    end
+    end
+    end)
+    end
+    end
+    end)
 spawn(function()
 while wait() do
     if _G.quest == true then
