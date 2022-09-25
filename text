@@ -1,0 +1,347 @@
+_G.distance = 300
+_G.tp = 1
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+    local Method = getnamecallmethod()
+    local Args = {...}
+    
+    if Method == 'InvokeServer' and self.Name == 'Morph' then
+ _G.crack = Args[1]
+ _G.crack1 = Args[2]
+ _G.crack3 = Args[4]
+    end
+    
+    return namecall(self, ...) 
+end)
+
+
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs", true))()
+local example = library:CreateWindow({
+  text = "Kaiju Universe"
+})
+example:AddLabel("Autofarm Speed",function()
+end)
+example:AddBox("Speed", function(object, focus)
+    if focus then
+   
+        _G.tp = tonumber(object.Text)
+    end
+    end)
+
+    example:AddLabel("Auto Use Skill",function()
+    end)
+    example:AddBox("Skill Name", function(object, focus)
+        if focus then
+            _G.skillname = tostring(object.Text)
+for i,v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ID") ~= nil then
+if type(v.ID) ~= "number" then
+local test = v.ID:split("#")
+if test[1] == _G.skillname then
+    print(v.ID)
+ _G.skillname = v.ID
+    end
+    end
+end
+end
+        end
+    end)
+   example:AddLabel("Range to Farm",function()
+    end)
+example:AddBox("Range", function(object, focus)
+    if focus then
+   
+        _G.distance = tonumber(object.Text)
+    end
+    end)
+    example:AddToggle("Auto Farm", function(state)
+_G.test = (state and true or false)
+while _G.test do
+wait()
+pcall(function()
+for i,v in pairs(game:GetService("Workspace").Map:GetDescendants()) do
+    if v.Name == "BoundingBox" and _G.test == true   and v.Parent:FindFirstChild("bValues") and v.Parent.bValues:FindFirstChild("Health") and v.Parent.bValues:FindFirstChild("Health").Value > v.Parent.bValues:FindFirstChild("MaxHealth").Value/2  and (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).Magnitude < _G.distance then
+local location = v.Position
+local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+local x = location.X
+local y = location.Y
+local z = location.Z
+
+                 game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+if x < hum.Position.X then
+    while x < hum.Position.X do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-_G.tp,hum.Position.Y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if x > hum.Position.X then
+    while x > hum.Position.X do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+_G.tp,hum.Position.Y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if y < hum.Position.Y then
+    while y < hum.Position.Y do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if y > hum.Position.Y then
+    while y > hum.Position.Y do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if z < hum.Position.Z then
+    while z < hum.Position.Z do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z-_G.tp))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if z > hum.Position.Z then
+    while z > hum.Position.Z do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z+_G.tp))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if y < hum.Position.Y then
+    while y < hum.Position.Y do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+if y > hum.Position.Y then
+    while y > hum.Position.Y do
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
+game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
+              local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
+OnTween:Play()
+ OnTween.Completed:Wait()
+    end
+end
+                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+end
+end
+end)
+end
+end)
+local example = library:CreateWindow({
+    text = "Stuff"
+  })
+  example:AddToggle("Auto Respawn", function(state)
+    _G.autospawn = (state and true or false)
+    while _G.autospawn do
+        wait()
+        pcall(function()
+  if _G.crack ~= nil and game:GetService("Players").LocalPlayer.PlayerGui.newUI.PlayingUI.Visible == false  then
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.KaijuService.RF.Morph:InvokeServer(_G.crack, _G.crack1,nil,_G.crack3)
+    wait(5)
+for i,v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ID") ~= nil then
+if type(v.ID) ~= "number" then
+local test = v.ID:split("#")
+local test2 = _G.skillname:split("#")
+if test[1] == test2[1] then
+ _G.skillname = v.ID
+    end
+    end
+end
+end
+    wait(10)
+    elseif _G.crack2 ~= nil and game:GetService("Players").LocalPlayer.PlayerGui.newUI.PlayingUI.Visible == false then
+    local test = math.random(1,4)
+    for i,v in pairs(game:GetService("ReplicatedStorage").ReplicatedAssets.SpawnLocations:GetChildren()) do
+     if i == test and game.Players.LocalPlayer.Character.Parent == nil then
+    game:GetService("ReplicatedStorage").Packages.Knit.Services.KaijuService.RF.Morph:InvokeServer(_G.crack2,v,nil,_G.crack3)
+    wait(5)
+for i,v in pairs(getgc(true)) do
+    if type(v) == "table" and rawget(v,"ID") ~= nil then
+if type(v.ID) ~= "number" then
+local test = v.ID:split("#")
+local test2 = _G.skillname:split("#")
+if test[1] == test2[1] then
+ _G.skillname = v.ID
+    end
+    end
+end
+end
+             end
+    end
+    wait(1)
+    end
+end)
+end
+end)
+example:AddToggle("Auto Hide User", function(state)
+    _G.nametag = (state and true or false)
+    while _G.nametag do
+    wait()
+    pcall(function()
+    if game.Players.LocalPlayer.Character.Head:FindFirstChild("Nametag") then
+    game.Players.LocalPlayer.Character.Head.Nametag:Destroy()
+    wait()
+    end
+end)
+end
+end)
+example:AddButton("Kill Yourself",function()
+game.Players.LocalPlayer.Character:BreakJoints()
+end)
+example:AddButton("Fps Boost",function()
+local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
+local g = game
+local w = g.Workspace
+local l = g.Lighting
+local t = w.Terrain
+t.WaterWaveSize = 0
+t.WaterWaveSpeed = 0
+t.WaterReflectance = 0
+t.WaterTransparency = 0
+l.GlobalShadows = false
+l.FogEnd = 9e9
+l.Brightness = 0
+settings().Rendering.QualityLevel = "Level01"
+for i,v in pairs(g:GetDescendants()) do
+    if v:IsA("Part") or v:IsA("Union") or v:IsA("MeshPart") then
+        v.Material = "Plastic"
+v.Reflectance = 0
+elseif v:IsA("Decal") and decalsyeeted then 
+v.Transparency = 1
+elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then 
+v.Lifetime = NumberRange.new(0)
+    end
+end    
+end)
+spawn(function()
+    while wait() do
+        pcall(function()
+    if _G.crack2 == nil and game.Players.LocalPlayer.Character ~= nil then
+        _G.crack2 = game.Players.LocalPlayer.Character.Parent.Name
+        wait()
+    end
+end)
+    end
+end)
+local example = library:CreateWindow({
+    text = "Credits"
+  })
+  example:AddLabel("MARCO POLO#3842",function()
+  end)
