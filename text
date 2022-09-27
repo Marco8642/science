@@ -17,7 +17,16 @@ mt.__namecall = newcclosure(function(self, ...)
     return namecall(self, ...) 
 end)
 
-
+spawn(function()
+    while wait() do
+    pcall(function()
+        if _G.test == true then
+            game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+            wait(1)
+        end
+    end)
+    end
+end)
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -76,10 +85,10 @@ local x = location.X
 local y = location.Y
 local z = location.Z
 
-                 game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                 
 if x < hum.Position.X then
     while x < hum.Position.X do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-_G.tp,hum.Position.Y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -99,7 +108,7 @@ OnTween:Play()
 end
 if x > hum.Position.X then
     while x > hum.Position.X do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
     local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+_G.tp,hum.Position.Y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -119,7 +128,7 @@ OnTween:Play()
 end
 if y < hum.Position.Y then
     while y < hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -139,7 +148,7 @@ OnTween:Play()
 end
 if y > hum.Position.Y then
     while y > hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -159,7 +168,7 @@ OnTween:Play()
 end
 if z < hum.Position.Z then
     while z < hum.Position.Z do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z-_G.tp))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -179,7 +188,7 @@ OnTween:Play()
 end
 if z > hum.Position.Z then
     while z > hum.Position.Z do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z+_G.tp))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -199,7 +208,7 @@ OnTween:Play()
 end
 if y < hum.Position.Y then
     while y < hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -219,7 +228,7 @@ OnTween:Play()
 end
 if y > hum.Position.Y then
     while y > hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
         local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
 game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
               local TweenService = game:GetService("TweenService")
@@ -237,7 +246,7 @@ OnTween:Play()
  OnTween.Completed:Wait()
     end
 end
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+                
 end
 end
 end)
