@@ -32,7 +32,8 @@ end)
                  if ya.Name == "Player" and ya.Value == game.Players.LocalPlayer  then
                      for ye,lo in pairs(game:GetService("Workspace").NewCustomers:GetDescendants()) do
                          if lo.Name == "Part" and lo:GetAttribute("Type") == "Halloween" and _G.canautofarm == true and game:GetService("Players").LocalPlayer.variables.inMission.Value == false and _G.Autofarm == true then
-                             local TweenService = game:GetService("TweenService")
+                                _G.amount= _G.amount+1
+                            local TweenService = game:GetService("TweenService")
              local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
              local TweenValue = Instance.new("CFrameValue")
              TweenValue.Value = ya.Parent.Parent:GetPrimaryPartCFrame()
@@ -97,7 +98,6 @@ end)
                     game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
    wait(2)
    v.Parent.Parent.PrimaryPart.Anchored = false
-    _G.amount= _G.amount+1
    end
    end
    end
