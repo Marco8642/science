@@ -1,4 +1,5 @@
  _G.amount = 0
+ _G.canautofarm = true
 spawn(function()
     while _G.Autofarm do
         wait()
