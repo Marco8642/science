@@ -1,0 +1,88 @@
+    while _G.Autofarm do
+        wait()
+        pcall(function()
+   if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+               local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+       for ok,ya in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+                 if ya.Name == "Player" and ya.Value == game.Players.LocalPlayer  then
+                     for ye,lo in pairs(game:GetService("Workspace").NewCustomers:GetDescendants()) do
+                         if lo.Name == "Part" and lo:GetAttribute("Type") == "Halloween" and game:GetService("Players").LocalPlayer.variables.inMission.Value == false and _G.Autofarm == true then
+                             local TweenService = game:GetService("TweenService")
+             local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+             local TweenValue = Instance.new("CFrameValue")
+             TweenValue.Value = ya.Parent.Parent:GetPrimaryPartCFrame()
+             TweenValue.Changed:Connect(function()
+                 ya.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+             end)
+             local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=lo.CFrame+Vector3.new(0,4,0)})
+             OnTween:Play()	
+              OnTween.Completed:Wait()
+              wait(0.05)
+             
+                   ya.Parent.Parent.PrimaryPart.Anchored = true
+                  wait(0.5)
+              fireproximityprompt(lo.Client.PromptPart.CustomerPrompt)
+              wait(0.5)
+                ya.Parent.Parent.PrimaryPart.Anchored = false
+                         elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == true then
+     
+     for i,v in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+               if v.Name == "Player" and v.Value == game.Players.LocalPlayer then
+           local TweenService = game:GetService("TweenService")
+   local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+   
+   local TweenValue = Instance.new("CFrameValue")
+   TweenValue.Value = v.Parent.Parent:GetPrimaryPartCFrame()
+               
+   TweenValue.Changed:Connect(function()
+       v.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+   end)
+               
+   local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.Parent.Parent.PrimaryPart.CFrame+Vector3.new(0,850,0)})
+   OnTween:Play()
+    OnTween.Completed:Wait()
+        local TweenService = game:GetService("TweenService")
+   local TweenInfoToUse = TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+   
+   local TweenValue = Instance.new("CFrameValue")
+   TweenValue.Value = v.Parent.Parent:GetPrimaryPartCFrame()
+               
+   TweenValue.Changed:Connect(function()
+       v.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+   end)
+               
+   local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").ParkingMarkers.ParkingMarker.Union.CFrame+Vector3.new(0,850,0)})
+   OnTween:Play()
+    OnTween.Completed:Wait()
+         local TweenService = game:GetService("TweenService")
+   local TweenInfoToUse = TweenInfo.new(0.5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+   
+   local TweenValue = Instance.new("CFrameValue")
+   TweenValue.Value = v.Parent.Parent:GetPrimaryPartCFrame()
+               
+   TweenValue.Changed:Connect(function()
+       v.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+   end)
+               
+   local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").ParkingMarkers.ParkingMarker.Union.CFrame+Vector3.new(0,3,0)})
+   OnTween:Play()
+    OnTween.Completed:Wait()
+   v.Parent.Parent.PrimaryPart.Anchored = true
+    wait(2)
+                    game:GetService("ReplicatedStorage").CustomerMissions.CustomerMissionEnd:InvokeServer()
+   wait(2)
+   v.Parent.Parent.PrimaryPart.Anchored = false
+   end
+   end
+   end
+   end
+   end
+   end
+   elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+       game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+       wait(0.5)
+   game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+   wait(0.5)
+   end
+   end)
+    end
