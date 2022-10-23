@@ -6,7 +6,7 @@ spawn(function()
         _G.canautofarm = false
         wait(20)
         _G.amount = 0
-        _g.rat = true
+        _G.rat = true
     elseif _G.amount < 4 and _G.rat == true then
                 _G.canautofarm = true
                 _G.rat = false
