@@ -2,7 +2,7 @@
 spawn(function()
     while _G.Autofarm do
         wait()
-    if _G.amount > 2 then
+    if _G.amount > 4 then
         _G.canautofarm = false
         wait(20)
         _G.amount = 0
