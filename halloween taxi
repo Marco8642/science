@@ -3,12 +3,11 @@
 spawn(function()
     while _G.Autofarm do
         wait()
-    if _G.amount > 4 then
-        _G.canautofarm = false
+    if _G.amount > 3 then
         wait(20)
         _G.amount = 0
         _G.rat = true
-    elseif _G.amount < 4 and _G.rat == true then
+    elseif _G.amount < 3 and _G.rat == true and _G.canautofarm == false then
                 _G.canautofarm = true
                 _G.rat = false
     end
