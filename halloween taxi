@@ -47,7 +47,7 @@ end)
                    ya.Parent.Parent.PrimaryPart.Anchored = true
                   wait(0.5)
               fireproximityprompt(lo.Client.PromptPart.CustomerPrompt)
-              wait(0.5)
+              wait(2)
                 ya.Parent.Parent.PrimaryPart.Anchored = false
                          elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == true then
      
