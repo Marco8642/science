@@ -1,0 +1,47 @@
+ spawn(function()
+      if _G.showui == false and game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep:Destroy()
+else
+while _G.showui do
+    task.wait()
+if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
+local oh = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.CashLabel:Clone()
+oh.Name = "Rep"
+oh.Parent = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money
+wait()
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep.Position = UDim2.new(3,0,0,0)
+else
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep.Text = "Rep:"..tostring(game:GetService("Players").LocalPlayer.variables.rep.Value)
+end
+end
+end
+end) 
+       while _G.Trophies  do
+            task.wait()
+            pcall(function()
+      if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+    if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
+        task.wait()
+    game:GetService("ReplicatedStorage").Race.TimeTrial:InvokeServer("circuit", 5)
+    else
+    for a,b in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if b.Name == "Player" and b.Value == game.Players.LocalPlayer then
+    for i,v in pairs(game:GetService("Workspace").Races["circuit"].detects:GetChildren()) do
+        if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+            firetouchinterest(b.Parent.Parent.PrimaryPart,v,0)
+                    firetouchinterest(b.Parent.Parent.PrimaryPart,v,1)
+    
+        end
+    end
+firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races["circuit"].timeTrial:FindFirstChildOfClass("IntValue").finish,0)
+                    firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races["circuit"].timeTrial:FindFirstChildOfClass("IntValue").finish,1)
+    end
+     end   
+    end
+    elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+        game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+        wait(0.5)
+        game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+    end
+    end)
+        end
