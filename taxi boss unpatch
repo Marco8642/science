@@ -1,0 +1,79 @@
+repeat wait()
+ until game:IsLoaded() 
+    _G.autos = true
+    while _G.autos do
+        wait()
+    if game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("IntroGui") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("IntroGui").Enabled == true then
+require(game:GetService("ReplicatedFirst").IntroScript.Scenes):destroyScenes()
+game:GetService("Players").LocalPlayer.PlayerGui.IntroGui:Destroy()
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+local l__CurrentCamera__4 = workspace.CurrentCamera
+local l__LocalPlayer__11 = game.Players.LocalPlayer
+local l__PlayerGui__12 = l__LocalPlayer__11:WaitForChild("PlayerGui");
+	local l__isPlaying__5 = l__PlayerGui__12:WaitForChild("Scripts"):WaitForChild("isPlaying");
+	l__CurrentCamera__4.CameraType = Enum.CameraType.Custom;
+	l__CurrentCamera__4.CameraSubject = l__LocalPlayer__11.Character;
+	l__CurrentCamera__4.FieldOfView = 70;
+	l__LocalPlayer__11.CameraMinZoomDistance = 4
+	l__isPlaying__5.Value = true
+local part = Instance.new("Part",workspace)
+part.CFrame = game:GetService("Workspace").Christmas.hologram.CFrame-Vector3.new(0,20,0)
+part.Size = Vector3.new(100,5,100)
+part.Anchored = true
+part.Name="JustAPart"
+    wait(1)
+_G.xmass = true
+spawn(function()
+while _G.xmass do
+    pcall(function()
+    game:GetService("ReplicatedStorage").Christmas.ResetTree:InvokeServer()
+    wait(1)
+end)
+end
+end)
+spawn(function()
+_G.oh = 0
+_G.notso = true
+while _G.notso do
+    wait()
+if _G.check == true and _G.oh < 5 then
+_G.oh=_G.oh+1
+print(_G.oh)
+wait(1)
+elseif _G.oh >= 5 then
+    local module = loadstring(game:HttpGet"https://raw.githubusercontent.com/LeoKholYt/roblox/main/lk_serverhop.lua")()
+module:Teleport(game.PlaceId)
+wait(1)
+elseif _G.check == false then
+    _G.oh = 0
+    
+end
+end
+end)
+while _G.xmass do
+    wait()
+    pcall(function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,"W",false,game)
+for i,v in pairs(game:GetService("Workspace").Christmas.DecorationHunt:GetDescendants()) do
+    if v.ClassName == "ProximityPrompt" and v.Parent.MeshId == game:GetService("Workspace").Christmas.hologram.MeshId then
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+ wait()
+     repeat wait(0.2)
+        fireproximityprompt(v)
+        _G.check = true
+        until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.xmass == false
+ 
+repeat wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=workspace.JustAPart.CFrame+Vector3.new(0,5,0)
+wait(0.1)
+game:GetService("ReplicatedStorage").Christmas.DeliverDecoration:InvokeServer()
+wait(0.1)
+until v.Parent.MeshId ~= game:GetService("Workspace").Christmas.hologram.MeshId or _G.xmass == false
+_G.check = false
+wait(0.2)
+    end
+end
+end)
+end
+end
+end
