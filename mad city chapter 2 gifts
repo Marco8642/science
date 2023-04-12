@@ -188,12 +188,6 @@ game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
 end
-local test =  v.Value
-if workspace:Raycast(Vector3.new(test.X,test.Y,test.Z)+Vector3.new(0,5,0), Vector3.new(0, 1000, 0)) == nil and v.Parent ~= nil then
-  game.Players.LocalPlayer.Character:MoveTo(Vector3.new(test.X,test.Y,test.Z)+Vector3.new(0,5,0))  
-  else
-      print(workspace:Raycast(Vector3.new(test.X,test.Y,test.Z), Vector3.new(0, 1000, 0)))
-end
   workspace.Gravity = 0
   workspace.Gravity = 0
 end
