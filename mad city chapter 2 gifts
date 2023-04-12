@@ -1,3 +1,15 @@
+local table ={Vector3.new(-1306.2994384765625, 508.0502624511719, 1092.146240234375),
+Vector3.new(-4013.23828125, 618.530029296875, 1496.6663818359375),
+Vector3.new(-4614.7314453125, 618.5233764648438, 106.50773620605469),
+Vector3.new(-3707.229736328125, 618.5165405273438, -818.6224365234375),
+Vector3.new(-1322.18212890625, 616.0946044921875, -1470.0570068359375),
+Vector3.new(43.83209228515625, 618.5199584960938, -2096.015380859375),
+Vector3.new(1631.809814453125, 618.5146484375, -1996.1397705078125),
+Vector3.new(2101.208740234375, 618.541748046875, -169.38572692871094),
+Vector3.new(824.3096313476562, 618.5343627929688, 409.4871826171875),
+Vector3.new(950.0697631835938, 618.4273071289062, 1973.6917724609375),
+Vector3.new(-1136.0018310546875, 695.8126220703125, 3004.97509765625),
+Vector3.new(-3165.203125, 896.2648315429688, 2932.76318359375)}
 spawn(function()
     if game:GetService("Workspace").Ignore:FindFirstChild("Water") then
 game:GetService("Workspace").Ignore.Water:Destroy()
@@ -37,32 +49,6 @@ spawn(function()
     end
     end
     end)
-spawn(function()
-while _G.oh do
-    wait()
-    pcall(function()
-for a,b in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
-if b.ClassName == "Part" then
-    task.wait()
-    local cframefound = nil
-for i,v in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
-    if v.ClassName == "CFrameValue" and b.CFrame == v.Value then
-        task.wait()
-        cframefound = true
-    end
-end
-if cframefound ~= true then
-    task.wait()
-    Instance.new("CFrameValue",b.Parent).Value = b.CFrame
-    b:Destroy()
-    else
-        task.wait()
-    end
-end
-end
-end)
-end
-end)
 spawn(function()
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
     _G.teleport = false
@@ -128,18 +114,24 @@ game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
 end
+if b.PrimaryPart.Position.Y < hum.Position.Y then
+    while b.PrimaryPart.Position.Y < hum.Position.Y and game.Players.LocalPlayer:DistanceFromCharacter(b.PrimaryPart.Position)>10 and _G.teleport == true and _G.oh == true do
+        local CFrameEnd = CFrame.new(Vector3.new(b.PrimaryPart.Position.X,hum.Position.Y-5,b.PrimaryPart.Position.Z))
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
+task.wait()
+    end
+end
 game.Players.LocalPlayer.Character:MoveTo(location.Position+Vector3.new(0,5,0))
-     workspace.Gravity = 194
+     workspace.Gravity = 10
      wait(5)
      game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
      wait(3)
 _G.egg = false
 elseif _G.ohno > 10 and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
         workspace.Gravity = 1
-    for i,v in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
-        if  v.ClassName == "CFrameValue" and _G.egg ~= true and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
-   print(v.ClassName)
-          local location = v.Value 
+    for i,v in pairs(table) do
+        if  _G.egg ~= true and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
+          local location = v 
 local tp = 40
 local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
 local x = location.X
