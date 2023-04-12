@@ -16,7 +16,7 @@ raycastParams.FilterDescendantsInstances = {hum.Parent}
 raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 raycastParams.IgnoreWater = true
    if  (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >120 and _G.teleport == true and workspace:Raycast(game.Players.LocalPlayer.Character.Head.Position, Vector3.new(0, 1000, 0),raycastParams) ~= nil  then
-   print(workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, 1000, 0)))
+   print(workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, 100, 0)))
     game.Players.LocalPlayer.Character.Humanoid.Health = 0
     wait(15)
    end
