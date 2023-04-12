@@ -130,7 +130,7 @@ wait(0.1)
 end
 if b.PrimaryPart.Position.Y < hum.Position.Y then
     while b.PrimaryPart.Position.Y < hum.Position.Y and _G.teleport == true and _G.oh == true do
-        local CFrameEnd = CFrame.new(Vector3.new(b.PrimaryPart.Position.X,hum.Position.Y-5,b.PrimaryPart.Position.Z))
+        local CFrameEnd = CFrame.new(Vector3.new(b.PrimaryPart.Position.X,hum.Position.Y-1,b.PrimaryPart.Position.Z))
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 task.wait()
     end
