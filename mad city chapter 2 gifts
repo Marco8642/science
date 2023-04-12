@@ -1,8 +1,72 @@
+spawn(function()
+    if game:GetService("Workspace").Ignore:FindFirstChild("Water") then
+game:GetService("Workspace").Ignore.Water:Destroy()
+game:GetService("Workspace").Ignore.Water:Destroy()
+end
+end)
 _G.teleport = _G.oh
 _G.ohno = 0
 spawn(function()
+    while _G.oh do
+        wait()
+        pcall(function()
+                local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
+local raycastParams = RaycastParams.new()
+raycastParams.FilterDescendantsInstances = {hum.Parent}
+raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+raycastParams.IgnoreWater = true
+   if  (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >120 and _G.teleport == true and workspace:Raycast(game.Players.LocalPlayer.Character.Head.Position, Vector3.new(0, 1000, 0),raycastParams) ~= nil  then
+   print(workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, 1000, 0)))
+    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    wait(15)
+   end
+end)
+end
+end)
+spawn(function()
+    while _G.oh do
+        wait()
+    for a,b in pairs(workspace:GetChildren()) do
+    if string.find(b.Name,"EggCrate") and b.PrimaryPart ~= nil then
+        task.wait()
+        _G.egg = true
+    elseif string.find(b.Name,"EggCrate") and b.PrimaryPart == nil then 
+        _G.egg = false
+        task.wait()
+    end
+    end
+    end
+    end)
+spawn(function()
+while _G.oh do
+    wait()
+    pcall(function()
+for a,b in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
+if b.ClassName == "Part" then
+    task.wait()
+    local cframefound = nil
+for i,v in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
+    if v.ClassName == "CFrameValue" and b.CFrame == v.Value then
+        task.wait()
+        cframefound = true
+    end
+end
+if cframefound ~= true then
+    task.wait()
+    Instance.new("CFrameValue",b.Parent).Value = b.CFrame
+    b:Destroy()
+    else
+        task.wait()
+    end
+end
+end
+end)
+end
+end)
+spawn(function()
 game.Players.LocalPlayer.Character.Humanoid.Died:Connect(function()
     _G.teleport = false
+    _G.egg = false
 end)
 end)
 spawn(function()
@@ -12,31 +76,30 @@ end)
 end)
 while _G.oh do
     wait(1)
+    pcall(function()
 _G.ohno=_G.ohno+1
-if (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <100 then
-local hum =game.Players.LocalPlayer.Character.Humanoid
+if (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <100 then
+local hum = game.Players.LocalPlayer.Character
 hum:MoveTo(Vector3.new(-1453.7073974609375, 533.682373046875, 1140.095703125))
-hum.MoveToFinished:wait()
+wait(0.5)
 hum:MoveTo(Vector3.new(-1436.4833984375, 523.1337890625, 1101.6846923828125))
-hum.MoveToFinished:wait()
+wait(0.5)
 hum:MoveTo(Vector3.new(-1363.6480712890625, 509.68255615234375, 1122.3507080078125))
-hum.MoveToFinished:wait()
+wait(0.5)
 hum:MoveTo(Vector3.new(-1312.1580810546875, 508.0484619140625, 1086.1585693359375))
-hum.MoveToFinished:wait()
 else
-for i,v in pairs(workspace:GetChildren()) do
-    if v.Name =="ElfCrate" and v.PrimaryPart ~= nil and _G.teleport == true and _G.ohno <= 10 and (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100  or v.Name == "SantaCrate" and v.PrimaryPart ~= nil and _G.teleport == true and _G.ohno <= 10 and (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 or v.Name == "GingerbreadCrate" and v.PrimaryPart ~= nil and _G.teleport == true and _G.ohno <= 10 and (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
+for a,b in pairs(workspace:GetChildren()) do
+    if string.find(b.Name,"EggCrate") and b.PrimaryPart ~= nil and _G.teleport == true and _G.ohno <= 10 and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
 _G.ohno = 0
-local location = v.PrimaryPart
-local tp = 150
+local location = b.PrimaryPart
+local tp = 40
 local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
 local x = location.Position.X
-local y = 1000
+local y = 800
 local z = location.Position.Z
-game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame+Vector3.new(0,1000,0))
 if x < hum.Position.X then
     while x < hum.Position.X and _G.teleport == true and _G.oh == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-tp,hum.Position.Y,hum.Position.Z))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-tp,y,hum.Position.Z))
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
 end
@@ -44,7 +107,7 @@ end
 
 if x > hum.Position.X then
     while x > hum.Position.X and _G.teleport == true and _G.oh == true do
-    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+tp,hum.Position.Y,hum.Position.Z))
+    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+tp,y,hum.Position.Z))
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
@@ -52,7 +115,7 @@ end
 
 if z < hum.Position.Z then
     while z < hum.Position.Z and _G.teleport == true and _G.oh == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z-tp))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z-tp))
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
@@ -60,9 +123,16 @@ end
 
 if z > hum.Position.Z then
     while z > hum.Position.Z and _G.teleport == true and _G.oh == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z+tp))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z+tp))
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
+    end
+end
+if b.PrimaryPart.Position.Y < hum.Position.Y then
+    while b.PrimaryPart.Position.Y < hum.Position.Y and _G.teleport == true and _G.oh == true do
+        local CFrameEnd = CFrame.new(Vector3.new(b.PrimaryPart.Position.X,hum.Position.Y-5,b.PrimaryPart.Position.Z))
+game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
+task.wait()
     end
 end
 game.Players.LocalPlayer.Character:MoveTo(location.Position+Vector3.new(0,5,0))
@@ -70,24 +140,25 @@ game.Players.LocalPlayer.Character:MoveTo(location.Position+Vector3.new(0,5,0))
      wait(5)
      game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
      wait(3)
-
-elseif _G.ohno > 10 and _G.teleport == true and (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
+_G.egg = false
+elseif _G.ohno > 10 and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
         workspace.Gravity = 1
     for i,v in pairs(game:GetService("Workspace")["Winter Event"].ChristmasDrops:GetChildren()) do
-        if v.ClassName == "Part" and _G.teleport == true and (game:GetService("Workspace").PlayerSpawns.HeroSpawn.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
-local location = v
-local tp = 150
+        if  v.ClassName == "CFrameValue" and _G.egg ~= true and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
+   print(v.ClassName)
+          local location = v.Value 
+local tp = 40
 local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
-local x = location.Position.X
-local y = 1000
-local z = location.Position.Z
+local x = location.X
+local y = 800
+local z = location.Z
 
-game.Players.LocalPlayer.Character:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1000,0))
+game.Players.LocalPlayer.Character:MoveTo(game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,900,0))
 
 
 if x < hum.Position.X then
     while x < hum.Position.X and _G.teleport == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-tp,hum.Position.Y,hum.Position.Z))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-tp,y,hum.Position.Z))
 
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 
@@ -97,7 +168,7 @@ end
 
 if x > hum.Position.X  then
     while x > hum.Position.X and _G.teleport == true do
-    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+tp,hum.Position.Y,hum.Position.Z))
+    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+tp,y,hum.Position.Z))
 
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 
@@ -107,7 +178,7 @@ end
 
 if z < hum.Position.Z then
     while z < hum.Position.Z and _G.teleport == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z-tp))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z-tp))
 
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 
@@ -117,21 +188,27 @@ end
 
 if z > hum.Position.Z then
     while z > hum.Position.Z and _G.teleport == true do
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z+tp))
+        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z+tp))
 
 game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 
 wait(0.1)
     end
 end
-     workspace.Gravity = 194
-
-game.Players.LocalPlayer.Character:MoveTo(v.Position)
-wait(0.4)
+local test =  v.Value
+if workspace:Raycast(Vector3.new(test.X,test.Y,test.Z)+Vector3.new(0,5,0), Vector3.new(0, 1000, 0)) == nil and v.Parent ~= nil then
+  game.Players.LocalPlayer.Character:MoveTo(Vector3.new(test.X,test.Y,test.Z)+Vector3.new(0,5,0))  
+  else
+      print(workspace:Raycast(Vector3.new(test.X,test.Y,test.Z), Vector3.new(0, 1000, 0)))
 end
+  workspace.Gravity = 0
+  workspace.Gravity = 0
+end
+
 _G.ohno = 0
 end
 end
 end
 end
+end)
 end
