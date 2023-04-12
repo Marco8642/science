@@ -38,8 +38,9 @@ end)
 spawn(function()
     while _G.oh do
         wait()
+        pcall(function()
     for a,b in pairs(workspace:GetChildren()) do
-    if string.find(b.Name,"EggCrate") and b.PrimaryPart ~= nil then
+    if string.find(b.Name,"EggCrate") and b.PrimaryPart ~= nil and workspace:Raycast(b.PrimaryPart.Position, Vector3.new(0, 1000, 0)) == nil  then
         task.wait()
         _G.egg = true
     elseif string.find(b.Name,"EggCrate") and b.PrimaryPart == nil then 
@@ -47,6 +48,7 @@ spawn(function()
         task.wait()
     end
     end
+    end)
     end
     end)
 spawn(function()
