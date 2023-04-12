@@ -128,13 +128,6 @@ game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
 end
-if b.PrimaryPart.Position.Y < hum.Position.Y then
-    while b.PrimaryPart.Position.Y < hum.Position.Y and _G.teleport == true and _G.oh == true do
-        local CFrameEnd = CFrame.new(Vector3.new(b.PrimaryPart.Position.X,hum.Position.Y-1,b.PrimaryPart.Position.Z))
-game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
-task.wait()
-    end
-end
 game.Players.LocalPlayer.Character:MoveTo(location.Position+Vector3.new(0,5,0))
      workspace.Gravity = 194
      wait(5)
