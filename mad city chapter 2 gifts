@@ -11,6 +11,14 @@ Vector3.new(950.0697631835938, 618.4273071289062, 1973.6917724609375),
 Vector3.new(-1136.0018310546875, 695.8126220703125, 3004.97509765625),
 Vector3.new(-3165.203125, 896.2648315429688, 2932.76318359375)}
 spawn(function()
+if not workspace:FindFirstChild("Safelandingpart") then
+   local news = Instance.new("Part",workspace)
+   news.Name = "Safelandingpart"
+   news.Size = Vector3.new(50,5,50)
+   news.Anchored = true
+end
+end)
+spawn(function()
     if game:GetService("Workspace").Ignore:FindFirstChild("Water") then
 game:GetService("Workspace").Ignore.Water:Destroy()
 game:GetService("Workspace").Ignore.Water:Destroy()
@@ -24,7 +32,7 @@ spawn(function()
         pcall(function()
                 local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
 local raycastParams = RaycastParams.new()
-raycastParams.FilterDescendantsInstances = {hum.Parent}
+raycastParams.FilterDescendantsInstances = {hum.Parent,workspace.Camera}
 raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 raycastParams.IgnoreWater = true
    if  (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >120 and _G.teleport == true and workspace:Raycast(game.Players.LocalPlayer.Character.Head.Position, Vector3.new(0, 1000, 0),raycastParams) ~= nil  then
@@ -116,6 +124,12 @@ game.Players.LocalPlayer.Character:SetPrimaryPartCFrame(CFrameEnd)
 wait(0.1)
     end
 end
+workspace:FindFirstChild("Safelandingpart").CanCollide = true
+workspace:FindFirstChild("Safelandingpart").CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame-Vector3.new(0,10,0)
+workspace.Gravity = 150
+wait(3)
+workspace:FindFirstChild("Safelandingpart").CFrame = CFrame.new(0,0,0)
+wait()
 if b.PrimaryPart.Position.Y < hum.Position.Y then
     while b.PrimaryPart.Position.Y < hum.Position.Y and game.Players.LocalPlayer:DistanceFromCharacter(b.PrimaryPart.Position)>10 and _G.teleport == true and _G.oh == true do
         workspace.Gravity = 0
@@ -125,10 +139,10 @@ task.wait()
     end
 end
 game.Players.LocalPlayer.Character:MoveTo(location.Position+Vector3.new(0,5,0))
-     workspace.Gravity = 10
      wait(5)
      game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
      wait(3)
+     workspace.Gravity = 10
 _G.egg = false
 elseif _G.ohno > 10 and _G.teleport == true and (Vector3.new(-1409.8480224609375, 533.4159545898438, 1138.6212158203125)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude >100 then
         workspace.Gravity = 1
