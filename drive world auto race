@@ -15,7 +15,7 @@ while _G.auto do
     wait()
     pcall(function()
 for i,v in pairs(game:GetService("Workspace").Races:GetChildren()) do
-    if v.ClassName == "Folder" and v.PlayersWaiting.Value > 0 and interface.Score.Frame.Race.Visible == false and interface.Races.Frame.Visible == false and v.Active.Value == false and interface.RaceQueue.Enabled == false  then
+    if v.ClassName == "Folder" and v.PlayersWaiting.Value > 0 and interface.Score.Frame.Race.Visible == false and interface.Races.Enabled == false and v.Active.Value == false and interface.RaceQueue.Enabled == false  then
 game:GetService("ReplicatedStorage").Systems.Navigate.Teleport:InvokeServer(v)
 game:GetService("ReplicatedStorage").Systems.Races.JoinMultiplayerQueue:InvokeServer(v)
 _G.check = v.TotalCheckpoints.Value
