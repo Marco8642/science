@@ -3,7 +3,7 @@ spawn(function()
 while _G.auto do
     wait()
     pcall(function()
-if interface.RaceQueue.Enabled == true and interface.Score.Frame.Race.Visible == false and interface.Races.Frame.Visible == false and _G.race.PlayersWaiting.Value < 2 and _G.auto == true then
+if interface.RaceQueue.Enabled == true and interface.Score.Frame.Race.Visible == false and interface.Races.Enabled == false and _G.race.PlayersWaiting.Value < 2 and _G.auto == true then
 game:GetService("ReplicatedStorage").Systems.Races.LeaveMultiplayerQueue:FireServer(_G.race)
 wait()
 end
