@@ -3,7 +3,7 @@ spawn(function()
 while _G.auto do
     wait()
     pcall(function()
-if interface.RaceQueue.Enabled == true and interface.Score.Frame.Race.Visible == false and interface.Races.Enabled == false and _G.race.PlayersWaiting.Value < 2 and _G.auto == true then
+if interface.RaceQueue.Enabled == true and interface.Score.Frame.Race.Visible == false and _G.inrace ~= true and interface.Races.Enabled == false and _G.race.PlayersWaiting.Value < 2 and _G.auto == true then
 game:GetService("ReplicatedStorage").Systems.Races.LeaveMultiplayerQueue:FireServer(_G.race)
 wait()
 end
@@ -15,7 +15,7 @@ while _G.auto do
     wait()
     pcall(function()
 for i,v in pairs(game:GetService("Workspace").Races:GetChildren()) do
-    if v.ClassName == "Folder" and v.PlayersWaiting.Value > 0 and interface.Score.Frame.Race.Visible == false and interface.Races.Enabled == false and v.Active.Value == false and interface.RaceQueue.Enabled == false  then
+    if v.ClassName == "Folder" and v.PlayersWaiting.Value > 0 and interface.Score.Frame.Race.Visible == false and interface.Races.Enabled == false and v.Active.Value == false and interface.RaceQueue.Enabled == false and _G.inrace ~= true then
 game:GetService("ReplicatedStorage").Systems.Navigate.Teleport:InvokeServer(v)
 game:GetService("ReplicatedStorage").Systems.Races.JoinMultiplayerQueue:InvokeServer(v)
 _G.check = v.TotalCheckpoints.Value
@@ -47,12 +47,14 @@ while _G.auto do
     wait()
     pcall(function()
 if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Score.Frame.Race.Visible == true then
+    _G.inrace = true
 for l=1,_G.laps do
 for i =1,_G.check do
 game:GetService("ReplicatedStorage").Systems.Races.CheckpointTouched:FireServer(i)
 wait(0.1)
 end
 end
+_G.inrace = false
 end
 end)
 end
