@@ -1,0 +1,66 @@
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
+local example = library:CreateWindow({
+  text = "Drag Project"
+})
+example:AddToggle("Auto Farm", function(state)
+_G.test = (state and true or false)
+while _G.test do
+    task.wait()
+    pcall(function()
+if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+local car = game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model")
+car.PrimaryPart = car.DriveSeat
+if game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace")["Timer_Start"].Position) > 15 then
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	car:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace")["Timer_Start"].CFrame})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ else
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	car:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace")["Timer_Pause"].CFrame})
+OnTween:Play()
+ OnTween.Completed:Wait()
+end
+elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and game:GetService("Workspace"):FindFirstChild("Folder"..game.Players.LocalPlayer.Name) then
+    wait(1)
+game:GetService("ReplicatedStorage").DealershipEvents.SpawnCar:FireServer(game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").Name, "Civillian")
+wait(5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").DriveSeat.CFrame
+wait(1)
+end
+end)
+end
+end)
+local example = library:CreateWindow({
+  text = "Stuff That Dont Save"
+})
+example:AddButton("Get All Dealership Bikes", function()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.OwnedCars:GetChildren()) do
+    v.Value = true
+end
+
+end)
+example:AddButton("Get Vip Bikes", function()
+if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("VipGui") then
+local vipcopy= game:GetService("ReplicatedStorage").VipGui:Clone()
+vipcopy.Parent = game.Players.LocalPlayer.PlayerGui
+end
+    end)
