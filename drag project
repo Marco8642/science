@@ -26,7 +26,7 @@ OnTween:Play()
  OnTween.Completed:Wait()
  else
  local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(15, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+local TweenInfoToUse = TweenInfo.new(20, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
 
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()
@@ -53,14 +53,36 @@ local example = library:CreateWindow({
   text = "Stuff That Dont Save"
 })
 example:AddButton("Get All Dealership Bikes", function()
-    for i,v in pairs(game:GetService("Players").LocalPlayer.OwnedCars:GetChildren()) do
-    v.Value = true
+game:GetService("Players").LocalPlayer.OwnedCars:ClearAllChildren()
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
+    if v.Name == "CarName" and v.Text ~= "Template" and v.Text ~= "Unknown" and v.ClassName == "TextLabel"  then
+        local new =Instance.new("BoolValue",game:GetService("Players").LocalPlayer.OwnedCars)
+        new.Name = v.Text
+        new.Value = true
+    end
 end
-
 end)
 example:AddButton("Get Vip Bikes", function()
 if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("VipGui") then
 local vipcopy= game:GetService("ReplicatedStorage").VipGui:Clone()
 vipcopy.Parent = game.Players.LocalPlayer.PlayerGui
 end
+    end)
+    local example = library:CreateWindow({
+        text = "Teleports"
+      })
+      example:AddButton("Teleport to vehicle", function()
+        pcall(function()
+        game.Players.LocalPlayer.Character:MoveTo(game:GetService("Workspace"):FindFirstChild("Folder"..game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model").DriveSeat.Position)
+      end)  
+    end)
+
+    example:AddButton("Teleport to Dealership", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(-608.287292, 4.20762491, 154.133835, -0.972057402, 1.17043957e-08, 0.234743387, -1.35618947e-08, 1, -1.06019328e-07, -0.234743387, -1.06240435e-07, -0.972057402)
+    end)
+    example:AddButton("Teleport to Vip Houses", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(-157.390686, 3.55590415, -162.619614, -0.999450982, -3.9576328e-08, -0.0331323668, -3.7554905e-08, 1, -6.16327611e-08, 0.0331323668, -6.03546439e-08, -0.999450982)
+    end)
+    example:AddButton("Teleport to Drag race", function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(26.5487614, 3.54278731, -526.0625, -0.0196847972, 4.19225508e-08, 0.999806225, -5.75967327e-08, 1, -4.30646772e-08, -0.999806225, -5.84332938e-08, -0.0196847972)
     end)
