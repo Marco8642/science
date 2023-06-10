@@ -14,7 +14,7 @@ while _G.test do
     wait()
 local value = nil
     for i,v in pairs(game:GetService("Workspace").Quests.Materials:GetChildren()) do
-  if v.ClassName == "MeshPart" and not game:GetService("Workspace").ParkingMarkers:FindFirstChild("ContractDestPart") then
+  if v.ClassName == "MeshPart"  then
 value = v
 pcall(function()
     workspace.Gravity = 196
@@ -58,7 +58,7 @@ game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contr
     workspace.Gravity = 196
            wait(0.5)
     end
-if value == nil and not game:GetService("Workspace").ParkingMarkers:FindFirstChild("ContractDestPart") then
+if value == nil then
 game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
 wait(0.2)
 game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBigNuclear")
