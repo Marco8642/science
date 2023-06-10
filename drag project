@@ -8,6 +8,13 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Drag Project"
 })
+example:AddToggle("Super Money Farm", function(state)
+_G.money = (state and true or false)
+while _G.money do
+wait()
+game.ReplicatedStorage.EarnedCust:FireServer()
+end
+end)
 example:AddToggle("Auto Farm", function(state)
 _G.test = (state and true or false)
 while _G.test do
@@ -55,25 +62,7 @@ end
 end)
 end
 end)
-local example = library:CreateWindow({
-  text = "Stuff That Dont Save"
-})
-example:AddButton("Get All Dealership Bikes", function()
-game:GetService("Players").LocalPlayer.OwnedCars:ClearAllChildren()
-for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
-    if v.Name == "CarName" and v.Text ~= "Template" and v.Text ~= "Unknown" and v.ClassName == "TextLabel"  then
-        local new =Instance.new("BoolValue",game:GetService("Players").LocalPlayer.OwnedCars)
-        new.Name = v.Text
-        new.Value = true
-    end
-end
-end)
-example:AddButton("Get Vip Bikes", function()
-if not game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("VipGui") then
-local vipcopy= game:GetService("ReplicatedStorage").VipGui:Clone()
-vipcopy.Parent = game.Players.LocalPlayer.PlayerGui
-end
-    end)
+
     local example = library:CreateWindow({
         text = "Teleports"
       })
@@ -92,3 +81,12 @@ end
     example:AddButton("Teleport to Drag race", function()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(26.5487614, 3.54278731, -526.0625, -0.0196847972, 4.19225508e-08, 0.999806225, -5.75967327e-08, 1, -4.30646772e-08, -0.999806225, -5.84332938e-08, -0.0196847972)
     end)
+        example:AddButton("Teleport to foodpanda", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-0.0975782275, 3.70432806, -243.674194, 0.0824485049, -7.59362564e-08, 0.996595323, -8.9118295e-08, 1, 8.35684517e-08, -0.996595323, -9.57049764e-08, 0.0824485049)    
+end)
+        example:AddButton("Teleport to tealive", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(498.986755, 3.55590558, -220.309616, -0.0767711699, -6.0101355e-09, 0.997048736, 1.31667433e-09, 1, 6.12930728e-09, -0.997048736, 1.78334258e-09, -0.0767711699)
+end)
+        example:AddButton("Teleport to Mount Kiara", function()
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3969.83545, 3.55590558, -1198.41101, -0.920043468, 3.10609716e-09, 0.391816348, 1.42095935e-08, 1, 2.54388226e-08, -0.391816348, 2.89723729e-08, -0.920043468)
+end)
