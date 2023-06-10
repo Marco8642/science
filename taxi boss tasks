@@ -43,7 +43,7 @@ local TweenService = game:GetService("TweenService")
 local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
 
 local TweenService = game:GetService("TweenService")
-          local TweenInfoToUse = TweenInfo.new(2, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+          local TweenInfoToUse = TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
           local TweenValue = Instance.new("CFrameValue")
           TweenValue.Value = part.Parent.Parent:GetPrimaryPartCFrame()
           TweenValue.Changed:Connect(function()
