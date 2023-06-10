@@ -13,6 +13,7 @@ _G.money = (state and true or false)
 while _G.money do
 wait()
 game.ReplicatedStorage.EarnedCust:FireServer()
+game:GetService("ReplicatedStorage").Remotes.Tealive:FireServer(game.Players.LocalPlayer)
 end
 end)
 example:AddToggle("Auto Farm", function(state)
