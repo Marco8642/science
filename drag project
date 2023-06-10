@@ -54,7 +54,7 @@ OnTween:Play()
 end
 elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and game:GetService("Workspace"):FindFirstChild("Folder"..game.Players.LocalPlayer.Name) then
     wait(1)
-game:GetService("ReplicatedStorage").DealershipEvents.SpawnCar:FireServer(game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").Name, "Civillian")
+game:GetService("ReplicatedStorage").KeteLoL.Letak:FireServer(game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").Name, "Civillian")
 wait(5)
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").DriveSeat.CFrame
 wait(1)
