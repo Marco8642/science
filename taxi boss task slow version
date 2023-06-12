@@ -1,0 +1,68 @@
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
+local example = library:CreateWindow({
+  text = "Taxi Boss"
+})
+example:AddToggle("Auto Farm Nuke task", function(state)
+_G.test = (state and true or false)
+while _G.test do
+    wait()
+local value = nil
+    for i,v in pairs(game:GetService("Workspace").Quests.Materials:GetChildren()) do
+  if v.ClassName == "MeshPart"  then
+value = v
+pcall(function()
+    workspace.Gravity = 196
+local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
+part.Parent.Parent:SetPrimaryPartCFrame(v.CFrame*CFrame.new(0,3,-10))
+wait(0.5)
+fireproximityprompt(v.MaterialPrompt)
+wait(0.5)
+  end)
+  end
+end
+if game:GetService("Workspace").ParkingMarkers:FindFirstChild("ContractDestPart") then
+    workspace.Gravity = 10
+local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
+
+local TweenService = game:GetService("TweenService")
+          local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+          local TweenValue = Instance.new("CFrameValue")
+          TweenValue.Value = part.Parent.Parent:GetPrimaryPartCFrame()
+          TweenValue.Changed:Connect(function()
+              part.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+          end)
+          local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame+Vector3.new(0,200,0)})
+          OnTween:Play()	
+           OnTween.Completed:Wait()
+local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
+
+local TweenService = game:GetService("TweenService")
+          local TweenInfoToUse = TweenInfo.new(5, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+          local TweenValue = Instance.new("CFrameValue")
+          TweenValue.Value = part.Parent.Parent:GetPrimaryPartCFrame()
+          TweenValue.Changed:Connect(function()
+              part.Parent.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+          end)
+          local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").ParkingMarkers.ContractDestPart.Union.CFrame+Vector3.new(0,200,0)})
+          OnTween:Play()	
+           OnTween.Completed:Wait()
+           local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
+part.Parent.Parent:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.ContractDestPart.Part.CFrame)
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+    workspace.Gravity = 196
+           wait(0.5)
+    end
+if value == nil then
+game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
+wait(0.2)
+game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBigNuclear")
+wait(1)
+end
+end
+end)
