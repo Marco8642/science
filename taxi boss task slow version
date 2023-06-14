@@ -8,6 +8,12 @@ local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", tru
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
+example:AddBox("Enter seconds here", function(object, focus)
+    if focus then
+    _G.time = tonumber(object.Text)
+    
+    end
+    end)
 example:AddToggle("Auto Farm Nuke task", function(state)
 _G.test = (state and true or false)
 while _G.test do
@@ -31,7 +37,7 @@ if game:GetService("Workspace").ParkingMarkers:FindFirstChild("ContractDestPart"
 local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
 
 local TweenService = game:GetService("TweenService")
-          local TweenInfoToUse = TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+          local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
           local TweenValue = Instance.new("CFrameValue")
           TweenValue.Value = part.Parent.Parent:GetPrimaryPartCFrame()
           TweenValue.Changed:Connect(function()
@@ -43,7 +49,7 @@ local TweenService = game:GetService("TweenService")
 local part=game.Players.LocalPlayer.Character.Humanoid.SeatPart
 
 local TweenService = game:GetService("TweenService")
-          local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+          local TweenInfoToUse = TweenInfo.new(_G.time, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
           local TweenValue = Instance.new("CFrameValue")
           TweenValue.Value = part.Parent.Parent:GetPrimaryPartCFrame()
           TweenValue.Changed:Connect(function()
