@@ -12,7 +12,7 @@ example:AddToggle("Auto Delivery", function(state)
 _G.money = (state and true or false)
 while _G.money do
 wait()
-game:GetService("ReplicatedStorage").Kerja.FoodPanda.EarnedCust:FireServer()
+game:GetService("ReplicatedStorage").Kerja["FoodPanda and Tealive"].JobsEvent:FireServer("Delivery")
 end
 end)
 example:AddToggle("Auto Farm", function(state)
