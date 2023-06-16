@@ -27,7 +27,7 @@ game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contr
            wait(0.5)
 if value == nil then
 game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
-wait(0.2)
+wait(1)
 game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBigNuclear")
 wait(1)
 end
