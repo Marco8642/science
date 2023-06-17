@@ -1,4 +1,3 @@
-game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer("contractBigNuclear")
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -9,27 +8,23 @@ local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", tru
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
-example:AddToggle("Auto Farm Nuke task", function(state)
-_G.test = (state and true or false)
-while _G.test do
+example:AddToggle("Auto Money", function(state)
+_G.test2 = (state and true or false)
+while _G.test2 do
     wait()
-local value = nil
-    for i,v in pairs(game:GetService("Workspace").Quests.Materials:GetChildren()) do
-  if not game:GetService("Workspace").ParkingMarkers:FindFirstChild("ContractDestPart")  then
-value = v
-game:GetService("ReplicatedStorage").Quests.PickUpMaterial:InvokeServer("NuclearBarrel",1,"c",2.1)
-wait(0.5)
- 
-  end
-end
- wait(3)
+    if not  game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
+        game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBuildMaterial")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial")
+    end
+repeat task.wait()
+task.spawn(function()
 game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
-           wait(0.5)
-if value == nil then
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+end)
+until game:GetService("Players").LocalPlayer.ActiveQuests.contractBuildMaterial.Value == "!pw5pi3ps2"
+wait()
 game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
-wait(1)
-game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBigNuclear")
-wait(1)
-end
 end
 end)
