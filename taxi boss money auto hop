@@ -1,0 +1,55 @@
+repeat wait()
+until game:IsLoaded()
+wait(3)
+warn("script running")
+_G.count = 0
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Enabled = true
+spawn(function()
+while wait() do
+    if not game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") and _G.count < 10 then
+    wait(1)
+    _G.count=_G.count+1
+    elseif not game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") and _G.count >= 10 then
+    game.Players.LocalPlayer:kick("Rejoining")
+    wait()
+    game:GetService("TeleportService"):Teleport(game.PlaceId)
+   _G.count = 0
+    end
+    end
+end)
+spawn(function()
+while wait() do
+        if game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
+_G.count = 0
+wait()
+        end
+        end
+        end)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+pcall(function()
+game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
+game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
+end)
+_G.test2 = true
+while _G.test2 do
+    wait()
+    if not  game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
+        game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBuildMaterial")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial")
+    end
+repeat task.wait()
+task.spawn(function()
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+end)
+until game:GetService("Players").LocalPlayer.ActiveQuests.contractBuildMaterial.Value == "!pw5pi3ps2"
+wait()
+game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
+end
