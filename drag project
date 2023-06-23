@@ -21,37 +21,7 @@ while _G.test do
     task.wait()
     pcall(function()
 if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-local car = game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model")
-car.PrimaryPart = car.DriveSeat
-if game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace")["Timer_Start"].Position) > 15 then
- local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = car:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	car:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace")["Timer_Start"].CFrame})
-OnTween:Play()
- OnTween.Completed:Wait()
- else
- local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(20, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = car:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	car:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace")["Timer_Pause"].CFrame})
-OnTween:Play()
- OnTween.Completed:Wait()
-end
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Velocity = Vector3.new(0,1000,0)
 elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and game:GetService("Workspace"):FindFirstChild("Folder"..game.Players.LocalPlayer.Name) then
     wait(1)
 game:GetService("ReplicatedStorage").KeteLoL.Letak:FireServer(game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").Name, "Civillian")
