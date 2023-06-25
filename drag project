@@ -14,6 +14,14 @@ while _G.money do
 wait()
 if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated == "2023-06-25T09:34:04.2493277Z" then
 game:GetService("ReplicatedStorage").Kerja["FoodPanda and Tealive"].JobsEvent1:FireServer("Delivery")
+elseif game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated ~= "2023-06-25T09:34:04.2493277Z" then
+local CoreGui = game:GetService("StarterGui")
+    CoreGui:SetCore("SendNotification", {
+        Title = "Hi There";
+        Text = "this feature has been disabled due to game update Please notify me on youtube @LegoLua to fix it";
+        Duration = 10;
+    })
+wait(10)
 end
 end
 end)
