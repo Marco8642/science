@@ -47,7 +47,7 @@ if  variablecheck ~= true then
     wait(0.5)
 elseif variablecheck == true then
   remote:FireServer("Delivery")
-  wait(0.5)
+  wait()
 end
 end
 end)
