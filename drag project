@@ -43,7 +43,22 @@ end
 end)
 end
 end)
-
+local example = library:CreateWindow({
+    text = "Vehicle Buyer"
+  })
+  example:AddLabel("Buy Vehicle By Name",function()
+  end)
+  example:AddBox("Enter Vehicle Name", function(object, focus)
+    if focus then
+  local vehiclefinder = tostring(object.Text)
+  for i,v in pairs(game:GetDescendants()) do
+      if v.ClassName == "TextLabel" and string.find(v.Text,vehiclefinder) then
+  game:GetService("ReplicatedStorage").KeteLoL.Beli:FireServer(v.Text)
+  break
+      end
+      end
+    end
+end)  
     local example = library:CreateWindow({
         text = "Teleports"
       })
