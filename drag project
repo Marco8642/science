@@ -4,6 +4,7 @@ warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+_G.grav = workspace.Gravity
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs"))()
 local example = library:CreateWindow({
   text = "Drag Project"
@@ -69,4 +70,45 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(498.9867
 end)
         example:AddButton("Teleport to Mount Kiara", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3969.83545, 3.55590558, -1198.41101, -0.920043468, 3.10609716e-09, 0.391816348, 1.42095935e-08, 1, 2.54388226e-08, -0.391816348, 2.89723729e-08, -0.920043468)
+end)
+local example = library:CreateWindow({
+  text = "Misc"
+})
+example:AddLabel("Player Speed Changer",function()
+end)
+example:AddBox("Enter Speed Value", function(object, focus)
+  if focus then
+ 
+      _G.mood = tostring(object.Text)
+  end
+end)
+example:AddToggle("Speed Enabler", function(state)
+_G.speedster = (state and true or false)
+while _G.speedster do
+    task.wait()
+    pcall(function()
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = _G.mood
+    end)
+    end
+end)
+example:AddToggle("Infinite Jump", function(state)
+_G.infjump = (state and true or false)
+while _G.infjump do
+    task.wait()
+if game.Players.LocalPlayer.Character.Humanoid.Jump == true then
+game.Players.LocalPlayer.Character.Humanoid:ChangeState(3)
+end
+end
+end)
+example:AddLabel("Gravity Changer",function()
+end)
+example:AddBox("Enter Gravity Value", function(object, focus)
+  if focus then
+ 
+      code = tonumber(object.Text)
+      workspace.Gravity = code
+  end
+end)      
+example:AddButton("reset gravity", function(state)
+workspace.Gravity = _G.grav
 end)
