@@ -13,9 +13,9 @@ example:AddToggle("Auto Delivery", function(state)
 _G.money = (state and true or false)
 while _G.money do
 wait()
-if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated == "2023-06-25T18:01:17.0120778Z" then
+if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated == "2023-06-26T04:19:01.7439847Z" then
 game:GetService("ReplicatedStorage").Kerja["FoodPanda and Tealive"].JobsEvent1:FireServer("Delivery")
-elseif game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated ~= "2023-06-25T18:01:17.0120778Z" then
+elseif game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated ~= "2023-06-26T04:19:01.7439847Z" then
 local CoreGui = game:GetService("StarterGui")
     CoreGui:SetCore("SendNotification", {
         Title = "Hi There";
