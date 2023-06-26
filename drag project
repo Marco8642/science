@@ -1,4 +1,20 @@
-warn("Anti afk running")
+
+local variablecheck
+local remote
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'FireServer' and tostring(Args[1]) == "Delivery" then
+remote = self
+	end
+	return namecall(self, ...) 
+end)
+    warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
@@ -13,16 +29,25 @@ example:AddToggle("Auto Delivery", function(state)
 _G.money = (state and true or false)
 while _G.money do
 wait()
-if game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated == "2023-06-26T13:17:02.3763953Z" then
-game:GetService("ReplicatedStorage").Kerja["FoodPanda and Tealive"].JobsEvent1:FireServer("Delivery")
-elseif game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId).Updated ~= "2023-06-26T13:17:02.3763953Z" then
-local CoreGui = game:GetService("StarterGui")
-    CoreGui:SetCore("SendNotification", {
-        Title = "Hi There";
-        Text = "this feature has been disabled due to game update Please notify me on youtube @LegoLua to fix it";
-        Duration = 10;
-    })
-wait(10)
+if  variablecheck ~= true then
+  local before = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+  fireclickdetector(game:GetService("Workspace").Jobs.DeliverySystem.Clicker.ClickDetector,0)
+  wait(1)
+  for i,v in pairs(workspace:GetChildren()) do
+      if v.ClassName == "Model" and v:FindFirstChild("Prox") then
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChild("Prox").CFrame
+  wait(0.1)
+  fireproximityprompt(v:FindFirstChild("Prox").ProximityPrompt)
+  repeat wait()
+  until v.Parent == nil
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(before)
+      end
+      end
+      variablecheck = true
+    wait(0.5)
+elseif variablecheck == true then
+  remote:FireServer("Delivery")
+  wait(0.5)
 end
 end
 end)
