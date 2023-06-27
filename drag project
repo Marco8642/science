@@ -115,6 +115,22 @@ end)
         example:AddButton("Teleport to Mount Kiara", function()
 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3969.83545, 3.55590558, -1198.41101, -0.920043468, 3.10609716e-09, 0.391816348, 1.42095935e-08, 1, 2.54388226e-08, -0.391816348, 2.89723729e-08, -0.920043468)
 end)
+ example:AddToggle("Click Teleport", function(state)
+    _G.clickteleport = (state and true or false)
+if _G.clickteleport == true then
+    local plr = game.Players.LocalPlayer
+    local Mouse = plr:GetMouse()
+    _G.run=Mouse.Button1Down:Connect(function()
+    if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(CFrame.new(Mouse.Hit.Position))
+else
+    game.Players.LocalPlayer.Character:MoveTo(Mouse.Hit.Position)
+    end
+    end)
+    elseif _G.clickteleport == false then
+    _G.run:Disconnect()
+    end
+end)
 local example = library:CreateWindow({
   text = "Misc"
 })
