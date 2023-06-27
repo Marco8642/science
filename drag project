@@ -56,13 +56,17 @@ _G.test = (state and true or false)
 while _G.test do
     task.wait()
     pcall(function()
+        if not game:GetService("Players").LocalPlayer.OwnedCars:FindFirstChild("HondeEX5") then
+            game:GetService("ReplicatedStorage").KeteLoL.Beli:FireServer("HondeEX5")
+            wait()
+        end
 if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Velocity = Vector3.new(0,1000,0)
-elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and game:GetService("Workspace"):FindFirstChild("Folder"..game.Players.LocalPlayer.Name) then
+elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and game:GetService("Players").LocalPlayer.OwnedCars:FindFirstChild("HondeEX5") then
     wait(1)
-game:GetService("ReplicatedStorage").KeteLoL.Letak:FireServer(game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").Name, "Civillian")
+game:GetService("ReplicatedStorage").KeteLoL.Letak:FireServer(game:GetService("Players").LocalPlayer.OwnedCars:FindFirstChild("HondeEX5").Name, "Civillian")
 wait(5)
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").DriveSeat.CFrame
+game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
 wait(1)
 end
 end)
