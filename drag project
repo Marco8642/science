@@ -100,22 +100,54 @@ end)
     end)
 
     example:AddButton("Teleport to Dealership", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(-608.287292, 4.20762491, 154.133835, -0.972057402, 1.17043957e-08, 0.234743387, -1.35618947e-08, 1, -1.06019328e-07, -0.234743387, -1.06240435e-07, -0.972057402)
+        local spot = CFrame.new(-608.287292, 4.20762491, 154.133835, -0.972057402, 1.17043957e-08, 0.234743387, -1.35618947e-08, 1, -1.06019328e-07, -0.234743387, -1.06240435e-07, -0.972057402)
+        if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= spot
+        end
     end)
     example:AddButton("Teleport to Vip Houses", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(-157.390686, 3.55590415, -162.619614, -0.999450982, -3.9576328e-08, -0.0331323668, -3.7554905e-08, 1, -6.16327611e-08, 0.0331323668, -6.03546439e-08, -0.999450982)
+        local spot = CFrame.new(-157.390686, 3.55590415, -162.619614, -0.999450982, -3.9576328e-08, -0.0331323668, -3.7554905e-08, 1, -6.16327611e-08, 0.0331323668, -6.03546439e-08, -0.999450982)
+        if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= spot
+        end
     end)
     example:AddButton("Teleport to Drag race", function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(26.5487614, 3.54278731, -526.0625, -0.0196847972, 4.19225508e-08, 0.999806225, -5.75967327e-08, 1, -4.30646772e-08, -0.999806225, -5.84332938e-08, -0.0196847972)
+        local spot = CFrame.new(26.5487614, 3.54278731, -526.0625, -0.0196847972, 4.19225508e-08, 0.999806225, -5.75967327e-08, 1, -4.30646772e-08, -0.999806225, -5.84332938e-08, -0.0196847972)
+        if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= spot
+        end
     end)
         example:AddButton("Teleport to foodpanda", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-0.0975782275, 3.70432806, -243.674194, 0.0824485049, -7.59362564e-08, 0.996595323, -8.9118295e-08, 1, 8.35684517e-08, -0.996595323, -9.57049764e-08, 0.0824485049)    
+          local spot = CFrame.new(-0.0975782275, 3.70432806, -243.674194, 0.0824485049, -7.59362564e-08, 0.996595323, -8.9118295e-08, 1, 8.35684517e-08, -0.996595323, -9.57049764e-08, 0.0824485049)
+
+if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= spot
+        end    
 end)
         example:AddButton("Teleport to tealive", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(498.986755, 3.55590558, -220.309616, -0.0767711699, -6.0101355e-09, 0.997048736, 1.31667433e-09, 1, 6.12930728e-09, -0.997048736, 1.78334258e-09, -0.0767711699)
+            local spot = CFrame.new(481.97937, 3.79663563, -221.632538, -0.122349404, -2.05791491e-08, 0.992487073, 1.26337865e-08, 1, 2.22923671e-08, -0.992487073, 1.52663286e-08, -0.122349404)
+if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = spot
+        end
 end)
         example:AddButton("Teleport to Mount Kiara", function()
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(3969.83545, 3.55590558, -1198.41101, -0.920043468, 3.10609716e-09, 0.391816348, 1.42095935e-08, 1, 2.54388226e-08, -0.391816348, 2.89723729e-08, -0.920043468)
+            local spot = CFrame.new(3969.83545, 3.55590558, -1198.41101, -0.920043468, 3.10609716e-09, 0.391816348, 1.42095935e-08, 1, 2.54388226e-08, -0.391816348, 2.89723729e-08, -0.920043468)
+
+if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(spot)
+        else
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame= spot
+        end
 end)
  example:AddToggle("Click Teleport", function(state)
     getfenv().clickteleport = (state and true or false)
