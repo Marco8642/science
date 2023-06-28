@@ -35,6 +35,8 @@ if  variablecheck ~= true then
   wait(1)
   for i,v in pairs(workspace:GetChildren()) do
       if v.ClassName == "Model" and v:FindFirstChild("Prox") then
+        game.Players.LocalPlayer.Character.Humanoid.Sit = false
+        wait(0.1)
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChild("Prox").CFrame
   wait(0.1)
   fireproximityprompt(v:FindFirstChild("Prox").ProximityPrompt)
