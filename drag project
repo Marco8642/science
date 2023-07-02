@@ -206,3 +206,13 @@ end)
 example:AddButton("reset gravity", function(state)
 workspace.Gravity = getfenv().grav
 end)
+local example = library:CreateWindow({
+    text = "Misc"
+  })
+example:AddButton("Skip Loading Screen", function(state)
+local cam = workspace.Camera
+cam.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+cam.CameraType = Enum.CameraType.Custom
+game.Players.LocalPlayer.CameraMaxZoomDistance = 20
+game:GetService("Players").LocalPlayer.PlayerGui.Loading:Destroy()
+end)
