@@ -53,6 +53,16 @@ elseif variablecheck == true then
 end
 end
 end)
+example:AddButton("Get All Bikes[Temp]", function(state)
+    game:GetService("Players").LocalPlayer.OwnedCars:ClearAllChildren()
+    for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:GetDescendants()) do
+        if v.Name == "CarName" and v.Text ~= "Unknown" and v.Text ~= "unknown" and v.Text ~= "Template"  then
+    local new = Instance.new("BoolValue",game:GetService("Players").LocalPlayer.OwnedCars)
+      new.Name = v.Text
+      new.Value = true
+        end
+        end
+end)
 example:AddToggle("Auto Farm", function(state)
 getfenv().test = (state and true or false)
 while getfenv().test do
