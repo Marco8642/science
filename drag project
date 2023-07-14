@@ -30,16 +30,16 @@ getfenv().money = (state and true or false)
 while getfenv().money do
 wait()
 if  variablecheck ~= true then
-  local before = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+   local before = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
   fireclickdetector(game:GetService("Workspace").Jobs.DeliverySystem.Clicker.ClickDetector,0)
   wait(1)
-  for i,v in pairs(workspace:GetChildren()) do
-      if v.ClassName == "Model" and v:FindFirstChild("Prox1") then
+for i,v in pairs(workspace:GetDescendants()) do
+      if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
         game.Players.LocalPlayer.Character.Humanoid.Sit = false
         wait(0.1)
-  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChild("Prox1").CFrame
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
   wait(0.1)
-  fireproximityprompt(v:FindFirstChild("Prox1").ProximityPrompt)
+  fireproximityprompt(v)
   repeat wait()
   until v.Parent == nil
   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(before)
