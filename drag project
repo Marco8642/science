@@ -35,14 +35,11 @@ if  variablecheck ~= true then
   wait(1)
 for i,v in pairs(workspace:GetDescendants()) do
       if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
-        game.Players.LocalPlayer.Character.Humanoid.Sit = false
-        wait(0.1)
-  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+  v.MaxActivationDistance = math.huge
   wait(0.1)
   fireproximityprompt(v)
   repeat wait()
   until v.Parent == nil
-  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=CFrame.new(before)
       end
       end
       variablecheck = true
