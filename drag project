@@ -1,4 +1,7 @@
-
+if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
+print("joinning sentul")
+game:GetService("TeleportService"):Teleport(13970285340)
+end
 local variablecheck
 local remote
 local mt = getrawmetatable(game);
@@ -71,17 +74,6 @@ wait(1)
 end
 end)
 end
-end)
-      example:AddButton("Get All Bikes[temp]", function()
-for i,v in pairs(getgc(true)) do
-   if type(v) == 'table' and rawget(v,"Sniper150Drag") ~= nil then
-for a,b in pairs(v) do
-   local new = Instance.new("BoolValue",game:GetService("Players").LocalPlayer.OwnedCars)
-   new.Name = a
-   new.Value = true
-   end
-   end
-   end
 end)
     local example = library:CreateWindow({
         text = "Teleports"
