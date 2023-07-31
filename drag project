@@ -201,3 +201,11 @@ cam.CameraType = Enum.CameraType.Custom
 game.Players.LocalPlayer.CameraMaxZoomDistance = 20
 game:GetService("Players").LocalPlayer.PlayerGui.Loading:Destroy()
 end)
+example:AddButton("Join Sentul", function(state)
+game:GetService("TeleportService"):Teleport(11568403922)
+wait()
+queue_on_teleport[[ repeat wait()
+until game:IsLoaded()
+game:GetService("TeleportService"):Teleport(13970285340)
+]]
+end)
