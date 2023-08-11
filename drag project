@@ -39,6 +39,7 @@ if  variablecheck ~= true then
 for i,v in pairs(workspace:GetDescendants()) do
       if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
   v.MaxActivationDistance = math.huge
+  v.RequiresLineOfSight = false
   wait(0.1)
   fireproximityprompt(v)
   repeat wait()
