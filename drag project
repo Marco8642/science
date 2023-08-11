@@ -1,6 +1,9 @@
 if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
-print("joinning sentul")
-game:GetService("TeleportService"):Teleport(13970285340)
+game:GetService("TeleportService"):Teleport(13970285340,game.Players.LocalPlayer)
+queue_on_teleport[[
+    game:GetService("TeleportService"):Teleport(13970285340,game.Players.LocalPlayer)
+
+]]
 end
 local variablecheck
 local remote
@@ -203,10 +206,13 @@ game.Players.LocalPlayer.CameraMaxZoomDistance = 20
 game:GetService("Players").LocalPlayer.PlayerGui.Loading:Destroy()
 end)
 example:AddButton("Join Sentul", function(state)
+writefile("dragprojectTphelper.txt","queue_on_teleport".."[[".."game"..".".."TeleportService"..":".."Teleport".."(13970285340"..",game.Players.LocalPlayer)".."]]")
 game:GetService("TeleportService"):Teleport(11568403922)
 wait()
-queue_on_teleport[[ repeat wait()
+queue_on_teleport[[
+repeat task.wait()
 until game:IsLoaded()
-game:GetService("TeleportService"):Teleport(13970285340)
+readfile("dragprojectTphelper.txt")
+game:GetService("TeleportService"):Teleport(13970285340,game.Players.LocalPlayer)
 ]]
 end)
