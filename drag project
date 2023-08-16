@@ -16,6 +16,7 @@ mt.__namecall = newcclosure(function(self, ...)
 	local Args = {...}
 
 	if Method == 'FireServer' and tostring(Args[1]) == "Delivery" then
+print(self)
 remote = self
 	end
 	return namecall(self, ...) 
@@ -41,12 +42,13 @@ if  variablecheck ~= true then
   wait(1)
 for i,v in pairs(workspace:GetDescendants()) do
       if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
+  v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
   v.MaxActivationDistance = math.huge
   v.RequiresLineOfSight = false
-  wait(0.1)
-  fireproximityprompt(v)
   repeat wait()
+fireproximityprompt(v)
   until v.Parent == nil
+  print()
       end
       end
       variablecheck = true
