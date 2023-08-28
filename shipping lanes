@@ -1,0 +1,134 @@
+while _G.test do
+	wait()
+local check,errors = pcall(function()
+    _G.rat = nil
+    local distance = math.huge
+    for a,b in pairs(game:GetService("Workspace").Ports:GetDescendants()) do
+        if b.Name == "DockingArea"  then
+    local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
+    if Dist < distance then
+    distance = Dist
+    _G.rat = b
+    end
+    end
+    end
+    if _G.rat.Parent.Parent.Name ~= "Rockfall Port" then
+        for i,v in pairs(getgc(true)) do
+        if type(v) == "table" and rawget(v,"ID") ~= nil and type(v.ID) == "string" then
+    id = v.ID
+        end
+        end
+    for i,v in pairs(getgc(true)) do
+        if type(v) == "table" and rawget(v,"PlacedItems") ~= nil and type(v.PlacedItems) == "string" then
+    items = v.PlacedItems
+        end
+        end
+    game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("SpawnShip", {["Fuel"] = math.huge,["PlacedItems"] = items,["Upgrades"] = {},["ID"] = id,["ShipName"] = "SS Starter Ship",["Distance"] = 103.85999999999915,["ShipType"] ="Small Container Ship"}, "Rockfall Port")
+    wait(3)
+    game:GetService("Players").LocalPlayer.CurrentShip.Value.ControlPanel.VehicleSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+    end
+	repeat wait()
+	until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil
+	if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-5640.44775390625, 229.45823669433594, 1645.7984619140625)) > 150 then
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
+local ClickToMoveController = PlayerModule:GetClickToMoveController()
+ClickToMoveController:SetUseDirectPath(true)
+ClickToMoveController:MoveTo(Vector3.new(-5640.44775390625, 229.45823669433594, 1645.7984619140625),true)
+wait(1)
+	elseif game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-5640.44775390625, 229.45823669433594, 1645.7984619140625)) < 150 then
+local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+repeat task.wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+game.Players.LocalPlayer.CurrentShip.Value.ShipCoreScript.RemoteEvent:FireServer("SetThrottle", -50)
+local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+wait(2)
+local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+
+print(number)
+until number < 2
+game.Players.LocalPlayer.CurrentShip.Value.ShipCoreScript.RemoteEvent:FireServer("SetThrottle", 0)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+repeat wait()
+    local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+until number == 0
+wait(3)
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Dock.MouseButton1Click)
+repeat wait()
+until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("PortGui"):WaitForChild("LoadingBar").Visible == false
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.PortMainMenu.MenuButtons.CargoManager.Button.MouseButton1Click)
+wait()
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.ContainerMenu.ScrollingFrame:GetChildren()) do
+	if v.Name == "ListItem" and v.PortName.Text == "Ocean Fall Port" then
+		firesignal(v.Load.MouseButton1Click)
+	end
+end
+wait(2)
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.PortMainMenu.MenuButtons.Undock.Button.MouseButton1Click)
+wait(10)
+repeat wait()
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
+local ClickToMoveController = PlayerModule:GetClickToMoveController()
+    ClickToMoveController:MoveTo(Vector3.new(-12308.9697265625, 270.3766784667969, -6376.62451171875),true)
+wait(1)
+until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-12308.9697265625, 270.3766784667969, -6376.62451171875)) < 200
+repeat wait()
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
+local ClickToMoveController = PlayerModule:GetClickToMoveController()
+    ClickToMoveController:MoveTo(Vector3.new(6537.8779296875, 262.49554443359375, -44690.4296875),true)
+    wait(1)
+until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(6537.8779296875, 262.49554443359375, -44690.4296875)) < 200
+repeat wait()
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
+local ClickToMoveController = PlayerModule:GetClickToMoveController()
+    ClickToMoveController:MoveTo(Vector3.new(19089.974609375, 242.09771728515625, -44922.1484375),true)
+    wait(1)
+until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(19089.974609375, 242.09771728515625, -44922.1484375)) < 200
+
+
+local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+repeat task.wait()
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+game.Players.LocalPlayer.CurrentShip.Value.ShipCoreScript.RemoteEvent:FireServer("SetThrottle", -50)
+wait(1)
+local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+print(number)
+until number < 2
+game.Players.LocalPlayer.CurrentShip.Value.ShipCoreScript.RemoteEvent:FireServer("SetThrottle", 0)
+wait(5)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+repeat wait()
+    local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+until number == 0
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Dock.MouseButton1Click)
+repeat wait()
+until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("PortGui"):WaitForChild("LoadingBar").Visible == false
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.PortMainMenu.MenuButtons.CargoManager.Button.MouseButton1Click)
+wait()
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.ContainerMenu.SwitchMode.MouseButton1Click)
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.ContainerMenu.ScrollingFrame:GetDescendants()) do
+	if v.Name == "Unload" then
+		firesignal(v.MouseButton1Click)
+		wait()
+end
+end
+wait(2)
+firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.PortMainMenu.MenuButtons.Undock.Button.MouseButton1Click)
+end
+	end)
+if errors ~= nil then
+	warn(errors)
+end
+end
