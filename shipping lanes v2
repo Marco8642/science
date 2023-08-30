@@ -4,10 +4,25 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    wait(1)
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
+spawn(function()
+while wait() do
+	pcall(function()
+if _G.ship == nil and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+for i,v in pairs(getgc(true)) do
+if type(v) == "table" and rawget(v,"ID") == game.Players.LocalPlayer.CurrentShip.Value:GetAttribute("ShipID") then
+_G.ship = v
+	end
+end
+end
+end)
+end
+end)
 local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
 local example = library:CreateWindow({
   text = "Shipping Lanes"
 })
+
+
 example:AddToggle("Auto Farm", function(state)
 _G.test = (state and true or false)
 local farmnum = 0
@@ -31,14 +46,7 @@ local check,errors = pcall(function()
     end
     end
     if _G.rat.Parent.Parent.Name ~= "Rockfall Port" then
-     for i,v in pairs(getgc(true)) do
-	if type(v) == "table" and rawget(v,"ID") and type(v.ID) == "string" then
-if v.ShipType == game.Players.LocalPlayer.CurrentShip.Name then
-tab = v
-end
-	end
-end
-game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("SpawnShip", tab, "Rockfall Port")
+game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("SpawnShip", _G.ship, "Rockfall Port")
     wait(3)
     game:GetService("Players").LocalPlayer.CurrentShip.Value.ControlPanel.VehicleSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
     end
