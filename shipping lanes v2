@@ -22,7 +22,9 @@ local example = library:CreateWindow({
   text = "Shipping Lanes"
 })
 
-
+example:AddButton("Get SL-7 Ship",function()
+game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("BuyShip","SL-7", "", "")
+end)
 example:AddToggle("Auto Farm", function(state)
 _G.test = (state and true or false)
 local farmnum = 0
