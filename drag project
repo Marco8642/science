@@ -231,6 +231,20 @@ end)
 local example = library:CreateWindow({
     text = "Misc"
   })
+example:AddButton("Complete Merdeka Event", function(state)
+for i,v in pairs(workspace.Merdeka:GetDescendants()) do
+	if v.ClassName == "ProximityPrompt" then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+		wait(0.2)
+		v.HoldDuration = 0
+		fireproximityprompt(v)
+wait(0.2)
+	end
+end
+game:GetService("ReplicatedStorage").RewardMerdeka:FireServer("Bendera")
+game:GetService("ReplicatedStorage").RewardMerdeka:FireServer("Tank")
+game:GetService("ReplicatedStorage").RewardMerdeka:FireServer("Time")
+end)
 example:AddButton("Skip Loading Screen", function(state)
 local cam = workspace.Camera
 cam.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
