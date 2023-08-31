@@ -1,0 +1,12 @@
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/PpMcEF8z", true))()
+local example = library:CreateWindow({
+  text = "Money Changer"
+})
+example:AddBox("Enter Amount", function(object, focus)
+  if focus then
+
+game:GetService("ReplicatedStorage").Event.ThrottleMoney:FireServer(-game.Players.LocalPlayer.leaderstats.Money.Value)
+wait(1)
+game:GetService("ReplicatedStorage").Event.ThrottleMoney:FireServer(tonumber(object.Text))
+  end
+  end)
