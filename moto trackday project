@@ -10,7 +10,9 @@ local example = library:CreateWindow({
 })
 example:AddToggle("Auto Money", function(state)
 _G.test = (state and true or false)
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 while _G.test do
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = _G.test
 game:GetService("ReplicatedStorage").Event.ThrottleMoney:FireServer(99999)
 task.wait(10)
 end
