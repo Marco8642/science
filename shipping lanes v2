@@ -54,6 +54,11 @@ game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("
     end
 	repeat wait()
 	until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil or _G.test == false
+for i,v in pairs(workspace:GetDescendants()) do
+		pcall(function()
+	v.CanCollide = false
+	end)
+	end
 	wait(5)
 dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)).magnitude
 		print(dist/25/7)
