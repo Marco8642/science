@@ -55,7 +55,6 @@ game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("
 	repeat wait()
 	until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil or _G.test == false
 	wait(5)
-
 dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-Vector3.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)).magnitude
 		print(dist/25/7)
 	local ship = game.Players.LocalPlayer.CurrentShip.Value
@@ -91,6 +90,8 @@ OnTween:Play()
  OnTween.Completed:Wait()
  wait(3)
 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Dock.MouseButton1Click)
+repeat wait()
+until game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("PortGui") or _G.test == false
 repeat wait()
 until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("PortGui"):WaitForChild("LoadingBar").Visible == false or _G.test == false
 firesignal(game:GetService("Players").LocalPlayer.PlayerGui.PortGui.PortMainMenu.MenuButtons.CargoManager.Button.MouseButton1Click)
