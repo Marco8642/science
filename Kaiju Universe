@@ -73,7 +73,7 @@ example:AddToggle("Use All abilities", function(state)
 task.wait()
 for a,b in pairs(v) do
 if a == "ID" then
-wait()
+task.wait(0.1)
 game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(b)
     end
     end
