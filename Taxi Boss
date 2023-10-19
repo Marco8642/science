@@ -1,6 +1,815 @@
-_, Protected_by_MoonSecV2, Discord = 'discord.gg/gQEH2uZxUk'
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs", true))()
+local example = library:CreateWindow({
+  text = "Taxi Boss"
+})
+example:AddToggle("Auto Break Pumpkins", function(state)
+    _G.pumps = (state and true or false)
+    while _G.pumps do
+        task.wait()
+        pcall(function()
+    for i,v in pairs(workspace.Pumpkins:GetDescendants()) do
+        if v.Name == "TouchInterest" then
+    firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v.Parent,0)
+    firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v.Parent,1)
+task.wait()
+        end
+    end
+end)
+    end
+end)
+example:AddToggle("Super Spin[Halloween]", function(state)
+    _G.ohserver = (state and true or false)
+    while _G.ohserver do
+    task.wait()
+    if game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() < 1500 then 
+    for i=1,10000 do
+    task.spawn(function()
+        game.ReplicatedStorage.Halloween.OpenLootbox:InvokeServer("lootbox")
+    end)
+    end
+    wait(10)
+    end
+    end
+end)
+example:AddToggle("Auto Race[Halloween]", function(state)
+_G.halorace = (state and true or false)
+game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
+while _G.halorace  do
+            task.wait()
+            pcall(function()
+      if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+    if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
+        task.wait(0.1)
+game:GetService("ReplicatedStorage").Race.JoinRace:InvokeServer("summerRace")
+wait()
+game:GetService("ReplicatedStorage").Race.StartRace:FireServer()
+    else
+    for a,b in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if b.Name == "Player" and b.Value == game.Players.LocalPlayer then
+    for i,v in pairs(game:GetService("Workspace").Races.summerRace.detects:GetChildren()) do
+        if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+            warn(v)
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
+            print(v)
+            firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v,0)
+                    firetouchinterest(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.PrimaryPart,v,1)
+    
+        end
+    end
 
+    end
+     end   
+    end
+    elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+        game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+        wait(0.5)
+        game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+    end
+    end)
+        end
+    end)
+example:AddToggle("Auto Money", function(state)
+_G.test2 = (state and true or false)
+pcall(function()
+game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
+game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
+end)
+while _G.test2 do
+    wait()
+    if not  game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
+        game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBuildMaterial")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial")
+    end
+repeat task.wait()
+task.spawn(function()
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+game:GetService("ReplicatedStorage").Quests.DeliveryComplete:InvokeServer("contractMaterial")
+end)
+until game:GetService("Players").LocalPlayer.ActiveQuests.contractBuildMaterial.Value == "!pw5pi3ps2"
+wait()
+game:GetService("ReplicatedStorage").Quests.Contracts.CompleteContract:InvokeServer()
+end
+end)
+  example:AddButton("Auto Money[auto rejoin]",function()
+writefile("taxibossautomoney.txt",game:HttpGet("https://pastebin.com/raw/HuKppzEV"))
+loadstring(game:HttpGet("https://pastebin.com/raw/HuKppzEV"))()
+  end)
+  example:AddToggle("Auto Customers[Beta]", function(state)
+    _G.customersfarm = (state and true or false)
+    pcall(function()
+       game:GetService("Workspace").GaragePlate:Destroy()
+       end)
+       for i,v in pairs(game:GetService("Workspace").World.Industrial.Port:GetChildren()) do
+          if string.find(v.Name,"Container") then
+             v:Destroy()
+          end
+       end
+    _G.numbers = 0
+    _G.stuck = 0
+    local testvalue = 1
+    local  ohsoso = false
+    local antiban = 0
+    while _G.customersfarm do
+        wait()
+        pcall(function()
+    if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+    local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = {chr,car,workspace.Camera}
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.IgnoreWater = false
+     ohsoso = false
+     if game:GetService("Players").LocalPlayer.variables.inMission.Value == true and not game:GetService("Workspace").ParkingMarkers:FindFirstChild("destinationPart") then
+        antiban=antiban+1
+        wait(1)
+     elseif  antiban > 10 then
+        game.Players.LocalPlayer:Kick("Kicked Due to game being glitched")
+        end
+       if game:GetService("Players").LocalPlayer.variables.inMission.Value == true and game:GetService("Workspace").ParkingMarkers:FindFirstChild("destinationPart") and game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").ParkingMarkers:WaitForChild("destinationPart").Position) < 50 then
+                     tastvalue = 1
+                     car:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame+Vector3.new(0,3,0))
+                       car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+                     game:GetService("VirtualInputManager"):SendKeyEvent(true,304,false,game)
+                     wait(1)
+                     car:SetPrimaryPartCFrame(game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame+Vector3.new(0,3,0))
+                     car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+                     game:GetService("VirtualInputManager"):SendKeyEvent(true,304,false,game)
+                     wait()
+                dcframe = game:GetService("Workspace").ParkingMarkers.destinationPart.CFrame
+    repeat wait()
+         if (car.PrimaryPart.Position-Vector3.new(dcframe.X,dcframe.Y,dcframe.Z)).magnitude > 3 then
+                              car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+                     car:PivotTo(dcframe)
+                     wait(0.1)
+                     game:GetService("VirtualInputManager"):SendKeyEvent(true,304,false,game)
+                     car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+         end
+    until not game:GetService("Workspace").ParkingMarkers:FindFirstChild("destinationPart") or _G.customersfarm == false
+    antiban = 0
+    game:GetService("VirtualInputManager"):SendKeyEvent(false,304,false,game)
+    _G.numbers=_G.numbers+1
+                    testvalue = 1
+                     task.wait()
+    
+    elseif  workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, -100, 0),raycastParams).Instance.Name == "Terrain" and ohsoso == false then
+       _G.rat = nil
+       local distance = math.huge
+       for i,v in pairs(game:GetService("Workspace").World:GetDescendants()) do
+          if string.find(v.Name,"road") and v.ClassName == "Part" or string.find(v.Name,"Road") and v.ClassName == "Part"    then
+              local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude
+       if Dist < distance then
+       distance = Dist
+       _G.rat = v
+       end
+       end
+       end
+    car:PivotTo(_G.rat.CFrame)
+     ohsoso = true
+    elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == true  then
+    warn("Tester")
+    local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    print(testvalue)
+    testvalue = testvalue-.02 
+    if testvalue < 0 then
+         _G.rat = nil
+       local distance = math.huge
+       for i,v in pairs(game:GetService("Workspace").World:GetDescendants()) do
+          if string.find(v.Name,"road") and v.ClassName == "Part" or string.find(v.Name,"Road") and v.ClassName == "Part"  then
+              local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude
+       if Dist < distance then
+       distance = Dist
+       _G.rat = v
+       end
+       end
+       end
+    car:PivotTo(_G.rat.CFrame)
+_G.stuck = _G.stuck+1
+        testvalue = 1 
+    end
+    pcall(function()
+    local PathfindingService = game:GetService("PathfindingService")
+    local TweenService = game:GetService("TweenService")
+    local part1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+    local part2 = game:GetService("Workspace").ParkingMarkers.destinationPart
+    local whatever = part1.CFrame:lerp(part2.CFrame, testvalue)
+    local iguess = Vector3.new(whatever.X,part2.Position.Y,whatever.Z)
+    local carprimary = car
+    local destination = iguess
+    
+    
+    local path = PathfindingService:CreatePath({
+       AgentRadius = 20
+       })
+    
+    path:ComputeAsync(carprimary.PrimaryPart.Position, destination)
+    print(path:ComputeAsync(carprimary.PrimaryPart.Position, destination))
+    local waypoints = path:GetWaypoints()
+    
+    for yay, waypoint in pairs(waypoints) do
+       print("test")
+    local part = Instance.new("Part")
+    part.Shape = "Ball"
+    part.Size = Vector3.new(0.6, 0.6, 0.6)
+    part.Position = waypoint.Position
+    part.Anchored = true
+    part.CanCollide = false
+    part.Parent = game.Workspace
+    local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    local raycastParams = RaycastParams.new()
+    raycastParams.FilterDescendantsInstances = {chr,car,workspace.Camera}
+    raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+    raycastParams.IgnoreWater = true
+    if workspace:Raycast(waypoint.Position, Vector3.new(0, 1000, 0),raycastParams) == nil then
+    car:PivotTo(part.CFrame+Vector3.new(0,5,0))
+    part:Destroy()
+    testvalue = 1
+    task.wait(0.009)
+    elseif workspace:Raycast(waypoint.Position, Vector3.new(0, 1000, 0),raycastParams) ~= nil then
+      print(workspace:Raycast(waypoint.Position, Vector3.new(0, 1000, 0),raycastParams))
+      part:Destroy()
+      testvalue = 1
+    end
+    end
+    end)
+    elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
+      _G.rat = nil
+    local distance = math.huge
+    for i,v in pairs(game:GetService("Workspace").NewCustomers:GetDescendants()) do
+       if v.Name == "Part"  and v:FindFirstChildOfClass("CFrameValue") and v:GetAttribute("Rating") < game:GetService("Players").LocalPlayer.variables.vehicleRating.Value and game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
+         print(v)
+           local Dist = (v.Position-Vector3.new(v:FindFirstChildOfClass("CFrameValue").Value.X,v:FindFirstChildOfClass("CFrameValue").Value.Y,v:FindFirstChildOfClass("CFrameValue").Value.Z)).magnitude
+    if Dist < distance then
+    distance = Dist
+    _G.rat = v
+    end
+    end
+    end
+       for ok,ya in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+                 if ya.Name == "Player" and ya.Value == game.Players.LocalPlayer  then
+    ya.Parent.Parent:SetPrimaryPartCFrame(_G.rat.CFrame*CFrame.new(0,3,0))
+    wait(1)
+    fireproximityprompt(_G.rat.Client.PromptPart.CustomerPrompt)
+    wait(3)
+    end
+    end
+    end
+    elseif game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil then
+          game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+        wait(0.5)
+        game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+    end
+    end)
+    end
+  end)
+example:AddToggle("Auto Trophies", function(state)
+  _G.Trophies = (state and true or false)
+game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
+_G.showui = _G.Trophies
+ spawn(function()
+      if _G.showui == false and game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep:Destroy()
+else
+while _G.showui do
+    task.wait()
+if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
+local oh = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.CashLabel:Clone()
+oh.Name = "Rep"
+oh.Parent = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money
+wait()
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep.Position = UDim2.new(3,0,0,0)
+else
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep.Text = "Rep:"..tostring(game:GetService("Players").LocalPlayer.variables.rep.Value)
+end
+end
+end
+end) 
+       while _G.Trophies  do
+            task.wait()
+            pcall(function()
+      if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+    if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
+        task.wait()
+    game:GetService("ReplicatedStorage").Race.TimeTrial:InvokeServer("circuit", 5)
+    else
+    for a,b in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+        if b.Name == "Player" and b.Value == game.Players.LocalPlayer then
+    for i,v in pairs(game:GetService("Workspace").Races["circuit"].detects:GetChildren()) do
+        if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+            v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            firetouchinterest(b.Parent.Parent.PrimaryPart,v,0)
+                    firetouchinterest(b.Parent.Parent.PrimaryPart,v,1)
+    
+        end
+    end
+    game:GetService("Workspace").Races["circuit"].timeTrial:FindFirstChildOfClass("IntValue").finish.CFrame =  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races["circuit"].timeTrial:FindFirstChildOfClass("IntValue").finish,0)
+                    firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races["circuit"].timeTrial:FindFirstChildOfClass("IntValue").finish,1)
+    end
+     end   
+    end
+    elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+        game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+        wait(0.5)
+        game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+    end
+    end)
+        end
+end)
+example:AddToggle("Auto TimeTrial Medals", function(state)
+  _G.medals = (state and true or false)
+  game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
+  while _G.medals  do
+       task.wait()
+ if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+   for round=1,3 do
+   for what,races in pairs(game:GetService("Workspace").Races:GetChildren()) do
+     if races.ClassName == "Folder" and _G.medals then
+game:GetService("ReplicatedStorage").Race.TimeTrial:InvokeServer(races.Name, round)
+wait()
+if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
+   task.wait()
+game:GetService("ReplicatedStorage").Race.TimeTrial:InvokeServer(races.Name, round)
+else
+   for a,b in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
+   if b.Name == "Player" and b.Value == game.Players.LocalPlayer then
+ repeat wait()
+for i,v in pairs(game:GetService("Workspace").Races[races.Name].detects:GetChildren()) do
+   if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+      v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+       firetouchinterest(b.Parent.Parent.PrimaryPart,v,0)
+               firetouchinterest(b.Parent.Parent.PrimaryPart,v,1)
+   end
+end
+until game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue") or _G.medals == false
+repeat wait()
+ for i,v in pairs(game:GetService("Workspace").Races[races.Name].detects:GetChildren()) do
+   if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
+      v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+       firetouchinterest(b.Parent.Parent.PrimaryPart,v,0)
+               firetouchinterest(b.Parent.Parent.PrimaryPart,v,1)
+   end
+end
+ pcall(function()
+ game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue").finish.CFrame=game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue").finish,0)
+               firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue").finish,1)
+end)
+until game:GetService("Players").LocalPlayer.variables.race.Value == "none" or _G.medals == false
+end
+end 
+end
 
-,nil,nil;(function() _msec=(function(e,l,o)local q=l["㒗㒞㒝㒡㒢㒣㒢㒘㒟㒜㒞㒝㒡㒣㒜"];local G=o[e[(677+-#{{};'}','}';83,{}})]][e["㒛㒗㒛㒝㒛㒜㒚㒜㒤㒢㒘㒢㒘㒤㒚㒠"]];local m=(109-0x69)/((451-(-#'roblox roblox zimjelja roblox roblox sastalajala roblox roblox roblox salamelja roblox'+(-0x39+396)))/0x63)local t=((0x3f-(((((0xc0e9/83)-0x162)+-#'paidlancer')-166)+-#[[IP grabbed]]))+-#'Ur mom')-(8+-#{55;(function()return{','}end)();'}',(function()return#{('FKHMPL'):find("\72")}>0 and 1 or 0 end),",";(function()return#{('FKHMPL'):find("\72")}>0 and 1 or 0 end),{}})local j=o[e[(-#'sussy'+(0xb7+-35))]][e["㒗㒠㒛㒛㒠㒢㒣㒞㒘㒚㒞㒞㒟㒢㒡㒡"]];local p=(-0x3a+((497-0x11c)-154))+((-0x1f+53)+-#"loading trojan horse")local z=o[e[(545+-#{",",'nil';1})]][e["㒡㒗㒞㒜㒢㒥㒞㒙㒟㒜㒢"]]local d=(0x38+-54)-((227-((2670640/0xfb)/76))+-#'roblox roblox zimjelja roblox roblox sastalajala roblox roblox roblox salamelja roblox')local D=(((((((1381+-#{{},(function()return#{('OPFBBL'):find("\70")}>0 and 1 or 0 end);(function()return#{('OPFBBL'):find("\70")}>0 and 1 or 0 end),",";{}})-0x2bf)-395)+-#[[Uh summa lumma dooma lumma you assumin Im a human]])+-83)+-#'Reduce meme string slowmode when plsplspls')+-0x64)local _=((((0x1fb-(0x11f46/238))-110)-75)+-#'Crackzzzz')local C=((2568/(-#{113,(function()return#{('HfMblK'):find("\77")}>0 and 1 or 0 end);'}'}+110))+-#"33 cocks in my mouth")local S=(-0x59+((0x8b6e9/(0x83+-62))/0x59))local N=(9+-#{17;15;(function()return#{('bHmpml'):find("\109")}>0 and 1 or 0 end);(function()return{','}end)(),","})local B=((0x3ffc/(-#[[you cut your pubes with nail clippers]]+(399+(-2970/0x1b))))+-0x3d)local f=(0x55+(((-0x6e0/22)+-23)+20))local r=(0x80-(((-#{(function()return#{('oFpFbP'):find("\112")}>0 and 1 or 0 end),(function()return{','}end)();(function()return#{('oFpFbP'):find("\112")}>0 and 1 or 0 end),16,62,1;'nil'}+2279095)/0x77)/152))local c=((((-#{'nil',",";'}',1;",",'nil'}+4398)-0x8ae)/70)+-#'Only a to Z 0 to 9 is allowed')local w=(-#{68;(function()return#{('pFHfPb'):find("\72")}>0 and 1 or 0 end);'}';68;68}+7)local h=(-#{",",(function()return#{('fhboBf'):find("\98")}>0 and 1 or 0 end);{};(function()return{','}end)(),'}',1,55}+9)local x=((((865396+-#{'}';71,'nil',(function()return{','}end)();'nil',(function()return#{('MLlobL'):find("\108")}>0 and 1 or 0 end),71})/0xcb)/203)-19)local i=(((95+-#{'}';1,{},(function()return#{('PKmLBH'):find("\109")}>0 and 1 or 0 end),1})-0x4a)+-#'turi ip ip ip')local b=(((79+-#{145,1;'nil';{},(function()return{','}end)();(function()return{','}end)()})-0x2e)+-24)local s=(125+(-20740/((17616+-0x6a)/103)))local k=(9+-#{'nil',(function()return{','}end)();19;(function()return{','}end)(),{};(function()return#{('fmbboo'):find("\98")}>0 and 1 or 0 end)})local O=(-#'pairu sucks dick'+(((-0x4c+(((0x6510/176)+-0x48)+-#"while wait 1 do print deez end"))+-#"whats up")+0x3a))local U=(-#"boronide sucks ass"+(((-#{{};'}';148;'nil',","}+17204)/0x93)+-96))local K=e[((0x157a-2790)-1380)];local H=o[e[(-0x3e+205)]][e["㒚㒗㒤㒦㒥㒢㒘㒢㒟㒘㒛㒛㒢㒗㒡"]];local Y=o[(function(e)return type(e):sub(1,1)..'\101\116'end)('㒘㒡㒟㒥㒜㒦㒢㒡')..'\109\101'..('\116\97'or'㒢㒞㒥㒟㒛㒛㒥㒞')..e[(0x18154/182)]];local M=o[e[(-#[[If not skid then return hasbitches end]]+(679+-0x63))]][e["㒗㒡㒝㒜㒡㒡㒤㒢㒘㒙㒞㒦㒟㒗"]];local v=(8+-#{55,(function()return{','}end)();",",{};155,55})-(0x3a-((-#[[abortion is a right dont take it away in the USA date 2022]]+(-69+0x30))+135))local y=(0x8a/(0xb5-(249-0x89)))-(0x66/51)local F=o[e[((0xe3+-76)+-#'Hey skid')]][e["㒝㒡㒟㒦㒘㒞㒥㒚㒤"]];local a=function(o,e)return o..e end local I=(76/0x13)*(-#'Big black men'+((-70+((-0x4a+2917)-1464))/77))local L=o[e["㒠㒚㒛㒡㒦㒝㒟㒘㒥㒥㒠㒚㒢"]];local n=(0x1c/14)*(0x172-((0x4b2-659)-0x12d))local A=(-#'Hoo gah hooga hoo gahoo hoo gah hooga hoo gahoo'+(2244-0x495))*(-87+(210-(-0x38+177)))local R=(((0x181-(-#[[ballz]]+(495-0x106)))+-#'send nudes')-0x5f)local g=(0x17e/(-#[[i still cannot find who the fuck asked]]+((-108+0x18c)+-59)))*(0x50-78)local P=o[e["㒡㒗㒛㒤㒦㒗㒥㒛㒟"]]or o[e[((1276-0x2ac)+-#"da hood money generator 2022 working free no virus")]][e["㒡㒗㒛㒤㒦㒗㒥㒛㒟"]];local u=((-122+(31553-0x3dc7))/61)local e=o[e["㒞㒝㒞㒘㒚㒘㒙㒝㒙㒘㒥㒜㒗㒤㒚㒜㒟㒜"]];local z=(function(a)local r,l=3,0x10 local o={j={},v={}}local n=-d local e=l+t while true do o[a:sub(e,(function()e=r+e return e-t end)())]=(function()n=n+d return n end)()if n==(I-d)then n=""l=v break end end local n=#a while e<n+t do o.v[l]=a:sub(e,(function()e=r+e return e-t end)())l=l+d if l%m==v then l=y M(o.j,(F((o[o.v[y]]*I)+o[o.v[d]])))end end return z(o.j)end)("..:::MoonSec::..㒗㒘㒙㒚㒛㒜㒝㒞㒟㒠㒡㒢㒣㒤㒥㒦㒣㒛㒝㒡㒦㒗㒟㒝㒘㒣㒢㒚㒛㒟㒤㒥㒞㒛㒗㒡㒢㒣㒚㒝㒣㒣㒝㒙㒛㒦㒠㒙㒙㒛㒢㒡㒜㒗㒚㒛㒤㒤㒞㒦㒗㒤㒠㒜㒤㒤㒝㒡㒗㒗㒠㒝㒝㒦㒙㒚㒣㒢㒜㒝㒤㒗㒞㒢㒘㒙㒡㒢㒛㒟㒦㒚㒘㒙㒠㒥㒚㒛㒣㒡㒡㒞㒜㒢㒗㒗㒞㒜㒘㒤㒣㒗㒜㒡㒥㒚㒞㒚㒗㒢㒥㒞㒥㒗㒝㒟㒦㒥㒠㒛㒞㒗㒙㒠㒣㒛㒜㒗㒣㒟㒟㒘㒙㒗㒢㒞㒛㒥㒢㒚㒝㒥㒗㒜㒠㒥㒙㒣㒢㒜㒦㒤㒟㒡㒙㒗㒢㒝㒠㒦㒛㒜㒥㒡㒞㒚㒗㒠㒡㒟㒘㒞㒤㒢㒝㒜㒘㒚㒙㒥㒢㒥㒜㒛㒥㒡㒤㒗㒞㒞㒘㒥㒡㒞㒛㒝㒥㒙㒡㒦㒡㒗㒚㒗㒣㒝㒜㒣㒝㒜㒦㒗㒟㒤㒙㒢㒢㒦㒛㒠㒦㒞㒘㒜㒡㒙㒚㒟㒣㒥㒤㒡㒜㒢㒗㒙㒟㒦㒘㒤㒢㒛㒜㒛㒥㒚㒟㒞㒤㒞㒛㒠㒤㒝㒝㒣㒗㒙㒥㒟㒠㒡㒙㒜㒤㒚㒜㒜㒦㒟㒝㒚㒙㒞㒢㒘㒗㒢㒞㒣㒗㒡㒡㒗㒚㒝㒛㒗㒤㒘㒝㒢㒗㒙㒠㒝㒙㒚㒢㒥㒛㒤㒤㒚㒘㒜㒡㒟㒚㒥㒤㒛㒤㒟㒝㒜㒗㒤㒗㒘㒣㒠㒜㒟㒥㒥㒟㒛㒝㒡㒘㒣㒡㒞㒜㒜㒤㒞㒞㒡㒘㒘㒟㒢㒣㒥㒝㒗㒦㒝㒟㒣㒠㒝㒘㒠㒣㒘㒛㒦㒞㒤㒘㒚㒡㒝㒚㒣㒤㒙㒢㒡㒝㒚㒗㒛㒟㒘㒣㒜㒜㒝㒥㒣㒟㒙㒝㒥㒗㒦㒢㒗㒛㒦㒤㒜㒤㒢㒡㒗㒚㒙㒣㒟㒜㒥㒝㒢㒥㒢㒟㒠㒙㒡㒞㒠㒥㒝㒞㒟㒗㒥㒡㒛㒡㒘㒚㒘㒤㒚㒝㒘㒢㒦㒚㒚㒢㒥㒜㒛㒥㒡㒣㒣㒟㒜㒗㒦㒡㒚㒛㒛㒢㒥㒞㒗㒦㒢㒡㒠㒙㒢㒣㒥㒣㒞㒠㒗㒘㒥㒢㒛㒛㒡㒚㒗㒥㒜㒞㒦㒗㒢㒡㒣㒚㒞㒤㒚㒝㒟㒚㒡㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒗㒚㒝㒥㒗㒙㒠㒟㒙㒥㒙㒚㒡㒘㒞㒘㒟㒢㒘㒣㒢㒙㒛㒟㒚㒚㒢㒟㒞㒚㒗㒤㒝㒟㒦㒟㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒢㒣㒚㒦㒡㒤㒚㒥㒤㒛㒝㒡㒛㒤㒗㒜㒠㒡㒙㒞㒤㒘㒠㒠㒟㒟㒘㒡㒢㒗㒛㒝㒙㒥㒤㒞㒞㒟㒤㒟㒟㒢㒣㒦㒝㒗㒦㒝㒟㒣㒝㒜㒙㒛㒢㒤㒜㒙㒤㒦㒝㒞㒡㒡㒚㒣㒤㒙㒝㒟㒜㒙㒦㒠㒡㒙㒚㒛㒙㒢㒥㒦㒟㒙㒘㒟㒡㒥㒢㒝㒚㒦㒥㒗㒝㒜㒠㒣㒚㒙㒣㒟㒞㒗㒛㒞㒟㒡㒙㒘㒢㒝㒝㒘㒥㒙㒞㒟㒗㒥㒡㒡㒠㒣㒤㒗㒝㒝㒦㒣㒠㒟㒙㒟㒢㒦㒜㒛㒥㒡㒟㒗㒘㒡㒛㒣㒛㒙㒤㒟㒝㒥㒗㒡㒠㒡㒚㒘㒣㒝㒜㒣㒛㒟㒟㒟㒙㒗㒢㒛㒛㒢㒥㒗㒞㒝㒗㒣㒡㒟㒛㒟㒣㒥㒝㒝㒦㒡㒠㒞㒙㒝㒢㒤㒜㒙㒥㒠㒞㒥㒘㒟㒛㒡㒛㒗㒤㒝㒝㒣㒗㒠㒠㒟㒙㒦㒣㒛㒜㒡㒛㒝㒟㒝㒘㒥㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒢㒗㒜㒙㒣㒣㒝㒚㒦㒟㒠㒜㒙㒛㒢㒣㒜㒗㒦㒟㒣㒦㒘㒙㒡㒠㒚㒥㒥㒠㒝㒡㒗㒗㒠㒝㒛㒣㒚㒙㒜㒟㒥㒦㒟㒛㒘㒢㒢㒗㒛㒤㒤㒣㒞㒟㒘㒟㒠㒥㒚㒜㒣㒡㒝㒤㒦㒝㒟㒤㒙㒙㒢㒠㒛㒥㒥㒟㒘㒡㒘㒗㒡㒝㒚㒣㒤㒦㒝㒟㒦㒦㒠㒛㒙㒥㒝㒗㒜㒝㒥㒣㒟㒙㒞㒝㒡㒥㒛㒜㒤㒡㒟㒙㒜㒠㒠㒣㒚㒚㒣㒟㒝㒢㒦㒛㒟㒡㒙㒗㒤㒝㒣㒘㒥㒙㒞㒠㒗㒥㒡㒜㒚㒡㒥㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒦㒜㒛㒥㒢㒟㒗㒘㒞㒡㒣㒜㒛㒤㒟㒝㒥㒗㒜㒠㒡㒛㒘㒣㒝㒜㒣㒦㒙㒡㒟㒘㒥㒢㒛㒛㒢㒥㒗㒞㒞㒗㒣㒡㒜㒚㒟㒥㒗㒝㒛㒦㒡㒠㒚㒙㒝㒣㒟㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒞㒝㒣㒗㒜㒠㒟㒚㒗㒣㒛㒞㒡㒦㒗㒟㒝㒘㒤㒢㒙㒛㒠㒤㒥㒟㒝㒗㒡㒣㒗㒚㒝㒣㒣㒝㒚㒦㒟㒟㒦㒙㒛㒣㒚㒜㒗㒗㒝㒞㒣㒘㒙㒡㒠㒚㒥㒤㒜㒝㒡㒗㒜㒠㒝㒛㒣㒣㒙㒜㒟㒥㒦㒟㒛㒘㒢㒢㒗㒜㒥㒤㒣㒠㒙㒗㒟㒠㒥㒚㒜㒣㒡㒝㒘㒦㒝㒠㒗㒙㒙㒣㒡㒛㒥㒥㒛㒞㒤㒘㒗㒢㒛㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒘㒜㒝㒥㒦㒟㒙㒘㒡㒡㒥㒛㒡㒤㒡㒞㒗㒗㒞㒠㒣㒜㒗㒣㒟㒜㒦㒦㒛㒟㒡㒙㒗㒢㒡㒥㒣㒥㒙㒞㒟㒗㒥㒣㒙㒚㒡㒤㒘㒝㒝㒗㒗㒚㒙㒙㒟㒢㒥㒜㒛㒚㒘㒟㒗㒘㒞㒡㒣㒜㒛㒙㒢㒝㒥㒗㒜㒠㒡㒛㒘㒣㒝㒜㒣㒦㒙㒡㒟㒚㒞㒢㒛㒛㒢㒥㒗㒞㒞㒗㒣㒡㒜㒚㒟㒥㒗㒝㒛㒦㒡㒠㒚㒙㒝㒣㒟㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒞㒝㒣㒗㒜㒠㒟㒚㒗㒣㒛㒞㒡㒦㒗㒟㒝㒘㒤㒢㒙㒛㒠㒤㒥㒟㒝㒗㒡㒣㒗㒚㒝㒣㒣㒝㒚㒦㒟㒟㒦㒙㒛㒣㒚㒜㒗㒗㒝㒞㒣㒘㒙㒡㒠㒚㒥㒤㒜㒝㒡㒗㒜㒠㒝㒛㒣㒣㒙㒜㒟㒥㒦㒟㒛㒘㒢㒢㒗㒜㒥㒤㒣㒠㒙㒗㒟㒠㒥㒚㒜㒣㒡㒝㒘㒦㒝㒟㒥㒙㒙㒤㒟㒛㒥㒥㒛㒞㒢㒘㒗㒡㒞㒚㒣㒥㒣㒝㒟㒦㒥㒠㒛㒙㒡㒣㒘㒜㒝㒥㒥㒟㒙㒘㒡㒡㒥㒞㒛㒤㒡㒞㒗㒗㒞㒠㒣㒚㒚㒣㒟㒝㒣㒦㒛㒠㒣㒙㒗㒢㒝㒛㒥㒥㒙㒟㒠㒗㒥㒡㒛㒚㒡㒦㒗㒝㒝㒦㒣㒠㒛㒙㒟㒣㒗㒜㒛㒥㒤㒟㒗㒙㒟㒡㒣㒛㒙㒤㒣㒝㒥㒘㒗㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒙㒗㒢㒛㒛㒥㒥㒗㒞㒟㒗㒣㒣㒙㒚㒟㒣㒥㒝㒝㒦㒡㒠㒙㒙㒝㒣㒥㒜㒙㒗㒟㒞㒥㒘㒛㒡㒣㒛㒗㒤㒟㒝㒣㒗㒢㒠㒟㒛㒥㒣㒛㒜㒡㒦㒙㒟㒝㒘㒥㒢㒙㒛㒤㒤㒥㒠㒛㒗㒡㒡㒗㒚㒟㒣㒣㒝㒛㒦㒟㒡㒝㒙㒛㒣㒡㒜㒗㒥㒝㒞㒤㒘㒙㒡㒥㒚㒥㒤㒝㒝㒡㒘㒙㒠㒝㒙㒣㒣㒛㒜㒟㒦㒥㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒡㒠㒥㒚㒜㒣㒡㒝㒘㒦㒝㒠㒥㒙㒙㒢㒟㒜㒗㒥㒛㒟㒢㒘㒗㒡㒝㒚㒣㒦㒙㒝㒟㒦㒥㒠㒝㒙㒡㒣㒙㒜㒝㒥㒦㒟㒙㒙㒡㒡㒥㒛㒛㒤㒥㒞㒗㒘㒙㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒙㒢㒝㒜㒗㒥㒙㒞㒡㒗㒥㒣㒛㒚㒡㒤㒗㒝㒟㒦㒣㒠㒛㒙㒟㒤㒗㒜㒛㒗㒡㒟㒗㒘㒝㒡㒥㒛㒙㒤㒡㒝㒥㒗㒤㒠㒡㒜㒗㒣㒝㒜㒣㒦㒛㒟㒟㒙㒗㒢㒛㒛㒦㒥㒗㒠㒝㒗㒣㒡㒙㒚㒡㒣㒥㒝㒝㒦㒡㒡㒟㒙㒝㒤㒣㒜㒙㒥㒟㒟㒗㒘㒛㒡㒣㒛㒗㒥㒛㒝㒣㒘㒛㒠㒟㒙㒥㒣㒞㒜㒡㒗㒝㒟㒝㒘㒣㒢㒙㒝㒟㒤㒥㒞㒛㒗㒤㒡㒗㒚㒠㒣㒣㒝㒤㒦㒟㒡㒗㒙㒛㒢㒡㒜㒛㒥㒝㒠㒚㒘㒙㒡㒟㒚㒥㒥㒝㒝㒡㒗㒗㒠㒢㒙㒣㒤㒝㒜㒟㒥㒥㒟㒛㒙㒣㒢㒗㒛㒝㒥㒙㒞㒙㒘㒣㒠㒥㒚㒛㒣㒡㒞㒙㒦㒝㒟㒣㒙㒠㒢㒟㒝㒙㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒢㒦㒥㒠㒢㒙㒡㒣㒙㒜㒝㒦㒣㒟㒙㒘㒟㒢㒗㒛㒛㒥㒤㒞㒗㒗㒠㒠㒣㒚㒝㒣㒟㒜㒥㒦㒛㒟㒡㒙㒟㒢㒝㒛㒤㒥㒙㒟㒡㒝㒘㒡㒛㒚㒢㒤㒗㒞㒞㒦㒣㒠㒙㒙㒟㒤㒥㒡㒢㒥㒡㒟㒘㒘㒝㒡㒤㒛㒙㒤㒢㒝㒥㒘㒝㒠㒡㒚㒗㒣㒠㒜㒣㒦㒥㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒤㒡㒙㒚㒢㒣㒥㒝㒝㒦㒡㒢㒗㒙㒝㒢㒣㒜㒚㒥㒟㒞㒦㒘㒛㒢㒣㒛㒗㒦㒝㒝㒣㒗㒙㒠㒠㒙㒥㒣㒜㒜㒡㒦㒠㒟㒝㒚㒣㒢㒙㒛㒟㒤㒦㒞㒛㒗㒢㒡㒗㒚㒢㒣㒣㒟㒙㒦㒟㒟㒥㒙㒜㒢㒡㒜㒘㒥㒝㒠㒛㒘㒙㒣㒟㒚㒥㒤㒛㒝㒢㒗㒗㒠㒞㒙㒣㒤㒗㒜㒟㒗㒗㒟㒛㒘㒡㒢㒙㒛㒝㒦㒜㒞㒙㒗㒟㒠㒥㒛㒝㒣㒡㒝㒗㒦㒠㒟㒣㒙㒣㒢㒟㒛㒥㒥㒛㒟㒣㒘㒗㒡㒝㒛㒗㒤㒙㒞㒠㒦㒥㒠㒛㒙㒡㒥㒗㒜㒝㒥㒣㒟㒝㒘㒟㒢㒙㒛㒛㒤㒤㒞㒗㒘㒟㒠㒣㒚㒙㒣㒥㒜㒥㒗㒗㒟㒡㒙㒗㒢㒝㒛㒣㒥㒙㒞㒟㒘㒙㒡㒛㒛㒗㒤㒗㒝㒟㒦㒣㒢㒙㒙㒟㒢㒥㒜㒟㒥㒡㒟㒛㒘㒝㒢㒥㒛㒙㒦㒟㒝㒥㒗㒛㒠㒥㒚㒗㒣㒡㒜㒣㒦㒡㒟㒟㒚㒥㒢㒛㒛㒡㒥㒛㒞㒝㒘㒗㒡㒙㒜㒛㒣㒥㒟㒛㒦㒡㒠㒗㒙㒡㒢㒣㒜㒝㒥㒟㒟㒤㒘㒛㒡㒡㒛㒗㒤㒝㒝㒦㒗㒙㒠㒡㒙㒥㒣㒝㒜㒡㒦㒗㒟㒝㒘㒣㒢㒛㒛㒟㒥㒗㒞㒛㒗㒤㒡㒗㒛㒝㒣㒣㒝㒙㒦㒠㒟㒥㒚㒦㒢㒡㒜㒙㒥㒝㒟㒗㒘㒙㒡㒟㒚㒥㒤㒛㒞㒙㒗㒗㒠㒞㒙㒣㒣㒙㒦㒞㒥㒥㒟㒛㒘㒡㒢㒘㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒦㒥㒛㒞㒡㒘㒗㒡㒝㒤㒢㒤㒙㒝㒟㒦㒥㒠㒜㒙㒡㒣㒗㒜㒝㒥㒤㒟㒚㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒙㒦㒞㒜㒥㒦㒛㒟㒡㒛㒤㒣㒛㒛㒣㒥㒙㒞㒟㒜㒜㒗㒠㒡㒥㒘㒥㒣㒢㒜㒤㒗㒛㒟㒤㒚㒘㒣㒟㒚㒤㒦㒗㒟㒜㒙㒗㒠㒠㒤㒣㒝㒥㒗㒛㒠㒡㒟㒙㒙㒞㒢㒦㒜㒞㒜㒤㒙㒞㒢㒛㒛㒡㒥㒗㒣㒤㒞㒢㒘㒛㒡㒚㒛㒘㒤㒛㒜㒢㒦㒚㒟㒢㒝㒞㒝㒗㒥㒟㒞㒥㒘㒛㒦㒗㒡㒠㒛㒛㒤㒗㒛㒟㒗㒘㒡㒗㒚㒞㒣㒥㒚㒚㒥㒥㒟㒜㒘㒥㒡㒣㒜㒦㒞㒠㒗㒡㒡㒗㒚㒝㒘㒥㒣㒚㒜㒢㒦㒚㒠㒞㒢㒤㒝㒘㒥㒝㒞㒣㒘㒙㒦㒡㒡㒚㒛㒛㒤㒝㒝㒠㒦㒠㒟㒤㒚㒝㒢㒤㒜㒙㒤㒞㒟㒥㒘㒦㒢㒟㒚㒤㒤㒠㒝㒤㒦㒛㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒣㒗㒟㒥㒝㒜㒞㒥㒘㒗㒡㒝㒚㒣㒙㒙㒣㒠㒞㒗㒗㒟㒦㒦㒣㒛㒜㒝㒥㒣㒟㒙㒝㒝㒗㒦㒢㒘㒚㒦㒣㒝㒗㒝㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒟㒢㒜㒛㒥㒙㒞㒟㒗㒥㒦㒡㒠㒦㒚㒟㒣㒦㒜㒦㒦㒥㒟㒤㒚㒘㒡㒢㒦㒙㒟㒗㒘㒝㒡㒣㒟㒡㒛㒤㒤㒢㒝㒜㒗㒟㒠㒦㒙㒦㒣㒗㒞㒚㒠㒘㒘㒥㒢㒛㒛㒡㒙㒚㒤㒥㒝㒤㒘㒛㒠㒠㒚㒘㒤㒟㒜㒦㒗㒙㒦㒢㒣㒟㒜㒙㒥㒟㒞㒥㒜㒤㒘㒟㒢㒝㒛㒜㒤㒞㒝㒞㒥㒢㒠㒚㒚㒝㒤㒗㒜㒜㒦㒟㒛㒟㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒘㒝㒗㒢㒝㒜㒗㒝㒟㒥㒙㒛㒢㒡㒠㒞㒛㒢㒦㒗㒜㒝㒗㒤㒢㒘㒚㒞㒣㒦㒝㒥㒦㒡㒟㒤㒚㒗㒣㒣㒝㒘㒙㒦㒘㒥㒢㒗㒛㒝㒤㒣㒥㒛㒝㒠㒗㒘㒠㒠㒠㒦㒝㒝㒦㒝㒟㒣㒙㒙㒗㒟㒡㒦㒜㒝㒤㒦㒞㒥㒘㒡㒚㒦㒤㒢㒝㒟㒦㒥㒠㒛㒡㒘㒙㒦㒣㒟㒜㒞㒦㒜㒟㒟㒗㒦㒡㒞㒚㒦㒘㒢㒗㒦㒠㒣㒚㒙㒣㒟㒡㒘㒝㒗㒥㒢㒠㒚㒙㒠㒠㒡㒛㒚㒥㒜㒞㒚㒡㒞㒛㒞㒤㒗㒝㒝㒦㒣㒥㒝㒠㒞㒚㒚㒢㒞㒜㒙㒣㒠㒟㒛㒙㒗㒡㒞㒛㒡㒤㒚㒞㒞㒗㒥㒢㒘㒤㒗㒜㒣㒦㒙㒟㒟㒝㒛㒘㒤㒢㒣㒛㒜㒣㒠㒞㒘㒘㒛㒡㒥㒚㒚㒤㒝㒜㒙㒠㒗㒤㒘㒣㒞㒜㒙㒥㒟㒞㒥㒜㒢㒗㒦㒢㒛㒘㒠㒤㒛㒝㒢㒗㒛㒠㒙㒚㒝㒢㒦㒜㒥㒗㒞㒙㒘㒢㒙㒛㒟㒤㒥㒥㒛㒝㒢㒗㒠㒡㒟㒚㒦㒟㒦㒗㒚㒟㒥㒙㒛㒢㒡㒡㒗㒜㒟㒥㒜㒞㒦㒗㒠㒢㒗㒛㒤㒢㒡㒝㒘㒗㒟㒡㒗㒛㒚㒝㒘㒥㒥㒟㒛㒘㒡㒙㒝㒡㒞㒛㒥㒤㒢㒝㒠㒗㒗㒡㒗㒙㒦㒤㒚㒡㒙㒟㒤㒛㒦㒣㒗㒛㒥㒥㒛㒞㒡㒜㒡㒘㒜㒡㒜㒛㒗㒢㒡㒜㒦㒦㒞㒟㒦㒘㒞㒜㒢㒥㒣㒟㒙㒘㒟㒘㒘㒡㒜㒛㒣㒢㒠㒝㒡㒞㒘㒚㒤㒣㒟㒜㒥㒦㒛㒤㒝㒟㒦㒘㒠㒡㒤㒛㒥㒣㒟㒞㒡㒗㒜㒢㒚㒚㒜㒤㒟㒤㒘㒡㒚㒙㒟㒢㒥㒜㒛㒙㒦㒥㒥㒟㒡㒘㒘㒢㒛㒙㒥㒤㒚㒝㒣㒗㒚㒠㒚㒚㒙㒣㒘㒚㒞㒦㒥㒟㒚㒙㒙㒢㒥㒗㒤㒞㒤㒗㒣㒡㒙㒚㒟㒘㒥㒤㒗㒜㒢㒗㒠㒟㒢㒙㒥㒣㒜㒢㒤㒟㒠㒘㒛㒡㒡㒛㒗㒚㒠㒤㒘㒞㒗㒗㒣㒡㒗㒙㒜㒣㒝㒚㒚㒥㒦㒠㒗㒙㒢㒞㒜㒥㒜㒞㒛㒗㒡㒡㒗㒠㒡㒚㒘㒤㒝㒜㒤㒦㒘㒠㒟㒙㒤㒙㒜㒥㒢㒞㒣㒘㒙㒡㒟㒠㒛㒚㒜㒤㒝㒞㒜㒦㒢㒜㒠㒣㒝㒜㒟㒥㒥㒟㒛㒟㒘㒘㒘㒢㒚㒛㒘㒦㒚㒗㒣㒠㒥㒚㒛㒣㒡㒤㒛㒜㒞㒦㒦㒟㒤㒗㒦㒜㒟㒥㒛㒞㒡㒘㒗㒥㒤㒡㒘㒛㒝㒢㒢㒝㒚㒗㒝㒡㒗㒙㒠㒢㒠㒜㒘㒡㒦㒘㒢㒡㒥㒛㒛㒤㒡㒣㒚㒝㒦㒘㒗㒢㒚㒤㒘㒜㒥㒦㒛㒟㒡㒞㒚㒙㒡㒡㒤㒜㒛㒥㒣㒝㒗㒗㒜㒠㒤㒚㒜㒚㒢㒗㒗㒠㒙㒙㒟㒢㒥㒣㒢㒛㒢㒥㒠㒟㒡㒡㒦㒜㒚㒤㒟㒝㒥㒗㒛㒗㒗㒠㒠㒚㒟㒣㒘㒝㒝㒦㒞㒠㒚㒘㒞㒢㒙㒛㒠㒥㒛㒟㒗㒗㒞㒡㒡㒚㒚㒤㒞㒝㒥㒝㒜㒙㒣㒢㒣㒜㒙㒥㒟㒣㒥㒟㒗㒗㒢㒢㒠㒚㒢㒤㒥㒜㒠㒠㒣㒙㒥㒣㒛㒜㒡㒜㒥㒦㒜㒟㒡㒘㒞㒣㒠㒥㒙㒞㒛㒗㒡㒡㒗㒟㒣㒚㒢㒤㒝㒜㒤㒠㒗㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒠㒟㒞㒤㒝㒚㒝㒡㒗㒗㒠㒝㒚㒥㒘㒝㒜㒟㒥㒥㒟㒛㒚㒦㒢㒗㒛㒝㒤㒣㒠㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒡㒤㒙㒙㒤㒟㒛㒥㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒦㒘㒝㒟㒘㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒙㒜㒡㒥㒝㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒝㒡㒦㒛㒡㒡㒙㒗㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒣㒣㒚㒡㒦㒝㒝㒝㒦㒣㒠㒙㒙㒟㒣㒞㒜㒛㒥㒢㒟㒗㒚㒙㒡㒣㒛㒝㒞㒟㒝㒥㒗㒛㒠㒡㒚㒠㒣㒝㒜㒤㒦㒙㒟㒣㒢㒥㒢㒛㒛㒡㒥㒗㒥㒘㒗㒣㒡㒚㒚㒟㒥㒗㒢㒞㒦㒡㒠㒗㒙㒝㒥㒘㒜㒙㒥㒟㒞㒥㒚㒛㒚㒝㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒜㒜㒣㒛㒝㒣㒦㒗㒟㒝㒘㒥㒢㒙㒝㒠㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒗㒙㒛㒢㒣㒜㒗㒗㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒘㒦㒠㒝㒛㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒝㒘㒤㒣㒠㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒠㒤㒙㒙㒤㒟㒛㒥㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒦㒝㒝㒟㒙㒛㒠㒛㒙㒡㒣㒗㒜㒝㒗㒗㒟㒙㒘㒠㒡㒥㒞㒘㒤㒡㒞㒛㒡㒝㒠㒣㒚㒙㒣㒟㒞㒙㒦㒛㒟㒢㒙㒗㒢㒡㒥㒣㒥㒙㒞㒟㒗㒥㒤㒛㒚㒡㒤㒘㒝㒝㒗㒥㒥㒜㒙㒟㒢㒥㒜㒛㒘㒗㒟㒗㒘㒝㒡㒣㒝㒙㒘㒜㒝㒥㒗㒛㒠㒡㒚㒗㒣㒝㒟㒝㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒞㒗㒣㒡㒚㒚㒟㒥㒗㒝㒛㒦㒡㒠㒗㒙㒝㒥㒘㒜㒙㒥㒟㒞㒥㒚㒛㒡㒡㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒜㒜㒣㒛㒝㒣㒦㒗㒟㒝㒘㒥㒢㒙㒛㒥㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒗㒙㒛㒢㒣㒜㒗㒗㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒙㒠㒝㒛㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒝㒚㒤㒣㒠㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒠㒡㒙㒙㒣㒡㒛㒥㒥㒛㒞㒣㒘㒗㒣㒟㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒥㒟㒙㒘㒠㒡㒥㒜㒝㒤㒡㒞㒗㒗㒝㒠㒣㒛㒜㒣㒟㒜㒥㒦㒛㒡㒡㒙㒗㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒡㒠㒚㒡㒦㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒗㒣㒟㒗㒚㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒠㒡㒜㒥㒣㒝㒞㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒟㒣㒗㒣㒢㒛㒚㒟㒣㒥㒝㒝㒦㒡㒠㒞㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒟㒝㒣㒗㒚㒠㒟㒛㒗㒣㒛㒜㒡㒦㒗㒟㒝㒛㒘㒢㒙㒛㒟㒤㒥㒠㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒢㒜㒙㒛㒣㒣㒜㒗㒥㒝㒞㒥㒘㒙㒡㒥㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒗㒟㒛㒘㒣㒢㒗㒝㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒙㒦㒝㒡㒣㒙㒙㒢㒟㒛㒥㒥㒛㒞㒡㒘㒗㒣㒦㒚㒣㒦㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒗㒙㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒟㒠㒣㒚㒚㒣㒟㒝㒙㒦㒛㒟㒡㒙㒗㒢㒝㒤㒡㒥㒙㒞㒠㒗㒥㒢㒝㒟㒤㒤㒗㒝㒝㒦㒣㒡㒢㒙㒟㒢㒥㒜㒛㒦㒣㒘㒤㒘㒝㒡㒤㒛㒙㒦㒤㒝㒥㒗㒛㒠㒡㒜㒗㒣㒝㒜㒣㒦㒚㒟㒟㒘㒦㒢㒛㒞㒘㒥㒗㒟㒟㒗㒣㒡㒙㒚㒢㒣㒥㒝㒞㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒞㒦㒘㒛㒡㒤㒛㒗㒤㒟㒝㒣㒙㒙㒠㒟㒙㒥㒣㒜㒜㒡㒦㒘㒟㒝㒙㒞㒢㒙㒝㒟㒤㒥㒞㒛㒗㒢㒡㒗㒚㒞㒣㒣㒞㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒘㒥㒝㒞㒥㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒗㒟㒛㒘㒥㒢㒗㒛㒝㒤㒣㒞㒙㒞㒗㒠㒥㒚㒜㒣㒡㒟㒗㒝㒝㒟㒣㒙㒞㒢㒟㒜㒙㒥㒛㒟㒚㒘㒗㒣㒣㒡㒡㒤㒙㒝㒤㒦㒥㒦㒣㒙㒡㒣㒘㒜㒝㒘㒟㒟㒙㒘㒣㒛㒥㒛㒛㒤㒡㒞㒗㒝㒥㒠㒣㒚㒚㒣㒟㒞㒥㒝㒛㒟㒡㒙㒜㒢㒝㒜㒗㒥㒙㒠㒣㒗㒥㒢㒝㒟㒤㒤㒗㒝㒣㒦㒣㒢㒞㒙㒟㒢㒥㒜㒛㒗㒡㒦㒗㒘㒝㒢㒙㒛㒙㒤㒥㒝㒥㒙㒜㒠㒡㒜㒗㒚㒝㒜㒣㒦㒟㒟㒟㒙㒛㒢㒛㒝㒠㒥㒗㒞㒣㒜㒡㒡㒙㒚㒤㒣㒥㒣㒣㒦㒡㒠㒘㒙㒝㒣㒙㒜㒙㒥㒣㒘㒥㒘㒛㒡㒡㒛㒗㒚㒥㒝㒣㒗㒚㒠㒟㒛㒗㒘㒞㒜㒡㒦㒜㒟㒝㒚㒜㒢㒙㒛㒟㒤㒥㒟㒝㒘㒦㒡㒗㒚㒣㒣㒣㒟㒞㒦㒟㒟㒥㒙㒛㒤㒡㒜㒗㒥㒝㒟㒙㒘㒙㒡㒥㒚㒥㒦㒢㒝㒡㒘㒙㒠㒝㒙㒣㒣㒡㒜㒟㒦㒘㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒥㒠㒥㒚㒣㒣㒡㒝㒙㒦㒝㒡㒣㒙㒙㒢㒟㒜㒛㒥㒛㒟㒗㒘㒗㒡㒢㒚㒣㒦㒙㒝㒟㒦㒥㒠㒡㒙㒡㒣㒝㒜㒝㒗㒥㒟㒙㒚㒟㒡㒥㒛㒛㒥㒗㒞㒗㒗㒣㒠㒣㒜㒜㒣㒟㒞㒥㒦㒛㒟㒡㒙㒝㒢㒝㒜㒙㒥㒙㒠㒗㒗㒥㒡㒛㒚㒡㒤㒗㒝㒣㒦㒣㒠㒠㒙㒟㒢㒥㒜㒛㒥㒡㒟㒗㒘㒝㒢㒘㒛㒙㒤㒟㒝㒥㒗㒢㒠㒡㒚㒛㒣㒝㒜㒣㒦㒙㒟㒟㒟㒛㒢㒛㒛㒢㒥㒗㒠㒝㒞㒣㒡㒙㒛㒙㒣㒥㒝㒤㒦㒡㒡㒛㒙㒝㒥㒙㒟㒢㒥㒟㒟㒟㒘㒛㒦㒤㒛㒗㒤㒞㒝㒣㒗㒡㒠㒟㒚㒙㒝㒛㒜㒡㒦㒗㒟㒝㒝㒦㒢㒙㒛㒠㒤㒥㒞㒟㒡㒡㒡㒗㒚㒝㒣㒣㒣㒟㒦㒟㒟㒦㒙㒛㒤㒡㒝㒙㒥㒝㒟㒝㒘㒙㒢㒘㒚㒥㒤㒟㒝㒡㒘㒙㒚㒛㒙㒣㒣㒥㒜㒟㒗㒚㒟㒛㒘㒡㒢㒗㒛㒝㒞㒗㒞㒙㒘㒙㒠㒥㒛㒗㒣㒡㒝㒙㒦㒝㒠㒙㒟㒛㒢㒟㒜㒟㒥㒛㒥㒗㒘㒗㒡㒞㒚㒣㒤㒙㒝㒟㒗㒙㒚㒛㒙㒡㒣㒗㒜㒝㒜㒙㒟㒙㒘㒠㒡㒥㒜㒝㒙㒤㒞㒗㒘㒗㒠㒣㒜㒤㒣㒟㒜㒥㒦㒛㒡㒡㒠㒥㒢㒝㒜㒞㒥㒙㒞㒣㒗㒥㒢㒝㒚㒡㒦㒗㒝㒝㒦㒣㒠㒤㒙㒟㒣㒠㒜㒛㒦㒣㒟㒗㒚㒝㒡㒣㒛㒙㒥㒚㒝㒥㒗㒦㒠㒡㒛㒡㒣㒝㒜㒣㒦㒙㒟㒟㒙㒡㒢㒛㒜㒚㒥㒗㒞㒝㒗㒣㒢㒛㒚㒟㒣㒥㒞㒘㒦㒡㒠㒡㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒢㒛㒛㒗㒥㒚㒝㒣㒗㒚㒠㒟㒛㒗㒣㒛㒜㒡㒦㒡㒟㒝㒛㒞㒢㒙㒛㒟㒤㒥㒠㒛㒗㒡㒡㒗㒛㒘㒣㒣㒝㒝㒦㒟㒡㒗㒙㒛㒤㒡㒜㒗㒥㒝㒟㒞㒘㒙㒢㒚㒚㒥㒥㒝㒝㒡㒙㒗㒠㒝㒙㒣㒣㒤㒜㒟㒦㒠㒟㒛㒚㒛㒢㒗㒛㒝㒤㒣㒞㒙㒘㒛㒠㒥㒚㒤㒣㒡㒝㒗㒦㒝㒠㒥㒙㒙㒢㒟㒜㒢㒥㒛㒡㒠㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒥㒙㒡㒣㒤㒜㒝㒥㒤㒟㒙㒘㒥㒦㒡㒛㒛㒤㒦㒞㒗㒜㒜㒠㒣㒚㒚㒣㒟㒝㒗㒦㒛㒟㒥㒣㒗㒢㒝㒛㒣㒥㒙㒣㒞㒗㒥㒡㒜㒚㒡㒤㒝㒢㒙㒦㒣㒠㒙㒙㒟㒦㒟㒜㒛㒥㒢㒟㒗㒘㒟㒡㒣㒛㒝㒞㒟㒝㒥㒗㒛㒠㒡㒝㒡㒣㒝㒜㒤㒦㒙㒟㒣㒢㒥㒢㒛㒛㒡㒥㒗㒗㒛㒗㒣㒡㒚㒚㒟㒥㒗㒢㒞㒦㒡㒠㒗㒙㒝㒥㒘㒜㒙㒥㒟㒞㒥㒚㒛㒙㒜㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒛㒦㒣㒛㒞㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒠㒚㒗㒡㒣㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒣㒞㒜㒗㒗㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒣㒠㒝㒛㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒝㒥㒤㒣㒠㒟㒗㒟㒠㒥㒚㒛㒣㒡㒥㒥㒦㒝㒟㒤㒙㒙㒣㒦㒛㒥㒥㒟㒘㒡㒘㒗㒡㒝㒚㒣㒝㒗㒝㒟㒦㒦㒠㒛㒚㒣㒘㒚㒜㒝㒥㒣㒟㒙㒚㒤㒡㒥㒛㒛㒤㒡㒠㒗㒜㒜㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒢㒘㒙㒗㒣㒟㒛㒣㒥㒙㒞㒡㒗㒥㒡㒡㒚㒡㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒣㒟㒗㒘㒟㒡㒣㒝㒙㒤㒟㒝㒥㒗㒛㒠㒡㒚㒗㒣㒝㒝㒞㒦㒙㒡㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒚㒚㒟㒥㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒦㒝㒞㒥㒙㒝㒡㒡㒛㒗㒤㒟㒝㒣㒙㒞㒠㒟㒙㒥㒣㒛㒞㒡㒦㒗㒟㒝㒘㒥㒢㒙㒛㒡㒤㒥㒠㒢㒗㒡㒢㒙㒚㒝㒣㒣㒝㒝㒦㒟㒡㒦㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒡㒚㒥㒤㒟㒝㒡㒗㒙㒠㒝㒛㒣㒣㒙㒜㒟㒦㒗㒟㒛㒘㒣㒢㒗㒝㒜㒤㒣㒠㒙㒗㒟㒠㒥㒚㒝㒣㒡㒝㒙㒦㒝㒡㒞㒙㒙㒤㒟㒛㒥㒥㒛㒞㒣㒘㒗㒡㒟㒚㒣㒦㒗㒝㒟㒘㒥㒠㒛㒙㒡㒣㒙㒜㒝㒥㒥㒟㒙㒚㒣㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒛㒣㒟㒜㒦㒦㒛㒠㒣㒙㒗㒢㒝㒛㒣㒥㒙㒡㒙㒗㒥㒡㒛㒚㒡㒥㒙㒝㒝㒦㒣㒠㒚㒙㒟㒣㒤㒜㒛㒥㒡㒟㒗㒘㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒝㒠㒡㒚㒘㒣㒝㒝㒥㒦㒙㒟㒟㒘㒥㒢㒛㒝㒦㒥㒗㒞㒝㒗㒣㒣㒙㒚㒟㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒥㒚㒜㒙㒦㒡㒞㒥㒘㒛㒡㒣㒛㒗㒤㒣㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒥㒢㒙㒛㒡㒤㒥㒠㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒠㒙㒛㒤㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒦㒛㒝㒡㒙㒗㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒙㒟㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒝㒣㒡㒝㒘㒦㒝㒟㒣㒣㒘㒢㒟㒛㒥㒥㒛㒞㒢㒘㒗㒡㒝㒚㒣㒤㒞㒝㒟㒦㒥㒠㒛㒟㒘㒣㒜㒜㒝㒥㒣㒟㒙㒟㒡㒗㒦㒡㒞㒚㒦㒡㒙㒜㒤㒡㒗㒚㒙㒣㒟㒜㒥㒝㒢㒥㒢㒟㒠㒙㒡㒞㒠㒥㒝㒞㒟㒗㒥㒡㒛㒡㒥㒚㒘㒤㒠㒝㒞㒥㒠㒙㒡㒢㒥㒜㒛㒥㒡㒤㒦㒜㒤㒟㒘㒛㒞㒤㒟㒝㒥㒗㒛㒗㒡㒠㒚㒙㒞㒣㒟㒜㒥㒠㒤㒘㒥㒢㒛㒛㒡㒦㒙㒣㒠㒗㒣㒡㒚㒚㒟㒤㒙㒝㒛㒦㒡㒠㒗㒙㒣㒘㒥㒜㒙㒥㒟㒞㒥㒘㒡㒡㒡㒛㒘㒤㒝㒝㒣㒗㒙㒠㒣㒣㒥㒣㒛㒜㒡㒦㒗㒟㒣㒘㒣㒢㒚㒛㒟㒤㒥㒣㒡㒗㒡㒡㒙㒚㒝㒣㒤㒝㒙㒦㒟㒟㒥㒙㒡㒣㒡㒜㒗㒥㒟㒞㒣㒘㒠㒡㒟㒚㒦㒤㒛㒝㒢㒗㒗㒠㒡㒣㒣㒣㒙㒜㒟㒥㒥㒟㒢㒘㒡㒢㒘㒛㒝㒤㒣㒣㒟㒗㒟㒡㒗㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒚㒙㒤㒛㒛㒥㒥㒜㒞㒡㒘㒘㒡㒝㒚㒥㒤㒙㒞㒡㒜㒘㒠㒛㒙㒢㒣㒗㒜㒡㒥㒣㒟㒙㒘㒟㒣㒥㒢㒛㒤㒡㒞㒘㒗㒝㒠㒤㒚㒙㒣㒠㒜㒥㒦㒡㒠㒡㒙㒗㒢㒞㒛㒣㒥㒦㒞㒟㒗㒦㒡㒛㒚㒢㒤㒗㒝㒡㒠㒣㒠㒙㒙㒟㒢㒥㒝㒘㒥㒡㒟㒘㒘㒝㒢㒗㒥㒙㒤㒟㒝㒥㒗㒛㒡㒥㒚㒗㒣㒞㒜㒣㒗㒛㒤㒢㒘㒥㒢㒜㒛㒡㒥㒚㒞㒝㒗㒣㒡㒙㒜㒟㒚㒥㒝㒛㒦㒢㒠㒗㒙㒞㒢㒣㒜㒛㒥㒟㒞㒥㒘㒡㒡㒡㒛㒘㒤㒝㒝㒤㒗㒙㒠㒠㒙㒥㒤㒝㒡㒤㒦㒗㒟㒞㒘㒣㒢㒞㒛㒟㒤㒥㒞㒛㒗㒣㒥㒗㒚㒝㒣㒥㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒝㒜㒞㒣㒘㒚㒡㒟㒛㒗㒤㒛㒝㒢㒗㒗㒠㒡㒣㒣㒣㒙㒜㒟㒥㒥㒟㒣㒘㒡㒢㒘㒛㒝㒤㒣㒘㒘㒗㒟㒠㒥㒚㒛㒣㒢㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒞㒡㒘㒡㒡㒝㒚㒣㒤㒙㒢㒥㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒞㒙㒜㒞㒙㒦㒛㒡㒤㒡㒞㒗㒗㒝㒤㒦㒞㒟㒚㒡㒢㒦㒝㒘㒥㒦㒣㒢㒢㒦㒛㒣㒥㒙㒞㒟㒟㒜㒘㒚㒡㒣㒚㒢㒤㒠㒝㒣㒦㒚㒟㒢㒙㒚㒦㒦㒦㒞㒟㒗㒘㒝㒡㒣㒟㒜㒛㒤㒥㒗㒞㒝㒦㒦㒠㒥㒚㒡㒠㒦㒜㒚㒦㒜㒟㒚㒙㒝㒡㒢㒢㒜㒟㒘㒗㒣㒡㒙㒚㒟㒘㒗㒤㒠㒝㒥㒗㒛㒠㒜㒙㒡㒟㒛㒙㒣㒥㒤㒟㒢㒘㒟㒝㒣㒤㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒠㒘㒦㒢㒙㒛㒟㒤㒥㒥㒙㒝㒦㒘㒞㒟㒤㒤㒜㒝㒙㒦㒟㒟㒥㒝㒝㒙㒦㒣㒛㒜㒡㒥㒢㒟㒗㒤㒡㒠㒚㒛㒛㒥㒢㒗㒛㒠㒝㒙㒣㒣㒙㒣㒦㒛㒦㒥㒤㒟㒥㒚㒘㒛㒤㒤㒣㒞㒙㒗㒟㒦㒛㒠㒠㒙㒤㒤㒛㒝㒜㒦㒥㒜㒛㒤㒙㒛㒥㒥㒛㒞㒡㒘㒗㒗㒚㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒞㒝㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒜㒗㒝㒡㒥㒚㒙㒣㒟㒝㒗㒦㒛㒠㒛㒙㒗㒢㒝㒛㒣㒗㒙㒞㒟㒗㒥㒡㒝㒚㒡㒤㒙㒝㒝㒗㒚㒠㒙㒚㒡㒢㒥㒜㒛㒥㒤㒟㒗㒘㒣㒡㒣㒛㒙㒤㒟㒟㒗㒗㒛㒠㒡㒚㒛㒣㒝㒝㒙㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒟㒗㒣㒡㒝㒚㒟㒤㒗㒝㒛㒗㒣㒠㒗㒙㒝㒢㒦㒜㒙㒥㒢㒞㒥㒘㒛㒡㒡㒝㒗㒤㒝㒝㒣㒗㒜㒠㒟㒚㒘㒣㒛㒜㒥㒦㒗㒡㒝㒘㒣㒢㒙㒛㒢㒤㒥㒞㒞㒗㒡㒡㒙㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒢㒤㒜㒗㒥㒞㒞㒣㒙㒛㒡㒟㒚㒥㒤㒛㒝㒡㒗㒠㒠㒝㒙㒣㒣㒙㒝㒡㒥㒥㒟㒛㒘㒢㒢㒗㒛㒞㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒟㒥㒙㒙㒢㒠㒛㒥㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒛㒡㒣㒗㒜㒝㒥㒣㒟㒙㒘㒟㒡㒥㒛㒣㒤㒡㒟㒙㒗㒝㒠㒣㒚㒛㒣㒟㒝㒟㒦㒛㒟㒡㒙㒗㒤㒝㒛㒣㒥㒙㒞㒡㒗㒥㒡㒝㒚㒡㒤㒞㒝㒝㒗㒥㒠㒙㒙㒟㒣㒘㒜㒛㒦㒗㒟㒗㒘㒝㒡㒣㒜㒛㒤㒟㒝㒥㒗㒟㒠㒡㒚㒝㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒣㒥㒗㒞㒡㒗㒣㒡㒛㒚㒟㒥㒗㒝㒛㒦㒡㒠㒚㒙㒝㒢㒦㒜㒙㒥㒟㒞㒥㒚㒛㒡㒡㒛㒗㒤㒠㒝㒣㒗㒜㒠㒟㒚㒙㒣㒛㒞㒡㒦㒗㒟㒝㒘㒦㒢㒙㒛㒢㒤㒥㒞㒝㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒘㒙㒛㒢㒢㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒜㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒚㒗㒟㒠㒥㒚㒛㒣㒡㒦㒦㒦㒝㒟㒣㒙㒙㒢㒠㒛㒥㒥㒛㒞㒡㒘㒙㒡㒝㒚㒣㒤㒙㒝㒟㒗㒙㒠㒛㒙㒡㒣㒗㒡㒤㒦㒙㒟㒙㒘㒟㒡㒥㒢㒝㒚㒢㒥㒛㒝㒦㒗㒡㒠㒠㒘㒦㒝㒙㒦㒛㒟㒡㒙㒗㒗㒡㒢㒘㒜㒡㒥㒣㒟㒦㒡㒣㒚㒡㒤㒗㒝㒝㒞㒗㒗㒘㒠㒝㒚㒚㒣㒘㒛㒣㒥㒜㒟㒟㒟㒘㒛㒛㒤㒟㒝㒥㒗㒛㒦㒠㒞㒞㒣㒦㒜㒣㒦㒙㒟㒟㒙㒛㒣㒛㒛㒡㒥㒘㒞㒝㒗㒦㒡㒙㒚㒠㒣㒥㒝㒜㒦㒡㒠㒛㒣㒝㒢㒣㒜㒙㒥㒟㒟㒘㒘㒛㒡㒢㒛㒗㒤㒡㒗㒣㒗㒙㒠㒟㒙㒥㒣㒣㒜㒡㒦㒘㒟㒝㒙㒥㒗㒜㒛㒟㒥㒗㒞㒛㒗㒥㒡㒗㒚㒝㒣㒣㒞㒛㒛㒢㒟㒥㒙㒞㒢㒡㒜㒚㒥㒝㒞㒣㒘㒙㒣㒟㒡㒥㒤㒛㒝㒥㒗㒗㒠㒝㒙㒣㒣㒛㒜㒟㒥㒥㒥㒗㒘㒡㒢㒚㒛㒝㒤㒥㒞㒙㒗㒡㒠㒥㒛㒛㒥㒝㒝㒗㒦㒟㒟㒣㒙㒚㒢㒟㒜㒘㒥㒛㒞㒡㒡㒦㒡㒝㒚㒣㒤㒙㒝㒠㒦㒥㒠㒛㒙㒡㒣㒗㒜㒞㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒡㒡㒚㒙㒣㒟㒜㒥㒙㒘㒠㒘㒙㒗㒢㒝㒛㒣㒙㒝㒤㒤㒟㒘㒘㒟㒡㒣㒚㒦㒤㒦㒞㒤㒠㒠㒙㒟㒢㒥㒜㒛㒚㒡㒥㒣㒞㒞㒙㒜㒡㒞㒛㒡㒥㒘㒟㒜㒡㒜㒚㒗㒣㒝㒜㒣㒚㒥㒦㒞㒟㒘㒘㒜㒢㒝㒚㒗㒥㒙㒝㒤㒘㒢㒠㒤㒛㒗㒠㒘㒗㒟㒠㒗㒙㒝㒢㒣㒠㒟㒜㒘㒥㒣㒞㒟㒦㒗㒡㒠㒛㒟㒤㒦㒞㒝㒤㒢㒠㒝㒙㒤㒣㒝㒜㒛㒜㒢㒙㒜㒢㒙㒛㒟㒤㒥㒣㒞㒝㒤㒘㒙㒠㒢㒚㒘㒤㒗㒚㒦㒗㒚㒟㒤㒥㒞㒜㒚㒥㒝㒞㒣㒘㒙㒦㒡㒡㒚㒛㒛㒣㒘㒗㒠㒠㒝㒙㒣㒣㒙㒡㒟㒜㒡㒥㒜㒠㒚㒘㒜㒢㒟㒙㒚㒥㒞㒞㒘㒛㒠㒚㒟㒣㒡㒝㒗㒦㒝㒗㒚㒟㒚㒙㒘㒣㒙㒥㒟㒞㒡㒚㒤㒡㒣㒚㒣㒤㒙㒝㒟㒞㒘㒦㒣㒠㒠㒚㒞㒣㒢㒜㒜㒗㒚㒙㒙㒡㒥㒛㒛㒤㒡㒢㒞㒝㒢㒘㒗㒟㒜㒙㒤㒤㒗㒝㒡㒦㒚㒟㒚㒘㒢㒣㒤㒥㒛㒞㒟㒗㒥㒡㒛㒠㒠㒘㒞㒠㒚㒗㒗㒠㒙㒙㒟㒢㒥㒢㒢㒛㒢㒥㒤㒞㒢㒡㒦㒛㒞㒤㒟㒝㒥㒗㒛㒥㒞㒠㒦㒚㒛㒣㒘㒝㒢㒡㒞㒘㒥㒢㒛㒛㒡㒦㒙㒣㒠㒗㒣㒡㒙㒚㒟㒤㒡㒝㒛㒦㒡㒠㒗㒛㒝㒙㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒡㒤㒝㒠㒙㒞㒗㒠㒟㒙㒥㒣㒛㒞㒟㒦㒗㒟㒞㒘㒣㒢㒢㒛㒟㒥㒙㒘㒛㒗㒡㒡㒗㒚㒝㒥㒡㒝㒙㒦㒠㒟㒥㒚㒝㒗㒤㒜㒗㒥㒝㒞㒣㒘㒦㒡㒟㒚㒥㒤㒛㒟㒡㒠㒟㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒦㒘㒡㒣㒙㒛㒝㒤㒣㒞㒛㒗㒟㒡㒗㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒝㒞㒡㒘㒙㒡㒝㒜㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒠㒥㒣㒡㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒡㒚㒚㒙㒥㒟㒜㒥㒦㒛㒟㒡㒙㒗㒢㒝㒛㒣㒥㒞㒞㒟㒙㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒙㒚㒝㒢㒥㒞㒛㒥㒡㒟㒗㒘㒝㒡㒣㒛㒙㒤㒟㒞㒙㒗㒛㒡㒣㒚㒗㒣㒝㒜㒥㒦㒙㒟㒥㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒤㒗㒝㒛㒦㒣㒠㒗㒙㒣㒢㒣㒜㒙㒥㒟㒞㒥㒚㒙㒡㒡㒛㒘㒤㒝㒝㒣㒗㒙㒠㒣㒣㒥㒣㒛㒜㒡㒦㒗㒡㒛㒘㒣㒢㒚㒛㒟㒦㒗㒣㒞㒗㒡㒡㒗㒚㒝㒤㒛㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒚㒡㒟㒚㒦㒤㒛㒞㒣㒗㒗㒠㒝㒙㒣㒣㒙㒝㒜㒥㒥㒟㒛㒘㒡㒤㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒤㒜㒝㒗㒗㒟㒟㒣㒙㒙㒢㒡㒛㒥㒥㒝㒞㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒣㒣㒗㒜㒟㒥㒣㒡㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒦㒚㒙㒥㒟㒜㒥㒦㒛㒟㒡㒙㒗㒢㒝㒛㒣㒥㒠㒞㒟㒙㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒙㒙㒤㒢㒥㒞㒛㒥㒡㒟㒗㒘㒝㒡㒣㒛㒙㒤㒟㒞㒣㒗㒛㒢㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒡㒛㒡㒗㒗㒞㒝㒗㒣㒡㒙㒚㒟㒣㒥㒝㒛㒦㒢㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒝㒡㒡㒛㒘㒤㒝㒝㒣㒡㒘㒠㒟㒙㒥㒣㒛㒜㒢㒦㒗㒟㒝㒘㒣㒢㒞㒛㒟㒤㒥㒞㒛㒗㒤㒡㒙㒚㒝㒣㒣㒝㒙㒜㒞㒤㒜㒙㒞㒢㒥㒜㒗㒥㒝㒞㒣㒟㒠㒗㒠㒡㒞㒛㒟㒣㒘㒗㒡㒠㒝㒙㒣㒣㒙㒢㒢㒛㒦㒦㒙㒞㒤㒘㒜㒢㒙㒜㒗㒤㒡㒞㒘㒘㒘㒚㒞㒣㒦㒝㒗㒦㒝㒟㒣㒠㒙㒘㒢㒡㒦㒜㒗㒥㒝㒥㒝㒡㒞㒛㒠㒤㒙㒝㒟㒦㒥㒡㒝㒞㒤㒣㒗㒜㒝㒥㒣㒟㒚㒘㒟㒡㒥㒛㒛㒗㒡㒤㒞㒗㒝㒠㒣㒚㒙㒣㒢㒜㒥㒦㒠㒟㒡㒚㒙㒗㒠㒛㒣㒥㒙㒞㒟㒗㒦㒡㒛㒚㒡㒤㒗㒟㒝㒝㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒟㒚㒘㒝㒢㒙㒡㒛㒤㒟㒝㒥㒗㒛㒡㒝㒚㒗㒣㒞㒜㒣㒦㒙㒟㒟㒙㒙㒜㒛㒛㒡㒥㒗㒞㒝㒘㒟㒡㒙㒚㒠㒣㒥㒞㒝㒛㒤㒠㒗㒙㒝㒢㒣㒜㒛㒥㒟㒞㒥㒘㒛㒡㒡㒛㒝㒤㒝㒝㒣㒗㒙㒠㒠㒙㒥㒣㒜㒜㒡㒗㒙㒤㒠㒘㒣㒢㒙㒛㒟㒥㒙㒞㒛㒗㒡㒡㒗㒚㒟㒗㒣㒝㒙㒦㒠㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒠㒘㒡㒟㒚㒥㒤㒛㒝㒣㒗㒗㒠㒞㒙㒣㒣㒝㒦㒟㒥㒥㒟㒛㒘㒡㒢㒙㒛㒝㒤㒤㒞㒙㒗㒟㒚㒤㒚㒛㒣㒡㒝㒗㒦㒞㒟㒣㒙㒙㒢㒟㒛㒦㒥㒜㒞㒡㒘㒗㒡㒝㒚㒣㒤㒝㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒘㒢㒡㒥㒛㒛㒤㒡㒛㒜㒗㒢㒠㒣㒚㒙㒣㒟㒢㒛㒜㒜㒦㒝㒠㒜㒘㒢㒣㒤㒥㒟㒞㒟㒗㒥㒡㒛㒟㒡㒚㒘㒤㒟㒝㒘㒗㒗㒠㒣㒚㒦㒝㒟㒥㒡㒟㒗㒘㒝㒦㒦㒡㒞㒛㒣㒢㒥㒞㒝㒗㒚㒠㒤㒙㒞㒣㒥㒝㒢㒤㒟㒞㒦㒙㒝㒢㒥㒙㒚㒢㒣㒞㒥㒗㒚㒡㒜㒚㒚㒝㒣㒦㒡㒠㒗㒙㒝㒢㒣㒥㒜㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒝㒝㒣㒙㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒥㒢㒙㒝㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒛㒦㒟㒡㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒢㒚㒥㒤㒛㒝㒡㒗㒗㒠㒟㒙㒣㒣㒚㒜㒟㒥㒥㒟㒛㒚㒡㒢㒗㒛㒝㒤㒥㒞㒙㒗㒡㒠㒥㒚㒜㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒜㒗㒥㒛㒞㒢㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒜㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒤㒞㒗㒗㒝㒠㒣㒜㒦㒣㒥㒜㒥㒦㒛㒟㒡㒞㒗㒘㒞㒢㒥㒛㒞㒥㒝㒟㒙㒙㒜㒚㒦㒤㒗㒝㒝㒦㒣㒥㒟㒟㒠㒙㒡㒣㒠㒛㒦㒟㒚㒙㒡㒡㒣㒛㒙㒤㒟㒣㒘㒝㒠㒗㒥㒟㒗㒚㒟㒣㒜㒜㒦㒥㒠㒠㒗㒙㒤㒠㒡㒛㒘㒥㒟㒟㒗㒥㒜㒞㒥㒛㒗㒣㒜㒝㒞㒦㒜㒙㒥㒢㒣㒜㒙㒥㒟㒞㒥㒡㒞㒡㒡㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒙㒥㒥㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒤㒦㒞㒛㒙㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒜㒢㒡㒞㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒤㒗㒗㒠㒝㒙㒣㒣㒙㒜㒡㒥㒥㒟㒜㒘㒡㒢㒗㒛㒝㒦㒣㒞㒙㒗㒟㒡㒗㒚㒛㒣㒣㒝㒗㒦㒟㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒞㒡㒘㒙㒡㒝㒚㒤㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒞㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒦㒚㒙㒣㒟㒜㒥㒣㒠㒠㒗㒙㒗㒢㒝㒛㒣㒚㒙㒤㒠㒟㒗㒗㒠㒡㒟㒛㒛㒢㒤㒗㒘㒠㒙㒙㒟㒢㒥㒡㒡㒛㒢㒥㒣㒟㒢㒘㒘㒛㒜㒥㒣㒝㒥㒗㒛㒠㒡㒟㒚㒙㒢㒤㒗㒛㒙㒦㒡㒟㒞㒙㒘㒡㒢㒜㒙㒥㒦㒜㒣㒗㒚㒡㒡㒛㒙㒡㒞㒛㒗㒗㒙㒟㒞㒙㒠㒢㒞㒦㒗㒞㒥㒘㒛㒡㒡㒛㒗㒝㒠㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒡㒝㒘㒣㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒡㒘㒚㒝㒥㒣㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒞㒞㒣㒚㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒦㒣㒙㒜㒟㒥㒥㒟㒛㒘㒣㒢㒗㒛㒞㒤㒣㒞㒙㒗㒟㒢㒥㒚㒛㒣㒡㒝㒙㒦㒝㒟㒥㒙㒙㒢㒡㒛㒥㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒤㒛㒝㒟㒦㒦㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒘㒠㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒝㒘㒦㒛㒟㒡㒙㒗㒝㒘㒜㒙㒥㒙㒞㒟㒗㒥㒦㒛㒠㒢㒛㒙㒣㒢㒝㒡㒗㒝㒦㒤㒣㒚㒜㒛㒥㒡㒟㒗㒝㒣㒗㒤㒡㒥㒛㒤㒤㒚㒟㒜㒡㒥㒚㒗㒣㒝㒜㒣㒛㒜㒥㒤㒠㒙㒗㒛㒢㒣㒛㒠㒥㒚㒝㒤㒘㒛㒢㒘㒘㒥㒣㒜㒝㒣㒗㒛㒝㒠㒗㒙㒣㒛㒛㒠㒥㒢㒞㒠㒢㒙㒛㒗㒤㒝㒝㒣㒗㒙㒙㒢㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒝㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒚㒦㒟㒡㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒠㒚㒥㒦㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒘㒟㒛㒘㒡㒢㒗㒛㒝㒤㒥㒞㒙㒗㒠㒠㒥㒚㒛㒣㒡㒟㒗㒦㒝㒟㒣㒙㒛㒢㒟㒜㒗㒥㒛㒞㒣㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒝㒙㒡㒣㒘㒜㒝㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒢㒞㒗㒗㒝㒠㒣㒞㒥㒣㒟㒜㒥㒦㒛㒗㒢㒙㒝㒢㒝㒛㒣㒥㒙㒥㒡㒝㒦㒘㒟㒡㒚㒚㒥㒣㒤㒜㒚㒠㒠㒙㒟㒢㒥㒜㒛㒛㒗㒥㒜㒞㒠㒙㒗㒢㒘㒛㒡㒡㒘㒜㒢㒡㒟㒚㒗㒣㒝㒜㒣㒚㒠㒥㒤㒠㒙㒗㒙㒡㒦㒛㒘㒥㒟㒞㒘㒘㒜㒡㒣㒙㒘㒤㒛㒝㒠㒗㒛㒞㒤㒢㒥㒜㒙㒥㒟㒞㒥㒞㒚㒦㒘㒠㒞㒤㒦㒝㒣㒗㒙㒠㒟㒠㒞㒚㒙㒡㒞㒜㒠㒦㒠㒟㒦㒘㒢㒢㒞㒛㒣㒘㒥㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒞㒥㒝㒚㒥㒞㒜㒦㒥㒝㒞㒣㒘㒙㒥㒤㒠㒦㒛㒞㒤㒚㒝㒥㒦㒤㒞㒗㒙㒢㒣㒡㒜㒚㒥㒞㒟㒥㒘㒠㒢㒜㒛㒡㒠㒦㒘㒘㒠㒥㒚㒛㒣㒡㒢㒞㒝㒜㒦㒥㒟㒤㒙㒢㒢㒥㒛㒜㒤㒤㒞㒜㒤㒚㒛㒗㒤㒙㒝㒟㒦㒥㒤㒠㒠㒟㒚㒜㒣㒚㒛㒚㒟㒜㒘㒟㒡㒥㒛㒛㒙㒤㒤㒠㒞㒡㒛㒝㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒢㒗㒛㒗㒟㒣㒝㒚㒟㒟㒗㒥㒡㒛㒚㒡㒘㒟㒤㒢㒝㒠㒦㒚㒠㒝㒙㒤㒢㒤㒛㒥㒤㒙㒟㒜㒘㒢㒢㒝㒙㒟㒣㒦㒞㒝㒗㒥㒢㒘㒤㒞㒜㒣㒦㒙㒟㒟㒝㒚㒙㒙㒢㒥㒛㒜㒥㒟㒝㒙㒗㒞㒡㒗㒚㒞㒣㒞㒝㒝㒦㒜㒝㒢㒚㒙㒢㒞㒜㒝㒦㒙㒛㒘㒢㒜㒛㒗㒤㒝㒝㒣㒞㒘㒗㒗㒟㒦㒚㒠㒣㒥㒜㒦㒥㒣㒞㒤㒙㒛㒢㒜㒘㒗㒡㒗㒡㒛㒚㒠㒣㒦㒝㒜㒦㒢㒠㒘㒚㒞㒝㒚㒢㒤㒜㒥㒥㒝㒞㒣㒘㒙㒥㒥㒡㒞㒛㒙㒣㒥㒛㒝㒦㒦㒠㒥㒚㒜㒣㒣㒚㒘㒥㒣㒟㒚㒘㒣㒡㒡㒤㒦㒞㒤㒗㒟㒠㒥㒚㒛㒘㒝㒣㒦㒜㒠㒥㒤㒟㒥㒗㒟㒢㒡㒛㒜㒦㒚㒞㒜㒘㒟㒝㒠㒤㒞㒝㒟㒦㒥㒠㒛㒟㒤㒙㒘㒣㒟㒚㒜㒥㒝㒝㒦㒢㒝㒛㒛㒤㒡㒞㒗㒛㒥㒘㒘㒠㒦㒙㒠㒣㒣㒝㒚㒦㒚㒟㒛㒥㒚㒜㒗㒥㒙㒞㒟㒗㒥㒦㒙㒠㒢㒚㒤㒣㒢㒙㒠㒠㒟㒙㒟㒢㒥㒜㒛㒙㒤㒣㒝㒟㒟㒗㒤㒡㒦㒚㒤㒣㒝㒗㒛㒘㒢㒚㒟㒣㒝㒜㒣㒦㒙㒤㒘㒟㒣㒙㒞㒢㒥㒛㒘㒥㒛㒝㒦㒗㒞㒟㒥㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒙㒟㒦㒦㒘㒟㒡㒡㒛㒗㒤㒝㒥㒚㒝㒚㒗㒘㒡㒙㒘㒢㒝㒞㒦㒗㒟㒝㒘㒣㒙㒟㒡㒤㒛㒝㒤㒤㒝㒤㒗㒣㒠㒢㒘㒥㒣㒚㒝㒣㒦㒞㒠㒙㒙㒘㒜㒚㒥㒡㒞㒣㒘㒙㒡㒟㒟㒥㒚㒜㒤㒣㒞㒛㒠㒠㒚㒟㒣㒙㒜㒟㒥㒥㒣㒤㒟㒟㒙㒝㒢㒜㒛㒞㒤㒞㒜㒢㒗㒚㒡㒝㒛㒗㒣㒜㒝㒟㒝㒘㒚㒗㒢㒟㒛㒥㒥㒛㒢㒤㒟㒜㒘㒠㒢㒗㒛㒘㒤㒜㒝㒚㒗㒝㒞㒡㒚㒙㒣㒜㒜㒠㒦㒙㒟㒣㒜㒠㒜㒘㒤㒡㒞㒗㒗㒝㒥㒣㒠㒚㒚㒡㒣㒠㒜㒤㒦㒟㒟㒞㒗㒚㒡㒤㒜㒛㒥㒚㒞㒚㒘㒝㒠㒘㒤㒝㒝㒝㒦㒣㒠㒙㒝㒢㒙㒡㒢㒤㒛㒦㒥㒥㒟㒡㒟㒘㒛㒞㒤㒟㒝㒥㒗㒛㒥㒗㒡㒙㒙㒞㒣㒠㒜㒞㒢㒜㒙㒞㒢㒛㒛㒡㒥㒗㒢㒠㒞㒢㒗㒦㒡㒟㒚㒡㒣㒠㒝㒥㒦㒜㒟㒡㒚㒤㒝㒙㒥㒟㒞㒥㒘㒛㒥㒤㒢㒜㒛㒠㒥㒗㒞㒘㒗㒜㒠㒚㒚㒝㒡㒞㒜㒠㒦㒠㒟㒦㒘㒢㒢㒞㒛㒣㒥㒞㒤㒦㒡㒞㒚㒝㒣㒣㒝㒙㒚㒢㒦㒝㒟㒜㒙㒟㒢㒞㒛㒢㒥㒗㒚㒦㒡㒣㒚㒥㒤㒛㒝㒡㒜㒗㒗㒙㒟㒤㒚㒢㒙㒤㒦㒚㒟㒛㒘㒡㒢㒗㒟㒦㒛㒡㒣㒘㒞㒤㒘㒙㒢㒜㒤㒢㒝㒗㒦㒝㒟㒣㒞㒛㒘㒤㒢㒥㒜㒗㒥㒚㒞㒚㒗㒞㒢㒗㒚㒞㒣㒣㒜㒘㒗㒟㒠㒠㒚㒙㒢㒞㒜㒚㒥㒞㒠㒠㒢㒜㒛㒛㒤㒡㒞㒗㒛㒠㒗㒢㒡㒗㒚㒝㒣㒚㒜㒞㒦㒥㒛㒣㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒡㒛㒘㒡㒗㒦㒝㒠㒗㒗㒠㒙㒙㒟㒢㒥㒢㒢㒛㒢㒥㒤㒞㒢㒜㒞㒜㒗㒤㒟㒝㒥㒗㒛㒥㒘㒠㒜㒚㒡㒡㒗㒜㒞㒦㒢㒟㒘㒘㒠㒢㒟㒛㒛㒤㒞㒞㒡㒘㒝㒡㒢㒞㒟㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒦㒗㒢㒥㒠㒜㒢㒗㒛㒗㒤㒝㒝㒣㒛㒜㒗㒡㒠㒚㒙㒜㒣㒥㒜㒜㒜㒢㒙㒡㒢㒙㒛㒟㒤㒥㒣㒛㒝㒢㒘㒙㒡㒘㒚㒜㒤㒗㒜㒦㒤㒢㒟㒜㒙㒣㒢㒢㒛㒢㒥㒥㒟㒜㒡㒢㒛㒚㒤㒛㒝㒡㒗㒗㒥㒣㒟㒤㒙㒥㒣㒤㒜㒚㒙㒦㒘㒥㒢㒗㒛㒝㒤㒣㒣㒝㒝㒤㒘㒝㒡㒟㒦㒞㒝㒠㒦㒝㒟㒣㒙㒙㒦㒢㒢㒝㒛㒜㒥㒣㒞㒘㒗㒠㒢㒗㒚㒞㒤㒡㒡㒠㒠㒥㒙㒡㒣㒗㒜㒝㒚㒚㒥㒞㒟㒣㒗㒘㒡㒠㒛㒣㒥㒝㒝㒦㒦㒦㒠㒞㒠㒤㒝㒞㒦㒛㒟㒡㒙㒗㒙㒣㒡㒤㒜㒛㒥㒘㒝㒦㒗㒝㒡㒝㒚㒜㒤㒠㒙㒟㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒟㒗㒙㒡㒥㒣㒥㒤㒥㒗㒝㒥㒗㒛㒠㒡㒞㒘㒚㒛㒢㒦㒜㒡㒦㒞㒠㒗㒘㒠㒡㒥㒚㒞㒟㒙㒗㒣㒡㒙㒚㒟㒙㒙㒤㒢㒜㒦㒦㒜㒠㒛㒗㒦㒢㒞㒜㒡㒦㒛㒞㒤㒗㒤㒡㒜㒟㒘㒞㒙㒗㒙㒠㒟㒙㒥㒘㒛㒢㒢㒝㒙㒥㒢㒟㒡㒙㒝㒞㒛㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒘㒙㒡㒢㒡㒜㒗㒥㒝㒣㒥㒞㒚㒘㒣㒡㒞㒛㒙㒤㒘㒡㒡㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒙㒡㒦㒗㒘㒢㒥㒙㒞㒙㒗㒟㒠㒥㒟㒛㒚㒝㒣㒘㒝㒦㒦㒘㒠㒛㒝㒚㒜㒙㒥㒛㒞㒡㒘㒗㒦㒤㒠㒤㒚㒢㒤㒣㒗㒘㒠㒞㒙㒡㒣㒗㒜㒝㒜㒡㒥㒞㒟㒦㒜㒠㒛㒠㒤㒡㒞㒗㒗㒝㒗㒣㒠㒚㒚㒘㒤㒗㒝㒞㒟㒤㒙㒢㒢㒝㒛㒣㒥㒙㒢㒤㒝㒦㒘㒞㒡㒚㒚㒥㒣㒤㒛㒦㒗㒝㒡㒘㒙㒡㒢㒠㒛㒘㒟㒢㒘㒝㒡㒣㒛㒙㒘㒢㒢㒛㒞㒝㒦㒢㒠㒤㒙㒢㒢㒙㒜㒚㒦㒛㒠㒚㒘㒠㒡㒘㒥㒡㒞㒝㒗㒣㒡㒙㒟㒟㒛㒗㒤㒚㒝㒞㒗㒗㒠㒡㒗㒣㒢㒚㒜㒡㒦㒙㒘㒞㒡㒥㒛㒗㒤㒝㒝㒣㒜㒜㒗㒘㒠㒣㒙㒠㒗㒜㒦㒟㒟㒝㒘㒣㒢㒙㒠㒥㒛㒚㒤㒣㒞㒚㒗㒚㒡㒙㒚㒘㒤㒜㒙㒜㒡㒗㒙㒛㒢㒡㒜㒗㒙㒠㒦㒘㒟㒜㒘㒣㒡㒤㒛㒘㒣㒦㒞㒙㒥㒚㒠㒜㒚㒜㒣㒢㒜㒞㒦㒚㒟㒟㒦㒜㒢㒛㒛㒗㒛㒞㒘㒢㒠㒥㒚㒛㒣㒡㒣㒝㒜㒦㒦㒥㒟㒞㒙㒟㒣㒗㒜㒚㒦㒙㒞㒠㒘㒚㒡㒜㒛㒝㒥㒘㒝㒥㒗㒝㒠㒠㒙㒤㒣㒝㒝㒗㒡㒦㒙㒛㒡㒥㒛㒛㒤㒡㒢㒥㒝㒢㒘㒚㒞㒜㒚㒤㒤㒘㒝㒟㒦㒠㒟㒤㒘㒢㒢㒥㒜㒜㒞㒢㒙㒙㒡㒛㒚㒡㒤㒗㒡㒤㒝㒘㒗㒝㒞㒟㒚㒗㒢㒤㒜㒞㒥㒘㒟㒟㒙㒜㒠㒙㒚㒠㒥㒗㒞㒟㒤㒤㒞㒝㒚㒟㒢㒤㒜㒦㒥㒤㒛㒢㒢㒠㒛㒡㒥㒗㒞㒝㒝㒘㒘㒗㒡㒘㒚㒤㒤㒙㒞㒢㒠㒢㒙㒝㒢㒣㒜㒙㒚㒟㒦㒗㒞㒤㒘㒞㒡㒘㒛㒟㒥㒜㒜㒙㒦㒠㒡㒗㒚㒟㒗㒝㒦㒘㒟㒠㒙㒛㒢㒙㒛㒟㒤㒥㒥㒟㒞㒠㒗㒥㒡㒢㒚㒠㒣㒛㒜㒤㒗㒗㒙㒞㒣㒚㒜㒗㒥㒝㒞㒣㒝㒝㒘㒦㒡㒚㒚㒠㒤㒟㒛㒠㒗㒛㒠㒙㒚㒘㒤㒠㒦㒜㒟㒛㒘㒡㒢㒗㒠㒝㒛㒟㒤㒚㒟㒘㒗㒚㒡㒝㒚㒤㒙㒟㒦㒞㒟㒣㒙㒙㒣㒡㒠㒜㒥㒛㒞㒡㒘㒗㒣㒦㒚㒣㒤㒙㒝㒟㒘㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒝㒛㒡㒥㒝㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒝㒦㒦㒛㒡㒡㒙㒗㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒤㒛㒚㒡㒦㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒦㒤㒟㒗㒚㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒠㒡㒚㒡㒣㒝㒟㒙㒦㒙㒟㒟㒘㒥㒢㒛㒥㒡㒥㒘㒞㒞㒗㒣㒥㒢㒚㒟㒤㒙㒗㒛㒦㒡㒠㒗㒙㒝㒜㒣㒜㒚㒥㒠㒞㒥㒙㒝㒦㒤㒛㒗㒤㒝㒝㒣㒙㒢㒠㒟㒙㒥㒣㒛㒞㒡㒞㒦㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒣㒗㒗㒡㒣㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒣㒢㒜㒗㒗㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒚㒗㒠㒝㒛㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒜㒙㒤㒣㒟㒛㒗㒟㒠㒥㒚㒜㒣㒡㒠㒤㒦㒝㒟㒣㒙㒙㒣㒡㒛㒥㒥㒛㒞㒣㒘㒗㒣㒦㒚㒣㒤㒙㒝㒟㒘㒥㒠㒛㒙㒡㒣㒙㒜㒝㒥㒥㒟㒙㒛㒠㒡㒥㒜㒝㒤㒡㒞㒗㒗㒡㒠㒣㒚㒡㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒢㒝㒛㒥㒥㒙㒞㒣㒗㒥㒡㒝㒚㒡㒦㒗㒝㒝㒦㒣㒠㒛㒙㒟㒣㒗㒜㒛㒙㒣㒟㒗㒚㒝㒡㒣㒛㒙㒤㒡㒝㒥㒗㒝㒠㒡㒜㒡㒣㒝㒜㒣㒦㒙㒟㒟㒙㒗㒢㒛㒛㒤㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒣㒥㒝㒜㒦㒡㒠㒗㒙㒝㒢㒦㒜㒙㒥㒣㒞㒥㒘㒛㒡㒡㒛㒗㒞㒚㒝㒤㒗㒚㒠㒟㒛㒥㒚㒛㒜㒡㒦㒝㒟㒝㒙㒘㒢㒙㒜㒣㒤㒥㒠㒡㒛㒚㒡㒗㒚㒣㒣㒣㒞㒤㒦㒟㒟㒦㒙㒛㒦㒛㒜㒗㒥㒡㒘㒣㒘㒙㒡㒟㒚㒥㒥㒦㒝㒡㒗㒘㒠㒝㒚㒗㒝㒙㒜㒟㒥㒥㒟㒛㒢㒝㒢㒘㒛㒞㒤㒣㒠㒙㒞㒟㒠㒥㒚㒡㒣㒡㒝㒜㒦㒝㒢㒡㒙㒙㒣㒡㒡㒘㒥㒛㒟㒘㒘㒗㒣㒦㒚㒣㒤㒙㒝㒟㒘㒥㒗㒛㒙㒡㒣㒞㒜㒝㒦㒚㒟㒙㒝㒛㒡㒥㒝㒛㒛㒡㒞㒗㒗㒤㒠㒣㒚㒠㒣㒟㒝㒦㒦㒛㒠㒗㒝㒥㒢㒝㒜㒙㒥㒙㒘㒛㒗㒦㒡㒜㒚㒡㒤㒞㒝㒝㒗㒗㒚㒙㒙㒟㒢㒥㒜㒛㒟㒝㒟㒘㒘㒞㒡㒣㒜㒛㒙㒢㒝㒥㒗㒡㒠㒡㒝㒤㒣㒝㒜㒣㒦㒙㒠㒡㒢㒢㒢㒛㒜㒘㒥㒗㒠㒦㒗㒣㒡㒙㒚㒟㒥㒥㒝㒛㒦㒡㒠㒞㒙㒝㒣㒚㒜㒙㒘㒠㒞㒥㒙㒝㒡㒡㒛㒗㒤㒦㒝㒣㒗㒡㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒙㒚㒢㒙㒜㒘㒤㒥㒞㒝㒗㒡㒣㒗㒚㒝㒣㒣㒝㒠㒦㒟㒠㒜㒙㒛㒦㒦㒜㒗㒗㒝㒞㒣㒘㒙㒡㒦㒚㒥㒤㒢㒝㒡㒙㒡㒠㒝㒙㒣㒣㒙㒜㒟㒦㒜㒟㒛㒙㒙㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒡㒣㒡㒝㒗㒦㒝㒠㒛㒙㒙㒢㒣㒛㒥㒥㒛㒞㒡㒘㒗㒛㒗㒚㒤㒤㒚㒝㒟㒘㒥㒗㒛㒙㒡㒣㒢㒜㒝㒦㒝㒟㒙㒙㒣㒡㒥㒝㒡㒛㒟㒞㒗㒘㒘㒠㒣㒥㒡㒣㒟㒜㒦㒦㒛㒡㒜㒙㒗㒢㒡㒥㒣㒥㒙㒞㒟㒗㒥㒜㒣㒚㒡㒤㒘㒝㒝㒗㒥㒥㒜㒙㒟㒣㒠㒜㒛㒘㒚㒟㒗㒘㒝㒡㒣㒝㒙㒝㒛㒝㒥㒗㒦㒠㒡㒚㒢㒣㒝㒟㒤㒦㒙㒠㒡㒘㒥㒢㒛㒜㒞㒥㒗㒣㒙㒗㒣㒡㒙㒚㒟㒣㒥㒝㒛㒦㒡㒠㒢㒙㒝㒣㒠㒜㒙㒥㒡㒞㒥㒚㒛㒡㒡㒛㒗㒥㒘㒝㒣㒗㒤㒠㒟㒚㒦㒣㒛㒞㒡㒦㒗㒟㒝㒙㒞㒢㒙㒜㒚㒤㒥㒡㒝㒗㒡㒣㒗㒚㒝㒣㒣㒝㒤㒦㒟㒠㒠㒙㒛㒢㒦㒜㒗㒗㒝㒞㒣㒘㒙㒢㒚㒚㒥㒤㒦㒝㒡㒙㒥㒠㒝㒜㒙㒣㒙㒜㒟㒦㒠㒟㒛㒜㒚㒢㒗㒛㒞㒤㒣㒟㒟㒗㒟㒡㒙㒤㒛㒣㒡㒝㒗㒦㒝㒣㒜㒙㒙㒢㒠㒛㒥㒥㒟㒘㒡㒘㒗㒡㒝㒚㒣㒟㒡㒝㒟㒦㒦㒠㒛㒚㒣㒘㒚㒜㒝㒦㒞㒟㒙㒘㒣㒡㒥㒛㒛㒤㒡㒠㒗㒞㒝㒠㒣㒚㒤㒣㒟㒝㒠㒦㒛㒠㒟㒙㒗㒤㒣㒟㒜㒥㒙㒟㒚㒗㒥㒥㒙㒚㒡㒤㒘㒝㒝㒛㒜㒠㒙㒙㒣㒜㒥㒜㒛㒥㒡㒟㒗㒜㒛㒡㒣㒛㒚㒤㒟㒞㒙㒡㒛㒠㒡㒚㒗㒣㒝㒘㒛㒦㒙㒟㒠㒘㒥㒣㒝㒠㒤㒥㒗㒟㒘㒗㒣㒣㒢㒚㒟㒣㒥㒝㒛㒘㒡㒘㒛㒙㒝㒣㒞㒜㒙㒦㒚㒞㒥㒛㒜㒡㒡㒜㒙㒤㒝㒝㒣㒗㒦㒠㒟㒝㒚㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒜㒚㒤㒥㒟㒘㒗㒡㒡㒙㒚㒝㒤㒥㒝㒙㒦㒟㒠㒡㒙㒛㒗㒜㒜㒗㒥㒝㒞㒣㒚㒙㒡㒟㒚㒥㒥㒗㒝㒡㒗㒣㒠㒝㒝㒟㒣㒙㒝㒡㒥㒥㒟㒛㒙㒞㒢㒗㒞㒤㒤㒣㒞㒙㒗㒟㒢㒗㒚㒛㒣㒡㒝㒥㒦㒝㒠㒜㒙㒙㒢㒟㒛㒥㒗㒛㒞㒡㒘㒗㒢㒛㒚㒣㒥㒗㒝㒟㒚㒣㒠㒛㒛㒡㒣㒗㒜㒝㒦㒡㒟㒙㒙㒝㒡㒥㒟㒜㒤㒡㒟㒙㒗㒝㒠㒣㒛㒘㒣㒟㒝㒞㒦㒛㒟㒡㒙㒗㒤㒝㒛㒣㒥㒙㒟㒞㒗㒥㒢㒚㒚㒡㒤㒞㒝㒝㒘㒣㒠㒙㒙㒟㒣㒤㒜㒛㒦㒠㒟㒗㒚㒢㒡㒣㒜㒛㒤㒟㒝㒥㒘㒛㒠㒡㒝㒞㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒜㒢㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒥㒗㒝㒛㒦㒡㒡㒙㒙㒝㒦㒚㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒥㒙㒝㒣㒘㒛㒠㒟㒚㒗㒣㒛㒝㒣㒦㒗㒟㒝㒙㒠㒢㒙㒜㒦㒤㒥㒞㒛㒗㒡㒣㒗㒚㒝㒣㒣㒝㒦㒦㒟㒠㒢㒙㒛㒦㒝㒜㒗㒦㒟㒞㒣㒘㒙㒢㒝㒚㒥㒘㒚㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒢㒟㒛㒘㒣㒢㒗㒛㒟㒤㒣㒠㒙㒗㒟㒠㒥㒛㒙㒣㒡㒝㒜㒦㒝㒣㒙㒙㒙㒤㒟㒛㒥㒥㒛㒟㒟㒘㒗㒢㒛㒚㒣㒗㒟㒝㒟㒘㒥㒠㒛㒙㒡㒣㒥㒜㒝㒦㒡㒟㒙㒜㒥㒡㒥㒛㒛㒤㒡㒞㒗㒘㒛㒠㒣㒚㒛㒣㒟㒝㒗㒦㒛㒠㒡㒙㒗㒢㒝㒜㒠㒥㒙㒡㒝㒗㒥㒢㒙㒚㒡㒦㒗㒝㒝㒦㒣㒡㒗㒙㒟㒣㒢㒜㒛㒗㒤㒟㒗㒚㒝㒡㒣㒛㒙㒥㒝㒝㒥㒘㒙㒠㒡㒜㒞㒣㒝㒝㒙㒜㒟㒟㒟㒙㒥㒢㒛㒛㒢㒥㒗㒞㒞㒗㒣㒡㒛㒚㒟㒣㒥㒢㒠㒦㒡㒠㒗㒙㒝㒣㒘㒜㒙㒥㒟㒞㒥㒘㒛㒦㒦㒛㒗㒤㒝㒝㒣㒗㒦㒠㒟㒙㒥㒣㒛㒜㒡㒟㒠㒟㒝㒙㒡㒢㒙㒜㒟㒤㒥㒞㒜㒗㒡㒣㒗㒚㒝㒣㒣㒞㒗㒦㒟㒠㒠㒙㒛㒥㒝㒜㒗㒥㒝㒞㒣㒘㒙㒢㒟㒚㒥㒥㒘㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒦㒟㒛㒙㒝㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒛㒝㒣㒡㒝㒗㒦㒝㒟㒤㒙㒙㒤㒟㒛㒥㒥㒛㒟㒤㒘㒗㒢㒗㒚㒣㒥㒞㒝㒟㒘㒗㒠㒛㒙㒡㒤㒛㒜㒝㒥㒥㒟㒙㒘㒟㒡㒥㒝㒛㒤㒡㒞㒗㒘㒡㒠㒣㒛㒝㒣㒟㒠㒡㒦㒛㒠㒣㒙㒗㒢㒝㒝㒘㒥㒙㒡㒦㒗㒥㒡㒛㒚㒡㒥㒙㒝㒝㒦㒣㒡㒟㒙㒟㒦㒞㒜㒛㒥㒡㒟㒗㒙㒟㒡㒣㒛㒙㒥㒦㒝㒥㒚㒢㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒚㒙㒢㒛㒝㒘㒥㒗㒞㒟㒗㒣㒡㒙㒚㒟㒣㒥㒞㒞㒦㒡㒡㒚㒙㒝㒤㒗㒜㒙㒦㒟㒞㒥㒘㒛㒢㒣㒛㒗㒗㒛㒝㒣㒘㒜㒠㒟㒙㒥㒣㒛㒜㒡㒦㒥㒟㒝㒙㒥㒢㒙㒛㒡㒤㒥㒠㒛㒗㒡㒡㒗㒛㒜㒣㒣㒞㒗㒦㒟㒢㒙㒙㒛㒢㒡㒜㒗㒥㒝㒟㒢㒘㒙㒡㒡㒚㒥㒤㒜㒝㒡㒙㒗㒠㒝㒙㒣㒤㒘㒜㒟㒦㒣㒟㒛㒚㒢㒢㒗㒝㒝㒤㒣㒞㒙㒘㒞㒠㒥㒛㒚㒣㒡㒠㒢㒦㒝㒟㒣㒙㒙㒢㒟㒜㒤㒥㒛㒞㒣㒘㒗㒡㒞㒚㒣㒥㒛㒝㒟㒦㒥㒡㒚㒙㒡㒤㒠㒜㒝㒥㒣㒟㒙㒙㒡㒡㒥㒛㒛㒥㒡㒞㒗㒘㒜㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒦㒢㒝㒛㒥㒥㒙㒞㒠㒗㒥㒣㒛㒚㒡㒤㒗㒞㒜㒦㒣㒠㒣㒙㒟㒤㒤㒜㒛㒗㒡㒟㒗㒘㒝㒢㒢㒛㒙㒥㒞㒝㒥㒘㒛㒠㒡㒛㒙㒣㒝㒜㒣㒗㒚㒟㒟㒜㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒛㒞㒣㒥㒞㒜㒦㒡㒠㒙㒙㒝㒣㒙㒜㒙㒥㒟㒟㒤㒘㒛㒙㒜㒛㒗㒤㒞㒝㒣㒗㒚㒠㒟㒚㒙㒝㒛㒜㒡㒦㒗㒟㒝㒠㒞㒢㒙㒛㒠㒤㒥㒞㒟㒡㒡㒡㒗㒚㒝㒣㒣㒘㒟㒦㒟㒟㒦㒙㒛㒤㒡㒣㒗㒥㒝㒟㒢㒘㒙㒢㒙㒚㒥㒦㒚㒝㒡㒙㒗㒡㒞㒙㒣㒤㒘㒜㒟㒦㒤㒟㒛㒜㒡㒢㒗㒝㒝㒤㒣㒞㒙㒘㒞㒠㒥㒛㒚㒣㒡㒞㒗㒦㒝㒠㒥㒙㒙㒢㒟㒜㒦㒥㒛㒢㒙㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒡㒚㒙㒡㒤㒘㒜㒝㒥㒥㒟㒙㒘㒥㒡㒥㒛㒛㒥㒠㒞㒗㒢㒣㒠㒣㒚㒚㒣㒟㒜㒥㒦㒛㒟㒥㒣㒗㒢㒝㒛㒣㒥㒙㒙㒥㒗㒥㒡㒜㒚㒡㒥㒙㒢㒠㒦㒣㒡㒘㒙㒟㒗㒟㒜㒛㒥㒡㒟㒗㒚㒝㒗㒞㒛㒙㒥㒟㒝㒥㒗㒥㒠㒡㒛㒦㒣㒝㒞㒣㒦㒙㒟㒟㒙㒥㒢㒛㒜㒡㒥㒗㒢㒝㒗㒣㒣㒙㒚㒟㒣㒥㒞㒛㒦㒡㒡㒗㒙㒝㒦㒛㒜㒙㒗㒟㒞㒥㒘㒛㒢㒡㒛㒗㒥㒝㒝㒣㒙㒙㒠㒟㒛㒥㒣㒛㒜㒡㒗㒗㒟㒝㒙㒣㒢㒙㒟㒗㒤㒥㒠㒛㒗㒡㒡㒗㒛㒝㒣㒣㒞㒙㒦㒟㒢㒤㒙㒛㒢㒡㒜㒗㒥㒝㒟㒢㒘㒙㒡㒡㒚㒥㒤㒝㒝㒡㒘㒙㒠㒝㒙㒣㒤㒙㒜㒟㒘㒞㒟㒛㒘㒡㒢㒗㒝㒝㒤㒣㒞㒙㒘㒟㒠㒥㒛㒛㒣㒡㒠㒘㒦㒝㒠㒥㒙㒙㒢㒟㒝㒗㒥㒛㒣㒝㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒡㒛㒙㒡㒤㒙㒜㒝㒥㒥㒟㒙㒚㒟㒡㒥㒛㒛㒥㒡㒞㒗㒘㒝㒠㒣㒛㒚㒣㒟㒞㒥㒦㒛㒟㒡㒚㒗㒢㒝㒜㒣㒥㒙㒡㒡㒗㒥㒣㒛㒚㒡㒤㒗㒞㒝㒦㒣㒡㒙㒙㒟㒤㒟㒜㒛㒗㒡㒟㒗㒘㒝㒢㒣㒛㒙㒥㒟㒝㒥㒚㒙㒠㒡㒚㒝㒣㒝㒜㒣㒗㒘㒟㒟㒤㒛㒢㒛㒛㒢㒥㒗㒟㒝㒗㒣㒡㒝㒤㒟㒣㒥㒝㒛㒦㒡㒛㒝㒙㒝㒢㒤㒜㒙㒦㒡㒤㒘㒘㒛㒢㒠㒛㒗㒙㒗㒝㒣㒗㒙㒠㒟㒛㒥㒤㒘㒜㒡㒗㒗㒟㒝㒙㒝㒢㒙㒝㒞㒤㒥㒠㒛㒗㒡㒡㒗㒛㒝㒣㒣㒞㒙㒦㒟㒣㒥㒙㒛㒤㒡㒜㒗㒥㒝㒟㒣㒘㒙㒢㒟㒚㒥㒗㒣㒝㒡㒙㒗㒠㒝㒙㒣㒤㒙㒜㒟㒦㒥㒟㒛㒚㒡㒢㒗㒝㒝㒤㒣㒞㒙㒘㒟㒠㒥㒛㒛㒣㒡㒠㒟㒦㒝㒡㒣㒙㒙㒢㒟㒜㒥㒥㒛㒟㒡㒘㒗㒤㒜㒚㒣㒤㒙㒝㒟㒦㒥㒡㒚㒙㒡㒣㒙㒜㒝㒥㒥㒟㒙㒙㒡㒡㒥㒛㒛㒥㒡㒞㒗㒗㒡㒠㒣㒚㒙㒣㒟㒞㒥㒦㒛㒟㒡㒚㒗㒢㒝㒜㒣㒥㒙㒞㒠㒗㒥㒡㒡㒚㒡㒤㒗㒞㒝㒦㒣㒚㒚㒙㒟㒢㒦㒜㒛㒦㒠㒟㒗㒘㒡㒛㒣㒛㒙㒤㒟㒝㒥㒡㒜㒠㒡㒚㒘㒣㒝㒝㒗㒠㒙㒟㒟㒘㒥㒢㒛㒗㒗㒥㒗㒞㒞㒗㒣㒣㒙㒡㒟㒣㒥㒞㒚㒦㒡㒠㒜㒙㒝㒦㒙㒜㒙㒗㒟㒦㒦㒘㒛㒢㒠㒛㒗㒥㒜㒝㒣㒚㒟㒠㒟㒛㒥㒣㒛㒜㒡㒦㒦㒟㒝㒙㒢㒢㒙㒠㒗㒤㒥㒡㒛㒗㒡㒡㒗㒛㒜㒣㒣㒠㒝㒦㒟㒤㒞㒙㒛㒣㒣㒜㒗㒥㒝㒟㒢㒘㒙㒣㒘㒚㒥㒤㒛㒝㒡㒘㒙㒠㒝㒙㒣㒤㒙㒜㒟㒗㒝㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒘㒞㒠㒥㒚㒝㒣㒡㒝㒘㒦㒝㒠㒥㒙㒙㒢㒟㒜㒤㒥㒛㒢㒥㒘㒗㒡㒝㒚㒣㒦㒙㒝㒟㒦㒥㒡㒛㒙㒡㒣㒡㒜㒝㒗㒢㒟㒙㒚㒟㒡㒥㒛㒛㒥㒡㒞㒗㒘㒝㒠㒣㒞㒙㒣㒟㒞㒥㒦㒛㒟㒡㒚㒗㒢㒝㒜㒣㒥㒙㒠㒜㒗㒥㒡㒛㒚㒡㒤㒗㒞㒜㒦㒣㒠㒛㒙㒟㒢㒦㒜㒛㒦㒣㒟㒗㒘㒝㒢㒢㒛㒙㒦㒘㒝㒥㒗㒛㒠㒡㒛㒙㒣㒝㒜㒣㒗㒙㒟㒟㒚㒝㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒛㒞㒣㒥㒝㒝㒦㒡㒠㒘㒙㒝㒤㒣㒜㒙㒥㒟㒟㒤㒘㒛㒡㒦㒛㒗㒗㒣㒝㒣㒙㒙㒠㒟㒙㒥㒤㒚㒜㒡㒦㒦㒟㒝㒜㒙㒢㒙㒝㒟㒤㒥㒞㒛㒘㒠㒡㒗㒛㒜㒣㒣㒡㒡㒦㒟㒢㒥㒙㒛㒢㒡㒜㒦㒥㒝㒢㒗㒘㒙㒢㒥㒚㒥㒤㒟㒝㒡㒗㒗㒠㒝㒙㒣㒞㒟㒜㒟㒥㒦㒟㒛㒘㒥㒜㒗㒛㒝㒤㒣㒞㒙㒢㒥㒠㒥㒚㒜㒣㒡㒝㒗㒞㒗㒟㒣㒙㒤㒢㒟㒛㒥㒥㒛㒞㒡㒘㒗㒡㒡㒤㒣㒤㒙㒝㒟㒦㒥㒙㒥㒙㒢㒣㒘㒜㒝㒦㒥㒤㒜㒘㒟㒢㒠㒛㒛㒗㒚㒞㒗㒗㒝㒠㒣㒜㒙㒜㒛㒜㒥㒦㒦㒟㒡㒙㒢㒢㒝㒞㒤㒥㒙㒟㒡㒗㒥㒡㒛㒛㒞㒤㒗㒢㒙㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒟㒢㒘㒝㒢㒠㒛㒙㒤㒡㒝㒥㒙㒛㒠㒡㒚㒗㒤㒘㒜㒣㒦㒤㒟㒟㒙㒦㒢㒛㒝㒡㒥㒗㒞㒝㒘㒞㒡㒙㒛㒚㒣㒥㒠㒝㒦㒡㒢㒗㒙㒝㒢㒣㒜㒤㒥㒟㒟㒠㒘㒛㒡㒦㒛㒗㒦㒝㒝㒣㒗㒙㒡㒚㒙㒥㒣㒦㒜㒡㒘㒥㒟㒝㒛㒙㒢㒙㒛㒟㒥㒠㒞㒛㒣㒤㒡㒗㒚㒞㒣㒣㒡㒢㒦㒟㒠㒙㒣㒛㒢㒡㒜㒗㒥㒝㒚㒦㒘㒙㒡㒠㒚㒥㒤㒟㒗㒡㒗㒗㒠㒝㒙㒣㒜㒣㒜㒠㒥㒦㒟㒛㒙㒣㒗㒚㒛㒝㒥㒞㒞㒙㒛㒜㒠㒥㒚㒛㒣㒡㒞㒙㒠㒚㒟㒣㒙㒥㒢㒟㒞㒞㒥㒛㒞㒡㒘㒗㒣㒝㒚㒣㒤㒙㒞㒛㒦㒥㒡㒗㒙㒡㒦㒘㒜㒝㒦㒥㒟㒙㒘㒟㒢㒣㒛㒛㒥㒙㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒜㒥㒗㒗㒟㒡㒙㒥㒢㒝㒛㒥㒥㒙㒠㒟㒗㒥㒡㒛㒛㒝㒤㒗㒞㒙㒦㒣㒤㒛㒙㒟㒤㒥㒜㒛㒥㒡㒟㒣㒘㒝㒢㒟㒛㒙㒗㒙㒝㒥㒗㒛㒠㒡㒚㒗㒤㒙㒜㒣㒦㒦㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒘㒞㒡㒙㒚㒟㒣㒥㒞㒘㒦㒡㒠㒛㒙㒝㒢㒣㒜㒙㒥㒟㒘㒝㒘㒜㒡㒢㒛㒗㒦㒝㒤㒣㒗㒙㒡㒟㒙㒥㒤㒚㒜㒡㒗㒛㒟㒝㒛㒙㒙㒗㒛㒟㒥㒥㒞㒛㒡㒘㒡㒘㒚㒞㒣㒣㒠㒣㒦㒟㒠㒙㒣㒛㒢㒡㒜㒗㒥㒝㒘㒚㒘㒚㒡㒠㒚㒥㒦㒛㒤㒡㒗㒗㒡㒝㒙㒣㒤㒘㒜㒟㒘㒣㒟㒛㒙㒣㒗㒚㒛㒝㒥㒤㒞㒙㒚㒘㒠㒥㒚㒛㒣㒡㒟㒗㒝㒝㒟㒣㒚㒚㒢㒟㒜㒦㒥㒛㒣㒝㒘㒗㒣㒝㒡㒣㒤㒙㒞㒠㒦㒥㒡㒜㒙㒡㒤㒘㒜㒝㒦㒙㒤㒗㒘㒟㒢㒥㒛㒛㒞㒘㒞㒘㒗㒞㒠㒣㒛㒚㒣㒟㒝㒙㒠㒛㒟㒡㒙㒗㒢㒝㒥㒚㒥㒚㒞㒠㒗㒥㒢㒝㒟㒤㒤㒗㒞㒝㒦㒣㒢㒢㒙㒟㒢㒥㒜㒛㒗㒡㒗㒛㒘㒝㒢㒣㒛㒙㒥㒟㒝㒥㒚㒜㒠㒡㒛㒙㒣㒝㒜㒣㒗㒛㒟㒟㒜㒚㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒛㒟㒣㒥㒞㒝㒦㒡㒠㒙㒙㒝㒣㒥㒜㒙㒥㒟㒟㒦㒘㒛㒦㒜㒛㒗㒤㒝㒝㒣㒙㒙㒠㒟㒙㒥㒤㒜㒜㒡㒗㒘㒟㒝㒜㒟㒢㒙㒜㒡㒤㒥㒞㒛㒘㒣㒡㒗㒝㒤㒣㒣㒝㒙㒦㒟㒡㒗㒙㒛㒢㒡㒝㒚㒥㒝㒟㒜㒘㒙㒡㒟㒚㒥㒦㒛㒝㒡㒗㒗㒡㒠㒙㒣㒤㒜㒜㒟㒙㒣㒟㒛㒚㒡㒢㒗㒛㒝㒥㒦㒞㒙㒘㒢㒠㒥㒞㒜㒣㒡㒞㒙㒦㒝㒟㒣㒚㒝㒢㒟㒜㒞㒥㒛㒞㒡㒘㒗㒣㒝㒚㒣㒤㒙㒞㒣㒦㒥㒡㒟㒙㒡㒣㒞㒜㒝㒗㒣㒟㒙㒘㒟㒣㒙㒛㒛㒥㒥㒞㒗㒙㒢㒠㒣㒛㒛㒣㒟㒜㒥㒗㒠㒟㒡㒜㒞㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒡㒛㒜㒗㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒤㒗㒜㒛㒥㒡㒠㒞㒘㒝㒥㒚㒛㒙㒤㒟㒝㒥㒗㒛㒠㒡㒚㒗㒤㒞㒜㒣㒗㒠㒟㒟㒙㒗㒢㒛㒜㒣㒥㒗㒞㒝㒘㒥㒡㒙㒛㒦㒣㒥㒝㒛㒦㒡㒢㒗㒙㒝㒢㒣㒝㒛㒥㒟㒠㒗㒘㒛㒥㒝㒛㒗㒥㒟㒝㒣㒗㒙㒡㒢㒙㒥㒗㒚㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒦㒗㒞㒛㒗㒣㒡㒗㒚㒟㒣㒣㒟㒙㒦㒟㒟㒥㒚㒞㒢㒡㒜㒦㒥㒝㒢㒙㒘㒙㒣㒟㒚㒥㒤㒛㒞㒤㒗㒗㒡㒠㒙㒣㒦㒟㒜㒟㒗㒥㒟㒛㒘㒡㒣㒚㒛㒝㒥㒦㒞㒙㒛㒥㒠㒥㒚㒛㒣㒡㒝㒗㒗㒠㒟㒣㒙㒛㒢㒟㒜㒗㒥㒛㒟㒡㒘㒗㒡㒝㒛㒥㒤㒙㒠㒝㒦㒥㒡㒞㒙㒡㒥㒗㒜㒝㒥㒣㒠㒜㒘㒟㒣㒗㒛㒛㒦㒤㒞㒗㒙㒝㒠㒣㒚㒙㒤㒢㒜㒥㒗㒞㒟㒡㒛㒞㒢㒝㒜㒙㒛㒟㒞㒟㒙㒚㒡㒛㒚㒡㒤㒗㒝㒞㒦㒣㒠㒛㒙㒟㒢㒥㒡㒠㒥㒡㒟㒗㒘㒝㒢㒢㒛㒙㒤㒟㒝㒥㒗㒛㒥㒦㒚㒗㒣㒝㒜㒣㒗㒛㒟㒟㒘㒥㒢㒛㒛㒡㒦㒦㒞㒝㒘㒦㒡㒙㒛㒤㒣㒥㒝㒜㒦㒡㒢㒗㒙㒝㒢㒣㒝㒜㒥㒟㒟㒥㒘㒛㒤㒝㒛㒗㒤㒝㒝㒣㒗㒙㒡㒤㒙㒥㒤㒝㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒦㒛㒞㒛㒘㒢㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒚㒢㒢㒡㒜㒗㒥㒝㒞㒤㒘㒙㒣㒟㒚㒥㒤㒛㒟㒙㒗㒗㒡㒜㒙㒣㒦㒟㒜㒟㒗㒥㒟㒛㒘㒡㒣㒟㒛㒝㒦㒛㒞㒙㒚㒥㒠㒥㒜㒛㒣㒡㒝㒗㒗㒥㒟㒣㒚㒡㒢㒟㒠㒝㒥㒛㒠㒡㒘㒗㒡㒝㒜㒛㒤㒙㒟㒗㒦㒥㒡㒠㒙㒡㒤㒙㒜㒝㒥㒣㒠㒢㒘㒟㒢㒗㒛㒛㒤㒡㒞㒗㒙㒝㒠㒣㒚㒙㒥㒘㒜㒥㒗㒤㒟㒡㒜㒣㒢㒝㒜㒥㒥㒙㒞㒟㒙㒟㒡㒛㒞㒘㒤㒗㒝㒝㒦㒣㒡㒛㒙㒟㒢㒥㒝㒦㒥㒡㒟㒢㒘㒝㒡㒣㒛㒙㒥㒡㒝㒥㒗㒛㒢㒝㒚㒗㒦㒤㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒦㒠㒞㒝㒙㒟㒡㒙㒚㒡㒣㒥㒝㒛㒦㒡㒠㒗㒚㒥㒢㒣㒝㒡㒥㒟㒠㒞㒘㒛㒢㒡㒛㒗㒤㒝㒟㒚㒗㒙㒣㒝㒙㒥㒤㒣㒜㒡㒦㒗㒟㒝㒘㒣㒣㒜㒛㒟㒦㒜㒞㒛㒗㒣㒡㒗㒜㒝㒣㒣㒝㒙㒗㒣㒟㒥㒚㒞㒢㒡㒞㒛㒥㒝㒞㒣㒘㒙㒡㒟㒜㒙㒤㒛㒝㒣㒗㒗㒠㒞㒙㒣㒥㒙㒜㒟㒥㒥㒠㒟㒘㒡㒣㒚㒛㒝㒦㒤㒞㒙㒙㒟㒠㒥㒚㒛㒤㒥㒝㒗㒗㒡㒟㒣㒜㒤㒢㒟㒛㒥㒥㒛㒞㒡㒙㒛㒡㒝㒚㒥㒤㒙㒝㒠㒦㒥㒡㒝㒙㒡㒣㒗㒝㒡㒥㒣㒡㒢㒘㒟㒡㒥㒛㒛㒦㒡㒞㒗㒗㒝㒢㒗㒚㒙㒤㒣㒜㒥㒙㒜㒟㒡㒚㒙㒢㒝㒛㒣㒦㒟㒞㒟㒛㒚㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒙㒚㒣㒢㒥㒝㒡㒥㒡㒟㒙㒘㒝㒢㒥㒛㒙㒤㒟㒟㒚㒗㒛㒥㒜㒚㒗㒣㒝㒜㒣㒘㒙㒟㒟㒘㒥㒣㒠㒛㒡㒦㒜㒞㒝㒛㒟㒡㒙㒛㒡㒣㒥㒝㒛㒘㒗㒠㒗㒜㒠㒢㒣㒜㒙㒥㒟㒠㒗㒘㒛㒡㒡㒜㒞㒤㒝㒞㒜㒗㒙㒠㒟㒙㒥㒥㒛㒜㒡㒦㒗㒠㒤㒘㒣㒣㒠㒛㒟㒘㒣㒞㒛㒙㒡㒡㒗㒚㒝㒥㒚㒝㒙㒗㒦㒟㒥㒝㒜㒢㒡㒝㒙㒥㒝㒞㒣㒙㒡㒡㒟㒛㒞㒤㒛㒝㒡㒗㒗㒢㒝㒙㒣㒣㒙㒞㒗㒥㒥㒠㒣㒘㒡㒢㒞㒛㒝㒦㒣㒞㒙㒗㒟㒢㒝㒚㒛㒥㒙㒝㒗㒘㒢㒟㒣㒚㒛㒢㒟㒛㒥㒦㒤㒞㒡㒛㒞㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒛㒛㒣㒗㒜㒝㒥㒣㒟㒙㒘㒟㒣㒗㒛㒛㒤㒡㒟㒢㒗㒝㒤㒚㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒣㒢㒛㒣㒦㒤㒞㒟㒘㒗㒡㒛㒛㒣㒤㒗㒝㒝㒘㒙㒠㒙㒚㒦㒢㒥㒜㒛㒥㒡㒡㒗㒘㒝㒡㒣㒜㒟㒤㒟㒟㒛㒗㒛㒤㒝㒚㒗㒤㒟㒜㒣㒦㒙㒠㒦㒘㒥㒦㒚㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒥㒛㒝㒛㒦㒣㒠㒗㒙㒟㒢㒣㒞㒙㒥㒟㒞㒥㒙㒢㒡㒡㒛㒦㒤㒝㒡㒙㒗㒙㒢㒟㒙㒥㒣㒛㒞㒘㒦㒗㒠㒤㒘㒣㒥㒟㒛㒟㒦㒥㒞㒛㒗㒡㒢㒞㒚㒝㒥㒚㒝㒙㒚㒥㒟㒥㒙㒛㒢㒡㒜㒗㒦㒤㒞㒣㒘㒛㒡㒟㒛㒗㒤㒛㒞㒡㒗㒗㒠㒝㒛㒙㒣㒙㒟㒝㒥㒥㒠㒢㒘㒡㒤㒗㒛㒝㒤㒣㒟㒠㒗㒟㒢㒛㒚㒛㒥㒤㒝㒗㒘㒝㒟㒣㒙㒙㒣㒦㒛㒥㒦㒢㒞㒡㒚㒞㒡㒝㒛㒙㒚㒟㒝㒟㒘㒞㒠㒛㒙㒣㒣㒗㒜㒞㒥㒣㒟㒛㒘㒟㒡㒥㒠㒠㒤㒡㒞㒗㒗㒝㒡㒢㒚㒙㒣㒟㒜㒥㒦㒛㒤㒦㒙㒗㒢㒝㒛㒣㒦㒟㒞㒟㒗㒥㒡㒛㒚㒡㒤㒜㒝㒝㒘㒚㒠㒙㒛㒘㒢㒥㒜㒜㒥㒡㒡㒗㒘㒝㒡㒣㒜㒠㒤㒟㒟㒙㒗㒛㒣㒝㒚㒗㒣㒝㒜㒣㒦㒙㒡㒘㒘㒥㒣㒡㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒥㒟㒝㒛㒗㒦㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒙㒦㒡㒡㒛㒗㒤㒝㒝㒤㒗㒙㒡㒡㒙㒥㒣㒛㒞㒝㒦㒗㒡㒦㒘㒣㒢㒙㒛㒟㒦㒥㒞㒛㒗㒡㒢㒣㒚㒝㒥㒟㒝㒙㒙㒠㒟㒥㒚㒝㒢㒡㒜㒗㒗㒛㒞㒣㒘㒡㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒛㒟㒣㒙㒞㒝㒥㒥㒟㒝㒘㒡㒤㒗㒛㒝㒤㒣㒟㒥㒗㒟㒢㒡㒚㒛㒦㒞㒝㒗㒘㒝㒟㒣㒙㒙㒤㒛㒛㒥㒗㒗㒞㒡㒙㒥㒡㒝㒜㒣㒤㒙㒝㒟㒘㒡㒠㒛㒛㒝㒣㒗㒠㒤㒥㒣㒡㒙㒘㒟㒡㒥㒝㒗㒤㒡㒟㒣㒗㒝㒢㒘㒚㒙㒤㒡㒜㒥㒦㒛㒡㒞㒙㒗㒢㒟㒛㒣㒥㒙㒞㒟㒙㒥㒡㒛㒚㒡㒥㒤㒝㒝㒘㒠㒠㒙㒝㒛㒢㒥㒝㒝㒥㒡㒟㒗㒚㒛㒡㒣㒞㒠㒤㒟㒝㒥㒗㒛㒡㒣㒚㒗㒣㒝㒞㒢㒦㒙㒠㒚㒘㒥㒢㒛㒛㒡㒦㒙㒞㒝㒗㒣㒣㒙㒚㒟㒗㒜㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒗㒜㒞㒥㒚㒛㒡㒡㒛㒙㒤㒝㒝㒣㒗㒙㒠㒟㒛㒡㒣㒛㒞㒝㒦㒗㒡㒚㒘㒣㒣㒙㒛㒟㒤㒥㒟㒦㒗㒡㒣㒥㒚㒝㒥㒟㒝㒙㒦㒟㒟㒥㒙㒛㒤㒘㒜㒗㒗㒘㒞㒣㒘㒛㒡㒟㒜㒥㒤㒛㒝㒡㒘㒟㒠㒝㒛㒚㒣㒙㒞㒣㒥㒥㒟㒛㒘㒡㒢㒗㒜㒥㒤㒣㒞㒛㒗㒟㒠㒦㒚㒛㒥㒡㒝㒗㒦㒝㒡㒛㒙㒙㒣㒦㒛㒥㒗㒜㒞㒡㒚㒗㒡㒝㒚㒣㒥㒡㒝㒟㒘㒝㒠㒛㒝㒜㒣㒗㒜㒝㒥㒣㒟㒙㒚㒗㒡㒥㒛㒝㒤㒡㒞㒘㒗㒝㒡㒥㒚㒙㒣㒟㒞㒝㒦㒛㒢㒚㒙㒗㒢㒝㒛㒣㒗㒙㒞㒟㒗㒥㒢㒣㒚㒡㒥㒟㒝㒝㒙㒤㒠㒙㒚㒡㒢㒥㒜㒛㒗㒛㒟㒗㒛㒢㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒠㒡㒛㒟㒣㒝㒞㒝㒦㒙㒟㒡㒘㒥㒣㒝㒛㒡㒥㒗㒟㒦㒗㒣㒥㒤㒚㒟㒣㒥㒝㒛㒘㒡㒠㒗㒙㒝㒤㒜㒜㒙㒗㒘㒞㒥㒜㒗㒡㒡㒜㒙㒤㒝㒝㒣㒘㒣㒠㒟㒜㒝㒣㒛㒜㒡㒦㒗㒠㒟㒘㒣㒢㒙㒝㒚㒤㒥㒞㒤㒗㒡㒡㒗㒚㒝㒥㒣㒝㒙㒦㒟㒡㒠㒙㒛㒤㒜㒜㒗㒙㒛㒞㒣㒚㒙㒡㒟㒚㒥㒥㒦㒝㒡㒘㒢㒠㒝㒝㒤㒣㒙㒝㒡㒥㒥㒟㒛㒚㒝㒢㒗㒛㒦㒤㒣㒞㒙㒗㒟㒢㒥㒚㒛㒣㒡㒞㒣㒦㒝㒡㒟㒙㒙㒢㒦㒛㒥㒗㒛㒞㒡㒘㒗㒣㒙㒚㒣㒥㒥㒝㒟㒙㒚㒠㒛㒚㒣㒣㒗㒜㒝㒗㒠㒟㒙㒛㒦㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒣㒜㒗㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒣㒟㒛㒣㒥㒙㒠㒞㒗㒥㒤㒢㒚㒡㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒤㒞㒜㒛㒗㒠㒟㒗㒘㒟㒡㒣㒜㒛㒤㒟㒝㒥㒘㒥㒠㒡㒛㒞㒣㒝㒜㒣㒦㒙㒡㒟㒘㒥㒢㒛㒝㒛㒥㒗㒠㒗㒗㒣㒤㒥㒚㒟㒥㒗㒝㒛㒦㒡㒡㒢㒙㒝㒦㒢㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒦㒗㒝㒣㒗㒛㒠㒟㒚㒗㒣㒛㒞㒡㒦㒗㒟㒝㒚㒞㒢㒙㒜㒞㒤㒥㒡㒡㒗㒡㒣㒗㒚㒝㒣㒣㒞㒤㒦㒟㒡㒠㒙㒛㒦㒗㒜㒗㒗㒝㒞㒣㒘㒙㒣㒚㒚㒥㒥㒦㒝㒡㒛㒝㒠㒝㒙㒣㒣㒙㒜㒟㒗㒠㒟㒛㒘㒣㒢㒗㒛㒟㒤㒣㒟㒙㒗㒟㒠㒥㒛㒥㒣㒡㒟㒥㒦㒝㒡㒞㒙㒙㒤㒟㒛㒥㒥㒛㒠㒜㒘㒗㒣㒗㒚㒣㒦㒜㒝㒟㒘㒥㒠㒛㒙㒡㒤㒢㒜㒝㒗㒞㒟㒙㒚㒦㒡㒥㒛㒡㒛㒗㒞㒗㒙㒚㒠㒣㒚㒜㒣㒟㒜㒦㒦㒛㒟㒣㒙㒗㒢㒝㒡㒘㒥㒙㒞㒟㒗㒥㒢㒚㒚㒡㒤㒗㒝㒝㒦㒣㒥㒞㒙㒟㒢㒥㒜㒛㒗㒛㒟㒗㒘㒝㒡㒣㒛㒙㒦㒗㒝㒥㒘㒦㒠㒡㒛㒤㒣㒝㒜㒤㒦㒙㒡㒟㒘㒥㒢㒛㒝㒜㒥㒗㒟㒥㒗㒣㒣㒥㒚㒟㒣㒥㒝㒛㒦㒡㒡㒤㒙㒝㒤㒝㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒦㒛㒝㒣㒘㒢㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒚㒢㒢㒙㒛㒟㒤㒥㒞㒜㒗㒡㒢㒙㒚㒝㒣㒣㒟㒙㒦㒟㒢㒞㒙㒛㒢㒡㒜㒗㒗㒝㒞㒣㒘㒙㒣㒟㒚㒥㒦㒛㒝㒡㒚㒘㒠㒝㒚㒥㒣㒙㒜㒟㒘㒗㒟㒛㒙㒙㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒜㒛㒣㒡㒟㒙㒦㒝㒟㒥㒙㒙㒤㒟㒛㒥㒥㒛㒠㒡㒘㒗㒣㒝㒚㒣㒦㒦㒝㒟㒘㒥㒠㒛㒙㒡㒥㒗㒜㒝㒗㒣㒟㒙㒚㒝㒡㒥㒝㒛㒤㒡㒞㒗㒙㒝㒠㒣㒜㒙㒣㒟㒡㒜㒦㒛㒡㒡㒙㒗㒢㒝㒝㒣㒥㒙㒠㒟㒗㒥㒢㒠㒚㒡㒥㒙㒝㒝㒦㒣㒢㒚㒙㒟㒣㒗㒜㒛㒥㒡㒟㒗㒚㒝㒡㒣㒛㒙㒦㒠㒝㒥㒙㒜㒠㒡㒝㒣㒣㒝㒝㒥㒦㒙㒟㒟㒛㒗㒢㒛㒟㒘㒥㒗㒞㒝㒗㒣㒢㒛㒚㒟㒣㒥㒟㒞㒦㒡㒢㒢㒙㒝㒢㒣㒜㒙㒦㒡㒞㒥㒘㒛㒣㒥㒛㒗㒗㒤㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒘㒘㒟㒝㒛㒗㒢㒙㒛㒡㒤㒥㒞㒛㒗㒡㒡㒗㒜㒝㒣㒣㒟㒙㒦㒟㒡㒦㒙㒛㒣㒡㒜㒗㒥㒝㒠㒢㒘㒙㒤㒝㒚㒥㒦㒛㒝㒡㒗㒗㒠㒝㒙㒣㒤㒤㒜㒟㒗㒤㒟㒛㒘㒣㒢㒗㒝㒝㒤㒣㒞㒙㒙㒛㒠㒥㒛㒦㒣㒡㒟㒛㒦㒝㒟㒣㒙㒙㒢㒟㒝㒡㒥㒛㒞㒣㒘㒗㒡㒞㒚㒣㒦㒙㒝㒟㒦㒥㒢㒗㒙㒡㒤㒢㒜㒝㒗㒤㒟㒙㒚㒟㒡㒥㒛㒛㒦㒝㒞㒗㒙㒙㒠㒣㒝㒤㒣㒟㒜㒥㒦㒛㒟㒡㒚㒣㒢㒝㒛㒥㒥㒙㒞㒠㒗㒥㒣㒛㒚㒡㒤㒗㒟㒙㒦㒣㒡㒘㒙㒟㒦㒛㒜㒛㒗㒡㒟㒗㒘㒝㒣㒟㒛㒙㒦㒛㒝㒥㒚㒡㒠㒡㒜㒗㒣㒝㒜㒣㒗㒥㒟㒟㒚㒡㒢㒛㒠㒙㒥㒗㒡㒝㒗㒣㒡㒙㒜㒛㒣㒥㒠㒟㒦㒡㒤㒠㒙㒝㒣㒥㒜㒙㒥㒟㒠㒡㒘㒛㒣㒚㒛㒗㒤㒝㒝㒣㒘㒛㒠㒟㒙㒥㒥㒘㒜㒡㒗㒟㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒞㒛㒙㒝㒡㒗㒚㒟㒣㒣㒝㒚㒦㒟㒡㒗㒙㒛㒢㒡㒝㒣㒥㒝㒡㒜㒘㒙㒡㒟㒚㒥㒦㒛㒝㒡㒗㒗㒢㒙㒙㒣㒤㒥㒜㒟㒘㒦㒟㒛㒙㒣㒢㒗㒛㒝㒦㒡㒞㒙㒙㒥㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒚㒥㒢㒟㒝㒣㒥㒛㒞㒣㒘㒗㒣㒝㒚㒣㒤㒙㒟㒛㒦㒥㒢㒗㒙㒡㒥㒙㒜㒝㒗㒣㒟㒙㒘㒟㒣㒡㒛㒛㒦㒝㒞㒗㒛㒠㒠㒣㒜㒙㒣㒟㒜㒥㒘㒗㒟㒡㒚㒣㒢㒝㒝㒟㒥㒙㒞㒟㒗㒥㒡㒛㒜㒝㒤㒗㒝㒟㒦㒣㒠㒚㒙㒟㒤㒗㒜㒛㒥㒡㒠㒣㒘㒝㒣㒜㒛㒙㒤㒟㒝㒥㒘㒝㒠㒡㒚㒗㒥㒚㒜㒣㒗㒡㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒙㒟㒡㒙㒚㒡㒣㒥㒝㒜㒦㒡㒢㒗㒙㒝㒢㒣㒝㒥㒥㒟㒟㒤㒘㒛㒥㒗㒛㒗㒦㒝㒝㒣㒗㒙㒢㒛㒙㒥㒥㒗㒜㒡㒙㒝㒟㒝㒚㒣㒢㒙㒛㒟㒦㒡㒞㒛㒙㒝㒡㒗㒞㒥㒣㒣㒠㒙㒦㒟㒟㒥㒛㒗㒢㒡㒟㒛㒥㒝㒠㒙㒘㒙㒡㒟㒚㒥㒤㒛㒞㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒦㒥㒘㒡㒢㒥㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒡㒘㒝㒝㒗㒗㒘㒟㒣㒥㒦㒢㒟㒛㒦㒥㒛㒞㒣㒘㒗㒡㒡㒤㒣㒤㒙㒝㒟㒦㒥㒝㒘㒙㒡㒣㒘㒜㒝㒦㒙㒣㒥㒘㒟㒢㒛㒛㒛㒗㒜㒞㒗㒗㒞㒠㒣㒚㒛㒣㒟㒝㒙㒠㒛㒟㒡㒙㒗㒢㒝㒞㒞㒥㒙㒞㒠㒗㒥㒡㒛㒢㒛㒤㒗㒝㒡㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒦㒗㒣㒣㒘㒝㒡㒤㒛㒙㒥㒦㒝㒥㒗㒜㒠㒡㒚㒙㒣㒝㒝㒗㒠㒙㒟㒟㒘㒥㒢㒛㒝㒘㒥㒗㒞㒞㒗㒣㒡㒝㒤㒟㒣㒥㒝㒛㒦㒡㒜㒞㒙㒞㒢㒤㒜㒙㒦㒡㒤㒘㒘㒛㒡㒡㒛㒗㒦㒦㒝㒣㒗㒙㒠㒟㒛㒥㒥㒢㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒠㒛㒤㒥㒠㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒦㒙㒛㒤㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒗㒛㒝㒡㒙㒗㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒙㒤㒢㒗㒝㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒡㒦㒝㒢㒙㒙㒙㒢㒟㒛㒥㒥㒛㒙㒚㒘㒘㒡㒞㒚㒣㒥㒟㒝㒟㒗㒙㒚㒛㒙㒡㒣㒗㒜㒝㒠㒜㒟㒚㒘㒠㒡㒥㒛㒟㒞㒡㒞㒗㒗㒝㒠㒣㒦㒠㒣㒠㒜㒦㒦㒛㒠㒣㒞㒚㒢㒝㒛㒣㒥㒙㒡㒘㒗㒥㒡㒛㒚㒡㒦㒗㒢㒜㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒘㒢㒟㒗㒙㒟㒡㒣㒛㒙㒤㒡㒝㒥㒙㒡㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒣㒥㒗㒞㒟㒗㒣㒣㒙㒚㒟㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒦㒥㒜㒙㒗㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒝㒝㒣㒗㒜㒠㒟㒛㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒝㒛㒤㒥㒟㒝㒗㒡㒡㒗㒚㒟㒣㒣㒟㒢㒦㒟㒟㒥㒙㒛㒤㒡㒜㒗㒥㒝㒞㒥㒘㒙㒡㒡㒚㒥㒗㒜㒝㒡㒘㒙㒠㒝㒙㒣㒣㒝㒜㒟㒚㒡㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒡㒠㒥㒚㒟㒣㒡㒝㒙㒦㒝㒡㒣㒙㒙㒢㒟㒜㒗㒥㒛㒞㒣㒘㒗㒢㒞㒚㒣㒦㒙㒝㒟㒦㒥㒠㒝㒙㒡㒣㒙㒜㒝㒘㒥㒟㒙㒚㒟㒡㒥㒛㒛㒤㒣㒞㒗㒗㒟㒠㒣㒛㒛㒣㒟㒞㒥㒦㒛㒟㒡㒙㒙㒢㒝㒛㒥㒥㒙㒡㒝㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒛㒙㒟㒢㒦㒜㒛㒦㒣㒟㒗㒘㒝㒡㒣㒛㒙㒦㒘㒝㒥㒗㒛㒠㒡㒛㒙㒣㒝㒜㒣㒦㒚㒟㒟㒙㒛㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒚㒟㒣㒥㒝㒝㒦㒡㒠㒘㒙㒝㒣㒥㒜㒙㒥㒟㒞㒥㒘㒛㒤㒚㒛㒗㒤㒝㒝㒣㒙㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒛㒤㒢㒙㒜㒡㒤㒥㒞㒛㒗㒣㒡㒗㒜㒣㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒥㒘㒙㒡㒡㒚㒥㒦㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒚㒗㒟㒛㒚㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒛㒘㒣㒡㒟㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒠㒝㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒝㒙㒡㒣㒘㒜㒝㒦㒥㒤㒜㒘㒟㒡㒥㒛㒛㒦㒚㒞㒗㒗㒝㒠㒣㒛㒛㒝㒝㒜㒥㒦㒜㒟㒡㒙㒝㒢㒝㒛㒣㒥㒙㒞㒟㒟㒤㒡㒛㒚㒡㒤㒗㒝㒟㒦㒣㒠㒚㒙㒟㒢㒥㒦㒚㒥㒡㒟㒗㒘㒝㒡㒤㒛㒙㒤㒟㒝㒥㒗㒡㒠㒡㒚㒗㒣㒝㒗㒞㒦㒟㒟㒟㒘㒥㒢㒛㒢㒣㒛㒘㒥㒡㒞㒜㒘㒗㒠㒦㒤㒘㒝㒦㒦㒡㒠㒗㒙㒝㒙㒢㒢㒡㒛㒠㒦㒚㒟㒟㒘㒠㒡㒝㒚㒞㒤㒥㒝㒦㒣㒡㒡㒦㒣㒝㒜㒡㒦㒗㒟㒝㒞㒢㒦㒠㒣㒠㒥㒙㒞㒛㒗㒡㒡㒗㒡㒤㒙㒤㒣㒢㒝㒣㒚㒟㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒞㒦㒝㒦㒗㒗㒠㒝㒙㒣㒚㒙㒢㒢㒛㒦㒦㒗㒟㒝㒣㒞㒛㒝㒤㒣㒞㒙㒘㒡㒦㒘㒚㒛㒣㒢㒝㒗㒦㒠㒟㒣㒙㒙㒢㒟㒜㒛㒛㒝㒞㒡㒘㒗㒡㒝㒛㒚㒤㒙㒝㒠㒦㒥㒠㒛㒙㒡㒣㒛㒦㒝㒥㒣㒟㒙㒘㒟㒢㒜㒛㒛㒤㒢㒞㒗㒗㒝㒦㒙㒚㒙㒣㒡㒜㒥㒦㒜㒟㒡㒙㒗㒢㒝㒜㒙㒛㒛㒞㒟㒘㒗㒡㒛㒛㒘㒤㒗㒝㒞㒦㒣㒠㒙㒙㒟㒣㒙㒦㒛㒥㒡㒟㒗㒘㒝㒢㒚㒛㒙㒤㒠㒝㒥㒗㒟㒚㒡㒚㒗㒣㒝㒜㒣㒦㒡㒟㒟㒘㒦㒢㒛㒛㒡㒚㒝㒞㒝㒗㒥㒡㒙㒚㒟㒣㒥㒝㒛㒦㒡㒡㒗㒛㒙㒢㒣㒜㒚㒥㒟㒟㒗㒘㒛㒡㒣㒛㒗㒥㒟㒢㒦㒗㒙㒠㒠㒙㒥㒣㒞㒜㒡㒦㒗㒟㒝㒛㒣㒘㒠㒛㒟㒤㒦㒞㒛㒗㒢㒡㒗㒚㒢㒣㒣㒞㒛㒛㒢㒟㒥㒙㒜㒢㒡㒜㒚㒥㒝㒞㒣㒘㒙㒣㒟㒡㒥㒤㒛㒝㒢㒗㒗㒠㒞㒙㒣㒣㒛㒜㒟㒦㒛㒠㒛㒘㒡㒢㒘㒛㒝㒥㒣㒞㒙㒗㒠㒠㒥㒚㒜㒣㒡㒝㒛㒠㒝㒟㒣㒙㒙㒢㒟㒜㒥㒥㒛㒞㒢㒘㒗㒡㒡㒤㒣㒤㒙㒝㒟㒦㒥㒡㒡㒙㒡㒣㒘㒜㒝㒦㒥㒤㒜㒘㒟㒡㒦㒛㒛㒤㒥㒞㒗㒗㒝㒠㒣㒚㒙㒣㒥㒜㒥㒦㒜㒟㒡㒙㒘㒢㒝㒛㒤㒥㒙㒟㒡㒝㒘㒡㒛㒚㒢㒤㒗㒝㒣㒦㒣㒠㒙㒙㒟㒣㒗㒠㒛㒥㒡㒟㒙㒘㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒘㒠㒚㒗㒣㒞㒜㒣㒦㒛㒟㒟㒘㒦㒢㒛㒛㒥㒟㒗㒞㒝㒗㒣㒡㒙㒛㒚㒣㒥㒝㒜㒦㒡㒠㒗㒣㒜㒢㒣㒜㒙㒥㒟㒞㒦㒘㒛㒡㒡㒛㒗㒤㒟㒝㒣㒗㒙㒠㒟㒙㒥㒤㒛㒜㒡㒦㒗㒟㒝㒞㒚㒢㒢㒛㒟㒤㒥㒞㒛㒝㒘㒗㒦㒡㒟㒚㒞㒤㒜㒝㒟㒥㒦㒟㒞㒘㒦㒜㒚㒥㒥㒞㒣㒘㒙㒡㒟㒢㒙㒛㒚㒤㒤㒞㒛㒗㒟㒠㒜㒚㒗㒢㒦㒛㒜㒟㒠㒘㒡㒢㒗㒛㒝㒙㒥㒤㒚㒝㒢㒗㒚㒡㒞㒛㒢㒝㒡㒦㒝㒟㒣㒙㒙㒦㒦㒢㒚㒜㒟㒣㒤㒞㒜㒘㒟㒢㒙㒚㒢㒣㒢㒝㒚㒘㒜㒙㒥㒣㒗㒜㒝㒥㒣㒤㒝㒞㒤㒙㒝㒢㒟㒚㒘㒞㒛㒗㒝㒠㒣㒚㒙㒘㒝㒢㒦㒝㒘㒥㒦㒛㒤㒢㒡㒛㒣㒥㒙㒞㒟㒞㒛㒗㒤㒡㒟㒚㒛㒚㒢㒗㒜㒠㒙㒙㒟㒢㒥㒠㒞㒜㒝㒥㒘㒟㒠㒘㒦㒠㒗㒚㒠㒤㒢㒝㒠㒦㒘㒚㒝㒣㒝㒜㒣㒦㒙㒣㒥㒟㒤㒙㒗㒡㒥㒛㒜㒥㒟㒥㒘㒡㒝㒚㒟㒣㒥㒝㒛㒞㒘㒦㒘㒟㒦㒚㒗㒦㒤㒥㒡㒞㒥㒘㒛㒡㒡㒠㒦㒘㒤㒥㒤㒗㒝㒠㒟㒙㒥㒣㒛㒣㒘㒜㒘㒦㒚㒟㒘㒚㒚㒛㒥㒤㒥㒞㒛㒗㒡㒘㒚㒡㒡㒚㒥㒣㒢㒝㒝㒦㒜㒙㒞㒣㒙㒜㒗㒥㒝㒞㒣㒟㒠㒘㒗㒠㒦㒛㒟㒣㒦㒞㒝㒦㒢㒠㒥㒘㒠㒝㒚㒥㒥㒟㒛㒘㒡㒦㒞㒡㒢㒜㒗㒢㒜㒞㒗㒗㒞㒡㒗㒙㒥㒤㒙㒜㒢㒦㒡㒞㒠㒢㒤㒛㒥㒥㒛㒞㒡㒟㒗㒗㒞㒡㒜㒛㒛㒤㒢㒙㒗㒠㒛㒙㒡㒣㒗㒜㒣㒦㒣㒟㒙㒘㒠㒡㒥㒛㒞㒤㒡㒞㒘㒗㒝㒠㒤㒚㒙㒣㒣㒦㒥㒦㒛㒟㒡㒙㒗㒢㒠㒛㒣㒥㒚㒞㒟㒘㒙㒛㒛㒚㒡㒤㒗㒝㒝㒘㒤㒠㒙㒙㒠㒢㒥㒝㒝㒚㒤㒟㒗㒘㒟㒡㒣㒜㒙㒤㒟㒝㒥㒗㒛㒡㒣㒣㒤㒣㒝㒜㒦㒦㒙㒠㒛㒘㒥㒢㒛㒛㒡㒗㒗㒞㒝㒗㒣㒡㒜㒚㒟㒤㒘㒝㒛㒦㒥㒠㒗㒚㒟㒢㒣㒜㒙㒥㒤㒞㒥㒘㒜㒡㒡㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒚㒘㒣㒛㒜㒦㒦㒗㒟㒟㒘㒣㒤㒙㒛㒟㒤㒥㒞㒞㒗㒡㒡㒚㒚㒝㒣㒦㒝㒙㒘㒟㒟㒥㒙㒛㒢㒤㒜㒗㒥㒠㒞㒣㒙㒘㒡㒟㒚㒥㒤㒛㒝㒡㒗㒚㒠㒝㒚㒗㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒛㒟㒤㒣㒞㒙㒗㒟㒡㒙㒚㒛㒣㒥㒝㒗㒦㒝㒟㒣㒙㒙㒤㒞㒛㒥㒥㒜㒞㒡㒚㒗㒘㒝㒚㒣㒤㒠㒝㒟㒗㒛㒠㒛㒚㒙㒣㒗㒞㒣㒜㒡㒟㒙㒘㒦㒡㒥㒝㒚㒤㒡㒞㒘㒗㒝㒡㒜㒚㒙㒣㒣㒦㒥㒦㒛㒟㒡㒙㒗㒤㒜㒛㒣㒥㒚㒞㒟㒙㒗㒦㒞㒚㒡㒤㒞㒝㒝㒗㒠㒠㒙㒙㒟㒢㒥㒞㒛㒙㒛㒟㒗㒘㒤㒡㒣㒛㒠㒤㒟㒞㒜㒗㒛㒢㒡㒚㒗㒣㒝㒝㒛㒦㒙㒟㒥㒘㒥㒢㒡㒛㒡㒦㒙㒞㒝㒗㒣㒡㒢㒚㒟㒤㒗㒝㒛㒦㒡㒠㒗㒛㒝㒢㒣㒜㒙㒦㒙㒞㒥㒘㒛㒡㒡㒛㒜㒤㒝㒝㒣㒗㒙㒠㒟㒚㒞㒣㒛㒝㒛㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒞㒢㒗㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒥㒟㒥㒙㒛㒣㒘㒜㒗㒗㒗㒞㒣㒘㒚㒡㒟㒚㒦㒤㒛㒝㒥㒡㒗㒠㒝㒙㒣㒣㒙㒞㒙㒥㒥㒟㒜㒘㒡㒢㒛㒥㒝㒤㒣㒞㒙㒗㒟㒢㒤㒚㒛㒣㒢㒝㒗㒗㒟㒤㒦㒙㒙㒢㒦㒛㒥㒥㒥㒞㒡㒘㒗㒡㒝㒚㒣㒤㒟㒝㒟㒗㒜㒠㒛㒙㒢㒣㒗㒜㒞㒥㒣㒠㒛㒝㒢㒡㒥㒛㒢㒤㒡㒞㒢㒗㒝㒠㒣㒚㒙㒥㒟㒣㒥㒦㒛㒠㒙㒙㒗㒢㒣㒛㒣㒥㒟㒞㒟㒘㒥㒣㒗㒚㒡㒤㒞㒝㒝㒗㒡㒠㒙㒚㒗㒢㒥㒜㒡㒚㒝㒟㒗㒘㒟㒡㒣㒛㒦㒤㒟㒝㒦㒗㒛㒠㒣㒚㒗㒣㒡㒦㒣㒦㒙㒟㒟㒘㒥㒣㒘㒛㒡㒥㒘㒞㒝㒗㒣㒛㒘㒚㒟㒣㒥㒝㒛㒦㒢㒠㒗㒙㒝㒢㒣㒜㒛㒥㒟㒞㒥㒘㒛㒡㒡㒛㒛㒤㒝㒝㒣㒗㒙㒥㒦㒚㒗㒣㒛㒜㒡㒦㒗㒥㒜㒝㒚㒢㒜㒜㒗㒤㒥㒞㒛㒗㒡㒘㒛㒡㒜㒚㒡㒤㒞㒝㒜㒦㒗㒟㒠㒙㒣㒦㒢㒥㒡㒞㒣㒘㒙㒡㒟㒡㒡㒚㒜㒤㒡㒞㒚㒛㒘㒚㒗㒣㒙㒜㒟㒥㒥㒤㒟㒞㒦㒙㒟㒢㒡㒥㒛㒞㒙㒗㒟㒠㒥㒚㒡㒙㒣㒝㒗㒦㒞㒟㒣㒙㒠㒢㒟㒛㒦㒥㒛㒞㒡㒘㒗㒡㒡㒤㒣㒤㒙㒝㒟㒦㒥㒠㒢㒙㒡㒣㒘㒜㒝㒦㒥㒤㒜㒘㒟㒢㒗㒛㒛㒤㒢㒞㒗㒗㒝㒠㒣㒛㒛㒘㒢㒜㒥㒦㒞㒟㒡㒙㒙㒢㒝㒛㒣㒥㒙㒠㒟㒞㒥㒡㒛㒚㒥㒤㒗㒝㒝㒦㒣㒠㒝㒙㒟㒢㒥㒢㒗㒥㒡㒟㒚㒘㒝㒡㒥㒛㒙㒤㒡㒝㒥㒘㒛㒢㒝㒚㒗㒣㒟㒜㒣㒦㒜㒟㒟㒙㒘㒢㒛㒛㒡㒞㒦㒞㒝㒗㒣㒡㒙㒚㒠㒣㒥㒝㒛㒦㒡㒠㒙㒙㒞㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒢㒜㒡㒦㒗㒟㒝㒘㒣㒤㒢㒛㒟㒤㒥㒞㒛㒗㒢㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒛㒝㒤㒦㒞㒙㒗㒟㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒡㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒘㒟㒡㒦㒛㒛㒤㒡㒞㒗㒗㒟㒠㒣㒚㒙㒣㒟㒝㒘㒦㒠㒟㒡㒙㒗㒢㒝㒢㒣㒛㒜㒤㒠㒞㒡㒘㒗㒥㒛㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒠㒥㒘㒝㒡㒣㒛㒙㒥㒡㒗㒣㒗㒛㒠㒣㒚㒗㒣㒟㒜㒣㒦㒙㒟㒟㒚㒗㒜㒙㒛㒡㒥㒚㒞㒝㒗㒥㒡㒙㒚㒟㒣㒥㒞㒝㒛㒤㒠㒗㒙㒡㒢㒣㒜㒚㒥㒟㒞㒥㒘㒛㒢㒗㒡㒝㒤㒝㒞㒘㒗㒙㒠㒟㒙㒥㒣㒜㒜㒡㒦㒛㒟㒝㒘㒣㒗㒞㒛㒟㒤㒥㒞㒛㒗㒣㒡㒗㒚㒝㒣㒣㒝㒙㒛㒤㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒠㒚㒤㒛㒝㒡㒗㒗㒠㒠㒙㒣㒣㒙㒜㒟㒥㒥㒤㒠㒘㒡㒢㒗㒛㒝㒤㒤㒞㒙㒗㒟㒠㒥㒚㒛㒛㒠㒝㒗㒦㒡㒟㒣㒙㒛㒢㒟㒛㒦㒥㒛㒟㒗㒟㒠㒡㒝㒚㒣㒤㒙㒞㒛㒦㒥㒠㒜㒙㒡㒣㒘㒜㒝㒦㒗㒙㒙㒘㒟㒡㒥㒛㒛㒥㒝㒞㒗㒗㒞㒠㒣㒚㒝㒝㒟㒜㒥㒦㒛㒟㒡㒚㒡㒢㒝㒛㒤㒥㒙㒞㒥㒟㒞㒡㒛㒚㒡㒤㒗㒞㒜㒦㒣㒠㒚㒙㒟㒢㒦㒜㒛㒥㒥㒙㒗㒘㒝㒡㒣㒛㒙㒥㒞㒝㒥㒗㒜㒠㒡㒚㒛㒝㒝㒜㒣㒦㒙㒟㒟㒚㒟㒢㒛㒛㒢㒥㒗㒞㒣㒜㒡㒡㒙㒚㒠㒣㒥㒞㒥㒦㒡㒠㒘㒙㒝㒢㒣㒜㒙㒥㒣㒘㒥㒘㒛㒡㒡㒛㒗㒦㒗㒝㒣㒗㒚㒠㒟㒙㒥㒣㒣㒜㒡㒦㒛㒟㒝㒘㒥㒢㒙㒛㒢㒤㒥㒞㒛㒘㒙㒡㒗㒚㒢㒣㒣㒝㒜㒦㒟㒠㒗㒙㒛㒣㒗㒠㒥㒥㒝㒟㒗㒘㒙㒣㒙㒚㒥㒤㒜㒝㒡㒗㒜㒠㒝㒚㒗㒝㒙㒜㒟㒥㒥㒟㒛㒚㒛㒢㒗㒛㒞㒤㒣㒞㒙㒘㒗㒠㒥㒚㒟㒣㒡㒝㒙㒦㒝㒟㒦㒙㒙㒢㒟㒜㒝㒥㒛㒞㒦㒘㒗㒡㒠㒚㒣㒤㒛㒝㒟㒗㒛㒥㒙㒙㒡㒣㒛㒜㒝㒗㒝㒟㒙㒘㒠㒡㒥㒛㒠㒤㒡㒞㒛㒡㒝㒠㒣㒚㒙㒣㒟㒞㒟㒦㒛㒟㒢㒙㒗㒢㒡㒥㒣㒥㒙㒞㒟㒗㒥㒢㒦㒚㒡㒤㒘㒝㒝㒦㒣㒢㒦㒙㒟㒣㒙㒜㒛㒥㒡㒟㒗㒘㒝㒡㒣㒛㒙㒙㒥㒝㒥㒗㒟㒠㒡㒚㒘㒣㒝㒜㒣㒦㒙㒟㒟㒛㒚㒢㒛㒛㒥㒥㒗㒞㒟㒗㒣㒡㒙㒚㒟㒣㒥㒗㒚㒦㒡㒠㒗㒙㒝㒢㒤㒜㒙㒥㒟㒞㒥㒘㒞㒡㒡㒛㒗㒤㒝㒝㒣㒗㒡㒠㒟㒙㒥㒣㒛㒤㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒝㒛㒛㒠㒛㒢㒚㒡㒣㒣㒝㒙㒦㒟㒦㒘㒟㒣㒘㒢㒣㒙㒥㒟㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒞㒗㒤㒝㒟㒚㒣㒥㒜㒟㒥㒥㒟㒛㒝㒦㒙㒝㒟㒦㒛㒜㒥㒣㒝㒤㒥㒗㒟㒚㒗㒦㒡㒙㒝㒗㒦㒟㒡㒚㒢㒢㒛㒥㒥㒛㒞㒡㒟㒚㒘㒢㒠㒥㒞㒤㒝㒥㒦㒥㒠㒛㒙㒡㒚㒚㒣㒡㒜㒥㒥㒢㒟㒝㒘㒜㒠㒢㒤㒡㒞㒗㒗㒝㒠㒣㒤㒤㒣㒣㒜㒥㒦㒛㒟㒡㒟㒙㒙㒦㒣㒗㒛㒞㒠㒠㒗㒥㒡㒛㒚㒡㒥㒙㒢㒠㒦㒣㒠㒜㒙㒟㒣㒙㒜㒛㒥㒡㒟㒗㒘㒝㒦㒝㒛㒙㒤㒢㒝㒥㒗㒞㒠㒡㒚㒘㒣㒝㒝㒙㒜㒛㒟㒟㒙㒘㒢㒛㒜㒘㒥㒗㒞㒞㒗㒣㒡㒙㒚㒟㒤㒙㒗㒛㒦㒡㒠㒗㒙㒝㒣㒚㒜㒙㒥㒠㒞㒥㒙㒝㒦㒤㒛㒗㒤㒠㒝㒣㒗㒝㒠㒟㒙㒥㒣㒛㒜㒡㒚㒡㒟㒝㒘㒦㒢㒙㒛㒢㒤㒥㒞㒜㒗㒡㒡㒗㒜㒢㒣㒣㒝㒜㒦㒟㒠㒗㒙㒛㒢㒡㒜㒗㒦㒟㒘㒡㒘㒙㒡㒢㒚㒥㒤㒜㒝㒡㒗㒗㒠㒝㒚㒥㒛㒠㒜㒟㒦㒙㒟㒛㒙㒘㒢㒗㒛㒝㒤㒣㒟㒛㒗㒟㒠㒥㒚㒠㒣㒡㒝㒘㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒟㒗㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒘㒗㒠㒛㒙㒡㒣㒞㒜㒝㒥㒤㒟㒙㒘㒟㒡㒥㒛㒟㒤㒡㒞㒗㒗㒢㒠㒣㒛㒦㒣㒟㒜㒦㒦㒛㒟㒡㒢㒡㒢㒝㒜㒜㒥㒙㒞㒣㒗㒥㒡㒛㒚㒡㒥㒙㒦㒢㒦㒣㒠㒣㒙㒟㒣㒛㒜㒛㒥㒡㒟㒗㒚㒝㒡㒣㒛㒙㒥㒙㒝㒥㒗㒥㒠㒡㒚㒙㒣㒝㒞㒣㒦㒙㒟㒟㒙㒠㒢㒛㒛㒡㒥㒗㒞㒢㒗㒣㒡㒙㒚㒟㒣㒥㒞㒘㒦㒡㒠㒟㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒢㒟㒛㒗㒤㒥㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒢㒟㒝㒙㒡㒢㒙㒛㒡㒤㒥㒠㒛㒗㒡㒡㒗㒛㒘㒣㒣㒝㒤㒦㒟㒠㒝㒙㒛㒢㒡㒜㒗㒥㒝㒟㒞㒘㒙㒡㒡㒚㒥㒤㒝㒝㒡㒗㒗㒠㒝㒙㒣㒣㒤㒜㒟㒦㒠㒟㒛㒘㒤㒢㒗㒝㒝㒤㒣㒞㒙㒘㒚㒠㒥㒚㒦㒣㒡㒝㒚㒦㒝㒟㒣㒙㒙㒢㒟㒜㒟㒥㒛㒞㒣㒘㒗㒡㒟㒚㒣㒤㒙㒝㒟㒦㒥㒠㒟㒙㒡㒣㒠㒜㒝㒦㒝㒟㒙㒘㒟㒡㒥㒛㒛㒥㒚㒞㒗㒗㒠㒠㒣㒚㒛㒣㒟㒞㒥㒦㒛㒟㒡㒙㒚㒢㒝㒜㒜㒥㒙㒞㒢㒗㒥㒡㒟㒣㒛㒤㒗㒝㒢㒦㒣㒠㒦㒙㒟㒢㒦㒜㒛㒦㒣㒤㒚㒘㒝㒢㒘㒛㒙㒤㒣㒝㒥㒗㒛㒠㒡㒚㒗㒚㒗㒜㒣㒦㒞㒟㒟㒘㒦㒢㒛㒛㒥㒥㒗㒞㒝㒚㒘㒡㒙㒚㒣㒣㒥㒝㒝㒦㒡㒠㒗㒙㒝㒢㒣㒦㒘㒥㒟㒞㒥㒘㒛㒡㒢㒛㒗㒤㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒠㒤㒥㒞㒛㒗㒡㒡㒗㒤㒜㒣㒣㒝㒙㒦㒟㒟㒦㒙㒛㒢㒡㒜㒗㒥㒞㒞㒤㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒦㒙㒜㒟㒥㒥㒟㒛㒛㒞㒢㒙㒛㒝㒤㒣㒞㒙㒝㒞㒥㒜㒝㒘㒣㒥㒝㒗㒦㒝㒟㒣㒞㒗㒘㒠㒢㒢㒛㒠㒡㒞㒘㒝㒡㒝㒚㒣㒤㒙㒣㒥㒝㒞㒗㒙㒠㒚㒚㒚㒢㒥㒣㒘㒟㒦㒘㒟㒡㒥㒛㒛㒙㒥㒤㒦㒞㒢㒦㒦㒠㒡㒘㒘㒣㒣㒝㒟㒥㒦㒠㒙㒘㒢㒢㒦㒜㒝㒙㒚㒘㒞㒡㒛㒚㒡㒤㒗㒢㒡㒝㒜㒦㒦㒟㒤㒘㒙㒣㒝㒜㒚㒥㒘㒟㒙㒤㒠㒛㒞㒤㒟㒝㒥㒗㒛㒦㒗㒠㒘㒚㒙㒤㒘㒜㒞㒜㒤㒙㒛㒢㒛㒛㒡㒥㒗㒣㒝㒞㒟㒗㒚㒢㒘㒚㒚㒤㒝㒜㒘㒠㒛㒙㒝㒢㒣㒜㒙㒜㒡㒤㒦㒞㒞㒗㒦㒛㒚㒤㒦㒝㒣㒗㒙㒠㒟㒟㒜㒚㒚㒣㒣㒜㒢㒦㒠㒟㒣㒘㒚㒡㒢㒛㒚㒛㒠㒗㒥㒡㒗㒚㒝㒣㒣㒢㒛㒜㒠㒦㒘㒟㒠㒝㒜㒜㒛㒥㒝㒞㒣㒘㒙㒗㒦㒠㒦㒛㒘㒣㒦㒜㒝㒠㒝㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒗㒡㒥㒦㒣㒞㒥㒜㒞㒙㒗㒟㒠㒥㒡㒡㒙㒢㒤㒙㒜㒦㒥㒤㒟㒛㒙㒛㒢㒚㒜㒞㒡㒞㒘㒢㒡㒝㒚㒣㒤㒙㒢㒛㒝㒤㒦㒞㒟㒢㒙㒣㒡㒝㒜㒟㒥㒚㒠㒘㒘㒚㒢㒝㒟㒜㒞㒚㒗㒝㒠㒣㒚㒙㒘㒢㒣㒞㒝㒟㒟㒤㒙㒟㒢㒝㒛㒣㒥㒙㒣㒘㒞㒣㒘㒟㒠㒗㒚㒘㒤㒙㒞㒘㒦㒞㒞㒦㒣㒚㒜㒛㒥㒡㒟㒗㒝㒟㒗㒤㒡㒜㒚㒤㒥㒘㒗㒞㒡㒘㒚㒗㒣㒝㒜㒣㒛㒙㒦㒛㒞㒦㒙㒤㒡㒦㒜㒙㒥㒠㒚㒠㒡㒝㒚㒟㒣㒥㒝㒛㒛㒡㒦㒘㒠㒟㒚㒗㒡㒠㒦㒠㒞㒥㒘㒛㒡㒡㒟㒜㒛㒛㒥㒗㒝㒞㒗㒡㒟㒛㒙㒠㒣㒙㒜㒠㒥㒠㒟㒟㒘㒞㒟㒤㒜㒛㒤㒠㒞㒟㒘㒛㒢㒞㒤㒜㒝㒙㒦㒟㒟㒥㒠㒟㒙㒚㒢㒤㒛㒢㒤㒗㒟㒛㒘㒘㒠㒦㒛㒗㒣㒘㒗㒣㒠㒝㒙㒣㒣㒙㒡㒘㒜㒣㒦㒡㒟㒠㒘㒢㒡㒢㒙㒦㒤㒞㒞㒡㒘㒛㒠㒠㒚㒣㒚㒜㒗㒛㒟㒣㒙㒙㒢㒟㒠㒜㒛㒠㒥㒥㒜㒛㒗㒢㒡㒦㒚㒜㒣㒤㒝㒣㒦㒟㒟㒢㒙㒥㒣㒡㒜㒦㒜㒞㒙㒘㒡㒥㒛㒛㒤㒡㒢㒚㒝㒥㒦㒤㒡㒛㒙㒠㒣㒘㒝㒟㒥㒦㒠㒙㒝㒙㒛㒤㒟㒤㒟㒠㒗㒥㒡㒛㒚㒡㒚㒝㒣㒦㒝㒥㒦㒞㒠㒣㒙㒤㒣㒠㒛㒤㒥㒟㒞㒦㒘㒡㒢㒝㒚㒤㒥㒗㒝㒠㒗㒤㒡㒛㒘㒤㒝㒞㒦㒙㒟㒟㒘㒥㒗㒛㒢㒣㒛㒠㒥㒚㒝㒤㒘㒛㒢㒘㒘㒥㒣㒜㒝㒣㒗㒛㒤㒘㒣㒛㒜㒙㒥㒟㒞㒥㒟㒢㒘㒙㒡㒘㒛㒡㒤㒘㒞㒟㒦㒤㒡㒗㒛㒜㒜㒥㒦㒗㒟㒝㒘㒣㒙㒗㒢㒞㒛㒣㒤㒠㒚㒞㒡㒛㒚㒝㒣㒣㒝㒙㒝㒣㒥㒦㒠㒞㒙㒜㒙㒜㒦㒛㒞㒣㒘㒙㒡㒟㒟㒜㒚㒠㒤㒥㒛㒥㒦㒢㒟㒤㒚㒛㒢㒤㒝㒘㒦㒟㒝㒤㒙㒗㒢㒜㒜㒗㒦㒚㒘㒙㒠㒥㒚㒛㒣㒡㒡㒞㒜㒢㒗㒗㒞㒜㒘㒤㒣㒗㒜㒡㒥㒚㒞㒚㒗㒢㒠㒛㒤㒙㒘㒚㒗㒙㒠㒛㒙㒡㒣㒗㒣㒤㒛㒤㒥㒢㒟㒣㒙㒦㒛㒣㒤㒡㒞㒗㒗㒝㒥㒛㒡㒞㒚㒜㒢㒦㒝㒙㒦㒠㒟㒠㒘㒡㒣㒤㒥㒞㒞㒟㒗㒥㒡㒛㒠㒤㒚㒘㒤㒟㒛㒜㒦㒝㒜㒜㒣㒛㒜㒛㒥㒡㒟㒗㒝㒝㒗㒤㒢㒛㒚㒤㒤㒣㒞㒟㒘㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒚㒞㒟㒞㒗㒣㒡㒙㒚㒟㒙㒗㒣㒠㒝㒡㒦㒣㒟㒦㒘㒦㒢㒚㒜㒣㒥㒚㒞㒟㒦㒤㒢㒛㒛㒜㒤㒥㒝㒚㒦㒦㒠㒚㒣㒞㒝㒘㒦㒗㒟㒝㒘㒣㒘㒝㒡㒤㒜㒙㒤㒠㒝㒤㒘㒛㒡㒠㒙㒚㒞㒞㒦㒟㒟㒥㒙㒛㒗㒗㒢㒠㒜㒛㒥㒗㒜㒟㒘㒘㒢㒗㒛㒞㒤㒥㒛㒚㒦㒥㒠㒜㒙㒥㒢㒣㒚㒤㒥㒡㒜㒤㒘㒣㒡㒞㒛㒦㒥㒜㒤㒣㒠㒥㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒗㒙㒦㒞㒜㒘㒥㒣㒞㒡㒘㒗㒡㒝㒠㒙㒚㒞㒤㒗㒝㒞㒦㒞㒠㒝㒙㒜㒣㒠㒣㒘㒟㒝㒘㒟㒡㒥㒛㒛㒛㒝㒤㒘㒞㒝㒗㒦㒚㒜㒣㒤㒜㒥㒦㒛㒟㒡㒠㒗㒘㒞㒢㒜㒜㒛㒥㒢㒟㒦㒡㒤㒚㒡㒤㒗㒝㒝㒚㒦㒦㒥㒟㒠㒚㒘㒣㒞㒚㒟㒥㒘㒟㒚㒘㒘㒛㒜㒥㒚㒝㒥㒗㒛㒠㒡㒞㒞㒙㒢㒤㒗㒚㒜㒦㒗㒟㒞㒙㒗㒡㒥㒜㒙㒤㒢㒞㒡㒣㒦㒛㒝㒣㒥㒝㒛㒦㒡㒤㒝㒟㒦㒙㒡㒢㒝㒙㒥㒥㒞㒟㒝㒘㒤㒢㒛㒘㒠㒤㒛㒝㒢㒗㒛㒠㒙㒝㒦㒜㒡㒦㒗㒟㒝㒙㒥㒗㒝㒛㒟㒤㒥㒞㒛㒘㒜㒡㒗㒚㒝㒣㒣㒟㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒟㒥㒘㒙㒣㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒤㒗㒜㒟㒗㒥㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒙㒗㒠㒥㒜㒛㒣㒡㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒞㒘㒥㒛㒠㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒡㒚㒙㒡㒥㒝㒜㒝㒥㒣㒟㒙㒘㒟㒢㒞㒛㒛㒤㒢㒞㒗㒘㒦㒠㒣㒚㒝㒝㒟㒜㒥㒦㒛㒟㒡㒙㒠㒢㒝㒛㒤㒥㒙㒞㒣㒡㒥㒡㒛㒚㒡㒤㒗㒥㒤㒦㒣㒠㒚㒙㒟㒤㒗㒡㒞㒥㒡㒟㒗㒘㒝㒢㒞㒛㒙㒤㒟㒝㒥㒙㒛㒣㒣㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒚㒥㒢㒛㒜㒣㒥㒗㒞㒝㒗㒥㒡㒙㒛㒡㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒟㒗㒘㒛㒡㒣㒛㒗㒦㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒥㒟㒝㒚㒣㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒛㒚㒣㒣㒟㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒟㒛㒘㒙㒣㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒟㒜㒟㒘㒛㒟㒛㒘㒡㒢㒗㒛㒝㒦㒦㒞㒙㒗㒠㒠㒥㒜㒘㒣㒡㒝㒛㒠㒝㒟㒣㒙㒙㒢㒟㒞㒘㒥㒛㒞㒢㒘㒗㒢㒟㒟㒦㒤㒙㒝㒟㒦㒥㒢㒙㒙㒡㒣㒗㒜㒝㒗㒣㒡㒛㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒙㒟㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒘㒢㒝㒛㒤㒥㒙㒟㒡㒗㒥㒡㒛㒚㒡㒤㒗㒞㒘㒦㒣㒠㒙㒙㒟㒤㒥㒜㒛㒥㒡㒟㒗㒘㒝㒡㒣㒛㒙㒦㒟㒝㒥㒘㒝㒠㒡㒚㒗㒣㒟㒜㒣㒘㒠㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒚㒡㒣㒥㒝㒝㒦㒡㒢㒗㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒢㒛㒛㒗㒦㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒜㒟㒝㒚㒣㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒛㒣㒣㒣㒞㒛㒦㒟㒟㒥㒙㒝㒢㒡㒜㒘㒥㒝㒞㒣㒘㒙㒣㒟㒚㒥㒤㒛㒝㒣㒗㒗㒠㒟㒙㒣㒤㒥㒜㒟㒗㒗㒟㒛㒘㒡㒢㒚㒛㒝㒤㒤㒞㒙㒗㒟㒠㒥㒜㒛㒣㒡㒝㒗㒦㒠㒟㒣㒙㒜㒢㒟㒞㒡㒥㒛㒞㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒢㒦㒥㒠㒜㒙㒡㒣㒛㒜㒝㒥㒣㒟㒙㒘㒟㒜㒟㒛㒛㒤㒢㒞㒗㒘㒟㒥㒦㒚㒙㒣㒟㒜㒥㒙㒘㒟㒡㒙㒗㒢㒝㒜㒥㒞㒦㒞㒟㒗㒦㒡㒛㒛㒜㒤㒗㒝㒝㒦㒣㒢㒙㒙㒟㒢㒥㒜㒜㒥㒡㒟㒘㒘㒝㒣㒣㒛㒙㒥㒡㒝㒥㒗㒛㒠㒤㒚㒗㒣㒦㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒘㒞㒝㒗㒦㒡㒙㒚㒡㒣㒥㒟㒛㒦㒡㒠㒗㒙㒞㒢㒣㒜㒚㒥㒟㒡㒠㒘㒛㒣㒡㒛㒗㒤㒝㒝㒤㒗㒙㒠㒠㒙㒥㒤㒢㒜㒡㒦㒗㒟㒝㒘㒣㒢㒚㒛㒟㒥㒗㒞㒛㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒜㒙㒥㒝㒟㒗㒘㒙㒡㒟㒚㒥㒤㒛㒥㒥㒗㒗㒠㒞㒙㒣㒥㒙㒣㒟㒥㒥㒟㒠㒘㒡㒢㒛㒛㒝㒤㒥㒞㒙㒙㒥㒗㒣㒚㒛㒣㒦㒝㒗㒞㒡㒟㒣㒙㒚㒢㒟㒜㒜㒥㒛㒞㒥㒢㒗㒡㒝㒚㒣㒤㒙㒥㒣㒦㒥㒠㒜㒙㒡㒥㒗㒣㒝㒥㒣㒟㒞㒘㒟㒢㒙㒛㒛㒥㒗㒞㒗㒘㒟㒥㒦㒚㒙㒣㒥㒜㒥㒦㒦㒟㒡㒙㒗㒢㒝㒝㒣㒜㒙㒞㒟㒘㒛㒡㒛㒛㒗㒤㒗㒞㒟㒦㒣㒢㒙㒠㒟㒢㒥㒜㒡㒥㒡㒟㒝㒘㒝㒢㒡㒛㒙㒤㒥㒥㒞㒗㒛㒠㒦㒚㒗㒦㒤㒜㒣㒦㒚㒟㒟㒙㒛㒢㒛㒛㒥㒟㒗㒞㒝㒗㒣㒡㒙㒝㒦㒣㒥㒝㒜㒦㒡㒠㒛㒣㒝㒢㒣㒜㒙㒥㒟㒗㒙㒘㒛㒡㒢㒛㒗㒥㒟㒢㒦㒗㒙㒠㒤㒙㒥㒦㒘㒜㒡㒦㒗㒟㒝㒙㒥㒜㒛㒛㒟㒥㒛㒞㒛㒘㒜㒡㒗㒚㒝㒣㒣㒟㒙㒦㒟㒟㒥㒙㒡㒢㒡㒜㒝㒥㒝㒠㒣㒘㒙㒢㒡㒚㒥㒤㒛㒞㒙㒗㒗㒠㒦㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒝㒛㒝㒥㒛㒞㒙㒗㒡㒠㒥㒜㒛㒣㒡㒝㒗㒦㒣㒟㒣㒙㒟㒢㒟㒜㒦㒥㒛㒟㒣㒘㒗㒡㒝㒛㒚㒤㒙㒝㒠㒦㒥㒠㒛㒙㒡㒥㒗㒜㒝㒥㒣㒟㒠㒘㒟㒢㒜㒛㒛㒦㒝㒞㒗㒗㒝㒠㒣㒚㒙㒣㒥㒜㒥㒦㒡㒟㒡㒙㒞㒢㒝㒝㒣㒥㒙㒞㒟㒘㒛㒡㒛㒛㒗㒤㒗㒟㒥㒦㒣㒢㒙㒙㒟㒢㒥㒜㒡㒥㒡㒟㒝㒘㒝㒤㒢㒛㒙㒤㒟㒝㒥㒗㒛㒡㒗㒚㒗㒣㒤㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒜㒞㒝㒗㒣㒡㒙㒚㒦㒣㒥㒝㒟㒦㒡㒠㒗㒙㒝㒢㒣㒡㒥㒥㒟㒞㒦㒘㒛㒣㒡㒢㒗㒤㒝㒞㒝㒗㒙㒡㒘㒙㒥㒦㒙㒜㒡㒘㒝㒦㒛㒘㒣㒢㒣㒛㒟㒚㒡㒞㒛㒗㒢㒡㒗㒛㒠㒣㒣㒝㒝㒠㒟㒟㒥㒙㒛㒢㒡㒡㒣㒥㒝㒞㒤㒘㒙㒣㒟㒜㒗㒤㒛㒞㒛㒗㒗㒠㒦㒙㒣㒦㒙㒜㒟㒗㒗㒙㒙㒘㒡㒢㒣㒛㒝㒥㒗㒞㒙㒗㒟㒠㒥㒚㒛㒜㒥㒝㒗㒗㒗㒟㒣㒙㒥㒢㒟㒜㒗㒥㒛㒟㒗㒙㒗㒡㒝㒛㒝㒤㒙㒢㒝㒦㒥㒠㒜㒙㒡㒣㒘㒜㒝㒦㒗㒙㒙㒘㒟㒡㒥㒛㒛㒙㒟㒞㒗㒗㒞㒠㒣㒚㒝㒝㒟㒜㒥㒦㒛㒟㒡㒞㒣㒢㒝㒛㒤㒥㒙㒟㒡㒝㒘㒡㒛㒛㒛㒤㒗㒟㒗㒦㒣㒠㒙㒙㒟㒤㒥㒤㒙㒥㒡㒟㒢㒘㒝㒢㒗㒛㒙㒦㒤㒝㒥㒙㒛㒠㒡㒚㒗㒤㒘㒜㒣㒦㒤㒟㒟㒛㒚㒢㒛㒝㒡㒥㒗㒞㒝㒘㒞㒡㒙㒛㒚㒣㒥㒞㒦㒦㒡㒠㒗㒙㒝㒢㒣㒜㒥㒥㒟㒟㒞㒘㒛㒡㒡㒛㒗㒥㒟㒝㒣㒗㒙㒡㒜㒙㒥㒥㒡㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒥㒟㒞㒛㒘㒞㒡㒗㒚㒞㒣㒣㒞㒛㒦㒟㒟㒥㒙㒥㒢㒡㒝㒡㒥㒝㒞㒣㒘㒙㒣㒟㒚㒥㒤㒛㒞㒜㒗㒗㒠㒡㒙㒣㒥㒞㒜㒟㒗㒥㒟㒛㒘㒡㒢㒢㒛㒝㒥㒞㒞㒙㒙㒤㒠㒥㒜㒛㒣㒡㒝㒗㒗㒘㒟㒣㒙㒤㒢㒟㒝㒠㒥㒛㒞㒡㒘㒗㒡㒝㒛㒟㒤㒙㒞㒘㒦㒥㒠㒛㒙㒡㒤㒙㒜㒝㒥㒣㒟㒦㒘㒟㒢㒡㒛㒛㒤㒡㒞㒗㒗㒝㒠㒣㒚㒙㒤㒙㒜㒥㒗㒘㒟㒡㒙㒘㒢㒝㒜㒙㒙㒥㒞㒟㒘㒚㒡㒛㒞㒦㒤㒗㒝㒞㒦㒣㒠㒛㒙㒟㒣㒙㒦㒛㒥㒡㒟㒗㒘㒝㒦㒘㒛㒙㒤㒠㒝㒥㒘㒝㒥㒤㒚㒗㒣㒢㒜㒣㒗㒣㒟㒟㒘㒥㒢㒛㒝㒡㒦㒤㒞㒝㒘㒙㒡㒙㒚㒣㒣㒥㒟㒠㒦㒡㒢㒗㒙㒝㒢㒣㒜㒟㒥㒟㒟㒛㒘㒛㒣㒦㒛㒗㒦㒝㒝㒣㒗㒙㒠㒥㒙㒥㒣㒡㒜㒡㒗㒢㒟㒝㒙㒥㒢㒙㒛㒟㒥㒜㒞㒛㒘㒜㒡㒗㒚㒝㒣㒣㒟㒙㒦㒟㒟㒥㒙㒢㒢㒡㒜㒞㒥㒝㒠㒣㒘㒙㒢㒡㒚㒥㒤㒛㒞㒚㒗㒗㒠㒦㒙㒣㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒞㒛㒝㒥㒜㒞㒙㒗㒡㒠㒥㒜㒛㒣㒡㒝㒗㒦㒤㒟㒣㒙㒠㒢㒟㒜㒦㒥㒛㒟㒣㒘㒗㒡㒝㒛㒛㒤㒙㒝㒠㒦㒥㒠㒛㒙㒡㒥㒗㒜㒝㒥㒣㒟㒡㒘㒟㒢㒝㒛㒛㒦㒝㒞㒗㒗㒝㒠㒣㒚㒙㒣㒦㒜㒥㒦㒢㒟㒡㒙㒟㒢㒝㒝㒣㒥㒙㒞㒟㒘㒜㒡㒛㒛㒘㒤㒗㒞㒢㒦㒣㒢㒙㒙㒟㒢㒥㒜㒢㒥㒡㒟㒞㒘㒝㒤㒜㒛㒙㒥㒡㒝㒥㒗㒛㒡㒚㒚㒗㒤㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒞㒞㒝㒘㒜㒡㒙㒚㒡㒣㒥㒟㒛㒦㒡㒠㒗㒙㒤㒢㒣㒜㒠㒥㒟㒟㒘㒘㒛㒢㒣㒛㒗㒤㒝㒞㒛㒗㒙㒢㒥㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒞㒛㒟㒥㒝㒞㒛㒗㒢㒡㒗㒛㒟㒣㒣㒝㒙㒦㒤㒟㒥㒚㒥㒢㒡㒜㒗㒥㒝㒠㒣㒘㒙㒡㒟㒛㒛㒤㒛㒝㒥㒗㒗㒢㒢㒙㒣㒥㒙㒜㒟㒥㒥㒟㒡㒘㒡㒢㒝㒛㒝㒗㒘㒞㒙㒙㒟㒠㒥㒚㒛㒤㒗㒝㒗㒦㒣㒟㒣㒚㒤㒢㒟㒝㒗㒥㒛㒞㒡㒘㒞㒡㒝㒛㒞㒤㒙㒝㒟㒦㒥㒢㒛㒙㒡㒣㒗㒜㒤㒥㒣㒟㒠㒘㒟㒣㒥㒛㒛㒥㒣㒞㒗㒗㒝㒡㒜㒚㒙㒤㒘㒜㒥㒦㒛㒟㒡㒙㒗㒢㒝㒛㒣㒥㒠㒞㒟㒘㒞㒡㒛㒚㒣㒤㒗㒟㒝㒦㒣㒠㒙㒙㒦㒢㒥㒜㒢㒥㒡㒠㒘㒘㒝㒢㒥㒛㒙㒤㒟㒞㒝㒗㒛㒠㒢㒚㒗㒣㒝㒜㒣㒘㒙㒟㒟㒘㒥㒢㒣㒛㒡㒥㒟㒞㒝㒙㒟㒡㒙㒚㒟㒣㒥㒝㒛㒗㒘㒠㒗㒙㒤㒢㒣㒜㒡㒥㒟㒠㒥㒘㒛㒡㒡㒛㒞㒤㒝㒞㒚㒗㒙㒡㒤㒙㒥㒥㒛㒜㒡㒦㒗㒟㒤㒘㒣㒢㒠㒛㒟㒗㒞㒞㒛㒘㒣㒡㒗㒚㒝㒤㒜㒝㒙㒗㒟㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒠㒡㒟㒛㒞㒤㒛㒝㒣㒗㒗㒢㒝㒙㒣㒣㒙㒜㒦㒥㒥㒟㒢㒘㒡㒢㒚㒛㒝㒥㒥㒞㒙㒗㒟㒡㒝㒚㒛㒤㒝㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒠㒞㒡㒘㒟㒡㒝㒚㒤㒤㒙㒝㒥㒛㒡㒠㒛㒙㒡㒣㒗㒟㒚㒥㒣㒟㒚㒘㒟㒢㒗㒛㒛㒤㒥㒘㒗㒗㒝㒠㒣㒚㒙㒦㒜㒜㒥㒦㒜㒟㒡㒙㒛㒜㒝㒛㒣㒥㒙㒞㒟㒢㒟㒡㒛㒚㒢㒤㒗㒞㒟㒛㒦㒠㒙㒙㒟㒢㒥㒜㒦㒥㒡㒟㒗㒘㒝㒣㒣㒢㒤㒤㒟㒝㒥㒗㒛㒠㒡㒚㒗㒤㒟㒜㒣㒘㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒘㒡㒡㒙㒜㒟㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒝㒡㒥㒟㒠㒥㒘㒛㒡㒡㒛㒗㒤㒝㒝㒣㒗㒙㒢㒢㒙㒥㒥㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒥㒤㒞㒛㒚㒗㒡㒗㒚㒝㒣㒣㒝㒙㒡㒙㒟㒥㒙㒜㒢㒡㒞㒘㒥㒝㒟㒗㒢㒙㒡㒟㒚㒥㒤㒛㒘㒛㒗㒗㒠㒞㒙㒣㒤㒛㒡㒢㒥㒥㒟㒛㒘㒡㒢㒢㒛㒝㒤㒣㒞㒙㒙㒟㒥㒤㒚㒛㒣㒡㒝㒗㒦㒝㒟㒣㒛㒙㒢㒟㒝㒗㒥㒛㒞㒡㒘㒙㒡㒝㒝㒚㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒗㒜㒝㒥㒣㒟㒛㒘㒟㒢㒗㒛㒛㒦㒡㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒜㒥㒘㒦㒟㒡㒛㒗㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒡㒛㒜㒠㒤㒗㒟㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒠㒝㒘㒝㒢㒥㒛㒙㒤㒟㒞㒗㒗㒛㒡㒜㒚㒗㒣㒝㒜㒣㒘㒙㒟㒟㒘㒥㒢㒝㒛㒡㒥㒙㒞㒝㒙㒣㒡㒙㒛㒡㒣㒥㒝㒛㒦㒥㒠㒗㒚㒟㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒙㒤㒝㒞㒗㒗㒙㒠㒡㒙㒥㒥㒛㒜㒡㒦㒗㒟㒟㒘㒣㒢㒛㒛㒟㒥㒣㒞㒛㒙㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒡㒟㒥㒚㒘㒢㒡㒞㒗㒥㒝㒞㒣㒘㒛㒡㒟㒛㒗㒤㒛㒟㒥㒗㒗㒢㒝㒙㒣㒣㒙㒜㒡㒥㒥㒟㒝㒘㒡㒢㒝㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒛㒣㒣㒝㒗㒦㒞㒟㒣㒚㒛㒢㒟㒛㒥㒥㒛㒞㒡㒚㒙㒡㒝㒚㒣㒤㒙㒞㒡㒦㒥㒠㒛㒙㒢㒣㒗㒟㒗㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒠㒥㒚㒙㒣㒠㒜㒥㒗㒝㒟㒡㒙㒗㒢㒝㒛㒣㒥㒤㒞㒟㒗㒥㒡㒛㒜㒡㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒞㒛㒥㒡㒠㒙㒘㒝㒡㒣㒛㒛㒤㒟㒠㒜㒗㒛㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒝㒛㒡㒥㒙㒞㒝㒙㒣㒡㒙㒚㒟㒣㒥㒝㒛㒦㒡㒠㒗㒜㒘㒢㒣㒞㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒗㒤㒝㒟㒗㒗㒙㒢㒟㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒣㒟㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒠㒟㒥㒙㒛㒜㒠㒜㒗㒥㒝㒞㒣㒘㒚㒡㒟㒚㒥㒤㒛㒝㒦㒗㒗㒠㒝㒙㒣㒣㒜㒜㒤㒥㒥㒟㒛㒘㒡㒙㒙㒡㒞㒚㒦㒤㒞㒚㒢㒡㒘㒚㒟㒣㒡㒝㒗㒦㒝㒗㒗㒟㒚㒙㒢㒢㒠㒢㒠㒞㒣㒘㒗㒡㒝㒚㒣㒚㒘㒡㒦㒞㒦㒠㒟㒙㒡㒣㒗㒜㒝㒝㒚㒥㒚㒟㒘㒙㒙㒣㒜㒤㒦㒞㒗㒗㒝㒠㒣㒡㒙㒙㒢㒢㒦㒝㒗㒦㒝㒚㒜㒢㒝㒛㒣㒥㒙㒟㒡㒝㒘㒡㒛㒚㒢㒤㒗㒝㒠㒦㒣㒠㒙㒙㒟㒣㒛㒢㒝㒥㒡㒟㒗㒘㒝㒢㒚㒛㒙㒤㒠㒝㒥㒗㒛㒠㒡㒚㒛㒝㒝㒜㒣㒦㒙㒟㒟㒙㒜㒢㒛㒛㒢㒥㒗㒞㒝㒝㒙㒡㒙㒚㒡㒣㒥㒝㒜㒦㒡㒠㒗㒙㒝㒣㒙㒢㒛㒥㒟㒟㒗㒘㒛㒢㒘㒛㒗㒤㒞㒝㒣㒗㒙㒠㒟㒚㒙㒝㒛㒜㒡㒦㒗㒟㒝㒙㒚㒢㒙㒛㒠㒤㒥㒞㒟㒡㒡㒡㒗㒚㒝㒣㒣㒝㒡㒦㒟㒟㒦㒙㒛㒢㒡㒡㒝㒥㒝㒞㒥㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒘㒗㒢㒙㒙㒣㒣㒚㒜㒟㒥㒦㒟㒛㒘㒣㒢㒗㒜㒟㒙㒦㒞㒙㒗㒠㒠㒥㒚㒞㒣㒡㒝㒗㒦㒝㒡㒣㒠㒙㒢㒟㒛㒦㒥㒛㒞㒢㒘㒗㒡㒞㒚㒣㒤㒟㒣㒡㒦㒥㒠㒜㒙㒡㒤㒛㒜㒝㒥㒤㒟㒙㒘㒟㒡㒥㒛㒟㒞㒡㒞㒗㒗㒝㒠㒣㒛㒝㒣㒟㒜㒦㒦㒛㒠㒣㒞㒚㒢㒝㒛㒤㒥㒙㒞㒡㒗㒥㒡㒛㒚㒡㒦㒗㒤㒝㒦㒣㒠㒚㒙㒟㒢㒦㒜㒛㒥㒥㒟㒗㒘㒝㒢㒙㒛㒙㒤㒠㒝㒥㒗㒜㒠㒡㒚㒘㒣㒝㒝㒥㒛㒜㒟㒟㒘㒦㒢㒛㒛㒦㒥㒗㒞㒝㒗㒣㒡㒛㒞㒟㒣㒥㒝㒝㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒦㒤㒘㒛㒡㒢㒛㒗㒤㒟㒝㒣㒗㒚㒠㒟㒚㒙㒝㒛㒜㒡㒦㒗㒟㒝㒙㒜㒢㒙㒛㒠㒤㒥㒞㒛㒡㒠㒡㒗㒚㒝㒣㒣㒝㒚㒦㒟㒟㒥㒙㒛㒢㒢㒜㒙㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒠㒙㒣㒣㒙㒜㒟㒦㒘㒟㒠㒘㒡㒢㒗㒛㒝㒚㒙㒤㒚㒞㒛㒘㒚㒠㒠㒣㒤㒞㒛㒦㒝㒟㒣㒙㒙㒗㒢㒢㒚㒜㒟㒣㒡㒟㒙㒗㒦㒡㒠㒚㒚㒤㒡㒞㒞㒥㒛㒟㒢㒚㒙㒣㒡㒙㒦㒣㒟㒟㒡㒗㒦㒢㒘㒚㒦㒛㒜㒗㒣㒠㒣㒚㒙㒣㒟㒡㒥㒜㒜㒦㒣㒟㒜㒙㒛㒣㒗㒥㒡㒞㒟㒗㒥㒡㒛㒚㒡㒝㒚㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒡㒗㒘㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒠㒤㒚㒗㒥㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒚㒞㒝㒙㒣㒡㒙㒚㒟㒣㒥㒝㒛㒦㒡㒠㒗㒙㒟㒢㒣㒜㒙㒥㒟㒞㒥㒘㒝㒡㒡㒛㒘㒤㒝㒝㒣㒗㒙㒢㒟㒙㒥㒣㒛㒜㒣㒦㒗㒟㒟㒘㒣㒢㒚㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒠㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒚㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒢㒥㒥㒟㒛㒘㒡㒤㒤㒛㒢㒤㒣㒞㒙㒗㒟㒦㒛㒠㒜㒚㒝㒤㒜㒜㒢㒥㒚㒙㒟㒢㒟㒛㒥㒥㒛㒣㒡㒞㒘㒘㒟㒡㒘㒛㒗㒤㒣㒙㒢㒡㒟㒙㒡㒣㒗㒜㒝㒚㒦㒥㒞㒟㒣㒦㒥㒢㒝㒛㒚㒤㒤㒝㒞㒗㒥㒡㒢㒘㒟㒢㒦㒝㒝㒦㒥㒝㒚㒦㒣㒢㒥㒛㒚㒥㒜㒞㒚㒡㒣㒚㒡㒤㒗㒝㒝㒦㒣㒙㒜㒙㒟㒢㒥㒜㒛㒥㒡㒟㒗㒘㒝㒡㒣㒝㒙㒤㒟㒝㒥㒗㒛㒠㒡㒚㒗㒣㒝㒜㒥㒦㒙㒡㒟㒘㒥㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒛㒚㒟㒥㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒥㒢㒞㒥㒘㒛㒡㒡㒛㒗㒤㒟㒝㒣㒗㒚㒠㒟㒙㒥㒣㒛㒞㒡㒦㒗㒟㒝㒘㒥㒢㒙㒛㒡㒤㒥㒞㒜㒗㒡㒡㒗㒚㒝㒣㒣㒝㒙㒦㒟㒠㒗㒙㒛㒢㒢㒜㒗㒥㒝㒞㒣㒘㒙㒡㒟㒚㒥㒤㒜㒝㒡㒗㒗㒠㒝㒞㒘㒣㒙㒜㒟㒥㒥㒜㒠㒙㒚㒢㒗㒛㒝㒤㒣㒢㒜㒞㒞㒗㒢㒡㒛㒚㒝㒣㒜㒝㒡㒦㒘㒟㒝㒝㒚㒜㒛㒥㒛㒞㒡㒘㒗㒥㒠㒟㒙㒛㒛㒣㒠㒝㒢㒦㒠㒜㒞㒣㒜㒜㒝㒥㒣㒟㒙㒞㒢㒗㒦㒢㒝㒙㒚㒤㒛㒤㒢㒡㒗㒚㒙㒣㒟㒜㒥㒛㒡㒦㒠㒠㒛㒘㒢㒙㒘㒥㒢㒞㒟㒗㒥㒡㒛㒢㒗㒚㒘㒤㒟㒝㒜㒦㒚㒟㒡㒙㒡㒢㒠㒜㒤㒜㒜㒙㒞㒡㒣㒛㒙㒤㒟㒣㒗㒝㒠㒗㒡㒠㒣㒙㒦㒢㒦㒜㒚㒦㒣㒟㒚㒘㒟㒠㒤㒜㒛㒥㒜㒞㒥㒗㒚㒠㒦㒚㒚㒝㒞㒗㒙㒠㒗㒙㒝㒢㒣㒡㒟㒛㒤㒥㒝㒞㒤㒗㒤㒡㒣㒚㒢㒤㒦㒗㒛㒚㒙㒣㒞㒜㒤㒦㒚㒟㒠㒘㒦㒤㒜㒦㒘㒘㒤㒥㒙㒞㒛㒗㒡㒡㒗㒠㒤㒙㒤㒣㒦㒜㒤㒚㒠㒚㒛㒢㒡㒜㒗㒥㒝㒣㒛㒟㒞㒘㒜㒠㒦㒛㒙㒤㒠㒝㒠㒦㒡㒞㒥㒚㒘㒣㒞㒝㒙㒤㒛㒞㒢㒙㒙㒢㒡㒤㒦㒞㒞㒗㒟㒠㒥㒚㒛㒘㒚㒣㒥㒛㒜㒗㒘㒠㒝㒝㒚㒜㒛㒥㒛㒞㒡㒘㒗㒦㒝㒡㒟㒚㒚㒥㒘㒝㒚㒗㒝㒦㒦㒣㒞㒜㒝㒥㒣㒟㒙㒝㒥㒘㒚㒡㒞㒛㒥㒤㒦㒞㒟㒣㒦㒢㒚㒤㒛㒜㒥㒦㒛㒟㒡㒞㒛㒙㒤㒢㒘㒛㒞㒥㒝㒝㒘㒗㒠㒡㒣㒛㒝㒣㒦㒜㒦㒦㒞㒙㒢㒣㒙㒜㒛㒥㒡㒟㒗㒝㒝㒘㒟㒡㒚㒜㒘㒛㒙㒗㒛㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒚㒜㒛㒥㒥㒗㒞㒝㒗㒣㒘㒛㒠㒠㒚㒘㒣㒠㒜㒘㒠㒞㒙㒝㒢㒣㒜㒙㒙㒢㒥㒝㒞㒜㒘㒟㒡㒞㒚㒢㒤㒗㒗㒜㒡㒚㒙㒥㒣㒛㒜㒡㒜㒚㒥㒢㒟㒡㒙㒝㒢㒡㒚㒦㒥㒗㒛㒤㒗㒠㒡㒡㒛㒜㒗㒤㒗㒗㒟㒥㒙㒛㒢㒡㒠㒟㒜㒢㒥㒠㒞㒚㒘㒝㒡㒤㒚㒤㒣㒥㒙㒤㒠㒦㒙㒣㒣㒙㒜㒟㒛㒜㒦㒚㒟㒣㒘㒢㒢㒠㒛㒣㒤㒚㒝㒢㒗㒚㒢㒜㒣㒦㒝㒗㒦㒝㒟㒣㒞㒟㒘㒠㒢㒡㒜㒠㒤㒦㒘㒚㒡㒡㒚㒣㒤㒙㒝㒟㒞㒜㒦㒜㒠㒝㒙㒣㒤㒞㒦㒗㒟㒙㒘㒟㒡㒥㒠㒢㒚㒢㒤㒠㒞㒡㒘㒤㒚㒞㒣㒟㒜㒥㒦㒛㒤㒣㒟㒘㒘㒠㒢㒘㒜㒜㒣㒥㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒞㒙㒝㒞㒥㒢㒜㒟㒥㒡㒟㒗㒘㒝㒦㒡㒡㒚㒛㒜㒤㒚㒗㒞㒡㒢㒚㒗㒣㒝㒜㒣㒚㒞㒦㒝㒠㒙㒘㒠㒢㒣㒚㒝㒤㒢㒞㒛㒗㒢㒠㒢㒚㒡㒣㒠㒚㒦㒗㒝㒟㒢㒙㒡㒣㒝㒚㒦㒟㒟㒘㒛㒡㒡㒛㒗㒘㒤㒤㒘㒞㒝㒥㒢㒠㒚㒚㒝㒤㒗㒜㒠㒥㒠㒟㒘㒚㒚㒜㒘㒤㒥㒞㒛㒗㒡㒦㒛㒡㒤㒚㒘㒣㒞㒝㒝㒤㒞㒠㒙㒙㒗㒢㒦㒠㒘㒟㒗㒘㒙㒡㒟㒚㒥㒛㒟㒣㒢㒞㒚㒗㒘㒟㒙㒣㒙㒜㒟㒥㒥㒟㒛㒘㒡㒢㒗㒛㒥㒘㒣㒛㒞㒘㒗㒠㒥㒚㒛㒣㒡㒡㒠㒝㒛㒦㒦㒠㒝㒘㒠㒢㒣㒛㒞㒤㒦㒝㒞㒡㒣㒚㒣㒤㒙㒝㒟㒝㒢㒦㒜㒠㒣㒙㒢㒢㒢㒜㒥㒤㒠㒙㒘㒡㒥㒛㒛㒤㒡㒢㒚㒝㒥㒦㒤㒡㒛㒙㒠㒣㒘㒝㒟㒥㒦㒠㒙㒥㒚㒜㒢㒥㒙㒞㒟㒗㒥㒥㒠㒠㒢㒛㒚㒣㒦㒝㒡㒦㒠㒝㒣㒙㒞㒣㒝㒛㒦㒥㒚㒟㒡㒘㒜㒢㒘㒛㒝㒠㒢㒘㒙㒠㒡㒚㒗㒣㒝㒡㒚㒜㒞㒦㒣㒝㒣㒘㒠㒡㒢㒜㒙㒤㒢㒞㒦㒘㒝㒟㒢㒚㒥㒤㒚㒝㒥㒠㒛㒙㒞㒢㒦㒜㒝㒥㒟㒞㒥㒘㒛㒦㒤㒡㒠㒛㒛㒤㒘㒤㒞㒠㒣㒙㒥㒣㒛㒜㒡㒜㒥㒦㒜㒟㒡㒘㒞㒘㒤㒥㒣㒞㒛㒗㒡㒡㒗㒞㒤㒚㒘㒤㒝㒚㒣㒦㒚㒠㒞㒘㒤㒢㒜㒜㒛㒥㒗㒞㒚㒘㒝㒢㒙㒛㒞㒥㒢㒗㒝㒠㒝㒙㒣㒣㒙㒡㒟㒛㒦㒦㒝㒞㒦㒘㒥㒢㒡㒤㒦㒟㒜㒗㒟㒠㒥㒚㒛㒘㒚㒣㒥㒝㒠㒗㒗㒟㒢㒙㒣㒣㒚㒜㒟㒥㒚㒞㒦㒘㒛㒠㒤㒚㒥㒟㒟㒞㒜㒦㒣㒠㒚㒚㒛㒢㒢㒝㒤㒠㒝㒘㒟㒡㒥㒛㒛㒙㒘㒤㒜㒞㒡㒥㒣㒡㒛㒚㒘㒣㒢㒜㒜㒦㒣㒠㒠㒗㒝㒡㒤㒜㒛㒥㒣㒜㒘㒥㒡㒡㒣㒚㒘㒤㒚㒝㒘㒝㒞㒚㒛㒢㒥㒜㒛㒥㒡㒣㒠㒟㒛㒙㒙㒢㒘㒛㒚㒤㒚㒜㒞㒦㒦㒡㒙㒚㒣㒣㒘㒝㒛㒢㒜㒙㒞㒢㒛㒛㒡㒥㒗㒣㒠㒟㒗㒗㒚㒡㒡㒛㒙㒢㒝㒜㒢㒦㒚㒟㒢㒠㒘㒜㒜㒥㒟㒞㒥㒘㒛㒦㒤㒡㒠㒛㒡㒛㒘㒗㒟㒠㒟㒙㒥㒣㒛㒢㒤㒜㒣㒥㒦㒟㒘㒙㒗㒢㒣㒚㒝㒞㒛㒗㒤㒡㒡㒚㒝㒣㒣㒝㒙㒚㒡㒗㒗㒟㒤㒘㒤㒢㒢㒙㒠㒥㒢㒞㒥㒘㒞㒢㒗㒜㒜㒞㒘㒗㒗㒠㒝㒙㒣㒘㒙㒣㒛㒛㒦㒦㒤㒞㒦㒙㒙㒢㒠㒚㒚㒞㒢㒗㒟㒠㒥㒚㒛㒛㒘㒣㒦㒝㒟㒦㒞㒠㒜㒙㒟㒡㒦㒛㒞㒤㒦㒚㒣㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒚㒥㒗㒗㒤㒞㒦㒗㒟㒙㒘㒟㒡㒥㒠㒝㒚㒢㒤㒚㒝㒢㒞㒘㒚㒤㒣㒟㒜㒥㒦㒛㒣㒦㒟㒘㒙㒠㒢㒜㒜㒗㒤㒦㒝㒘㒘㒟㒢㒚㒚㒣㒣㒢㒜㒙㒠㒙㒙㒟㒢㒥㒜㒛㒥㒡㒟㒗㒘㒝㒥㒣㒥㒤㒤㒡㒝㒥㒗㒛㒠㒡㒟㒦㒗㒤㒤㒤㒦㒜㒟㒟㒘㒥㒢㒛㒢㒝㒛㒦㒥㒙㒝㒚㒡㒤㒚㒟㒣㒥㒝㒛㒚㒤㒤㒝㒠㒟㒘㒤㒢㒦㒛㒤㒤㒛㒞㒜㒘㒝㒢㒜㒚㒢㒣㒚㒘㒜㒠㒟㒙㒥㒣㒛㒣㒗㒜㒠㒦㒟㒟㒘㒙㒙㒢㒡㒛㒤㒥㒣㒞㒚㒗㒤㒠㒦㒛㒗㒤㒢㒝㒟㒗㒗㒠㒚㒙㒞㒣㒗㒜㒡㒦㒤㒘㒣㒡㒟㒚㒥㒤㒛㒢㒗㒝㒠㒗㒟㒠㒘㒘㒜㒢㒤㒝㒗㒦㒡㒞㒦㒙㒙㒛㒠㒥㒗㒞㒙㒗㒟㒠㒥㒡㒢㒙㒢㒣㒠㒝㒡㒗㒤㒙㒝㒢㒟㒛㒥㒥㒛㒢㒦㒞㒥㒘㒢㒡㒠㒙㒠㒞㒚㒦㒥㒠㒛㒙㒡㒗㒣㒣㒜㒛㒦㒥㒚㒟㒛㒦㒥㒢㒗㒚㒢㒥㒠㒝㒢㒗㒥㒚㒜㒣㒦㒜㒥㒦㒛㒟㒡㒝㒚㒙㒜㒢㒡㒜㒗㒤㒤㒞㒘㒘㒟㒥㒜㒤㒚㒝㒝㒦㒣㒠㒙㒠㒝㒙㒚㒣㒢㒢㒦㒟㒝㒘㒝㒡㒣㒛㒙㒘㒢㒥㒗㒝㒠㒦㒢㒡㒛㒙㒢㒤㒤㒦㒞㒟㒟㒘㒥㒢㒛㒢㒡㒛㒘㒤㒦㒞㒥㒘㒜㒝㒜㒤㒙㒝㒛㒦㒡㒠㒗㒞㒗㒙㒢㒢㒢㒜㒝㒡㒙㒘㒜㒡㒡㒛㒗㒥㒟㒢㒦㒗㒙㒠㒠㒙㒥㒦㒤㒜㒡㒦㒗㒟㒝㒙㒙㒘㒛㒛㒟㒤㒥㒞㒛㒘㒘㒡㒗㒚㒞㒣㒣㒝㒙㒦㒟㒠㒙㒣㒛㒢㒡㒜㒗㒥㒝㒟㒚㒘㒙㒡㒠㒚㒥㒤㒛㒣㒗㒗㒗㒠㒟㒙㒣㒣㒚㒜㒟㒥㒥㒟㒛㒙㒗㒘㒙㒛㒝㒤㒥㒞㒙㒗㒦㒠㒥㒚㒜㒣㒡㒝㒗㒦㒝㒠㒗㒣㒙㒢㒟㒛㒥㒥㒛㒟㒘㒘㒗㒡㒞㒚㒣㒤㒝㒗㒟㒦㒥㒠㒛㒙㒡㒣㒟㒜㒝㒥㒤㒟㒙㒘㒟㒗㒛㒛㒛㒤㒣㒞㒗㒗㒝㒠㒣㒚㒙㒣㒟㒝㒥㒘㒗㒟㒡㒙㒘㒢㒝㒜㒤㒥㒙㒞㒡㒗㒥㒢㒝㒟㒤㒤㒗㒝㒞㒦㒣㒣㒢㒙㒟㒢㒥㒜㒛㒗㒡㒦㒗㒘㒝㒡㒤㒛㒙㒤㒠㒝㒥㒘㒜㒠㒡㒚㒝㒙㒟㒜㒣㒦㒚㒟㒟㒛㒘㒢㒜㒛㒢㒥㒗㒞㒝㒗㒣㒡㒝㒤㒟㒣㒥㒝㒛㒦㒡㒢㒚㒙㒞㒢㒤㒜㒙㒦㒡㒤㒘㒘㒛㒡㒢㒛㒗㒘㒛㒝㒣㒗㒙㒠㒟㒙㒥㒗㒠㒜㒡㒦㒘㒟㒝㒘㒤㒢㒙㒛㒠㒤㒥㒟㒝㒗㒡㒡㒗㒚㒞㒣㒣㒝㒢㒦㒟㒟㒥㒙㒛㒤㒡㒜㒗㒥㒝㒞㒤㒘㒙㒡㒠㒚㒥㒗㒞㒝㒡㒙㒗㒠㒝㒙㒣㒣㒚㒜㒟㒥㒦㒟㒛㒜㒡㒢㒗㒝㒝㒤㒣㒞㒙㒗㒠㒠㒥㒚㒜㒣㒡㒟㒚㒦㒝㒡㒣㒙㒙㒢㒟㒛㒦㒥㒛㒞㒢㒘㒗㒢㒗㒚㒣㒦㒙㒝㒟㒦㒥㒠㒝㒙㒡㒣㒘㒜㒝㒘㒝㒟㒙㒚㒟㒡㒥㒛㒛㒤㒣㒞㒗㒗㒟㒠㒣㒛㒝㒣㒟㒞㒥㒦㒛㒟㒡㒙㒙㒢㒝㒛㒥㒥㒙㒡㒞㒗㒥㒣㒡㒚㒡㒤㒗㒝㒟㒦㒣㒡㒣㒙㒟㒢㒦㒜㒛㒘㒗㒟㒗㒘㒡㒛㒣㒛㒙㒤㒟㒝㒥㒘㒥㒠㒡㒚㒘㒣㒝㒝㒗㒠㒙㒟㒟㒘㒥㒢㒛㒛㒣㒥㒘㒞㒞㒗㒣㒢㒛㒟㒢㒣㒥㒝㒝㒦㒡㒣㒥㒙㒝㒢㒣㒜㒙㒥㒟㒣㒦㒘㒛㒡㒣㒛㒗㒤㒞㒝㒣㒗㒚㒠㒟㒛㒗㒣㒛㒜㒡㒦㒙㒟㒝㒝㒗㒢㒙㒛㒟㒤㒥㒟㒝㒗㒡㒡㒗㒚㒠㒣㒣㒝㒢㒦㒟㒟㒥㒙㒛㒤㒡㒜㒗㒥㒝㒞㒦㒘㒙㒡㒢㒚㒥㒦㒘㒝㒡㒘㒙㒠㒝㒙㒣㒣㒞㒜㒟㒗㒚㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒢㒠㒥㒚㒠㒣㒡㒝㒙㒦㒝㒡㒣㒙㒙㒢㒟㒜㒘㒥㒛㒞㒤㒘㒗㒡㒤㒚㒣㒦㒙㒝㒟㒦㒥㒠㒞㒙㒡㒣㒚㒜㒝㒘㒜㒟㒙㒘㒟㒡㒥㒛㒛㒤㒤㒞㒗㒗㒡㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒙㒢㒝㒛㒣㒥㒙㒞㒣㒗㒥㒡㒟㒚㒡㒤㒗㒝㒝㒦㒣㒠㒘㒙㒟㒢㒦㒜㒛㒗㒡㒦㒗㒘㒝㒢㒚㒛㒙㒤㒥㒝㒥㒘㒦㒠㒡㒜㒝㒦㒦㒜㒣㒦㒠㒟㒟㒛㒟㒢㒛㒛㒢㒥㒗㒟㒙㒗㒣㒡㒝㒤㒟㒣㒥㒝㒛㒦㒡㒢㒡㒙㒝㒢㒤㒜㒙㒥㒣㒘㒥㒘㒛㒡㒡㒛㒗㒤㒛㒝㒣㒗㒚㒠㒟㒛㒥㒚㒛㒜㒡㒦㒞㒟㒝㒙㒙㒢㒙㒜㒥㒤㒥㒟㒝㒜㒤㒡㒗㒚㒥㒣㒣㒝㒢㒦㒟㒟㒥㒙㒛㒤㒡㒣㒗㒥㒝㒟㒛㒘㒙㒢㒗㒚㒥㒗㒞㒝㒡㒙㒗㒗㒝㒙㒣㒣㒡㒜㒟㒦㒝㒟㒛㒜㒡㒢㒗㒛㒣㒙㒡㒞㒙㒗㒦㒠㒥㒚㒙㒣㒡㒝㒘㒦㒝㒠㒛㒙㒙㒢㒣㒥㒥㒥㒛㒞㒡㒘㒗㒡㒛㒚㒣㒤㒚㒝㒟㒘㒗㒥㒞㒙㒡㒣㒞㒜㒝㒦㒜㒟㒙㒘㒟㒡㒥㒝㒛㒗㒣㒞㒗㒗㒤㒠㒣㒚㒠㒣㒟㒞㒢㒦㒛㒠㒣㒙㒗㒢㒝㒜㒜㒥㒙㒡㒢㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒠㒙㒟㒣㒞㒜㒛㒥㒣㒟㒗㒚㒝㒡㒣㒛㒙㒤㒦㒝㒥㒗㒢㒠㒡㒞㒗㒣㒝㒞㒣㒦㒙㒟㒟㒙㒜㒢㒛㒜㒘㒥㒗㒞㒢㒗㒣㒣㒙㒚㒟㒣㒥㒝㒢㒦㒡㒠㒞㒙㒝㒣㒤㒜㒙㒗㒟㒞㒥㒘㒛㒢㒘㒛㒗㒤㒤㒝㒣㒘㒟㒠㒟㒜㒛㒣㒛㒜㒡㒦㒞㒟㒝㒘㒡㒢㒙㒛㒠㒤㒥㒠㒣㒗㒡㒡㒛㒤㒝㒣㒣㒝㒙㒦㒟㒟㒣㒙㒛㒢㒢㒜㒗㒦㒟㒣㒦㒘㒙㒡㒦㒚㒥㒘㒙㒝㒡㒗㒗㒠㒝㒙㒣㒗㒜㒜㒟㒦㒜㒟㒛㒘㒢㒢㒗㒛㒞㒤㒣㒟㒛㒗㒟㒠㒥㒚㒢㒣㒡㒠㒠㒦㒝㒟㒣㒙㒙㒥㒟㒛㒥㒥㒛㒟㒘㒘㒗㒥㒗㒚㒣㒗㒚㒝㒟㒘㒗㒠㒛㒙㒡㒣㒞㒜㒝㒦㒜㒟㒙㒘㒟㒡㒥㒝㒛㒤㒡㒞㒗㒗㒤㒠㒣㒚㒠㒣㒟㒞㒢㒦㒛㒠㒣㒙㒗㒢㒝㒜㒜㒥㒙㒟㒝㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒠㒙㒟㒣㒞㒜㒛㒥㒣㒟㒗㒙㒟㒡㒣㒛㒙㒥㒗㒝㒥㒙㒙㒠㒡㒚㒗㒣㒝㒞㒣㒦㒙㒟㒟㒙㒝㒢㒛㒜㒙㒥㒗㒢㒟㒗㒣㒢㒛㒚㒟㒣㒥㒝㒤㒦㒡㒡㒗㒙㒝㒢㒣㒜㒙㒦㒡㒞㒥㒘㒛㒢㒛㒛㒗㒘㒜㒝㒣㒗㒙㒠㒟㒛㒥㒣㒛㒜㒡㒦㒡㒟㒝㒙㒝㒢㒙㒞㒦㒤㒥㒠㒛㒗㒡㒡㒗㒛㒗㒣㒣㒝㒣㒦㒟㒢㒜㒙㒛㒣㒣㒜㒗㒥㒝㒟㒞㒘㒙㒥㒞㒚㒥㒤㒛㒝㒡㒙㒗㒠㒝㒙㒣㒣㒤㒜㒟㒦㒠㒟㒛㒚㒥㒢㒗㒝㒝㒤㒣㒞㒙㒘㒚㒠㒥㒚㒦㒣㒡㒝㒢㒦㒝㒠㒥㒙㒙㒢㒟㒜㒡㒥㒛㒟㒡㒘㒗㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒡㒘㒙㒡㒣㒗㒜㒝㒥㒣㒟㒙㒙㒡㒡㒥㒛㒛㒥㒟㒞㒗㒘㒝㒠㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒟㒢㒝㒜㒡㒥㒙㒞㒡㒗㒥㒢㒝㒚㒡㒤㒗㒝㒦㒦㒣㒢㒚㒙㒟㒢㒥㒜㒛㒗㒡㒟㒗㒘㒝㒢㒜㒛㒙㒥㒘㒝㒥㒛㒝㒠㒡㒛㒙㒣㒝㒜㒣㒦㒣㒟㒟㒜㒠㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒛㒘㒣㒥㒝㒝㒦㒡㒠㒙㒙㒝㒤㒣㒜㒙㒥㒟㒟㒟㒘㒛㒢㒗㒛㒗㒗㒗㒝㒣㒙㒙㒠㒟㒙㒥㒣㒥㒜㒡㒦㒡㒟㒝㒛㒝㒢㒙㒝㒟㒤㒥㒞㒛㒘㒛㒡㒗㒛㒗㒣㒣㒟㒥㒦㒟㒟㒥㒙㒛㒢㒡㒜㒡㒥㒝㒞㒥㒘㒙㒡㒡㒚㒥㒥㒛㒝㒡㒗㒗㒠㒦㒙㒣㒤㒟㒜㒟㒦㒟㒟㒛㒚㒡㒢㒗㒛㒝㒥㒝㒞㒙㒘㒘㒠㒥㒛㒝㒣㒡㒟㒗㒦㒝㒟㒣㒙㒣㒢㒟㒜㒟㒥㒛㒢㒢㒘㒗㒡㒣㒡㒙㒤㒙㒞㒛㒦㒥㒠㒛㒙㒡㒣㒘㒜㒝㒥㒥㒟㒙㒘㒟㒗㒚㒛㒛㒤㒡㒞㒗㒗㒣㒠㒣㒚㒙㒣㒟㒜㒥㒛㒠㒟㒡㒙㒗㒢㒝㒜㒜㒥㒙㒞㒟㒗㒥㒡㒛㒜㒘㒤㒗㒞㒗㒦㒣㒠㒥㒙㒟㒢㒦㒜㒛㒗㒡㒟㒗㒘㒝㒢㒝㒛㒙㒤㒦㒝㒥㒛㒞㒠㒡㒚㒗㒣㒝㒜㒣㒦㒥㒟㒟㒙㒞㒢㒛㒛㒡㒥㒗㒞㒝㒗㒣㒡㒙㒛㒜㒣㒥㒝㒣㒦㒡㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒟㒣㒘㒛㒡㒡㒛㒗㒤㒞㒝㒣㒘㒛㒠㒟㒙㒥㒤㒚㒜㒡㒦㒠㒟㒝㒘㒣㒢㒙㒝㒟㒤㒥㒞㒛㒘㒠㒡㒗㒛㒜㒣㒣㒞㒦㒦㒟㒡㒗㒙㒛㒢㒡㒝㒘㒥㒝㒠㒘㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒡㒜㒙㒣㒤㒚㒜㒟㒦㒗㒟㒛㒚㒡㒢㒗㒛㒝㒥㒢㒞㒙㒘㒞㒠㒥㒛㒤㒣㒡㒟㒗㒦㒝㒟㒣㒚㒘㒢㒟㒜㒤㒥㒛㒟㒤㒘㒗㒣㒝㒚㒣㒤㒙㒞㒞㒦㒥㒡㒚㒙㒡㒥㒙㒜㒝㒗㒣㒟㒙㒘㒟㒢㒤㒛㒛㒥㒠㒞㒗㒗㒟㒠㒣㒛㒛㒣㒟㒜㒥㒗㒛㒟㒡㒙㒤㒢㒝㒛㒣㒥㒙㒠㒟㒗㒥㒡㒛㒛㒡㒤㒗㒞㒝㒦㒣㒤㒛㒙㒟㒤㒗㒜㒛㒥㒡㒠㒘㒘㒝㒢㒣㒛㒙㒤㒟㒝㒥㒘㒝㒠㒡㒚㒗㒤㒟㒜㒣㒙㒡㒟㒟㒘㒥㒢㒛㒜㒣㒥㒗㒞㒝㒘㒦㒡㒙㒛㒟㒣㒥㒝㒛㒦㒡㒠㒗㒙㒝㒢㒣㒝㒙㒥㒟㒠㒘㒘㒛㒡㒣㒛㒗㒤㒝㒝㒣㒗㒙㒡㒞㒙㒥㒤㒚㒜㒡㒗㒗㒟㒝㒙㒣㒢㒙㒛㒟㒥㒣㒞㒛㒙㒗㒡㒗㒛㒜㒣㒣㒝㒙㒦㒟㒟㒥㒙㒥㒢㒡㒜㒥㒥㒝㒞㒥㒘㒙㒣㒟㒚㒥㒤㒛㒞㒜㒗㒗㒡㒗㒙㒣㒤㒘㒜㒟㒥㒥㒟㒛㒘㒡㒢㒢㒛㒝㒤㒥㒞㒙㒗㒠㒠㒥㒜㒛㒣㒡㒝㒗㒗㒘㒟㒣㒙㒣㒢㒟㒛㒦㒥㒛㒠㒡㒘㒗㒡㒝㒛㒞㒤㒙㒞㒚㒦㒥㒡㒣㒙㒡㒣㒗㒜㒝㒥㒣㒟㒤㒘㒟㒢㒗㒛㒛㒤㒢㒞㒗㒘㒟㒠㒣㒚㒙㒤㒚㒜㒥㒚㒙㒟㒡㒙㒗㒢㒝㒜㒥㒥㒙㒞㒟㒘㒡㒡㒛㒛㒙㒤㒗㒝㒝㒦㒣㒠㒙㒙㒟㒢㒥㒜㒦㒥㒡㒟㒙㒘㒝㒡㒤㒛㒙㒥㒡㒝㒥㒗㒛㒡㒜㒚㒗㒗㒙㒜㒣㒦㒙㒟㒟㒚㒗㒢㒛㒛㒡㒥㒣㒞㒝㒘㒜㒡㒙㒚㒟㒣㒥㒟㒛㒦㒡㒠㒗㒚㒙㒢㒣㒜㒥㒥㒟㒠㒢㒘㒛㒢㒣㒛㒗㒤㒝㒞㒡㒗㒙㒡㒤㒙㒥㒣㒛㒜㒡㒦㒗㒟㒝㒘㒣㒢㒥㒛㒟㒥㒣㒞㒛㒗㒣㒡㒗㒜㒝㒣㒣㒝㒙㒗㒛㒟㒥㒚㒗㒢㒡㒝㒠㒥㒝㒠㒣㒘㒙㒡㒟㒛㒡㒤㒛㒞㒝㒗㒗㒡㒠㒙㒣㒥㒙㒜㒟㒥㒥㒠㒗㒘㒡㒢㒣㒛㒝㒦㒥㒞㒙㒙㒟㒠㒥㒚㒛㒤㒝㒝㒗㒗㒙㒟㒣㒝㒞㒢㒟㒛㒥㒥㒛㒞㒡㒘㒢㒡㒝㒚㒥㒤㒙㒝㒠㒦㒥㒡㒝㒙㒡㒣㒗㒝㒘㒥㒣㒣㒗㒘㒟㒡㒥㒛㒛㒤㒡㒞㒗㒗㒝㒡㒞㒚㒙㒣㒠㒜㒥㒦㒜㒟㒡㒚㒙㒢㒝㒛㒣㒥㒤㒞㒟㒛㒙㒡㒛㒚㒡㒤㒗㒟㒝㒦㒣㒠㒙㒚㒚㒢㒥㒜㒦㒥㒡㒠㒠㒘㒝㒣㒣㒛㒙㒤㒟㒞㒠㒗㒛㒡㒜㒚㒗㒤㒠㒜㒣㒘㒙㒟㒟㒘㒥㒢㒦㒛㒡㒥㒢㒞㒝㒘㒗㒡㒙㒜㒟㒣㒥㒝㒛㒗㒜㒠㒗㒚㒘㒢㒣㒟㒦㒥㒟㒠㒗㒘㒛㒡㒡㒛㒤㒤㒝㒟㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒗㒠㒘㒘㒣㒢㒦㒛㒟㒤㒦㒞㒛㒘㒣㒡㒗㒚㒝㒤㒞㒝㒙㒚㒝㒟㒥㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒤㒡㒟㒚㒦㒤㒛㒝㒢㒗㒗㒡㒟㒙㒣㒣㒙㒝㒚㒥㒥㒟㒤㒘㒡㒢㒗㒛㒝㒦㒣㒞㒙㒗㒟㒡㒠㒚㒛㒤㒜㒝㒗㒘㒚㒟㒣㒚㒛㒢㒟㒛㒥㒦㒘㒞㒡㒘㒝㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒚㒜㒣㒗㒝㒚㒥㒣㒟㒛㒘㒟㒣㒥㒛㒛㒤㒡㒞㒢㒗㒝㒡㒞㒚㒙㒦㒥㒜㒥㒘㒛㒟㒡㒙㒗㒣㒘㒛㒣㒥㒤㒞㒟㒚㒣㒡㒛㒜㒡㒤㒗㒝㒝㒗㒞㒠㒙㒚㒚㒢㒥㒠㒘㒥㒡㒟㒗㒘㒝㒡㒣㒛㒤㒤㒟㒞㒗㒗㒛㒠㒢㒚㒗㒤㒟㒜㒣㒦㒙㒠㒚㒘㒥㒦㒙㒛㒡㒥㒗㒞㒝㒘㒥㒡㒙㒚㒟㒤㒡㒝㒛㒚㒙㒠㒗㒙㒝㒢㒣㒜㒙㒥㒟㒞㒥㒘㒦㒡㒡㒛㒙㒤㒝㒝㒤㒗㒙㒡㒡㒙㒥㒣㒛㒝㒜㒦㒗㒢㒦㒘㒣㒢㒙㒛㒟㒗㒥㒞㒛㒗㒡㒡㒢㒚㒝㒗㒝㒝㒙㒘㒥㒟㒥㒚㒝㒗㒤㒜㒗㒦㒘㒞㒣㒛㒢㒡㒟㒚㒥㒤㒛㒟㒡㒞㒗㒠㒝㒚㒞㒣㒙㒝㒚㒥㒥㒠㒜㒘㒡㒤㒝㒢㒛㒤㒣㒞㒤㒗㒟㒠㒢㒚㒛㒣㒢㒝㒗㒘㒣㒟㒣㒙㒝㒜㒟㒛㒥㒥㒛㒞㒡㒗㒤㒡㒝㒚㒤㒤㒙㒞㒡㒜㒘㒠㒛㒚㒜㒣㒗㒜㒦㒥㒣㒟㒙㒘㒟㒣㒥㒤㒗㒤㒡㒞㒢㒗㒝㒡㒞㒚㒙㒥㒜㒜㒥㒗㒝㒟㒡㒙㒗㒣㒚㒛㒣㒘㒜㒞㒟㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒗㒞㒠㒙㒚㒜㒢㒥㒜㒝㒥㒡㒡㒗㒘㒝㒡㒣㒛㒤㒤㒟㒞㒠㒗㒛㒤㒡㒚㒗㒥㒝㒜㒣㒦㒙㒠㒚㒘㒥㒢㒦㒛㒡㒥㒜㒞㒝㒙㒣㒡㒙㒚㒟㒤㒠㒝㒛㒗㒜㒠㒗㒚㒞㒢㒣㒞㒙㒥㒟㒞㒥㒘㒦㒡㒡㒛㒢㒤㒝㒟㒙㒗㒙㒢㒥㒙㒥㒣㒛㒝㒜㒦㒗㒟㒚㒘㒣㒢㒚㒛㒟㒗㒝㒞㒛㒗㒥㒛㒗㒚㒝㒣㒣㒝㒙㒦㒜㒟㒥㒙㒜㒢㒡㒝㒙㒚㒠㒞㒣㒘㒤㒡㒟㒞㒞㒤㒛㒝㒡㒗㒗㒢㒝㒠㒣㒣㒙㒝㒚㒥㒥㒟㒦㒘㒡㒥㒡㒛㒝㒗㒙㒥㒗㒗㒟㒡㒠㒚㒛㒣㒞㒝㒗㒦㒞㒟㒣㒛㒟㒢㒟㒜㒙㒟㒛㒞㒡㒘㒗㒡㒝㒚㒠㒤㒙㒝㒠㒦㒥㒡㒝㒞㒤㒣㒗㒝㒘㒥㒣㒡㒘㒘㒟㒡㒥㒛㒛㒦㒡㒗㒙㒗㒝㒡㒞㒚㒙㒤㒚㒜㒥㒚㒙㒟㒡㒙㒗㒢㒝㒛㒣㒥㒤㒞㒟㒗㒦㒡㒛㒚㒢㒤㒗㒞㒟㒦㒣㒠㒙㒚㒚㒢㒥㒠㒟㒥㒡㒟㒗㒘㒝㒢㒥㒛㒙㒤㒟㒞㒡㒗㒛㒡㒚㒚㒗㒣㒝㒜㒣㒘㒙㒟㒟㒘㒥㒣㒗㒛㒡㒥㒣㒞㒝㒙㒠㒡㒙㒛㒡㒣㒥㒝㒛㒗㒟㒠㒗㒚㒢㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒣㒤㒝㒞㒡㒗㒙㒠㒡㒙㒥㒥㒛㒜㒡㒦㒗㒠㒙㒘㒣㒢㒥㒛㒟㒦㒞㒞㒛㒙㒡㒡㒗㒚㒝㒤㒟㒝㒙㒗㒛㒟㒥㒚㒞㒢㒡㒞㒗㒥㒝㒞㒣㒘㒥㒡㒟㒛㒡㒤㒛㒠㒡㒗㒗㒢㒝㒙㒣㒣㒙㒝㒛㒥㒥㒠㒗㒘㒡㒤㒠㒛㒝㒤㒣㒞㒙㒗㒟㒡㒡㒚㒛㒤㒞㒝㒗㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒦㒞㒡㒘㒗㒡㒝㒛㒠㒤㒙㒝㒣㒦㒥㒠㒛㒙㒡㒣㒗㒜㒗㒥㒣㒟㒚㒘㒟㒣㒥㒢㒛㒤㒡㒟㒗㒗㒝㒡㒢㒚㒙㒥㒚㒜㒥㒘㒡㒣㒚㒙㒗㒣㒝㒛㒣㒡㒛㒞㒟㒗㒦㒡㒛㒜㒘㒤㒗㒝㒡㒠㒣㒠㒙㒙㒟㒢㒥㒘㒝㒥㒡㒟㒘㒘㒝㒢㒗㒥㒙㒤㒟㒝㒥㒗㒛㒠㒛㒚㒗㒣㒞㒜㒣㒘㒙㒦㒟㒘㒥㒣㒛㒛㒡㒥㒦㒞㒝㒚㒥㒡㒙㒛㒡㒚㒝㒝㒛㒗㒢㒠㒗㒜㒟㒢㒣㒜㒙㒥㒟㒠㒥㒘㒛㒡㒡㒜㒘㒤㒝㒞㒤㒗㒙㒤㒡㒙㒥㒤㒝㒜㒡㒦㒗㒠㒟㒘㒣㒤㒤㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒤㒤㒝㒙㒦㒡㒟㒥㒙㒝㒢㒡㒜㒝㒥㒝㒞㒣㒙㒙㒡㒟㒗㒟㒤㒛㒝㒢㒗㒗㒡㒞㒙㒣㒣㒝㒦㒟㒥㒥㒟㒛㒘㒡㒞㒡㒛㒝㒤㒤㒞㒙㒗㒣㒚㒥㒚㒛㒣㒡㒝㒗㒦㒗㒟㒣㒙㒚㒢㒟㒝㒗㒚㒞㒞㒡㒙㒗㒡㒝㒜㒡㒤㒙㒝㒟㒦㒥㒢㒛㒚㒘㒣㒗㒝㒝㒥㒣㒠㒙㒘㒟㒦㒗㒛㒛㒥㒣㒞㒗㒗㒝㒡㒤㒚㒙㒤㒟㒜㒥㒦㒛㒟㒡㒚㒙㒢㒝㒛㒣㒦㒛㒞㒟㒛㒤㒡㒛㒚㒡㒤㒗㒟㒝㒦㒣㒠㒙㒚㒡㒢㒥㒝㒝㒥㒡㒢㒞㒘㒝㒣㒣㒛㒙㒤㒟㒟㒗㒗㒛㒡㒣㒚㒗㒥㒤㒜㒣㒗㒛㒟㒟㒘㒥㒣㒞㒛㒡㒘㒦㒞㒝㒗㒣㒡㒙㒜㒟㒣㒥㒝㒛㒗㒤㒠㒗㒚㒠㒢㒣㒞㒝㒥㒟㒠㒥㒘㒛㒡㒡㒜㒚㒤㒝㒞㒦㒗㒙㒡㒚㒙㒥㒤㒝㒜㒡㒦㒗㒠㒡㒘㒣㒣㒙㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒥㒘㒝㒙㒦㒟㒟㒥㒙㒛㒢㒡㒝㒙㒥㒝㒞㒣㒙㒟㒡㒟㒛㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒝㒟㒥㒥㒠㒡㒘㒡㒢㒙㒛㒝㒥㒥㒞㒙㒗㒟㒡㒦㒚㒛㒥㒢㒝㒗㒦㒝㒟㒣㒛㒙㒢㒟㒛㒥㒦㒜㒞㒡㒙㒘㒡㒝㒞㒥㒤㒙㒞㒡㒦㒥㒠㒛㒚㒣㒣㒗㒠㒘㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒟㒘㒗㒝㒠㒥㒚㒙㒣㒡㒜㒥㒘㒛㒟㒡㒙㒗㒣㒟㒛㒣㒥㒟㒞㒟㒚㒟㒡㒛㒜㒡㒤㒗㒝㒝㒗㒥㒠㒙㒚㒡㒢㒥㒞㒥㒥㒡㒡㒗㒘㒝㒡㒣㒜㒛㒤㒟㒟㒗㒗㒛㒣㒝㒚㒗㒣㒝㒜㒣㒦㒙㒠㒡㒘㒥㒢㒝㒛㒡㒥㒙㒞㒝㒘㒣㒡㒙㒚㒟㒤㒦㒝㒛㒘㒗㒠㒗㒚㒟㒢㒣㒞㒙㒥㒟㒞㒥㒙㒝㒡㒡㒜㒘㒤㒝㒞㒥㒗㒙㒢㒟㒙㒥㒣㒛㒝㒣㒦㒗㒠㒟㒘㒣㒦㒚㒛㒟㒥㒛㒤㒡㒗㒡㒢㒛㒚㒝㒣㒤㒝㒙㒦㒠㒟㒥㒙㒝㒢㒡㒜㒗㒚㒢㒞㒣㒘㒙㒡㒟㒛㒛㒤㒛㒝㒡㒗㒗㒠㒝㒟㒘㒣㒙㒜㒟㒥㒥㒠㒜㒘㒡㒢㒗㒛㒝㒤㒣㒤㒢㒗㒟㒢㒗㒚㒛㒤㒥㒝㒗㒦㒞㒟㒣㒛㒙㒢㒟㒛㒥㒦㒝㒞㒡㒘㒞㒡㒝㒞㒦㒤㒙㒝㒟㒦㒥㒠㒛㒚㒥㒣㒗㒝㒞㒥㒣㒟㒙㒘㒟㒡㒥㒛㒛㒤㒡㒟㒜㒗㒝㒡㒣㒚㒙㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒣㒣㒛㒣㒥㒙㒞㒟㒗㒦㒡㒛㒜㒡㒤㒗㒝㒝㒘㒚㒠㒙㒚㒞㒢㒥㒜㒝㒥㒡㒠㒙㒘㒝㒡㒣㒜㒡㒤㒟㒞㒢㒗㒛㒠㒡㒚㒗㒥㒝㒜㒣㒦㒙㒡㒗㒘㒥㒣㒣㒛㒡㒙㒙㒞㒝㒘㒥㒡㒙㒚㒟㒥㒞㒝㒛㒗㒡㒠㒗㒙㒝㒢㒣㒝㒛㒥㒟㒞㒥㒙㒥㒡㒡㒞㒜㒤㒝㒝㒣㒗㒙㒡㒡㒙㒥㒣㒛㒞㒜㒦㒗㒠㒝㒘㒣㒢㒙㒛㒟㒤㒥㒞㒛㒗㒡㒢㒟㒚㒝㒥㒞㒝㒙㒦㒡㒟㒥㒙㒛㒢㒡㒜㒗㒦㒤㒞㒣㒙㒠㒡㒟㒜㒝㒤㒛㒞㒡㒗㒗㒠㒝㒛㒙㒣㒙㒝㒥㒥㒥㒠㒢㒘㒡㒢㒗㒛㒝㒤㒣㒟㒛㒗㒟㒢㒛㒚㒛㒣㒣㒝㒗㒘㒝㒟㒣㒙㒙㒣㒢㒛㒥㒦㒝㒞㒡㒘㒦㒡㒝㒚㒣㒤㒙㒝㒟㒘㒘㒠㒛㒙㒣㒣㒗㒜㒞㒥㒣㒡㒙㒘㒟㒡㒥㒜㒞㒤㒡㒟㒙㒗㒝㒠㒤㒚㒙㒥㒟㒜㒥㒦㒛㒠㒤㒙㒗㒣㒠㒛㒣㒦㒡㒞㒟㒗㒥㒡㒛㒚㒡㒥㒚㒝㒝㒦㒥㒠㒙㒙㒠㒢㒥㒜㒛㒥㒡㒟㒗㒙㒝㒡㒣㒛㒙㒤㒟㒝㒥㒗㒛㒡㒗㒞㒣㒣㒝㒝㒞㒦㒙㒛㒝㒘㒥㒢㒜㒛㒡㒥㒙㒞㒝㒘㒗㒛㒙㒚㒟㒣㒥㒝㒛㒢㒟㒠㒗㒙㒞㒢㒣㒜㒝㒟㒟㒞㒥㒘㒛㒡㒡㒤㒤㒤㒝㒝㒤㒗㒙㒠㒟㒡㒟㒣㒛㒝㒘㒦㒗㒟㒝㒘㒣㒢㒙㒛㒟㒤㒥㒥㒥㒗㒡㒡㒜㒚㒝㒣㒣㒝㒙㒦㒟㒟㒥㒙㒡㒗㒝㒜㒗㒥㒟㒞㒣㒚㒟㒡㒟㒚㒦㒤㒛㒝㒣㒗㒗㒠㒡㒣㒣㒣㒙㒜㒟㒥㒥㒡㒡㒘㒡㒢㒘㒛㒝㒥㒗㒘㒙㒗㒟㒠㒥㒚㒛㒤㒚㒝㒗㒦㒞㒟㒣㒛㒙㒙㒟㒛㒥㒥㒝㒞㒡㒘㒘㒡㒝㒝㒝㒤㒙㒟㒟㒝㒥㒠㒛㒙㒣㒣㒗㒜㒟㒥㒣㒠㒝㒘㒟㒣㒥㒢㒛㒤㒡㒞㒙㒗㒝㒠㒥㒚㒙㒦㒞㒜㒥㒘㒡㒦㒟㒙㒗㒢㒟㒛㒣㒥㒢㒞㒟㒗㒦㒡㒛㒝㒢㒤㒗㒝㒡㒠㒣㒠㒙㒙㒟㒢㒥㒜㒤㒥㒡㒟㒘㒘㒝㒢㒥㒠㒜㒤㒟㒞㒗㒗㒛㒡㒚㒚㒗㒣㒝㒜㒣㒘㒙㒤㒞㒘㒥㒢㒝㒛㒡㒥㒙㒞㒝㒙㒠㒡㒙㒛㒡㒣㒥㒝㒛㒦㒥㒠㒗㒙㒣㒢㒣㒜㒙㒥㒟㒞㒥㒘㒛㒡㒡㒛㒙㒤㒝㒞㒗㒗㒙㒠㒡㒙㒥㒥㒛㒜㒡㒦㒗㒟㒟㒘㒣㒢㒛㒛㒟㒥㒜㒞㒛㒙㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒡㒟㒥㒛㒠㒢㒡㒞㒗㒥㒝㒞㒣㒘㒛㒡㒟㒛㒗㒤㒛㒠㒞㒗㒗㒡㒟㒙㒣㒣㒙㒜㒣㒥㒥㒟㒤㒘㒡㒢㒗㒛㒝㒦㒣㒞㒙㒗㒟㒡㒙㒚㒛㒣㒥㒝㒗㒘㒚㒟㒣㒚㒛㒢㒟㒛㒥㒥㒡㒞㒡㒛㒚㒡㒝㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒥㒣㒗㒜㒣㒥㒣㒟㒛㒘㒟㒣㒥㒛㒛㒤㒡㒞㒛㒗㒝㒡㒗㒚㒙㒗㒟㒜㒥㒘㒛㒟㒡㒙㒗㒢㒡㒛㒣㒥㒝㒞㒟㒘㒚㒡㒛㒜㒡㒤㒗㒝㒝㒗㒗㒠㒙㒙㒣㒢㒥㒜㒞㒥㒡㒡㒗㒘㒝㒡㒣㒛㒝㒤㒟㒞㒙㒗㒛㒢㒗㒚㒗㒣㒝㒜㒣㒦㒙㒟㒡㒘㒥㒢㒟㒛㒡㒥㒘㒞㒝㒘㒥㒡㒙㒚㒟㒤㒗㒝㒛㒚㒟㒠㒗㒙㒝㒢㒣㒝㒛㒥㒟㒞㒥㒘㒞㒡㒡㒜㒡㒤㒝㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒣㒦㒗㒟㒟㒘㒣㒢㒚㒛㒟㒦㒗㒞㒛㒗㒡㒡㒙㒚㒝㒤㒜㒝㒙㒦㒟㒟㒥㒛㒛㒢㒡㒜㒗㒥㒟㒞㒣㒘㒛㒡㒟㒜㒢㒤㒛㒞㒣㒗㒗㒠㒝㒚㒗㒣㒙㒜㒥㒥㒥㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒛㒗㒟㒡㒙㒚㒛㒣㒣㒝㒗㒘㒝㒟㒣㒙㒙㒢㒡㒛㒥㒥㒝㒞㒡㒘㒞㒡㒝㒜㒣㒤㒙㒝㒟㒗㒗㒠㒛㒙㒣㒣㒗㒞㒙㒥㒣㒡㒙㒘㒟㒡㒥㒛㒝㒤㒡㒞㒙㒗㒝㒣㒠㒚㒙㒣㒟㒜㒥㒦㒛㒟㒣㒙㒗㒢㒟㒛㒣㒥㒚㒞㒟㒘㒙㒛㒛㒚㒡㒤㒗㒝㒝㒗㒜㒠㒙㒙㒠㒢㒥㒜㒛㒟㒠㒟㒗㒘㒝㒡㒣㒛㒚㒤㒟㒝㒥㒗㒛㒠㒡㒚㒗㒣㒝㒜㒣㒦㒙㒟㒟㒘㒥㒢㒛㒛㒡㒥㒘㒞㒝㒗㒣㒡㒙㒚㒟㒝㒤㒝㒛㒦㒡㒠㒗㒙㒞㒢㒣㒜㒙㒥㒟㒗㒛㒘㒛㒡㒡㒛㒗㒟㒘㒞㒜㒗㒙㒠㒟㒙㒥㒘㒘㒢㒢㒜㒞㒦㒛㒟㒜㒙㒝㒢㒤㒛㒙㒤㒠㒢㒜㒡㒡㒚㒝㒣㒣㒝㒙㒜㒞㒥㒤㒠㒞㒘㒦㒢㒚㒜㒢㒥㒥㒞㒞㒗㒤㒡㒦㒜㒜㒝㒤㒗㒗㒠㒝㒙㒣㒗㒚㒡㒟㒚㒞㒢㒘㒙㒜㒢㒗㒛㒝㒤㒣㒢㒜㒞㒘㒘㒙㒠㒤㒛㒛㒣㒜㒝㒛㒦㒦㒟㒡㒙㒘㒢㒥㒘㒘㒟㒚㒘㒗㒡㒝㒚㒣㒛㒠㒣㒠㒝㒡㒦㒦㒠㒤㒚㒗㒢㒢㒜㒘㒥㒝㒣㒚㒢㒗㒛㒛㒤㒡㒞㒗㒝㒜㒥㒚㒤㒤㒣㒥㒜㒥㒦㒛㒟㒡㒝㒘㒙㒚㒢㒢㒜㒞㒥㒝㒟㒙㒦㒢㒛㒗㒤㒗㒝㒝㒦㒣㒗㒛㒟㒠㒚㒙㒢㒤㒜㒟㒥㒞㒠㒞㒢㒞㒛㒙㒤㒟㒝㒥㒝㒞㒗㒙㒠㒜㒙㒠㒣㒞㒜㒜㒥㒠㒟㒡㒙㒗㒡㒦㒜㒙㒙㒘㒘㒜㒡㒙㒚㒟㒣㒥㒣㒞㒝㒙㒦㒘㒠㒟㒘㒤㒢㒜㒜㒣㒥㒚㒟㒝㒤㒞㒛㒞㒤㒝㒝㒣㒗㒙㒤㒢㒠㒤㒚㒝㒢㒦㒚㒞㒦㒢㒟㒜㒗㒠㒛㒣㒤㒥㒞㒛㒗㒡㒗㒞㒠㒞㒚㒠㒣㒞㒛㒦㒠㒚㒙㒛㒢㒡㒜㒗㒜㒠㒥㒣㒞㒚㒘㒦㒡㒣㒜㒜㒞㒠㒗㒗㒠㒝㒙㒣㒗㒦㒠㒠㒛㒗㒣㒞㒝㒠㒤㒗㒠㒝㒙㒢㒢㒥㒜㒞㒣㒘㒝㒞㒗㒙㒠㒛㒙㒟㒥㒚㒙㒠㒢㒟㒛㒥㒥㒛㒤㒤㒞㒦㒘㒛㒡㒡㒚㒞㒣㒢㒞㒙㒝㒠㒚㒟㒣㒗㒜㒝㒥㒣㒣㒚㒟㒜㒘㒤㒢㒠㒛㒟㒥㒛㒙㒝㒗㒢㒠㒟㒥㒟㒣㒡㒜㒜㒦㒡㒠㒚㒗㒤㒜㒜㒥㒙㒞㒟㒗㒥㒥㒝㒡㒠㒚㒛㒤㒦㒛㒙㒗㒘㒠㒡㒙㒘㒢㒠㒘㒞㒟㒠㒘㒝㒡㒣㒛㒙㒙㒦㒣㒦㒞㒗㒗㒜㒡㒚㒚㒝㒣㒘㒜㒞㒥㒣㒛㒢㒣㒗㒛㒡㒥㒗㒞㒝㒛㒦㒘㒛㒠㒤㒙㒦㒤㒟㒜㒦㒥㒞㒟㒦㒙㒡㒢㒝㒜㒞㒦㒜㒝㒢㒢㒛㒛㒗㒤㒝㒝㒣㒝㒥㒗㒞㒟㒦㒙㒟㒣㒤㒝㒛㒦㒟㒟㒜㒙㒗㒡㒦㒥㒘㒞㒡㒗㒡㒡㒗㒚㒝㒘㒥㒣㒞㒝㒜㒦㒤㒠㒟㒘㒦㒤㒘㒥㒡㒞㒣㒘㒙㒡㒟㒡㒜㒚㒜㒤㒞㒝㒜㒛㒘㒚㒙㒣㒙㒜㒟㒥㒥㒦㒣㒟㒡㒘㒚㒡㒞㒛㒟㒤㒥㒢㒚㒡㒥㒚㒛㒣㒡㒝㒗㒚㒥㒗㒘㒟㒦㒘㒠㒢㒣㒜㒚㒥㒚㒞㒛㒦㒟㒡㒢㒛㒘㒤㒣㒛㒥㒦㒜㒠㒣㒚㒛㒗㒘㒦㒛㒟㒙㒘㒟㒡㒥㒠㒞㒚㒦㒥㒛㒜㒠㒦㒦㒡㒘㒚㒡㒣㒚㒙㒘㒟㒤㒙㒗㒢㒝㒛㒣㒙㒥㒤㒤㒞㒜㒞㒠㒚㒥㒤㒗㒝㒝㒦㒣㒦㒚㒠㒤㒚㒙㒣㒚㒢㒦㒟㒟㒘㒝㒡㒣㒛㒙㒘㒡㒤㒤㒝㒟㒘㒚㒞㒞㒚㒦㒣㒥㒝㒘㒚㒚㒙㒠㒢㒛㒛㒡㒥㒗㒣㒙㒞㒘㒗㒚㒠㒣㒚㒚㒤㒝㒜㒣㒦㒦㒟㒞㒙㒥㒢㒝㒝㒠㒠㒚㒘㒛㒡㒡㒛㒗㒙㒚㒣㒤㒞㒡㒤㒠㒠㒘㒚㒟㒣㒚㒝㒝㒥㒞㒠㒗㒘㒢㒢㒞㒛㒣㒢㒟㒞㒚㒘㒚㒡㒡㒙㒤㒤㒗㒜㒢㒦㒚㒜㒘㒣㒚㒜㒗㒥㒝㒞㒣㒜㒛㒘㒞㒡㒙㒛㒤㒢㒗㒝㒦㒗㒟㒟㒦㒙㒞㒡㒦㒦㒣㒟㒛㒘㒡㒢㒗㒠㒟㒚㒤㒤㒜㒝㒤㒢㒥㒞㒜㒚㒦㒤㒛㒝㒜㒡㒣㒝㒟㒘㒠㒣㒗㒜㒘㒤㒘㒘㒣㒡㒝㒚㒣㒤㒙㒢㒣㒞㒗㒦㒤㒠㒘㒙㒞㒢㒢㒜㒥㒣㒞㒟㒥㒘㒚㒢㒙㒛㒥㒘㒢㒗㒥㒠㒣㒚㒙㒣㒟㒣㒡㒝㒝㒤㒘㒟㒚㒙㒣㒢㒣㒜㒘㒣㒙㒟㒦㒡㒥㒚㒡㒤㒗㒝㒝㒝㒜㒗㒜㒠㒛㒙㒘㒣㒗㒜㒠㒦㒚㒟㒢㒘㒥㒡㒞㒙㒦㒞㒞㒗㒛㒠㒡㒚㒗㒘㒤㒣㒢㒝㒛㒦㒚㒠㒘㒙㒛㒡㒢㒛㒚㒤㒢㒗㒦㒡㒥㒚㒟㒣㒥㒝㒛㒛㒚㒦㒥㒠㒣㒙㒢㒢㒤㒛㒤㒤㒘㒞㒠㒘㒣㒢㒝㒚㒢㒤㒥㒗㒜㒠㒦㒙㒥㒣㒛㒜㒡㒛㒗㒦㒙㒞㒤㒙㒢㒡㒤㒜㒗㒥㒞㒗㒤㒡㒛㒚㒝㒣㒣㒝㒙㒛㒙㒦㒤㒟㒤㒙㒟㒦㒢㒦㒛㒞㒣㒘㒙㒡㒟㒟㒣㒚㒠㒥㒘㒞㒛㒗㒜㒠㒡㒚㒜㒣㒞㒜㒛㒦㒟㒝㒛㒗㒚㒠㒜㒙㒡㒠㒦㒗㒤㒠㒥㒚㒛㒣㒡㒢㒙㒜㒦㒦㒚㒟㒡㒙㒣㒙㒚㒥㒣㒞㒡㒘㒗㒡㒝㒞㒤㒚㒝㒣㒣㒛㒡㒦㒜㒟㒣㒙㒜㒣㒙㒘㒠㒟㒤㒘㒟㒡㒥㒛㒛㒙㒝㒤㒦㒝㒠㒦㒤㒠㒥㒘㒟㒣㒡㒜㒜㒗㒚㒟㒜㒙㒟㒙㒘㒥㒢㒞㒟㒗㒥㒡㒛㒢㒘㒚㒦㒤㒟㒝㒞㒗㒜㒠㒟㒘㒦㒢㒞㒛㒦㒟㒚㒘㒡㒡㒣㒛㒙㒤㒟㒤㒥㒝㒜㒗㒣㒡㒛㒣㒠㒝㒗㒦㒙㒟㒟㒘㒥㒗㒘㒢㒚㒜㒚㒤㒠㒚㒠㒡㒞㒚㒟㒣㒥㒝㒛㒛㒤㒦㒚㒠㒜㒙㒥㒢㒞㒝㒠㒠㒚㒘㒛㒡㒡㒛㒗㒙㒡㒤㒜㒝㒦㒦㒤㒛㒥㒘㒟㒣㒚㒜㒤㒥㒢㒞㒗㒙㒛㒢㒘㒚㒦㒥㒗㒙㒡㒥㒚㒡㒜㒚㒡㒣㒟㒝㒘㒦㒜㒜㒘㒣㒗㒜㒗㒥㒝㒞㒣㒟㒜㒘㒗㒠㒦㒚㒟㒤㒠㒞㒞㒥㒤㒙㒦㒣㒙㒜㒟㒥㒥㒣㒢㒞㒦㒙㒛㒦㒘㒥㒜㒞㒙㒗㒟㒠㒥㒟㒢㒚㒠㒤㒙㒝㒘㒦㒦㒠㒙㒘㒠㒢㒘㒛㒠㒦㒢㒘㒡㒡㒝㒚㒣㒤㒙㒡㒦㒝㒚㒗㒟㒞㒤㒙㒜㒣㒟㒝㒙㒥㒢㒞㒢㒘㒚㒣㒜㒥㒚㒞㒗㒗㒝㒠㒣㒞㒚㒚㒤㒤㒙㒝㒚㒡㒡㒝㒝㒘㒞㒢㒥㒛㒦㒞㒢㒙㒦㒡㒛㒚㒡㒤㒗㒣㒥㒞㒗㒗㒝㒠㒟㒚㒘㒟㒥㒘㒠㒡㒦㒟㒝㒗㒤㒢㒜㒛㒣㒤㒚㒝㒝㒗㒚㒠㒥㒦㒛㒢㒦㒝㒘㒦㒜㒛㒤㒙㒝㒡㒢㒜㒞㒡㒜㒜㒣㒘㒙㒟㒜㒚㒘㒡㒠㒛㒗㒣㒟㒡㒗㒢㒦㒜㒞㒥㒟㒞㒥㒘㒛㒦㒗㒡㒦㒛㒟㒣㒦㒝㒞㒣㒜㒚㒞㒣㒛㒜㒡㒦㒗㒣㒠㒟㒛㒘㒚㒢㒡㒚㒦㒤㒞㒞㒥㒗㒜㒡㒟㒣㒦㒞㒘㒦㒟㒟㒥㒙㒛㒗㒤㒢㒟㒜㒜㒦㒚㒚㒙㒦㒡㒡㒚㒛㒛㒤㒦㒞㒛㒦㒞㒡㒗㒙㒢㒣㒞㒜㒣㒙㒦㒙㒜㒢㒗㒛㒝㒤㒣㒢㒚㒝㒣㒗㒢㒠㒤㒚㒟㒢㒙㒜㒢㒦㒠㒠㒘㒙㒣㒢㒚㒝㒜㒞㒦㒘㒗㒡㒝㒚㒣㒙㒛㒣㒠㒝㒘㒦㒠㒠㒤㒠㒜㒜㒢㒥㒣㒟㒙㒘㒟㒦㒘㒢㒗㒛㒠㒥㒞㒞㒛㒞㒘㒚㒛㒣㒟㒜㒥㒦㒛㒦㒠㒠㒚㒝㒘㒜㒘㒥㒙㒞㒟㒗㒥㒥㒣㒡㒠㒚㒥㒣㒢㒞㒜㒚㒤㒙㒣㒢㒥㒜㒛㒥㒡㒣㒟㒞㒢㒗㒤㒡㒝㒤㒢㒞㒠㒗㒛㒠㒡㒚㒗㒚㒙㒣㒘㒜㒚㒥㒣㒟㒚㒙㒝㒢㒤㒜㒛㒤㒞㒟㒗㒘㒜㒟㒦㒤㒦㒝㒛㒦㒡㒠㒗㒞㒟㒘㒤㒢㒜㒛㒤㒠㒥㒜㒜㒘㒦㒢㒛㒛㒜㒟㒣㒛㒟㒦㒠㒡㒗㒚㒘㒞㒡㒝㒝㒢㒟㒣㒞㒢㒠㒛㒟㒤㒥㒞㒛㒝㒗㒗㒜㒠㒠㒛㒗㒤㒘㒝㒡㒣㒘㒙㒞㒣㒜㒜㒗㒥㒝㒞㒣㒜㒥㒘㒞㒡㒘㒚㒜㒤㒝㒜㒗㒗㒙㒟㒤㒚㒢㒢㒤㒝㒗㒗㒜㒙㒚㒢㒗㒛㒝㒤㒣㒥㒠㒝㒤㒗㒗㒠㒣㒚㒠㒣㒦㒝㒘㒤㒜㒝㒝㒟㒤㒜㒚㒥㒛㒞㒡㒘㒗㒦㒢㒟㒗㒚㒢㒤㒜㒚㒗㒠㒞㒚㒛㒣㒗㒜㒝㒥㒣㒣㒤㒟㒘㒘㒘㒡㒦㒙㒡㒤㒣㒝㒞㒘㒜㒠㒞㒚㒡㒚㒚㒦㒞㒟㒡㒙㒗㒢㒝㒢㒡㒛㒞㒥㒦㒚㒢㒡㒦㒚㒡㒤㒗㒝㒝㒝㒢㒦㒡㒟㒠㒚㒚㒣㒟㒜㒠㒥㒝㒞㒞㒘㒥㒡㒦㒗㒡㒞㒘㒘㒙㒠㒡㒚㒗㒣㒝㒡㒚㒜㒞㒦㒣㒝㒙㒘㒠㒢㒤㒛㒚㒤㒢㒞㒡㒗㒝㒠㒠㒚㒣㒤㒟㒝㒤㒥㒞㒚㒗㒢㒣㒜㒙㒥㒟㒤㒘㒟㒠㒘㒣㒡㒝㒚㒞㒣㒦㒝㒞㒤㒦㒡㒚㒙㒤㒜㒤㒦㒛㒟㒝㒘㒣㒢㒙㒟㒢㒚㒦㒥㒞㒞㒙㒡㒚㒛㒢㒣㒣㒝㒙㒦㒟㒤㒣㒟㒜㒙㒞㒢㒜㒗㒝㒥㒢㒞㒟㒣㒟㒠㒙㒚㒣㒣㒦㒙㒗㒥㒡㒠㒜㒙㒦㒢㒤㒛㒙㒦㒝㒟㒚㒘㒘㒢㒙㒚㒚㒞㒜㒗㒟㒠㒥㒚㒛㒙㒢㒤㒗㒜㒦㒚㒞㒙㒡㒢㒟㒛㒥㒥㒛㒤㒣㒞㒠㒘㒡㒝㒡㒚㒛㒥㒗㒝㒤㒗㒝㒡㒢㒣㒥㒜㒝㒥㒣㒟㒙㒝㒣㒘㒞㒢㒘㒚㒦㒣㒛㒞㒟㒗㒜㒠㒚㒚㒛㒞㒥㒛㒙㒥㒢㒟㒤㒘㒢㒣㒤㒦㒝㒞㒟㒗㒥㒡㒛㒟㒤㒚㒜㒤㒡㒛㒣㒗㒛㒠㒘㒙㒢㒢㒜㒜㒣㒦㒠㒝㒝㒗㒤㒢㒛㒛㒣㒢㒘㒛㒡㒗㒣㒠㒘㒚㒚㒣㒘㒦㒜㒠㒚㒘㒥㒢㒛㒛㒡㒚㒝㒤㒦㒞㒥㒘㒝㒡㒤㒙㒦㒤㒗㒛㒦㒗㒚㒟㒢㒙㒥㒡㒠㒦㒗㒞㒥㒘㒛㒡㒡㒟㒟㒛㒢㒤㒠㒝㒚㒗㒝㒠㒤㒙㒤㒢㒥㒠㒢㒟㒣㒘㒣㒢㒙㒛㒟㒘㒦㒤㒟㒝㒥㒥㒙㒡㒜㒛㒛㒢㒠㒗㒞㒟㒥㒙㒛㒢㒡㒢㒛㒜㒠㒥㒙㒚㒙㒘㒘㒢㒘㒦㒛㒤㒙㒝㒘㒗㒟㒠㒠㒙㒥㒢㒤㒝㒘㒦㒞㒣㒜㒢㒛㒛㒝㒤㒣㒞㒙㒜㒛㒗㒚㒠㒡㒚㒥㒥㒘㒦㒥㒟㒣㒙㒙㒢㒟㒠㒞㒜㒙㒥㒤㒟㒛㒗㒞㒡㒡㒚㒜㒣㒤㒤㒚㒠㒟㒙㒡㒣㒗㒜㒝㒚㒝㒦㒜㒟㒞㒘㒣㒞㒘㒥㒝㒞㒗㒗㒝㒠㒣㒟㒞㒚㒥㒡㒞㒜㒤㒗㒛㒟㒜㒦㒟㒠㒢㒙㒞㒢㒡㒞㒟㒘㒗㒢㒢㒤㒠㒝㒝㒦㒣㒠㒙㒝㒠㒙㒙㒢㒟㒚㒥㒥㒦㒞㒤㒘㒚㒡㒥㒚㒤㒣㒜㒗㒠㒠㒡㒚㒗㒣㒝㒣㒣㒜㒚㒦㒘㒠㒗㒙㒞㒡㒘㒥㒠㒞㒝㒗㒣㒡㒙㒟㒣㒙㒦㒤㒣㒝㒚㒢㒗㒝㒟㒙㒢㒣㒜㒜㒢㒡㒢㒘㒤㒡㒡㒛㒗㒤㒝㒢㒣㒝㒥㒦㒠㒡㒞㒙㒠㒣㒣㒚㒞㒦㒢㒟㒜㒗㒠㒜㒗㒤㒥㒞㒛㒗㒡㒥㒙㒡㒜㒚㒗㒤㒢㒚㒦㒗㒞㒠㒝㒙㒠㒜㒚㒥㒦㒞㒣㒘㒙㒡㒟㒡㒜㒚㒜㒤㒞㒝㒜㒗㒠㒠㒘㒚㒗㒣㒢㒜㒚㒜㒠㒙㒘㒢㒗㒛㒝㒤㒣㒢㒜㒞㒘㒘㒙㒠㒤㒛㒛㒣㒜㒝㒛㒗㒤㒙㒟㒢㒟㒛㒥㒥㒛㒣㒡㒞㒣㒗㒞㒢㒜㒚㒞㒤㒡㒙㒢㒠㒢㒙㒡㒣㒗㒜㒝㒙㒦㒦㒛㒞㒤㒘㒙㒡㒤㒛㒥㒥㒚㒗㒠㒡㒗㒚㒙㒣㒟㒜㒥㒚㒣㒥㒦㒟㒘㒘㒡㒡㒚㒥㒠㒞㒟㒗㒥㒡㒛㒟㒙㒛㒛㒤㒡㒝㒣㒤㒠㒟㒤㒚㒙㒡㒢㒦㒥㒟㒗㒘㒝㒡㒣㒠㒝㒛㒘㒤㒢㒝㒠㒥㒥㒡㒙㒙㒦㒢㒤㒜㒥㒡㒟㒜㒦㒙㒠㒢㒥㒛㒦㒠㒝㒜㒙㒗㒚㒡㒡㒚㒢㒟㒛㒣㒦㒠㒟㒙㒝㒢㒣㒜㒙㒚㒗㒦㒙㒟㒟㒘㒡㒠㒗㒛㒜㒤㒦㒞㒝㒘㒠㒚㒜㒣㒛㒜㒡㒦㒗㒥㒡㒟㒜㒙㒜㒡㒢㒛㒤㒥㒝㒝㒥㒙㒘㒚㒢㒣㒣㒝㒙㒦㒟㒤㒘㒟㒣㒘㒦㒣㒚㒜㒡㒞㒦㒘㒣㒡㒟㒚㒥㒤㒛㒢㒛㒞㒚㒗㒜㒠㒡㒗㒝㒢㒤㒜㒘㒦㒚㒞㒥㒘㒜㒠㒤㒥㒡㒞㒙㒗㒟㒠㒥㒠㒢㒙㒢㒣㒤㒜㒢㒦㒦㒟㒞㒙㒝㒣㒘㒛㒠㒡㒠㒞㒟㒘㒡㒢㒗㒛㒙㒢㒦㒗㒣㒠㒛㒙㒡㒣㒗㒡㒚㒜㒜㒦㒗㒟㒘㒘㒢㒢㒠㒛㒞㒠㒗㒜㒟㒦㒤㒡㒝㒚㒘㒣㒣㒜㒢㒥㒘㒙㒚㒢㒝㒛㒣㒥㒙㒢㒤㒝㒘㒦㒛㒚㒤㒤㒛㒝㒝㒦㒣㒠㒙㒞㒟㒘㒦㒣㒝㒜㒥㒜㒜㒘㒥㒡㒣㒛㒙㒤㒟㒣㒘㒝㒞㒗㒣㒠㒜㒚㒛㒡㒚㒝㒞㒦㒘㒙㒘㒢㒡㒛㒡㒥㒗㒞㒝㒜㒠㒘㒘㒡㒝㒚㒠㒣㒠㒞㒚㒝㒜㒚㒢㒢㒣㒜㒙㒥㒟㒥㒙㒞㒤㒘㒤㒡㒚㒛㒜㒤㒥㒝㒝㒣㒝㒠㒜㒙㒢㒟㒠㒜㒞㒤㒞㒝㒘㒦㒡㒞㒡㒜㒚㒣㒥㒟㒙㒦㒜㒡㒘㒦㒠㒝㒝㒦㒟㒟㒥㒙㒛㒗㒟㒢㒘㒜㒚㒥㒘㒚㒦㒢㒜㒚㒥㒤㒛㒝㒡㒝㒘㒗㒝㒠㒜㒦㒘㒣㒦㒜㒚㒥㒝㒟㒙㒘㒦㒢㒜㒛㒞㒥㒜㒚㒞㒞㒚㒚㒜㒣㒡㒝㒗㒦㒝㒥㒢㒦㒞㒣㒠㒛㒥㒥㒛㒞㒡㒝㒙㒗㒢㒡㒣㒚㒥㒤㒘㒝㒘㒦㒜㒠㒥㒙㒜㒢㒡㒚㒦㒦㒝㒟㒞㒙㒗㒡㒜㒛㒘㒤㒜㒟㒞㒡㒘㒚㒙㒣㒟㒜㒥㒛㒘㒦㒠㒟㒥㒘㒢㒣㒜㒢㒞㒞㒦㒗㒥㒡㒛㒚㒡㒚㒝㒤㒟㒝㒢㒦㒦㒞㒡㒗㒜㒠㒝㒘㒞㒟㒞㒘㒝㒡㒣㒛㒙㒙㒗㒥㒙㒞㒟㒗㒡㒞㒞㒙㒢㒤㒗㒘㒦㒟㒣㒘㒥㒢㒛㒛㒡㒜㒛㒤㒦㒞㒠㒗㒞㒥㒚㒤㒙㒝㒛㒦㒡㒠㒗㒠㒡㒙㒘㒣㒡㒜㒣㒜㒚㒙㒣㒡㒡㒛㒗㒤㒝㒤㒣㒝㒚㒗㒢㒡㒙㒙㒠㒢㒣㒜㒠㒦㒛㒛㒡㒘㒜㒢㒞㒛㒢㒡㒚㒞㒣㒗㒘㒡㒤㒦㒢㒤㒞㒛㒚㒣㒘㒜㒢㒗㒗㒢㒡㒙㒢㒙㒝㒘㒙㒡㒟㒚㒥㒤㒛㒝㒡㒗㒗㒠㒝㒙㒣㒣㒜㒜㒤㒥㒥㒟㒛㒘㒡㒦㒠㒡㒡㒛㒟㒤㒞㒝㒣㒘㒦㒚㒢㒣㒡㒝㒗㒦㒝㒦㒛㒠㒝㒙㒣㒢㒥㒘㒥㒡㒠㒚㒦㒙㒞㒛㒢㒤㒙㒝㒟㒦㒥㒤㒜㒟㒥㒙㒛㒠㒢㒝㒙㒥㒞㒟㒝㒙㒙㒟㒣㒚㒢㒤㒥㒝㒡㒗㒟㒠㒞㒚㒡㒗㒠㒗㒙㒟㒡㒙㒗㒢㒝㒡㒗㒛㒢㒥㒜㒞㒚㒦㒟㒡㒣㒚㒠㒣㒞㒝㒟㒢㒙㒞㒛㒘㒦㒣㒛㒜㒤㒜㒜㒙㒙㒡㒣㒛㒙㒤㒟㒡㒦㒝㒟㒦㒥㒞㒜㒚㒥㒤㒗㒝㒛㒥㒠㒝㒘㒘㒜㒢㒤㒛㒟㒞㒟㒗㒣㒡㒙㒚㒟㒣㒥㒝㒛㒦㒡㒟㒗㒝㒜㒚㒤㒜㒝㒥㒟㒞㒥㒘㒛㒦㒙㒡㒜㒚㒞㒤㒗㒟㒚㒡㒗㒙㒥㒣㒛㒜㒡㒚㒚㒥㒞㒟㒟㒘㒥㒡㒡㒚㒦㒤㒞㒞㒜㒞㒜㒛㒗㒣㒣㒝㒙㒦㒟㒤㒛㒟㒤㒙㒣㒢㒜㒚㒠㒥㒘㒟㒛㒘㒥㒡㒚㒛㒝㒠㒟㒗㒗㒥㒤㒚㒗㒣㒙㒜㒟㒥㒥㒥㒢㒞㒢㒘㒤㒡㒢㒗㒠㒞㒣㒗㒟㒠㒥㒚㒛㒘㒘㒣㒜㒝㒡㒤㒦㒟㒞㒙㒡㒣㒛㒛㒤㒤㒤㒞㒜㒘㒦㒚㒣㒤㒙㒝㒟㒗㒗㒤㒛㒙㒡㒣㒗㒜㒝㒦㒝㒟㒙㒘㒟㒡㒥㒜㒝㒚㒟㒞㒗㒗㒝㒠㒣㒚㒛㒣㒟㒜㒥㒦㒛㒟㒡㒙㒗㒢㒝㒛㒣㒥㒙㒞㒟㒗㒥㒡㒛㒚㒡㒤㒗㒝㒝㒦㒣㒠㒚㒙㒟㒢㒥㒜㒛㒥㒡㒟㒗㒙㒟㒡㒣㒛㒙㒤㒠㒝㒥㒜㒣㒠㒡㒚㒗㒣㒝㒝㒥㒦㒙㒟㒟㒘㒦㒢㒛㒢㒣㒥㒗㒞㒝㒗㒣㒣㒟㒚㒟㒣㒥㒝㒜㒦㒡㒠㒠㒙㒝㒢㒤㒜㒙㒜㒞㒞㒥㒘㒟㒛㒡㒛㒗㒤㒝㒝㒣㒗㒢㒠㒟㒙㒦㒣㒛㒜㒥㒠㒗㒟㒝㒘㒣㒢㒙㒜㒙㒤㒥㒞㒜㒗㒡㒡㒗㒤㒜㒣㒣㒝㒙㒦㒟㒟㒦㒙㒛㒢㒡㒜㒗㒥㒟㒢㒣㒘㒙㒡㒠㒚㒥㒤㒦㒝㒡㒗㒗㒠㒝㒚㒥㒙㒞㒜㒟㒥㒦㒟㒛㒚㒣㒢㒗㒛㒝㒤㒣㒟㒛㒗㒟㒠㒥㒚㒜㒣㒡㒝㒝㒦㒝㒟㒣㒙㒙㒥㒟㒛㒥㒥㒛㒞㒢㒘㒗㒡㒥㒚㒣㒛㒣㒝㒟㒘㒗㒠㒛㒙㒡㒣㒘㒜㒝㒦㒙㒟㒙㒘㒟㒡㒥㒞㒛㒤㒡㒞㒗㒗㒞㒠㒣㒛㒤㒣㒟㒥㒙㒦㒛㒠㒣㒙㒗㒢㒝㒛㒤㒥㒙㒞㒥㒗㒥㒡㒛㒚㒡㒗㒗㒝㒝㒦㒣㒠㒚㒙㒟㒗㒝㒜㒛㒝㒥㒟㒗㒙㒟㒡㒣㒛㒙㒤㒠㒝㒥㒜㒥㒠㒡㒚㒗㒣㒝㒝㒥㒟㒦㒟㒟㒙㒗㒢㒛㒣㒦㒥㒗㒞㒝㒗㒣㒣㒙㒚㒟㒣㒥㒝㒝㒦㒡㒠㒙㒙㒝㒦㒗㒜㒙㒦㒡㒞㒥㒘㒛㒡㒥㒛㒗㒦㒡㒝㒣㒗㒙㒠㒟㒙㒥㒣㒛㒜㒡㒦㒙㒟㒝㒙㒗㒢㒙㒛㒡㒤㒥㒠㒛㒗㒡㒡㒗㒚㒟㒣㒣㒝㒛㒦㒟㒣㒠㒙㒛㒤㒡㒜㒗㒥㒝㒞㒥㒘㒙㒡㒡㒚㒥㒘㒤㒝㒡㒗㒗㒠㒝㒙㒣㒣㒛㒜㒟㒦㒘㒟㒛㒘㒡㒢㒗㒛㒝㒤㒣㒞㒙㒗㒠㒠㒥㒚㒛㒣㒡㒝㒚㒦㒝㒠㒗㒙㒙㒢㒟㒛㒥㒥㒛㒠㒢㒘㒗㒡㒞㒚㒣㒦㒙㒤㒟㒦㒥㒠㒡㒙㒡㒣㒜㒜㒝㒜㒣㒟㒙㒚㒥㒥㒞㒛㒛㒥㒗㒞㒗㒙㒝㒠㒣㒚㒚㒣㒟㒟㒜㒦㒛㒟㒥㒣㒗㒢㒝㒛㒣㒥㒙㒠㒟㒗㒥㒡㒜㒚㒡㒤㒛㒗㒝㒦㒣㒠㒙㒙㒟㒤㒦㒜㒛㒥㒢㒟㒗㒛㒝㒘㒚㒛㒙㒤㒤㒝㒥㒙㒙㒠㒡㒢㒗㒣㒝㒝㒙㒚㒥㒟㒟㒘㒦㒢㒛㒝㒝㒥㒗㒞㒞㒗㒣㒡㒛㒚㒟㒤㒙㒗㒛㒦㒡㒠㒗㒙㒝㒤㒟㒜㒙㒥㒠㒞㒥㒙㒝㒦㒤㒛㒗㒤㒞㒝㒣㒟㒞㒠㒟㒙㒥㒣㒛㒞㒡㒗㒛㒟㒝㒘㒤㒢㒙㒛㒠㒤㒥㒡㒟㒗㒡㒢㒙㒚㒝㒣㒣㒝㒜㒦㒟㒤㒦㒙㒛㒢㒡㒜㒗㒥㒝㒞㒣㒘㒙㒡㒠㒚㒥㒤㒞㒝㒡㒗㒙㒠㒝㒚㒥㒣㒙㒜㒟㒦㒗㒟㒛㒠㒦㒢㒗㒛㒝㒤㒣㒠㒙㒗㒟㒠㒥㒚㒝㒣㒡㒝㒙㒦㒝㒣㒗㒙㒙㒣㒡㒛㒥㒥㒛㒞㒥㒘㒗㒣㒣㒚㒣㒤㒙㒝㒟㒦㒥㒠㒛㒙㒡㒣㒙㒜㒝㒦㒗㒟㒙㒘㒡㒡㒥㒝㒛㒤㒡㒞㒗㒗㒟㒠㒣㒚㒛㒣㒟㒡㒘㒦㒛㒡㒡㒙㒗㒢㒝㒛㒥㒥㒙㒞㒡㒗㒥㒘㒦㒚㒡㒦㒗㒝㒝㒦㒣㒠㒛㒙㒟㒣㒗㒜㒛㒦㒠㒟㒗㒘㒣㒘㒙㒛㒙㒤㒣㒝㒥㒗㒞㒠㒡㒚㒘㒣㒝㒜㒤㒦㒙㒟㒟㒞㒚㒢㒛㒛㒡㒥㒗㒞㒞㒗㒣㒡㒙㒚㒟㒣㒥㒟㒡㒦㒡㒠㒙㒙㒝㒣㒗㒜㒙㒥㒠㒞㒥㒙㒝㒡㒡㒛㒗㒤㒟㒝㒣㒘㒝㒠㒟㒙㒥㒣㒛㒝㒣㒦㒗㒟㒝㒘㒦㒢㒙㒣㒤㒤㒥㒞㒛㒗㒡㒣㒗㒚㒝㒣㒣㒝㒜㒦㒟㒠㒘㒙㒛㒚㒗㒜㒗㒦㒟㒞㒣㒘㒙㒡㒤㒚㒥㒗㒡㒝㒡㒗㒗㒠㒝㒙㒣㒣㒙㒜㒟㒦㒛㒟㒛㒘㒢㒢㒗㒛㒝㒤㒣㒞㒙㒗㒟㒠㒥㒚㒞㒣㒡㒝㒝㒦㒝㒟㒣㒙㒙㒢㒟㒛㒥㒥㒛㒞㒣㒘㒗㒡㒝㒚㒣㒤㒛㒝㒟㒦㒥㒠㒛㒙㒡㒣㒙㒜㒝㒥㒤㒟㒙㒘㒡㒡㒥㒝㒛㒤㒡㒞㒗㒗㒠㒠㒣㒚㒛㒣㒟㒞㒘㒦㒛㒟㒡㒜㒝㒢㒝㒜㒘㒥㒙㒞㒟㒗㒥㒡㒜㒚㒡㒗㒗㒣㒤㒦㒣㒠㒞㒙㒟㒚㒝㒜㒛㒛㒜㒟㒗㒘㒝㒛㒗㒛㒙㒤㒢㒝㒥㒗㒠㒠㒡㒚㒙㒣㒝㒞㒣㒗㒛㒟㒟㒙㒙㒢㒛㒛㒤㒥㒗㒣㒠㒗㒣㒢㒛㒤㒝㒣㒥㒝㒡㒦㒡㒦㒡㒙㒝㒢㒣㒜㒙㒥㒡㒢㒥㒘㒛㒢㒘㒛㒗㒤㒢㒝㒣㒗㒙㒠㒟㒙㒥㒥㒣㒜㒡㒦㒛㒟㒝㒙㒚㒢㒙㒛㒠㒤㒥㒠㒛㒘㒣㒡㒗㒚㒡㒣㒣㒝㒜㒦㒟㒥㒞㒙㒛㒣㒣㒥㒥㒥㒝㒟㒙㒘㒙㒤㒤㒚㒥㒤㒛㒝㒡㒗㒙㒤㒝㒙㒣㒣㒠㒜㒟㒦㒜㒟㒛㒘㒡㒢㒗㒛㒝㒗㒛㒞㒙㒗㒣㒠㒥㒚㒢㒣㒡㒝㒘㒦㒝㒡㒣㒚㒛㒢㒟㒜㒙㒥㒛㒞㒤㒘㒗㒦㒦㒚㒣㒥㒛㒗㒝㒦㒥㒠㒡㒙㒡㒥㒗㒜㒝㒥㒣㒟㒙㒘㒡㒥㒥㒛㒛㒥㒘㒞㒗㒘㒛㒠㒣㒚㒙㒣㒟㒜㒥㒘㒣㒟㒡㒙㒛㒢㒝㒜㒚㒥㒙㒞㒠㒗㒥㒣㒛㒛㒣㒤㒗㒝㒡㒦㒣㒠㒜㒙㒟㒘㒞㒜㒛㒦㒣㒘㒥㒘㒝㒢㒙㒛㒙㒘㒠㒝㒥㒗㒛㒠㒡㒚㒙㒗㒝㒜㒣㒦㒠㒟㒟㒙㒗㒢㒛㒛㒡㒥㒗㒞㒝㒚㒛㒡㒙㒚㒣㒣㒥㒝㒢㒦㒡㒠㒘㒙㒝㒤㒣㒝㒛㒥㒟㒟㒙㒘㒛㒡㒤㒛㒗㒗㒗㒝㒣㒘㒛㒚㒝㒙㒥㒣㒡㒜㒡㒙㒗㒟㒝㒘㒣㒢㒙㒛㒡㒘㒥㒞㒛㒘㒘㒡㒗㒚㒞㒣㒣㒝㒙㒦㒟㒟㒥㒛㒣㒢㒡㒜㒛㒥㒝㒟㒚㒘㒙㒡㒠㒚㒥㒦㒛㒞㒣㒗㒗㒠㒡㒙㒣㒣㒜㒜㒟㒘㒟㒟㒛㒙㒣㒛㒥㒛㒝㒥㒙㒞㒙㒟㒝㒠㒥㒚㒛㒣㒡㒝㒙㒚㒝㒟㒣㒙㒠㒢㒟㒜㒤㒥㒛㒞㒡㒘㒗㒡㒝㒝㒛㒤㒙㒝㒣㒦㒥㒠㒢㒙㒡㒣㒘㒜㒝㒗㒣㒠㒛㒘㒟㒢㒙㒛㒛㒤㒤㒞㒗㒜㒠㒠㒣㒛㒛㒝㒝㒜㒥㒦㒡㒟㒡㒚㒗㒢㒝㒛㒣㒥㒙㒞㒡㒛㒥㒡㒛㒛㒘㒤㒗㒝㒦㒦㒣㒠㒙㒙㒟㒢㒥㒞㒣㒥㒡㒟㒛㒘㒝㒢㒚㒛㒙㒤㒠㒝㒥㒙㒛㒡㒣㒚㒗㒣㒡㒜㒣㒦㒜㒟㒟㒛㒟㒢㒛㒜㒣㒞㒥㒞㒝㒘㒙㒡㒙㒟㒛㒣㒥㒝㒛㒦㒡㒠㒙㒝㒝㒢㒣㒜㒠㒥㒟㒟㒡㒘㒛㒡㒡㒛㒗㒤㒝㒠㒛㒗㒙㒠㒣㒙㒥㒣㒢㒜㒡㒦㒘㒟㒝㒚㒣㒣㒛㒛㒟㒥㒙㒞㒛㒗㒤㒡㒗㒟㒠㒣㒣㒞㒛㒠㒝㒟㒥㒙㒡㒢㒡㒠㒦㒥㒝㒞㒣㒘㒙㒡㒡㒞㒥㒤㒛㒞㒘㒗㒗㒠㒥㒙㒣㒣㒙㒜㒟㒥㒥㒡㒣㒘㒡㒢㒛㒛㒝㒥㒚㒞㒙㒗㒠㒠㒥㒜㒛㒤㒣㒝㒗㒦㒡㒟㒣㒙㒜㒢㒟㒡㒞㒥㒛㒟㒣㒡㒥㒡㒝㒛㒙㒤㒙㒣㒣㒦㒥㒠㒛㒙㒡㒣㒙㒠㒝㒥㒣㒟㒠㒘㒟㒢㒢㒛㒛㒤㒡㒞㒗㒗㒝㒠㒥㒚㒙㒣㒣㒜㒥㒦㒢㒟㒡㒙㒘㒢㒝㒝㒣㒥㒙㒞㒟㒘㒙㒡㒛㒚㒣㒤㒗㒞㒠㒦㒣㒠㒙㒙㒟㒢㒥㒜㒡㒥㒡㒟㒗㒘㒝㒡㒤㒛㒙㒗㒟㒝㒥㒗㒛㒡㒗㒚㒗㒚㒥㒜㒣㒙㒗㒟㒟㒘㒥㒢㒛㒛㒡㒥㒛㒞㒝㒘㒙㒡㒙㒚㒡㒣㒥㒟㒛㒦㒡㒠㒗㒙㒢㒢㒣㒜㒝㒥㒟㒤㒞㒘㒛㒢㒣㒛㒗㒤㒝㒞㒚㒗㒙㒤㒘㒙㒥㒣㒛㒜㒡㒦㒙㒣㒝㒘㒣㒢㒡㒛㒟㒤㒥㒞㒛㒗㒡㒡㒗㒚㒝㒣㒥㒝㒙㒦㒤㒟㒥㒙㒣㒢㒡㒜㒘㒥㒝㒠㒣㒘㒙㒡㒟㒛㒚㒤㒛㒝㒣㒗㒗㒡㒠㒙㒣㒣㒙㒜㒟㒥㒥㒟㒢㒘㒡㒢㒗㒛㒝㒤㒤㒞㒙㒚㒟㒠㒥㒚㒛㒤㒘㒝㒗㒝㒥㒟㒣㒟㒚㒢㒟㒛㒥㒥㒛㒞㒡㒘㒜㒡㒝㒛㒚㒤㒙㒝㒡㒦㒥㒢㒛㒙㒡㒣㒗㒜㒣㒥㒣㒟㒞㒘㒟㒤㒟㒛㒛㒥㒣㒞㒗㒗㒝㒡㒛㒚㒙㒤㒝㒜㒥㒦㒛㒟㒡㒙㒙㒦㒝㒛㒣㒥㒢㒞㒟㒘㒙㒡㒛㒚㒡㒤㒗㒝㒝㒙㒛㒠㒙㒙㒥㒢㒥㒜㒤㒥㒡㒟㒘㒘㒝㒢㒥㒠㒜㒤㒟㒞㒛㒗㒛㒡㒞㒚㒗㒣㒝㒜㒣㒦㒛㒣㒟㒘㒥㒢㒢㒛㒡㒥㒝㒞㒝㒗㒣㒡㒙㒚㒟㒛㒤㒝㒛㒗㒗㒠㒗㒙㒟㒢㒣㒜㒚㒥㒟㒞㒥㒢㒚㒡㒡㒛㒗㒤㒝㒝㒤㒗㒙㒠㒟㒙㒥");local M=((0x4662/143)+-#"get good use moonsec")local o=60 local l=d;local e={}e={[(128+-0x7f)]=function()local d,e,a,r=j(z,l,l+p);l=l+g;o=(o+(M*g))%u;return(((r+o-(M)+n*(g*m))%n)*((m*A)^m))+(((a+o-(M*m)+n*(m^p))%u)*(n*u))+(((e+o-(M*p)+A)%u)*n)+((d+o-(M*g)+A)%u);end,[(0x64-98)]=function(e,e,e)local e=j(z,l,l);l=l+t;o=(o+(M))%u;return((e+o-(M)+A)%n);end,[(((-37+0x8c)+-57)+-#[[why 6 hours cooldown to send a meme strings]])]=function()local d,e=j(z,l,l+m);o=(o+(M*m))%u;l=l+m;return(((e+o-(M)+n*(m*g))%n)*u)+((d+o-(M*m)+u*(m^p))%n);end,[(66-0x3e)]=function(l,e,o)if o then local e=(l/m^(e-d))%m^((o-t)-(e-d)+t);return e-e%d;else local e=m^(e-t);return(l%(e+e)>=e)and d or y;end;end,[(0x25-(-62+0x5e))]=function()local o=e[(232/0xe8)]();local l=e[(98+-0x61)]();local r=d;local a=(e[(144/0x24)](l,t,I+g)*(m^(I*m)))+o;local o=e[(-#"jjsploit winning"+(-0x53+103))](l,21,31);local e=((-d)^e[(-43+0x2f)](l,32));if(o==y)then if(a==v)then return e*y;else o=t;r=v;end;elseif(o==(n*(m^p))-t)then return(a==y)and(e*(t/v))or(e*(y/v));end;return G(e,o-((u*(g))-d))*(r+(a/(m^R)));end,[((0x282d/85)+-115)]=function(a,r,r)local r;if(not a)then a=e[(126/0x7e)]();if(a==y)then return'';end;end;r=H(z,l,l+a-d);l=l+a;local e=''for l=t,#r do e=K(e,F((j(H(r,l,l))+o)%u))o=(o+M)%n end return e;end}local function z(...)return{...},L('#',...)end local function A()local r={};local a={};local o={};local h={r,a,nil,o};local l={}local x=(31+-0x11)local n={[(87-0x53)]=(function(o)return not(#o==e[(52-0x32)]())end),[(-#'how tf do i remove the meme strings'+(-60+0x61))]=(function(o)return e[(36-0x1f)]()end),[((-5936/0x6a)+0x3b)]=(function(o)return e[(82-0x4c)]()end),[(-53+0x35)]=(function(o)local d=e[(1242/0xcf)]()local e=''local o=1 for l=1,#d do o=(o+x)%u e=K(e,F((j(d:sub(l,l))+o)%n))end return e end)};h[3]=e[(0x1d6/235)]();for e=t,e[(-#'how tf do i remove the meme strings'+(0x48/2))]()do a[e-t]=A();end;local o=e[(0xb0/176)]()for o=1,o do local e=e[(0x19+-23)]();local d;local e=n[e%(-#'Obfuscated By Obamas Left Nut'+(0xe2-155))];l[o]=e and e({});end;for x=1,e[((0xb7+-96)+-#'roblox roblox zimjelja roblox roblox sastalajala roblox roblox roblox salamelja roblox')]()do local o=e[((-14-0x25)+53)]();if(e[((235-(422-0xf3))+-#[[If LocalPlayer equals Dumbass then while true do end]])](o,d,t)==v)then local h=e[(-#'pussy day pussy clean pussy fresh pussy pretty pussy fat full of fresh'+((29528-0x39d2)/199))](o,m,p);local n=e[(87-((0xba+-94)+-#[[Alma Alma]]))](o,g,m+g);local o={e[(0x2c-41)](),e[(-56+0x3b)](),nil,nil};local a={[(-#"Please stop hitting my ribcage with a metal bar"+(129+-0x52))]=function()o[k]=e[((83-(-0x4e+148))+-#[[I can tell]])]();o[D]=e[(-31+((0xb8-130)+-#"this code is skidded"))]();end,[(0x7/7)]=function()o[k]=e[(-68+0x45)]();end,[(218/0x6d)]=function()o[b]=e[((0x85-122)+-#[[Give Robux]])]()-(m^I)end,[((0x6d+-95)+-#'sp5rit suck')]=function()o[U]=e[(-#"false"+(115-0x6d))]()-(m^I)o[S]=e[(150/0x32)]();end};a[h]();if(e[(-#'turi ip ip ip'+(0x110/16))](n,t,d)==t)then o[c]=l[o[w]]end if(e[(0x2b+-39)](n,m,m)==d)then o[i]=l[o[O]]end if(e[(72-0x44)](n,p,p)==t)then o[B]=l[o[B]]end r[x]=o;end end;return h;end;local function I(e,y,M)local l=e[m];local u=e[p];local n=e[d];return(function(...)local A={...};local e=d e*=-1 local g=e;local v={};local F={};local p=z local o=d;local j=l;local u=u;local z=L('#',...)-t;local l={};local n=n;for e=0,z do if(e>=u)then F[e-u]=A[e+t];else l[e]=A[e+d];end;end;local e=z-u+d local e;local u;while true do e=n[o];u=e[((-#'Apoio pela legalização de web sexo no Roblox'+(-0x60+193))/53)];a=(725539)while(203+-0x7b)>=u do a-= a a=(4726286)while u<=(0x8b-100)do a-= a a=(7676624)while(-32+0x33)>=u do a-= a a=(2299284)while(-0x69+114)>=u do a-= a a=(549054)while u<=(0x25+-33)do a-= a a=(11012992)while(-#'da hood money generator 2022 working free no virus'+(0x1584/108))>=u do a-= a a=(1487696)while u>(0x5a+-90)do a-= a local e=e[r]l[e](l[e+t])break end while(a)/((-#"how to find my dad at the dollar store getting milk"+(0x2afde/162)))==1436 do local b;local a;l[e[h]]();o=o+d;e=n[o];l[e[r]]=M[e[U]];o=o+d;e=n[o];a=e[w];b=l[e[s]];l[a+1]=b;l[a]=b[e[B]];o=o+d;e=n[o];l[e[c]]=e[s];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[w]]=l[e[O]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[S]];o=o+d;e=n[o];a=e[c];b=l[e[s]];l[a+1]=b;l[a]=b[e[D]];o=o+d;e=n[o];a=e[f]l[a](l[a+t])break end;break;end while 3104==(a)/((-#[[elbicho]]+(3577+(-24+0x2))))do a=(4943388)while((0x7f-109)+-#[[get some bitches]])>=u do a-= a local i;local a;a=e[c]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];a=e[f];i=l[e[b]];l[a+1]=i;l[a]=i[e[D]];o=o+d;e=n[o];l[e[r]]={};o=o+d;e=n[o];l[e[f]][e[O]]=e[B];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];a=e[f];i=l[e[U]];l[a+1]=i;l[a]=i[e[S]];o=o+d;e=n[o];l[e[h]]=e[s];break;end while 1473==(a)/(((0xd7a+-84)+-#'bigchungus'))do a=(13102915)while u>((114-0x63)+-#"my name jeff")do a-= a l[e[h]]=l[e[b]][e[N]];break end while(a)/((6725-(-0x42+3478)))==3955 do if(l[e[f]]==e[N])then o=o+t;else o=e[U];end;break end;break;end break;end break;end while(a)/((-#"dies of cringe"+(-0x41+1141)))==517 do a=(1891328)while(-#[[ballz]]+(-0x57+98))>=u do a-= a a=(2178306)while u>((0x75+-98)+-#"i love tatakai")do a-= a l[e[r]]();break end while(a)/((2852-0x5b5))==1566 do local S;local u;local a;a=e[x]l[a](P(l,a+t,e[U]))o=o+d;e=n[o];a=e[c];u=l[e[i]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[r]]=l[e[k]];o=o+d;e=n[o];l[e[h]]=l[e[U]];o=o+d;e=n[o];l[e[c]]={};o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];a=e[x];u=l[e[i]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=l[e[k]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[w]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[c]]=e[U];o=o+d;e=n[o];l[e[h]]=e[k];o=o+d;e=n[o];l[e[f]]=e[s];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];S={l,e};S[t][S[m][f]]=S[d][S[m][C]]+S[t][S[m][i]];o=o+d;e=n[o];l[e[f]][e[k]]=l[e[_]];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];a=e[h];u=l[e[O]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=l[e[s]][e[N]];o=o+d;e=n[o];a=e[x];u=l[e[k]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=M[e[k]];o=o+d;e=n[o];a=e[r];u=l[e[s]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[f]]=e[b];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[c]]=M[e[O]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[C]];o=o+d;e=n[o];l[e[f]]=e[O];o=o+d;e=n[o];l[e[c]]=M[e[b]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[x]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[h]]=M[e[O]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[B]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];l[e[r]]=(e[k]~=0);o=o+d;e=n[o];l[e[w]]=e[k];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[h]]=M[e[s]];o=o+d;e=n[o];l[e[h]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[c]]=e[O];o=o+d;e=n[o];a=e[c]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[x]]=l[e[U]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[C]];o=o+d;e=n[o];a=e[w];u=l[e[i]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];a=e[x]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[f]][e[i]]=l[e[_]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[B]];o=o+d;e=n[o];a=e[c];u=l[e[i]];l[a+1]=u;l[a]=u[e[N]];break end;break;end while 1024==(a)/((-#[[Sou usuário de HProtect]]+(271150/0x91)))do a=(3706352)while u<=((0x31+-34)+-#[[Omg guys]])do a-= a local u;local a;l[e[x]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];l[e[x]]=M[e[O]];o=o+d;e=n[o];l[e[r]]=l[e[U]][e[B]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[c]]=M[e[O]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[h]]=e[O];o=o+d;e=n[o];l[e[h]]=(e[O]~=0);o=o+d;e=n[o];l[e[c]]=e[k];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[f]]=M[e[b]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[C]];o=o+d;e=n[o];a=e[h];u=l[e[U]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]][e[b]]=l[e[_]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[N]];o=o+d;e=n[o];a=e[w];u=l[e[k]];l[a+1]=u;l[a]=u[e[D]];break;end while(a)/(((0xb68+-98)+-0x36))==1339 do a=(7430787)while u>(0x6f+-103)do a-= a M[e[b]]=l[e[w]];break end while(a)/((392249/0x8f))==2709 do l[e[x]]=l[e[i]]-l[e[_]];break end;break;end break;end break;end break;end while 2652==(a)/((0x19668/120))do a=(3497534)while u<=(-#"Se men is so tasty"+(93-0x3d))do a-= a a=(4026176)while((0x1090/106)+-#'Only a to Z 0 to 9 is allowed')>=u do a-= a a=(3085060)while(2470/(-#"iPipeh i love You"+(-104+0x170)))<u do a-= a l[e[w]][e[i]]=e[B];break end while 3790==(a)/((-#[[windows xp startup sfx]]+(0x3b0+-108)))do local h;local a;a=e[c]l[a](P(l,a+t,e[s]))o=o+d;e=n[o];a=e[x];h=l[e[O]];l[a+1]=h;l[a]=h[e[C]];o=o+d;e=n[o];l[e[f]]={};o=o+d;e=n[o];l[e[f]][e[k]]=e[B];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];a=e[r];h=l[e[i]];l[a+1]=h;l[a]=h[e[_]];o=o+d;e=n[o];l[e[r]]=e[k];break end;break;end while(a)/((-#"mf stfu"+(2208-0x471)))==3784 do a=(5645631)while(0x51-69)>=u do a-= a local i;local a;l[e[h]]=y[e[s]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[C]];o=o+d;e=n[o];a=e[w];i=l[e[b]];l[a+1]=i;l[a]=i[e[D]];o=o+d;e=n[o];l[e[x]]=y[e[b]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[N]];o=o+d;e=n[o];a=e[c]l[a](P(l,a+t,e[s]))o=o+d;e=n[o];do return end;break;end while(a)/((0x2fa45/87))==2517 do a=(2101008)while(-94+(-#"if syn request then print your mom then end and then kill yourself"+(382-0xd1)))<u do a-= a local e=e[c]local n,o=p(l[e](l[e+t]))g=o+e-d local o=0;for e=e,g do o=o+d;l[e]=n[o];end;break end while 1443==(a)/(((3015-0x60e)+-#'ambatakum'))do local a;l[e[h]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[D]];o=o+d;e=n[o];a=e[x]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[N]];o=o+d;e=n[o];if(l[e[h]]<l[e[B]])then o=e[i];else o=o+t;end;break end;break;end break;end break;end while(a)/(((66879534/0x92)/0x9f))==1214 do a=(7137480)while(0x60-80)>=u do a-= a a=(3798795)while(-#[[psx dupe is abd]]+(0x6b-((8866/0x3e)+-#"I have stolen your father figure and all your milk muahahahahahaha")))<u do a-= a if not l[e[r]]then o=o+t;else o=e[U];end;break end while(a)/((0x55f+(-6820/0x3e)))==3003 do local e=e[h]l[e]=l[e]()break end;break;end while(a)/(((-102+0x977a)/0xb))==2030 do a=(16560368)while(2176/0x80)>=u do a-= a local h;local a;l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];a=e[f];h=l[e[U]];l[a+1]=h;l[a]=h[e[B]];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];if l[e[f]]then o=o+d;else o=e[s];end;break;end while 4091==(a)/(((8251-0x103d)+-#'I make elevating music you make elevator music'))do a=(9991404)while((103-0x48)+-#"nerd emoji x7")<u do a-= a l[e[r]]();break end while 3834==(a)/(((5338-0xaa3)+-#[[rule 2 ok]]))do local d=e[x];local o=l[e[i]];l[d+1]=o;l[d]=o[e[D]];break end;break;end break;end break;end break;end break;end while(a)/((0x983+-24))==3184 do a=(5814714)while u<=((-0x67+(-#[[Reduce meme string slowmode when plsplspls]]+(576-0x15e)))+-#[[If LocalPlayer equals Dumbass then while true do end]])do a-= a a=(1535447)while((((-11-0x2b)+-#[[how to find my dad at the dollar store getting milk]])+145)+-#"iPipeh Is My god")>=u do a-= a a=(4200237)while u<=(-#"ive seen your mothers ass"+(0xb8/4))do a-= a a=(4630740)while u>(4740/0xed)do a-= a local a;local r;local u,N;local O;local a;l[e[w]]=M[e[U]];o=o+d;e=n[o];a=e[h];O=l[e[b]];l[a+1]=O;l[a]=O[e[D]];o=o+d;e=n[o];l[e[x]]=e[i];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[x]]=l[e[k]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[D]];o=o+d;e=n[o];a=e[f];O=l[e[s]];l[a+1]=O;l[a]=O[e[_]];o=o+d;e=n[o];a=e[h]u,N=p(l[a](l[a+t]))g=N+a-d r=0;for e=a,g do r=r+d;l[e]=u[r];end;o=o+d;e=n[o];a=e[f]u={l[a](P(l,a+1,g))};r=0;for e=a,e[C]do r=r+d;l[e]=u[r];end o=o+d;e=n[o];o=e[i];break end while(a)/(((0xb12+-79)+-#[[Tomathoust6969 was here]]))==1695 do local t;local a;a=e[x];t=l[e[U]];l[a+1]=t;l[a]=t[e[_]];o=o+d;e=n[o];l[e[h]]=e[s];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[c]]=M[e[O]];o=o+d;e=n[o];a=e[x];t=l[e[s]];l[a+1]=t;l[a]=t[e[D]];o=o+d;e=n[o];l[e[x]]=e[b];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[r]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[h]]=l[e[b]][e[N]];o=o+d;e=n[o];a=e[c];t=l[e[s]];l[a+1]=t;l[a]=t[e[C]];break end;break;end while 1773==(a)/((2474+-0x69))do a=(819398)while(-62+0x54)>=u do a-= a l[e[x]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[C]];o=o+d;e=n[o];if(l[e[h]]==e[C])then o=o+t;else o=e[s];end;break;end while(a)/((-#"Alma Alma"+(0x162a8/234)))==2162 do a=(5254221)while u>(-91+0x72)do a-= a local p;local I;local y;local z;local j;local g;local u;local a;a=e[f]l[a](P(l,a+t,e[O]))o=o+d;e=n[o];a=e[w];u=l[e[k]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[r]]=l[e[s]];o=o+d;e=n[o];l[e[h]]=l[e[b]];o=o+d;e=n[o];l[e[x]]={};o=o+d;e=n[o];l[e[h]]=M[e[i]];o=o+d;e=n[o];a=e[h];u=l[e[s]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[x]]=e[i];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[h]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[r]]=M[e[O]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[c]]=e[k];o=o+d;e=n[o];l[e[c]]=e[U];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];g={l,e};g[t][g[m][r]]=g[d][g[m][D]]+g[t][g[m][k]];o=o+d;e=n[o];l[e[f]][e[b]]=l[e[B]];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];a=e[r];u=l[e[s]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=l[e[s]][e[N]];o=o+d;e=n[o];a=e[h];u=l[e[b]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[h]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[c]][e[U]]=e[B];o=o+d;e=n[o];l[e[h]]=M[e[i]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];a=e[w]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[U]];o=o+d;e=n[o];a=e[c];u=l[e[s]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[r]]=e[b];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[N]];o=o+d;e=n[o];a=e[c];u=l[e[k]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=M[e[O]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[x]][e[O]]=e[S];o=o+d;e=n[o];a=e[c];j={};for e=1,#v do z=v[e];for e=0,#z do y=z[e];I=y[1];p=y[2];if I==l and p>=a then j[p]=I[p];y[1]=j;end;end;end;break end while 3459==(a)/((3096-0x629))do local g;local u;local a;a=e[w]l[a](P(l,a+t,e[U]))o=o+d;e=n[o];a=e[c];u=l[e[i]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[h]]=l[e[b]];o=o+d;e=n[o];l[e[f]]=l[e[U]];o=o+d;e=n[o];l[e[h]]={};o=o+d;e=n[o];l[e[h]]=M[e[U]];o=o+d;e=n[o];a=e[h];u=l[e[b]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[r]]=e[s];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[r]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[w]]=M[e[s]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[h]]=e[k];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];l[e[r]]=e[b];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];g={l,e};g[t][g[m][w]]=g[d][g[m][C]]+g[t][g[m][s]];o=o+d;e=n[o];l[e[w]][e[O]]=l[e[_]];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];a=e[r];u=l[e[k]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=l[e[i]][e[_]];o=o+d;e=n[o];a=e[f];u=l[e[i]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=M[e[i]];o=o+d;e=n[o];l[e[c]]=e[i];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];l[e[f]]=M[e[s]];o=o+d;e=n[o];l[e[h]]=M[e[i]];o=o+d;e=n[o];a=e[h];u=l[e[i]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[w]]=e[i];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[c]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[C]];o=o+d;e=n[o];l[e[h]]=l[e[O]][e[B]];o=o+d;e=n[o];a=e[r]l[a](l[a+t])o=o+d;e=n[o];l[e[h]]=M[e[O]];o=o+d;e=n[o];l[e[c]]();o=o+d;e=n[o];l[e[h]]=M[e[U]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[S]];o=o+d;e=n[o];a=e[x];u=l[e[s]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[x]]=e[b];o=o+d;e=n[o];a=e[r]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];l[e[h]]=M[e[b]];o=o+d;e=n[o];l[e[x]]();o=o+d;e=n[o];l[e[f]]=M[e[i]];o=o+d;e=n[o];a=e[c];u=l[e[b]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[h]]=e[i];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[r]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[S]];o=o+d;e=n[o];a=e[h];u=l[e[i]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];l[e[c]]=e[b];o=o+d;e=n[o];a=e[w]l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=M[e[s]];o=o+d;e=n[o];l[e[r]][e[U]]=e[N];break end;break;end break;end break;end while 383==(a)/((8129-0x1018))do a=(2710680)while u<=(2834/(-43+0x98))do a-= a a=(2721831)while u>(0xc80/128)do a-= a local o=e[c]l[o](P(l,o+t,e[O]))break end while(a)/((-#"Fucking Retarted"+(4885-0x9c0)))==1147 do local u;local a;a=e[r];u=l[e[k]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[c]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[D]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[_]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[D]];o=o+d;e=n[o];a=e[c];u=l[e[U]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];a=e[r]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]][e[s]]=e[B];o=o+d;e=n[o];l[e[f]]=M[e[i]];o=o+d;e=n[o];a=e[r];u=l[e[s]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[c]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[k]][e[N]];o=o+d;e=n[o];l[e[x]][e[b]]=l[e[N]];o=o+d;e=n[o];l[e[w]]=M[e[k]];o=o+d;e=n[o];l[e[h]]();o=o+d;e=n[o];l[e[c]]=M[e[b]];o=o+d;e=n[o];a=e[c];u=l[e[b]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[f]]=e[s];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[w]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[N]];o=o+d;e=n[o];l[e[h]]=M[e[U]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[_]];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];l[e[w]]=e[s];o=o+d;e=n[o];l[e[x]]=e[U];o=o+d;e=n[o];l[e[h]]=e[U];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[f]][e[i]]=l[e[C]];o=o+d;e=n[o];o=e[s];break end;break;end while(a)/((3314+(-0x27+-48)))==840 do a=(4619912)while u<=((168-0x7f)+-#'freerobuxphone')do a-= a l[e[w]]=l[e[U]]-l[e[C]];break;end while(a)/((-76+(0x1278-2418)))==2068 do a=(1122876)while u>(-#"no penne pasta"+(160-0x76))do a-= a local u;local a;l[e[h]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[h]]=M[e[k]];o=o+d;e=n[o];a=e[f];u=l[e[b]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[w]]=e[b];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[c]]=l[e[O]][e[S]];o=o+d;e=n[o];l[e[w]]=M[e[O]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[x]]=l[e[i]][l[e[D]]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[S]];o=o+d;e=n[o];a=e[r];u=l[e[O]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[r]]=e[U];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[h]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[f]]=e[s];o=o+d;e=n[o];a=e[f]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];l[e[c]]=M[e[b]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];a=e[c];u=l[e[s]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[r]]=e[s];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[r]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[w]]=M[e[b]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[b]][l[e[D]]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[B]];o=o+d;e=n[o];a=e[f];u=l[e[i]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[h]]=e[b];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[r]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[h]]=e[O];o=o+d;e=n[o];a=e[x]l[a](P(l,a+t,e[i]))break end while 333==(a)/((0x90114/175))do l[e[c]][e[k]]=l[e[_]];break end;break;end break;end break;end break;end while 1569==(a)/((529958/0x8f))do a=(11855468)while(-115+0x95)>=u do a-= a a=(6732844)while(-#[[waste of sperm]]+(160+-0x73))>=u do a-= a a=(4852120)while(780/0x1a)<u do a-= a local g;local u;local a;a=e[c]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];a=e[f];u=l[e[O]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[f]]=l[e[s]];o=o+d;e=n[o];l[e[x]]=l[e[s]];o=o+d;e=n[o];l[e[c]]={};o=o+d;e=n[o];l[e[x]]=l[e[i]][e[S]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[C]];o=o+d;e=n[o];l[e[r]]=M[e[i]];o=o+d;e=n[o];l[e[h]]=l[e[k]][e[N]];o=o+d;e=n[o];l[e[w]]=e[U];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];l[e[r]]=e[b];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];g={l,e};g[t][g[m][c]]=g[d][g[m][C]]+g[t][g[m][s]];o=o+d;e=n[o];l[e[h]][e[k]]=l[e[N]];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];a=e[x];u=l[e[s]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=l[e[O]][e[C]];o=o+d;e=n[o];a=e[c];u=l[e[O]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[f]]=M[e[k]];o=o+d;e=n[o];a=e[r];u=l[e[O]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[r]]=M[e[s]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[h]]=e[b];o=o+d;e=n[o];l[e[r]]=M[e[i]];o=o+d;e=n[o];l[e[w]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[f]]=M[e[k]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[x]]=e[b];o=o+d;e=n[o];l[e[w]]=(e[O]~=0);o=o+d;e=n[o];l[e[w]]=e[i];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[S]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];a=e[r]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=l[e[U]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[x];u=l[e[O]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]][e[b]]=l[e[_]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[B]];o=o+d;e=n[o];a=e[h];u=l[e[k]];l[a+1]=u;l[a]=u[e[D]];break end while(a)/((0x4c405/155))==2408 do local e=e[h]l[e]=l[e](l[e+t])break end;break;end while(a)/(((575546+-0x6e)/0xed))==2773 do a=(12937161)while u<=(105+-0x49)do a-= a local e=e[f]l[e]=l[e]()break;end while(a)/((3270+-0x33))==4019 do a=(10375043)while((9504/0x63)-0x3f)<u do a-= a local u;local a;l[e[w]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[c]]();o=o+d;e=n[o];l[e[x]]=M[e[k]];o=o+d;e=n[o];a=e[w];u=l[e[b]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[x]]=e[O];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[c]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[_]];o=o+d;e=n[o];a=e[r];u=l[e[U]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[x]]=M[e[U]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[r]]=M[e[b]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[_]];o=o+d;e=n[o];a=e[w]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];o=e[U];break end while 3143==(a)/((-#[[nononono listen listen]]+((0x9d67c-322401)/0x61)))do local a;local s;local u,D;local U;local a;l[e[h]]=M[e[i]];o=o+d;e=n[o];a=e[c];U=l[e[O]];l[a+1]=U;l[a]=U[e[C]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[h]]=l[e[i]][e[B]];o=o+d;e=n[o];a=e[x];U=l[e[i]];l[a+1]=U;l[a]=U[e[B]];o=o+d;e=n[o];a=e[h]u,D=p(l[a](l[a+t]))g=D+a-d s=0;for e=a,g do s=s+d;l[e]=u[s];end;o=o+d;e=n[o];a=e[f]u={l[a](P(l,a+1,g))};s=0;for e=a,e[_]do s=s+d;l[e]=u[s];end o=o+d;e=n[o];o=e[k];break end;break;end break;end break;end while(a)/((192502/0x3a))==3572 do a=(3116661)while u<=(155-0x77)do a-= a a=(2469896)while u>(1120/0x20)do a-= a local u;local a;a=e[w];u=l[e[i]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[r]]=l[e[b]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[D]];o=o+d;e=n[o];a=e[h];u=l[e[k]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[x]]=M[e[U]];o=o+d;e=n[o];a=e[w];u=l[e[s]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[x]]=l[e[b]][e[N]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[B]];o=o+d;e=n[o];a=e[x]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];l[e[x]]=M[e[b]];o=o+d;e=n[o];l[e[c]]=e[b];o=o+d;e=n[o];a=e[r]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=M[e[b]];o=o+d;e=n[o];a=e[w];u=l[e[i]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[c]]=e[O];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[x]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[x];u=l[e[s]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];o=e[s];break end while 2431==(a)/((216408/0xd5))do if(l[e[h]]<l[e[B]])then o=e[O];else o=o+t;end;break end;break;end while(a)/((2370-0x4ad))==2657 do a=(4038450)while u<=((0x94+-105)+-#"im gay")do a-= a do return l[e[w]]end break;end while(a)/((160056/0x6c))==2725 do a=(7072002)while u>(-#[[you get no absolute bitches]]+(0xcf3/(0x79-70)))do a-= a l[e[h]]=l[e[O]][e[B]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[C]];o=o+d;e=n[o];if(l[e[r]]~=e[_])then o=o+t;else o=e[O];end;break end while(a)/((0x24324/(0x91-85)))==2862 do local s;local D,u;local b;local a;a=e[h]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];l[e[h]]=M[e[k]];o=o+d;e=n[o];l[e[x]]=M[e[U]];o=o+d;e=n[o];a=e[f];b=l[e[O]];l[a+1]=b;l[a]=b[e[B]];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];l[e[h]]=(e[k]~=0);o=o+d;e=n[o];a=e[w]D,u=p(l[a](P(l,a+1,e[i])))g=u+a-1 s=0;for e=a,g do s=s+d;l[e]=D[s];end;o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,g))o=o+d;e=n[o];a=e[w]l[a]=l[a]()o=o+d;e=n[o];a=e[r];b=l[e[i]];l[a+1]=b;l[a]=b[e[S]];break end;break;end break;end break;end break;end break;end break;end while(a)/((-0x49+1332))==3754 do a=(7384500)while((0x750/26)+-#[[turi ip ip ip]])>=u do a-= a a=(583471)while(-0x4e+127)>=u do a-= a a=(766292)while(1276/(2465/0x55))>=u do a-= a a=(9276114)while(-0x3e+103)>=u do a-= a a=(1502900)while u>(0x9a-114)do a-= a l[e[r]]=y[e[U]];o=o+d;e=n[o];l[e[w]]=#l[e[i]];o=o+d;e=n[o];y[e[U]]=l[e[c]];o=o+d;e=n[o];l[e[x]]=y[e[O]];o=o+d;e=n[o];l[e[w]]=#l[e[k]];o=o+d;e=n[o];y[e[s]]=l[e[c]];o=o+d;e=n[o];do return end;break end while 1900==(a)/((-#[[I can tell]]+(1660-0x35b)))do local o=e[r]l[o](P(l,o+t,e[b]))break end;break;end while 2581==(a)/((-#'jjsplot on top'+(0x1c95-(-76+0xec9))))do a=(267344)while(-#[[Never fading and I know the haters are forever waiting]]+(22944/0xef))>=u do a-= a l[e[c]]=I(j[e[U]],nil,M);break;end while 1232==(a)/((29295/0x87))do a=(1209216)while u>(4300/0x64)do a-= a l[e[r]]=l[e[i]]%e[S];break end while(a)/((0x270fc/199))==1504 do local a=e[h];local r=e[_];local n=a+2 local a={l[a](l[a+1],l[n])};for e=1,r do l[n+e]=a[e];end;local a=a[1]if a then l[n]=a o=e[b];else o=o+d;end;break end;break;end break;end break;end while(a)/(((0x1ffa-4108)+-#'if syn request then print your mom then end and then kill yourself'))==191 do a=(3304120)while(126-0x50)>=u do a-= a a=(82550)while(3375/0x4b)<u do a-= a local d=e[i];local o=l[d]for e=d+1,e[C]do o=o..l[e];end;l[e[r]]=o;break end while(a)/((0xa3c-(-#'pairu sucks dick'+(0x5b3+-93))))==65 do l[e[c]]=(e[i]~=0);o=o+t;break end;break;end while(a)/(((-#"Cause I know the way to get em motivated"+(582365/0xf5))-0x4b7))==2924 do a=(1211508)while(0xb6-135)>=u do a-= a local r=j[e[k]];local a;local d={};a=Y({},{__index=function(o,e)local e=d[e];return e[1][e[2]];end,__newindex=function(l,e,o)local e=d[e]e[1][e[2]]=o;end;});for a=1,e[_]do o=o+t;local e=n[o];if e[(75-0x4a)]==85 then d[a-1]={l,e[U]};else d[a-1]={y,e[k]};end;v[#v+1]=d;end;l[e[w]]=I(r,a,M);break;end while(a)/((-#"I like watching videos of black men shaking their booty cheeks"+(-37+0x797)))==657 do a=(11165275)while(-0x22+82)<u do a-= a M[e[s]]=l[e[x]];break end while 3691==(a)/((-0x53+((530660/0xa9)+-#"Me be like at 5am in the morning")))do local o=e[f]l[o]=l[o](P(l,o+d,e[b]))break end;break;end break;end break;end break;end while(a)/((-#"Generated by nicuses right ball"+(16380/0x15)))==779 do a=(2452318)while u<=(0xde-168)do a-= a a=(9557120)while u<=(((204+-0x38)+-#"2406924069240 your mom is gay af lol")+-0x3d)do a-= a a=(445884)while u>(-#[[ive seen your mothers ass]]+(0xed-162))do a-= a if not l[e[h]]then o=o+t;else o=e[U];end;break end while 2036==(a)/((330+-0x6f))do local i;local a;a=e[x];i=l[e[U]];l[a+1]=i;l[a]=i[e[S]];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[r]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[w]]=l[e[O]][e[B]];o=o+d;e=n[o];if(l[e[h]]==e[N])then o=o+t;else o=e[k];end;break end;break;end while(a)/((0xe1b+-123))==2740 do a=(1397900)while((0xfb-185)+-#[[no penne pasta]])>=u do a-= a local d=e[x];local n=l[d]local a=l[d+2];if(a>0)then if(n>l[d+1])then o=e[s];else l[d+3]=n;end elseif(n<l[d+1])then o=e[s];else l[d+3]=n;end break;end while 350==(a)/(((0x1ccf1/29)+-#'fun fact if you want to say discord just type Discord with a capital D boom'))do a=(1547644)while(0xaa-117)<u do a-= a l[e[f]]={};break end while(a)/(((1050-0x240)+-#[[Cause I know the way to get em motivated]]))==3566 do local e=e[c]l[e]=l[e](P(l,e+d,g))break end;break;end break;end break;end while 1411==(a)/((180752/0x68))do a=(6928740)while(4256/0x4c)>=u do a-= a a=(9192393)while(-#[[moon on top]]+(247-((0x3e58/84)+-#"holy shit")))<u do a-= a do return l[e[r]]end break end while 2861==(a)/((-#"me and the monkey"+(0x4d47c/98)))do local a=e[c];local n={};for e=1,#v do local e=v[e];for o=0,#e do local e=e[o];local d=e[1];local o=e[2];if d==l and o>=a then n[o]=d[o];e[1]=n;end;end;end;break end;break;end while 2538==(a)/((0x95f6a/225))do a=(5568535)while(11058/0xc2)>=u do a-= a if(l[e[w]]~=e[S])then o=o+t;else o=e[i];end;break;end while 1945==(a)/((2952+-0x59))do a=(515223)while(-#'Me be like at 5am in the morning'+(((0x95e0/176)+-#'kys nigga')-0x77))<u do a-= a o=e[i];break end while 393==(a)/((0x199b0/80))do local h;local b,f;local a;l[e[w]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[C]];o=o+d;e=n[o];l[e[x]]=M[e[i]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[S]];o=o+d;e=n[o];a=e[x]b,f=p(l[a](l[a+t]))g=f+a-d h=0;for e=a,g do h=h+d;l[e]=b[h];end;o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,g))o=o+d;e=n[o];if not l[e[r]]then o=o+t;else o=e[s];end;break end;break;end break;end break;end break;end break;end while(a)/((6645-0xd23))==2250 do a=(8838860)while u<=(15249/0xdd)do a-= a a=(417339)while(191+-0x7f)>=u do a-= a a=(1946160)while u<=(-0x24+97)do a-= a a=(9147360)while u>(0x37c8/(529-0x123))do a-= a local u;local a;l[e[h]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[c]]();o=o+d;e=n[o];l[e[x]]=M[e[i]];o=o+d;e=n[o];a=e[c];u=l[e[s]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[h]]=e[i];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[c]]=l[e[U]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[B]];o=o+d;e=n[o];a=e[r];u=l[e[i]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[c]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];l[e[c]]=M[e[k]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[h]]=l[e[k]][e[D]];o=o+d;e=n[o];a=e[r];u=l[e[U]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];a=e[h]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];a=e[x];u=l[e[i]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[w]]=e[i];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[x]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];a=e[w];u=l[e[O]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];a=e[w]l[a](l[a+t])o=o+d;e=n[o];o=e[U];break end while(a)/((-#"Deeznutsbutinlualoo"+(2337+-0x26)))==4012 do if(l[e[r]]==l[e[C]])then o=o+t;else o=e[k];end;break end;break;end while 2040==(a)/((-#[[ambattakam]]+(-0x67+1067)))do a=(3220386)while u<=(0xfbe/65)do a-= a local d=e[c];local a=l[d+2];local n=l[d]+a;l[d]=n;if(a>0)then if(n<=l[d+1])then o=e[b];l[d+3]=n;end elseif(n>=l[d+1])then o=e[k];l[d+3]=n;end break;end while(a)/((2811-0x599))==2337 do a=(343965)while(-0x3b+122)<u do a-= a l[e[w]]=I(j[e[k]],nil,M);break end while 115==(a)/(((3081+(-67+0x6))+-#"use luraph if want lost money"))do local o=e[c]local n,e=p(l[o](P(l,o+1,e[U])))g=e+o-1 local e=0;for o=o,g do e=e+d;l[o]=n[e];end;break end;break;end break;end break;end while 261==(a)/((0x3dae2/158))do a=(3010237)while(2640/0x28)>=u do a-= a a=(1206200)while u>((0x2688/137)+-#[[El pepe]])do a-= a local r;local a;l[e[f]]=y[e[b]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[B]];o=o+d;e=n[o];a=e[w];r=l[e[i]];l[a+1]=r;l[a]=r[e[N]];o=o+d;e=n[o];l[e[x]]=y[e[U]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];a=e[f]l[a](P(l,a+t,e[s]))o=o+d;e=n[o];do return end;break end while 3700==(a)/((393+-0x43))do local f;local a;a=e[h];f=l[e[i]];l[a+1]=f;l[a]=f[e[B]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[C]];o=o+d;e=n[o];if(l[e[r]]~=e[B])then o=o+t;else o=e[k];end;break end;break;end while(a)/((0x6ed-920))==3529 do a=(7276213)while(0x1dd6/114)>=u do a-= a local O;local a;l[e[w]]();o=o+d;e=n[o];l[e[f]]=M[e[U]];o=o+d;e=n[o];l[e[x]][e[i]]=e[B];o=o+d;e=n[o];l[e[r]]=M[e[s]];o=o+d;e=n[o];a=e[f];O=l[e[b]];l[a+1]=O;l[a]=O[e[S]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[h]]=M[e[b]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[f]]=e[b];o=o+d;e=n[o];l[e[w]]=M[e[i]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[r]]=M[e[U]];o=o+d;e=n[o];l[e[c]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[N]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];l[e[x]]=(e[b]~=0);o=o+d;e=n[o];l[e[h]]=e[k];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[h]]=M[e[U]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[B]];o=o+d;e=n[o];l[e[f]]=e[U];o=o+d;e=n[o];a=e[c]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[D]];o=o+d;e=n[o];a=e[x];O=l[e[b]];l[a+1]=O;l[a]=O[e[D]];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[f]][e[k]]=l[e[N]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[D]];o=o+d;e=n[o];a=e[h];O=l[e[i]];l[a+1]=O;l[a]=O[e[C]];break;end while(a)/((-#[[impulse was here pastebin reel]]+(396167/0xc5)))==3673 do a=(2778580)while(6936/0x66)<u do a-= a l[e[r]]();o=o+d;e=n[o];l[e[f]]=M[e[O]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[f]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[h]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[D]];o=o+d;e=n[o];if(l[e[f]]~=e[S])then o=o+t;else o=e[s];end;break end while(a)/((-0x7a+3244))==890 do l[e[r]]=(e[U]~=0);break end;break;end break;end break;end break;end while 3911==(a)/(((-0x55+2361)+-#"get some bitches"))do a=(3983791)while((29784/0xdb)+-#[[if syn then syn dot request get beliveri12 coma nicuse ass end]])>=u do a-= a a=(2727256)while u<=(0x1514/76)do a-= a a=(3381300)while(4130/0x3b)<u do a-= a l[e[x]]=M[e[i]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[_]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[S]];o=o+d;e=n[o];if(l[e[h]]==e[N])then o=o+t;else o=e[s];end;break end while(a)/((5328-0xa74))==1275 do local d=e[h];local n=l[d]local a=l[d+2];if(a>0)then if(n>l[d+1])then o=e[s];else l[d+3]=n;end elseif(n<l[d+1])then o=e[s];else l[d+3]=n;end break end;break;end while 1736==(a)/(((0x460a5/181)+-#"no penne pasta"))do a=(5022786)while(-#"KFC and watermelon"+(2970/0x21))>=u do a-= a local i;local a;l[e[x]]=y[e[b]];o=o+d;e=n[o];l[e[r]]=l[e[U]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[k]][e[_]];o=o+d;e=n[o];a=e[h];i=l[e[k]];l[a+1]=i;l[a]=i[e[N]];o=o+d;e=n[o];l[e[r]]=y[e[O]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[_]];o=o+d;e=n[o];a=e[r]l[a](P(l,a+t,e[s]))o=o+d;e=n[o];do return end;break;end while 2346==(a)/((-#[[ur mom is hot]]+(-0x51+2235)))do a=(2474320)while u>(-#"imagine not being able to talk"+(12875/0x7d))do a-= a l[e[r]]=l[e[i]][l[e[N]]];break end while 1576==(a)/((303010/0xc1))do y[e[U]]=l[e[x]];break end;break;end break;end break;end while(a)/((((-0x6e+2162)+-#'dies of cringe')+-0x39))==2011 do a=(5676286)while(0x3020/160)>=u do a-= a a=(6100560)while(0xf3-168)>=u do a-= a l[e[c]]=#l[e[s]];break;end while 2220==(a)/(((0xb55+-123)+-#'imagine not being able to talk'))do a=(2778501)while u>(-#'if true then return your dad'+((-4472/0xac)+0x82))do a-= a if(l[e[x]]~=e[D])then o=o+t;else o=e[k];end;break end while(a)/((6910-(315497/0x5b)))==807 do local a=e[x];local r=e[N];local n=a+2 local a={l[a](l[a+1],l[n])};for e=1,r do l[n+e]=a[e];end;local a=a[1]if a then l[n]=a o=e[k];else o=o+d;end;break end;break;end break;end while 1798==(a)/((6387-0xc9e))do a=(7146470)while((11264/0x58)+-#"da hood money generator 2022 working free no virus")>=u do a-= a if(l[e[x]]==l[e[S]])then o=o+t;else o=e[i];end;break;end while 2594==(a)/(((-0x50+2853)+-#"good googly moogly"))do a=(9289751)while(0xcf-128)<u do a-= a local x;local a;a=e[h];x=l[e[k]];l[a+1]=x;l[a]=x[e[B]];o=o+d;e=n[o];l[e[h]]=e[O];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[c]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[h]]=l[e[O]][e[N]];o=o+d;e=n[o];if(l[e[f]]~=e[C])then o=o+t;else o=e[i];end;break end while 4087==(a)/((((-0x2a+4651)-2321)+-#"psx dupe is abd"))do local u;local a;a=e[c];u=l[e[b]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[h]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[B]];o=o+d;e=n[o];a=e[f];u=l[e[k]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[x]]=M[e[b]];o=o+d;e=n[o];a=e[w];u=l[e[O]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[x]]=e[s];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[f]]=l[e[O]][e[C]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[w]]=l[e[U]][e[N]];o=o+d;e=n[o];a=e[c]l[a](P(l,a+t,e[U]))o=o+d;e=n[o];l[e[f]]=M[e[U]];o=o+d;e=n[o];l[e[h]]=e[O];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[x]]=M[e[U]];o=o+d;e=n[o];a=e[r];u=l[e[i]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[x]]=e[U];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[f]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[h];u=l[e[U]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];a=e[r]l[a](l[a+t])break end;break;end break;end break;end break;end break;end break;end break;end while 2021==(a)/(((39585/0x69)+-#[[Impulse youtube ez]]))do a=(1582663)while u<=(0x4ba/(133-0x7b))do a-= a a=(1991231)while(11200/0x70)>=u do a-= a a=(3865989)while u<=(-#[[nigga porn 360]]+(237-0x85))do a-= a a=(1755428)while(-#"subemelaradjo"+(-43+0x8d))>=u do a-= a a=(727394)while u<=((0x1f68/67)+-#[[If not skid then return hasbitches end]])do a-= a a=(11476584)while(104+(-0x1409/223))<u do a-= a local d=e[s];local o=l[d]for e=d+1,e[S]do o=o..l[e];end;l[e[h]]=o;break end while 3528==(a)/((0xcfe+-73))do local a;local c;local k,s;local h;local a;l[e[w]]();o=o+d;e=n[o];l[e[f]]=M[e[O]];o=o+d;e=n[o];l[e[w]]=M[e[U]];o=o+d;e=n[o];a=e[f];h=l[e[i]];l[a+1]=h;l[a]=h[e[D]];o=o+d;e=n[o];l[e[x]]=e[O];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[r]]=l[e[b]][e[N]];o=o+d;e=n[o];a=e[x];h=l[e[b]];l[a+1]=h;l[a]=h[e[C]];o=o+d;e=n[o];a=e[w]k,s=p(l[a](l[a+t]))g=s+a-d c=0;for e=a,g do c=c+d;l[e]=k[c];end;o=o+d;e=n[o];a=e[x]k={l[a](P(l,a+1,g))};c=0;for e=a,e[C]do c=c+d;l[e]=k[c];end o=o+d;e=n[o];o=e[b];break end;break;end while(a)/((-90+0x439))==734 do a=(9388964)while u<=(7138/0x56)do a-= a l[e[r]]=M[e[b]];break;end while 2924==(a)/((0x1990-3333))do a=(9850850)while(0x2f94/145)<u do a-= a l[e[c]]=l[e[k]];break end while 2710==(a)/((7362-0xe8f))do l[e[x]]=M[e[U]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[U]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[S]];o=o+d;e=n[o];if(l[e[w]]~=e[_])then o=o+t;else o=e[k];end;break end;break;end break;end break;end while 818==(a)/(((4436-0x8dc)+-#"I watch gay furry porn"))do a=(3586012)while u<=(-50+0x89)do a-= a a=(3136970)while(-#[[Never fading and I know the haters are forever waiting]]+((-30+0x26f2)/71))<u do a-= a local m;local u;local a;a=e[c];u=l[e[s]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[f]]=e[O];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[w]]=l[e[k]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[r]]=e[s];o=o+d;e=n[o];l[e[x]]=M[e[s]];o=o+d;e=n[o];l[e[f]]=M[e[O]];o=o+d;e=n[o];a=e[w];u=l[e[s]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[c]]=e[s];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[x]]=l[e[k]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[_]];o=o+d;e=n[o];a=e[f]l[a]=l[a](l[a+t])o=o+d;e=n[o];u=e[s];m=l[u]for e=u+1,e[_]do m=m..l[e];end;l[e[w]]=m;o=o+d;e=n[o];l[e[r]][e[s]]=l[e[S]];o=o+d;e=n[o];o=e[i];break end while 1058==(a)/((0x1780-3051))do l[e[h]]=(e[U]~=0);break end;break;end while 3412==(a)/((-#'heil eco mother fuckers'+(0x4256a/253)))do a=(192885)while(5456/0x3e)>=u do a-= a local u;local a;a=e[f];u=l[e[i]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[x]]=e[i];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[w]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[S]];o=o+d;e=n[o];a=e[w];u=l[e[i]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];a=e[w];u=l[e[i]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[f]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[S]];o=o+d;e=n[o];a=e[r]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];l[e[x]]=M[e[O]];o=o+d;e=n[o];l[e[r]]=e[U];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[O]];o=o+d;e=n[o];a=e[h];u=l[e[b]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[h]]=e[s];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[r]]=l[e[U]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];a=e[r];u=l[e[O]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[x]l[a](l[a+t])break;end while(a)/((75845/(1970/0xa)))==501 do a=(3196960)while((0xe9+-119)+-#"ive seen your mothers ass")<u do a-= a if l[e[h]]then o=o+d;else o=e[i];end;break end while(a)/((0x17e9-3105))==1060 do local c;local a;l[e[f]]=y[e[s]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[x]]=l[e[U]][e[B]];o=o+d;e=n[o];a=e[h];c=l[e[b]];l[a+1]=c;l[a]=c[e[C]];o=o+d;e=n[o];l[e[f]]=y[e[s]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[r]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];do return end;break end;break;end break;end break;end break;end while(a)/((0x7ee-1053))==3957 do a=(4300021)while(0x1db/5)>=u do a-= a a=(6887070)while(125+-0x21)>=u do a-= a a=(7553250)while(1092/0xc)<u do a-= a local e=e[f]l[e]=l[e](l[e+t])break end while 2238==(a)/((-#'i shoved a whole bag of jellibeans up my ass'+(0x1aca-3439)))do local u;local a;l[e[w]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[h]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[B]];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=M[e[O]];o=o+d;e=n[o];a=e[r];u=l[e[k]];l[a+1]=u;l[a]=u[e[C]];o=o+d;e=n[o];l[e[c]]=e[U];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[c]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[h]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[D]];o=o+d;e=n[o];if(l[e[r]]<l[e[D]])then o=o+t;else o=e[U];end;break end;break;end while 1770==(a)/(((137340/0x23)+-#[[I boiled them into scrambled eggs]]))do a=(11267314)while u<=(0xcb+-110)do a-= a local u;local a;l[e[h]]=y[e[k]];o=o+d;e=n[o];a=e[c];u=l[e[O]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[h]]=M[e[b]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[r]]=M[e[O]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[C]];o=o+d;e=n[o];a=e[w]l[a](P(l,a+t,e[s]))o=o+d;e=n[o];l[e[w]]=M[e[i]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[c]l[a](l[a+t])o=o+d;e=n[o];l[e[x]]=y[e[k]];o=o+d;e=n[o];a=e[f];u=l[e[i]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[r]]=M[e[i]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[h]]=e[k];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=M[e[O]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[S]];o=o+d;e=n[o];a=e[x]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];do return end;break;end while 2846==(a)/(((-0x68+55530)/14))do a=(1307948)while(((0xe070/228)-149)+-#"rule 2 ok")<u do a-= a l[e[h]]=y[e[b]];break end while(a)/((-#[[Impulse youtube ez]]+(-0x4a+480)))==3371 do M[e[O]]=l[e[x]];o=o+d;e=n[o];l[e[w]]={};o=o+d;e=n[o];l[e[w]]={};o=o+d;e=n[o];M[e[i]]=l[e[f]];o=o+d;e=n[o];l[e[f]]=M[e[O]];o=o+d;e=n[o];if(l[e[c]]==e[_])then o=o+t;else o=e[O];end;break end;break;end break;end break;end while 1181==(a)/((7322-0xe61))do a=(4180164)while u<=(0x11f-190)do a-= a a=(14030)while u>((0xb3+-66)+-#"iPipeh i love You")do a-= a local h;local a;a=e[r];h=l[e[O]];l[a+1]=h;l[a]=h[e[N]];o=o+d;e=n[o];l[e[f]]=e[U];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[k]))o=o+d;e=n[o];l[e[w]]=l[e[i]][e[B]];o=o+d;e=n[o];l[e[w]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[C]];o=o+d;e=n[o];if(l[e[c]]~=e[_])then o=o+t;else o=e[U];end;break end while 305==(a)/((0x73-69))do y[e[s]]=l[e[h]];break end;break;end while(a)/((-#[[free bobux no skem]]+(0x14f6-2704)))==1581 do a=(17600)while((-0x3e+176)+-#"cruz pp is large")>=u do a-= a if l[e[c]]then o=o+d;else o=e[k];end;break;end while 32==(a)/((((-0x17fd/69)+-#'Give Robux')+649))do a=(227664)while(6039/0x3d)<u do a-= a l[e[c]][e[b]]=l[e[B]];break end while 432==(a)/((-#[[Cock and ball tortue]]+(-120+0x29b)))do local i;local a;a=e[r];i=l[e[O]];l[a+1]=i;l[a]=i[e[C]];o=o+d;e=n[o];l[e[c]]=e[U];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[N]];o=o+d;e=n[o];if(l[e[w]]==e[B])then o=o+t;else o=e[s];end;break end;break;end break;end break;end break;end break;end while 1153==(a)/((((100352/0x38)+-0x25)+-#[[if true then return your dad]]))do a=(4618488)while u<=(298-0xbc)do a-= a a=(55545)while u<=(20370/0xc2)do a-= a a=(867483)while u<=(194+(-12880/0x8c))do a-= a a=(10847247)while u>(0xeb-134)do a-= a local c=j[e[b]];local r;local d={};r=Y({},{__index=function(o,e)local e=d[e];return e[1][e[2]];end,__newindex=function(l,e,o)local e=d[e]e[1][e[2]]=o;end;});for a=1,e[S]do o=o+t;local e=n[o];if e[(-#"Faggot"+(-46+0x35))]==85 then d[a-1]={l,e[i]};else d[a-1]={y,e[s]};end;v[#v+1]=d;end;l[e[f]]=I(c,r,M);break end while 3041==(a)/((0x1c2b-3644))do M[e[O]]=l[e[f]];o=o+d;e=n[o];l[e[c]]=M[e[U]];o=o+d;e=n[o];l[e[h]][e[k]]=e[D];o=o+d;e=n[o];l[e[x]]=M[e[b]];o=o+d;e=n[o];l[e[h]][e[i]]=e[_];o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];l[e[c]][e[k]]=e[C];o=o+d;e=n[o];l[e[f]]=M[e[i]];break end;break;end while(a)/((0x13f26/102))==1083 do a=(2181630)while u<=(12463/0x79)do a-= a l[e[h]][e[U]]=e[N];break;end while 3630==(a)/((-#"10 black dicks in your mouth"+(0x13f6a/(0x115-147))))do a=(775634)while(168+-0x40)<u do a-= a local g;local y;local S;local p;local I;local _;local u;local a;a=e[f]l[a](P(l,a+t,e[U]))o=o+d;e=n[o];a=e[h];u=l[e[U]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[x]]=l[e[O]];o=o+d;e=n[o];l[e[r]]=l[e[i]];o=o+d;e=n[o];l[e[h]]={};o=o+d;e=n[o];l[e[r]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[r]]=M[e[i]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[c]]=e[O];o=o+d;e=n[o];l[e[x]]=e[O];o=o+d;e=n[o];l[e[w]]=e[U];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];_={l,e};_[t][_[m][x]]=_[d][_[m][C]]+_[t][_[m][i]];o=o+d;e=n[o];l[e[f]][e[s]]=l[e[C]];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];a=e[c];u=l[e[i]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[h]]=l[e[i]][e[B]];o=o+d;e=n[o];a=e[r];u=l[e[k]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];a=e[c];I={};for e=1,#v do p=v[e];for e=0,#p do S=p[e];y=S[1];g=S[2];if y==l and g>=a then I[g]=y[g];S[1]=I;end;end;end;break end while 1247==(a)/((0x1a456/173))do local a;l[e[w]]=M[e[k]];o=o+d;e=n[o];l[e[c]]=l[e[s]][e[_]];o=o+d;e=n[o];l[e[h]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](l[a+t])o=o+d;e=n[o];if(l[e[w]]==l[e[B]])then o=o+t;else o=e[i];end;break end;break;end break;end break;end while 23==(a)/((-61+0x9ac))do a=(3563370)while(322-0xd7)>=u do a-= a a=(7499720)while(-#'use luraph if want lost money'+(8775/0x41))<u do a-= a local e=e[c]local n,o=p(l[e](l[e+t]))g=o+e-d local o=0;for e=e,g do o=o+d;l[e]=n[o];end;break end while 3485==(a)/((2173+-0x15))do l[e[w]][l[e[O]]]=l[e[D]];break end;break;end while 2466==(a)/((-62+0x5e3))do a=(649110)while(-#'Moonsec An IB2 fork sooo secure and we love it and federal is so straight and federal owns Luauth and we love spoons and if sonic was here federal would die a painful death and he would turn into dust'+(35728/0x74))>=u do a-= a l[e[c]]=#l[e[i]];break;end while 330==(a)/((0x16172/46))do a=(4545655)while u>(0x13b-206)do a-= a if(l[e[f]]==e[D])then o=o+t;else o=e[b];end;break end while 1121==(a)/(((-10904/0xe8)+0x1006))do l[e[h]][l[e[U]]]=l[e[B]];break end;break;end break;end break;end break;end while 2229==(a)/((0x72530/226))do a=(255966)while(20700/0xb4)>=u do a-= a a=(8972864)while(-#"Luraph v13 has been released changed absolutely fucking nothing"+(-0x22+209))>=u do a-= a a=(715680)while((0x15f-223)+-#"iPipeh i love You")<u do a-= a l[e[c]]=l[e[i]][e[S]];break end while 994==(a)/(((0x8751-17361)/24))do local a;l[e[f]]=l[e[U]][e[N]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[f]]=l[e[O]][e[S]];o=o+d;e=n[o];l[e[x]]=l[e[O]];o=o+d;e=n[o];l[e[w]]=e[k];o=o+d;e=n[o];a=e[w]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];l[e[w]]=M[e[i]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[h]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[s]];o=o+d;e=n[o];l[e[w]]=e[U];o=o+d;e=n[o];a=e[x]l[a](P(l,a+t,e[b]))break end;break;end while 2983==(a)/((0x179b-3035))do a=(9579207)while u<=((0x14a-195)+-#"I FUCKING HATE FEMBOYS")do a-= a l[e[h]]=M[e[i]];break;end while 3993==(a)/((-#[[Tomathoust6969 was here]]+(0x1341-2507)))do a=(1338582)while(139+-0x19)<u do a-= a if(l[e[h]]<l[e[_]])then o=o+t;else o=e[i];end;break end while(a)/(((-0x58+3478)+-93))==406 do local d=e[x];local o=l[e[O]];l[d+1]=o;l[d]=o[e[N]];break end;break;end break;end break;end while 3459==(a)/((((0x2a3-381)-0xc1)+-#"you get no absolute bitches"))do a=(1688394)while((307+-0x72)+-#'fun fact if you want to say discord just type Discord with a capital D boom')>=u do a-= a a=(4274435)while u<=((0xaa+-27)+-#[[Nsrds GAYYYYAIAHAKAJAVAHAUA]])do a-= a local a;local k;local s,O;local f;local a;l[e[x]]=M[e[b]];o=o+d;e=n[o];a=e[r];f=l[e[i]];l[a+1]=f;l[a]=f[e[B]];o=o+d;e=n[o];l[e[h]]=e[i];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[w]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[r];f=l[e[i]];l[a+1]=f;l[a]=f[e[B]];o=o+d;e=n[o];a=e[w]s,O=p(l[a](l[a+t]))g=O+a-d k=0;for e=a,g do k=k+d;l[e]=s[k];end;o=o+d;e=n[o];a=e[c]s={l[a](P(l,a+1,g))};k=0;for e=a,e[S]do k=k+d;l[e]=s[k];end o=o+d;e=n[o];o=e[i];break;end while 3565==(a)/((0x98a-((0x520+-50)+-#[[moonsex looks great]])))do a=(9049472)while((326-0xc3)+-#'nigga porn 360')<u do a-= a l[e[c]]={};break end while(a)/(((7623-0xf21)+-#'no meme strings access moment'))==2432 do local t;local a;l[e[f]]=l[e[O]][e[B]];o=o+d;e=n[o];l[e[h]]();o=o+d;e=n[o];l[e[h]]=M[e[s]];o=o+d;e=n[o];a=e[x];t=l[e[k]];l[a+1]=t;l[a]=t[e[D]];o=o+d;e=n[o];l[e[c]]=e[s];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[w]]=l[e[O]][e[C]];o=o+d;e=n[o];l[e[w]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[w]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[B]];o=o+d;e=n[o];a=e[w];t=l[e[i]];l[a+1]=t;l[a]=t[e[_]];o=o+d;e=n[o];l[e[x]]=e[i];o=o+d;e=n[o];a=e[f]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];if l[e[h]]then o=o+d;else o=e[U];end;break end;break;end break;end while(a)/((0xac4-1439))==1282 do a=(10486552)while u<=(-#[[dies of cringe]]+(0x2b1f/83))do a-= a local e={l,e};e[t][e[m][x]]=e[d][e[m][S]]+e[t][e[m][k]];break;end while(a)/((0x1d49-3781))==2822 do a=(1508341)while(-#"moonsec backrooms confirmed"+(-0x47+218))<u do a-= a if(l[e[c]]~=l[e[C]])then o=o+t;else o=e[b];end;break end while(a)/(((-#'mama mo'+(-3660/0x7a))+1700))==907 do local u;local a;a=e[x];u=l[e[i]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[f]]=e[i];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];l[e[f]]=M[e[s]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[_]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[r]]=M[e[U]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[c]]=e[b];o=o+d;e=n[o];l[e[h]]=(e[O]~=0);o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[r]]=M[e[s]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[x]]=e[O];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[r]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[C]];o=o+d;e=n[o];a=e[w];u=l[e[O]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];a=e[w]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[f]][e[O]]=l[e[N]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[w];u=l[e[s]];l[a+1]=u;l[a]=u[e[D]];break end;break;end break;end break;end break;end break;end break;end while 467==(a)/((0x1a94-3415))do a=(6874194)while(0xc4+-55)>=u do a-= a a=(612158)while(-#[[2406924069240 your mom is gay af lol]]+(391-0xe0))>=u do a-= a a=(347565)while(0x13a-188)>=u do a-= a a=(3232158)while(-#'i still cannot find who the fuck asked'+(0x16f-206))>=u do a-= a a=(4646830)while u>(0x14a-208)do a-= a l[e[f]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[B]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[_]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[C]];o=o+d;e=n[o];if(l[e[x]]==e[C])then o=o+t;else o=e[b];end;break end while 1322==(a)/((0x1b92-3543))do local a=e[r];local n={};for e=1,#v do local e=v[e];for o=0,#e do local e=e[o];local d=e[1];local o=e[2];if d==l and o>=a then n[o]=d[o];e[1]=n;end;end;end;break end;break;end while 1194==(a)/((-#"Please stop hitting my ribcage with a metal bar"+((54683424/0x88)/146)))do a=(1087335)while u<=(336-0xd4)do a-= a local e={l,e};e[t][e[m][w]]=e[d][e[m][C]]+e[t][e[m][i]];break;end while 3285==(a)/((403+-0x48))do a=(3479387)while((1063125/0x51)/105)<u do a-= a local a;l[e[w]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[k]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[k]];o=o+d;e=n[o];l[e[c]]=e[i];o=o+d;e=n[o];a=e[c]l[a](P(l,a+t,e[k]))o=o+d;e=n[o];l[e[w]]=M[e[U]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[r]]=l[e[O]];o=o+d;e=n[o];l[e[h]]=e[s];o=o+d;e=n[o];a=e[f]l[a](P(l,a+t,e[b]))break end while 4079==(a)/((0x13936/94))do local o=e[x]local n,e=p(l[o](P(l,o+1,e[s])))g=e+o-1 local e=0;for o=o,g do e=e+d;l[o]=n[e];end;break end;break;end break;end break;end while 2465==(a)/((-#'monkey mode'+(17176/0x71)))do a=(2681280)while u<=((0x158-188)+-#'if true then return your dad')do a-= a a=(691408)while(-#'this is a meme string'+(181+(-0x56+53)))<u do a-= a l[e[c]]=M[e[k]];o=o+d;e=n[o];l[e[x]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[x]]=l[e[U]][e[_]];o=o+d;e=n[o];if(l[e[w]]~=e[S])then o=o+t;else o=e[i];end;break end while 316==(a)/(((4539-0x8fb)+-#'If LocalPlayer equals Dumbass then while true do end'))do local e=e[w]l[e](l[e+t])break end;break;end while 882==(a)/(((0x38c24/76)+-#"how to join the kkk"))do a=(15564108)while((-0x33+189)+-#'kys nigga')>=u do a-= a local a;l[e[f]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[c]][e[i]]=e[B];o=o+d;e=n[o];l[e[w]]=M[e[O]];o=o+d;e=n[o];l[e[f]]=e[U];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[U]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[O]][e[_]];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[x]]=M[e[s]];o=o+d;e=n[o];l[e[h]]=e[s];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];l[e[f]]=l[e[k]][e[B]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[r]][e[b]]=e[S];o=o+d;e=n[o];o=e[i];break;end while(a)/((-#"Crackzzzz"+(3938+-0x25)))==3999 do a=(2037248)while(185+-0x37)<u do a-= a l[e[w]]=y[e[k]];break end while(a)/((7980-0xfa1))==512 do local a;local i;local s,u;local x;local a;l[e[r]]=M[e[O]];o=o+d;e=n[o];a=e[c];x=l[e[U]];l[a+1]=x;l[a]=x[e[B]];o=o+d;e=n[o];l[e[w]]=e[b];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];a=e[c];x=l[e[k]];l[a+1]=x;l[a]=x[e[B]];o=o+d;e=n[o];a=e[r]s,u=p(l[a](l[a+t]))g=u+a-d i=0;for e=a,g do i=i+d;l[e]=s[i];end;o=o+d;e=n[o];a=e[w]s={l[a](P(l,a+1,g))};i=0;for e=a,e[_]do i=i+d;l[e]=s[i];end o=o+d;e=n[o];o=e[U];break end;break;end break;end break;end break;end while 614==(a)/((0x28299/165))do a=(7790503)while u<=((0x2dfb/(0xf6-167))+-#"mbb is a frag")do a-= a a=(5903784)while u<=((-0x50+223)+-#'IP grabbed')do a-= a a=(3869613)while(-#'Gay porn'+(-0x59+229))<u do a-= a l[e[r]]=e[s];break end while(a)/((5531-0xaf4))==1419 do local r;local a;a=e[c];r=l[e[i]];l[a+1]=r;l[a]=r[e[N]];o=o+d;e=n[o];l[e[c]]=e[U];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[x]]=M[e[b]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[D]];o=o+d;e=n[o];l[e[w]]=e[b];o=o+d;e=n[o];l[e[h]]=M[e[k]];o=o+d;e=n[o];l[e[f]]=l[e[b]][e[S]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[f]]=l[e[i]][e[C]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];l[e[f]]=(e[s]~=0);o=o+d;e=n[o];l[e[x]]=e[O];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[x]]=M[e[s]];o=o+d;e=n[o];l[e[x]]=l[e[i]][e[_]];o=o+d;e=n[o];l[e[c]]=e[k];o=o+d;e=n[o];a=e[h]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=l[e[b]][e[D]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[S]];o=o+d;e=n[o];a=e[h];r=l[e[k]];l[a+1]=r;l[a]=r[e[N]];o=o+d;e=n[o];a=e[x]l[a]=l[a](l[a+t])o=o+d;e=n[o];l[e[x]][e[i]]=l[e[B]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];a=e[x];r=l[e[b]];l[a+1]=r;l[a]=r[e[B]];break end;break;end while(a)/((0x57168/89))==1473 do a=(1894752)while u<=(-#[[Only a to Z 0 to 9 is allowed]]+(411-0xf8))do a-= a local o=e[r]local a={l[o](P(l,o+1,g))};local n=0;for e=o,e[C]do n=n+d;l[e]=a[n];end break;end while(a)/((-#[[hi momma teach me how to make incest]]+(1124-0x23c)))==3672 do a=(5280780)while(((933-0x1e8)+-#[[Innovative and Im made of rubber so that anything]])-261)<u do a-= a local o=e[f]local a={l[o](P(l,o+1,g))};local n=0;for e=o,e[B]do n=n+d;l[e]=a[n];end break end while(a)/((0xc6fc/((182-0x7d)+-#"moonsec backrooms confirmed")))==3110 do local t;local x;local a;l[e[c]]=e[k];o=o+d;e=n[o];l[e[h]]=e[b];o=o+d;e=n[o];l[e[r]]=#l[e[s]];o=o+d;e=n[o];l[e[c]]=e[k];o=o+d;e=n[o];a=e[r];x=l[a]t=l[a+2];if(t>0)then if(x>l[a+1])then o=e[s];else l[a+3]=x;end elseif(x<l[a+1])then o=e[i];else l[a+3]=x;end break end;break;end break;end break;end while(a)/(((0x1585-2763)+-#[[dot gg slash BKf6SjpfFv]]))==2861 do a=(5098748)while(-#[[freerobuxphone]]+(214+-0x3e))>=u do a-= a a=(6117300)while(((0xd219/155)+-#"you get no absolute bitches")-0xb7)<u do a-= a local d=e[x];local a=l[d+2];local n=l[d]+a;l[d]=n;if(a>0)then if(n<=l[d+1])then o=e[k];l[d+3]=n;end elseif(n>=l[d+1])then o=e[i];l[d+3]=n;end break end while(a)/((-121+0x80f))==3150 do local e=e[w]l[e]=l[e](P(l,e+d,g))break end;break;end while(a)/((1853+-0x72))==2932 do a=(6476340)while(0x18c-257)>=u do a-= a local u;local a;a=e[h];u=l[e[s]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[r]]=e[O];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[f]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[D]];o=o+d;e=n[o];a=e[r];u=l[e[U]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[h]]=M[e[k]];o=o+d;e=n[o];a=e[h];u=l[e[s]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[h]]=l[e[b]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[k]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[k]][e[D]];o=o+d;e=n[o];a=e[c]l[a](P(l,a+t,e[U]))o=o+d;e=n[o];l[e[w]]=M[e[k]];o=o+d;e=n[o];l[e[w]]=e[O];o=o+d;e=n[o];a=e[w]l[a](l[a+t])o=o+d;e=n[o];l[e[f]]=M[e[b]];o=o+d;e=n[o];a=e[w];u=l[e[s]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];l[e[x]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];l[e[r]]=l[e[U]][e[D]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[N]];o=o+d;e=n[o];a=e[x];u=l[e[b]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])break;end while(a)/((-#"moonsex looks great"+((1457280/0xf0)-3063)))==2166 do a=(9627970)while(0x5d84/171)<u do a-= a local a;local s;local C,N;local u;local a;l[e[r]]=M[e[b]];o=o+d;e=n[o];a=e[f];u=l[e[U]];l[a+1]=u;l[a]=u[e[D]];o=o+d;e=n[o];l[e[h]]=e[i];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[w]]=l[e[O]][e[D]];o=o+d;e=n[o];a=e[c];u=l[e[k]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];a=e[w]C,N=p(l[a](l[a+t]))g=N+a-d s=0;for e=a,g do s=s+d;l[e]=C[s];end;o=o+d;e=n[o];a=e[c]C={l[a](P(l,a+1,g))};s=0;for e=a,e[_]do s=s+d;l[e]=C[s];end o=o+d;e=n[o];o=e[k];break end while(a)/((-#'hypeblox likes sucking big black cock'+(4948-0x9d1)))==4015 do local x;local a;a=e[r];x=l[e[k]];l[a+1]=x;l[a]=x[e[S]];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];a=e[h]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=l[e[U]][e[S]];o=o+d;e=n[o];l[e[h]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[f]]=l[e[k]][e[B]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[C]];o=o+d;e=n[o];if(l[e[h]]~=e[_])then o=o+t;else o=e[s];end;break end;break;end break;end break;end break;end break;end while(a)/((95266/0x26))==2742 do a=(421819)while u<=(((-0x3960/144)+269)+-#"Fucking Retarted")do a-= a a=(3899870)while u<=((865-0x1e9)-0xe6)do a-= a a=(142636)while u<=(261+-0x76)do a-= a a=(2769085)while u>(0x43ac/122)do a-= a local a;local h;local b,w;local x;local a;l[e[c]]=l[e[s]][e[B]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[S]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[C]];o=o+d;e=n[o];l[e[r]]=l[e[i]][e[N]];o=o+d;e=n[o];l[e[c]]=M[e[i]];o=o+d;e=n[o];l[e[c]]=M[e[s]];o=o+d;e=n[o];a=e[f];x=l[e[U]];l[a+1]=x;l[a]=x[e[C]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[O]))o=o+d;e=n[o];l[e[r]]=l[e[O]][e[D]];o=o+d;e=n[o];a=e[f];x=l[e[i]];l[a+1]=x;l[a]=x[e[S]];o=o+d;e=n[o];a=e[c]b,w=p(l[a](l[a+t]))g=w+a-d h=0;for e=a,g do h=h+d;l[e]=b[h];end;o=o+d;e=n[o];a=e[f]b={l[a](P(l,a+1,g))};h=0;for e=a,e[S]do h=h+d;l[e]=b[h];end o=o+d;e=n[o];o=e[U];break end while(a)/(((2104-0x43d)+-#'fatee is gay 0nly on top'))==2783 do local k;local a;l[e[h]]=y[e[i]];o=o+d;e=n[o];l[e[c]]=l[e[b]][e[N]];o=o+d;e=n[o];l[e[c]]=l[e[s]][e[C]];o=o+d;e=n[o];a=e[w];k=l[e[O]];l[a+1]=k;l[a]=k[e[D]];o=o+d;e=n[o];l[e[r]]=y[e[b]];o=o+d;e=n[o];l[e[r]]=l[e[U]][e[B]];o=o+d;e=n[o];a=e[x]l[a](P(l,a+t,e[O]))o=o+d;e=n[o];do return end;break end;break;end while(a)/((80+-0x1c))==2743 do a=(7618166)while(-0x40+208)>=u do a-= a if(l[e[f]]~=l[e[S]])then o=o+t;else o=e[b];end;break;end while 2374==(a)/((3261+-0x34))do a=(459511)while(-54+0xc7)<u do a-= a local a;local c;local u,C;local U;local a;l[e[f]]=l[e[b]][e[B]];o=o+d;e=n[o];l[e[f]]();o=o+d;e=n[o];l[e[h]]=M[e[s]];o=o+d;e=n[o];l[e[w]]=M[e[k]];o=o+d;e=n[o];a=e[w];U=l[e[O]];l[a+1]=U;l[a]=U[e[S]];o=o+d;e=n[o];l[e[w]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[r]]=l[e[k]][e[B]];o=o+d;e=n[o];l[e[x]]=l[e[O]][e[D]];o=o+d;e=n[o];l[e[w]]=l[e[i]][e[D]];o=o+d;e=n[o];a=e[x];U=l[e[i]];l[a+1]=U;l[a]=U[e[B]];o=o+d;e=n[o];a=e[f]u,C=p(l[a](l[a+t]))g=C+a-d c=0;for e=a,g do c=c+d;l[e]=u[c];end;o=o+d;e=n[o];a=e[x]u={l[a](P(l,a+1,g))};c=0;for e=a,e[_]do c=c+d;l[e]=u[c];end o=o+d;e=n[o];o=e[i];break end while(a)/((408-0xef))==2719 do do return end;break end;break;end break;end break;end while(a)/((-82+0xbf3))==1310 do a=(46766)while((0xde+-52)+-#'legend says i was here')>=u do a-= a a=(3290225)while u>(413-0x10a)do a-= a local o=e[w]l[o]=l[o](P(l,o+d,e[i]))break end while 3557==(a)/((0x3ef+-82))do local k;local a;l[e[h]]=y[e[b]];o=o+d;e=n[o];l[e[f]]=l[e[s]][e[S]];o=o+d;e=n[o];l[e[x]]=l[e[b]][e[C]];o=o+d;e=n[o];a=e[c];k=l[e[i]];l[a+1]=k;l[a]=k[e[D]];o=o+d;e=n[o];l[e[r]]=y[e[i]];o=o+d;e=n[o];l[e[c]]=l[e[i]][e[_]];o=o+d;e=n[o];a=e[w]l[a](P(l,a+t,e[b]))o=o+d;e=n[o];do return end;break end;break;end while(a)/(((170+-0x57)+-#"warboy hates you"))==698 do a=(9953200)while(0x4dfe/134)>=u do a-= a local g;local u;local B;local a;l[e[x]]=M[e[k]];o=o+d;e=n[o];l[e[h]]=l[e[i]][e[D]];o=o+d;e=n[o];a=e[x];B=l[e[O]];l[a+1]=B;l[a]=B[e[N]];o=o+d;e=n[o];l[e[c]]=l[e[s]];o=o+d;e=n[o];l[e[f]]=l[e[b]];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];a=e[x];B=l[e[i]];l[a+1]=B;l[a]=B[e[S]];o=o+d;e=n[o];a=e[w]l[a]=l[a](l[a+t])o=o+d;e=n[o];u={l,e};u[t][u[m][r]]=u[d][u[m][N]]+u[t][u[m][k]];o=o+d;e=n[o];l[e[x]]=l[e[s]]%e[D];o=o+d;e=n[o];a=e[f]l[a]=l[a](l[a+t])o=o+d;e=n[o];B=e[k];g=l[B]for e=B+1,e[C]do g=g..l[e];end;l[e[w]]=g;o=o+d;e=n[o];u={l,e};u[t][u[m][f]]=u[d][u[m][_]]+u[t][u[m][U]];o=o+d;e=n[o];l[e[w]]=l[e[k]]%e[S];break;end while 2672==(a)/((756175/0xcb))do a=(13372632)while u>((39644/0xd4)+-#"you cut your pubes with nail clippers")do a-= a if(l[e[w]]<l[e[D]])then o=e[k];else o=o+t;end;break end while 3276==(a)/((0x2035-4163))do if(l[e[w]]<l[e[B]])then o=o+t;else o=e[b];end;break end;break;end break;end break;end break;end while(a)/((0xb40+-49))==149 do a=(5256603)while(-#'I hate black people'+(-103+0x116))>=u do a-= a a=(494236)while u<=(-0x20+(426-0xf1))do a-= a a=(667491)while u>(335-0xb7)do a-= a local g;local u;local a;a=e[r]l[a](P(l,a+t,e[i]))o=o+d;e=n[o];a=e[w];u=l[e[b]];l[a+1]=u;l[a]=u[e[_]];o=o+d;e=n[o];l[e[x]]=l[e[O]];o=o+d;e=n[o];l[e[w]]=l[e[s]];o=o+d;e=n[o];l[e[x]]={};o=o+d;e=n[o];l[e[r]]=l[e[b]][e[C]];o=o+d;e=n[o];l[e[w]]=M[e[O]];o=o+d;e=n[o];l[e[f]]=l[e[U]][e[_]];o=o+d;e=n[o];l[e[w]]=e[U];o=o+d;e=n[o];l[e[w]]=e[i];o=o+d;e=n[o];l[e[f]]=e[k];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];g={l,e};g[t][g[m][h]]=g[d][g[m][_]]+g[t][g[m][k]];o=o+d;e=n[o];l[e[f]][e[U]]=l[e[C]];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];a=e[w];u=l[e[O]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];a=e[h]l[a](l[a+t])o=o+d;e=n[o];l[e[h]]=l[e[U]][e[D]];o=o+d;e=n[o];a=e[f];u=l[e[k]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];a=e[f]l[a](l[a+t])o=o+d;e=n[o];l[e[c]]=M[e[b]];o=o+d;e=n[o];l[e[c]]=e[k];o=o+d;e=n[o];a=e[x]l[a](l[a+t])o=o+d;e=n[o];l[e[w]]=l[e[b]][e[N]];o=o+d;e=n[o];a=e[f];u=l[e[U]];l[a+1]=u;l[a]=u[e[S]];o=o+d;e=n[o];l[e[r]]=e[i];o=o+d;e=n[o];a=e[w]l[a]=l[a](P(l,a+d,e[s]))o=o+d;e=n[o];if not l[e[r]]then o=o+t;else o=e[U];end;break end while 179==(a)/((0x25539/41))do local t;local a;a=e[h];t=l[e[s]];l[a+1]=t;l[a]=t[e[C]];o=o+d;e=n[o];l[e[c]]=e[s];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[c]]=l[e[s]][e[_]];o=o+d;e=n[o];l[e[x]]=l[e[k]][e[_]];o=o+d;e=n[o];l[e[c]]=l[e[s]][e[N]];o=o+d;e=n[o];l[e[h]]=l[e[U]][e[S]];o=o+d;e=n[o];a=e[w];t=l[e[b]];l[a+1]=t;l[a]=t[e[D]];o=o+d;e=n[o];l[e[r]]=e[k];o=o+d;e=n[o];a=e[r]l[a]=l[a](P(l,a+d,e[U]))o=o+d;e=n[o];if l[e[w]]then o=o+d;else o=e[s];end;break end;break;end while 1574==(a)/((0x290-342))do a=(5153175)while u<=(0x16d-211)do a-= a l[e[h]]=l[e[s]];break;end while(a)/(((-108+0x24b1)/3))==1665 do a=(7267754)while u>(-#[[luraph deobfuscator]]+(0x1b5-263))do a-= a l[e[c]]=l[e[O]][l[e[N]]];break end while 3614==(a)/((2063+-0x34))do l[e[w]]=(e[U]~=0);o=o+t;break end;break;end break;end break;end while(a)/((0xd42+-127))==1609 do a=(4231155)while(0x11b+-124)>=u do a-= a a=(7099000)while(187+-0x1e)>=u do a-= a local a;local r;local b,s;local x;local a;l[e[c]]=M[e[O]];o=o+d;e=n[o];a=e[c];x=l[e[i]];l[a+1]=x;l[a]=x[e[C]];o=o+d;e=n[o];l[e[h]]=e[U];o=o+d;e=n[o];a=e[c]l[a]=l[a](P(l,a+d,e[i]))o=o+d;e=n[o];l[e[f]]=l[e[U]][e[D]];o=o+d;e=n[o];a=e[c];x=l[e[O]];l[a+1]=x;l[a]=x[e[S]];o=o+d;e=n[o];a=e[w]b,s=p(l[a](l[a+t]))g=s+a-d r=0;for e=a,g do r=r+d;l[e]=b[r];end;o=o+d;e=n[o];a=e[w]b={l[a](P(l,a+1,g))};r=0;for e=a,e[N]do r=r+d;l[e]=b[r];end o=o+d;e=n[o];o=e[k];break;end while(a)/((117800/0x26))==2290 do a=(3933414)while(0x9e0/16)<u do a-= a do return end;break end while 3167==(a)/(((0x551+-43)+-#'function howtofucknicuse print you cant fuck nicuse sorry haha you noooo end'))do l[e[h]]=e[k];break end;break;end break;end while 2721==(a)/((0xc8c-1657))do a=(394740)while u<=(15680/0x62)do a-= a o=e[O];break;end while 510==(a)/((1568-0x31a))do a=(4653632)while(0x4711/113)<u do a-= a local a;local U;local _,S;local u;local a;l[e[r]]=M[e[k]];o=o+d;e=n[o];a=e[f];u=l[e[i]];l[a+1]=u;l[a]=u[e[B]];o=o+d;e=n[o];l[e[w]]=e[b];o=o+d;e=n[o];a=e[x]l[a]=l[a](P(l,a+d,e[b]))o=o+d;e=n[o];l[e[h]]=l[e[s]][e[D]];o=o+d;e=n[o];l[e[f]]=M[e[i]];o=o+d;e=n[o];l[e[c]]=l[e[O]][e[N]];o=o+d;e=n[o];l[e[x]]=l[e[i]][l[e[D]]];o=o+d;e=n[o];l[e[r]]=l[e[s]][e[N]];o=o+d;e=n[o];a=e[x];u=l[e[O]];l[a+1]=u;l[a]=u[e[N]];o=o+d;e=n[o];a=e[h]_,S=p(l[a](l[a+t]))g=S+a-d U=0;for e=a,g do U=U+d;l[e]=_[U];end;o=o+d;e=n[o];a=e[c]_={l[a](P(l,a+1,g))};U=0;for e=a,e[C]do U=U+d;l[e]=_[U];end o=o+d;e=n[o];o=e[i];break end while 1634==(a)/((((-30+0x173b)+-#'Moonsec An IB2 fork sooo secure and we love it and federal is so straight and federal owns Luauth and we love spoons and if sonic was here federal would die a painful death and he would turn into dust')-0xb35))do l[e[r]]=l[e[U]]%e[D];break end;break;end break;end break;end break;end break;end break;end break;end o+= t end;end);end;return I(A(),{},q())()end)_msec({[(-42+0xb9)]='\115\116'..(function(e)return(e and'㒢㒤㒦㒦㒠㒡㒟㒗')or'\114\105'or'\120\58'end)((-#[[impulse is hot]]+(-0x46+89))==(62+-0x38))..'\110g',["㒛㒗㒛㒝㒛㒜㒚㒜㒤㒢㒘㒢㒘㒤㒚㒠"]='\108\100'..(function(e)return(e and'㒝㒡㒘㒙㒞㒝㒦㒟㒢㒜㒙㒝㒗㒘㒛㒣㒘㒠㒦')or'\101\120'or'\119\111'end)((-#'Deezbutts'+((0xe2-143)+-0x45))==(0x7a-116))..'\112',["㒗㒠㒛㒛㒠㒢㒣㒞㒘㒚㒞㒞㒟㒢㒡㒡"]=(function(e)return(e and'㒦㒚㒛㒡㒜㒣㒣㒠㒜㒚㒠㒝㒥㒦㒛㒙㒗㒢㒗')and'\98\121'or'\100\120'end)((1245/0xf9)==(125+-0x78))..'\116\101',["㒝㒡㒟㒦㒘㒞㒥㒚㒤"]='\99'..(function(e)return(e and'㒚㒘㒚㒥㒚㒝㒘㒢㒥㒠㒙㒙㒦㒗㒣㒥㒤')and'\90\19\157'or'\104\97'end)((0x26-33)==(0x174/124))..'\114',[(0x44d-559)]='\116\97'..(function(e)return(e and'㒣㒢㒜㒥㒠㒠㒛㒤㒚㒣㒙㒣㒡')and'\64\113'or'\98\108'end)((0x1d+-23)==(47-0x2a))..'\101',["㒚㒗㒤㒦㒥㒢㒘㒢㒟㒘㒛㒛㒢㒗㒡"]=(function(e)return(e and'㒟㒙㒗㒚㒙㒚㒘㒣㒦㒙㒞㒦㒣㒟㒟㒘㒛')or'\115\117'or'\78\107'end)((540/0xb4)==(-22+0x35))..'\98',["㒡㒗㒞㒜㒢㒥㒞㒙㒟㒜㒢"]='\99\111'..(function(e)return(e and'㒟㒜㒙㒚㒘㒙㒤㒦㒡㒦㒢㒥㒦㒙㒠㒝')and'\110\99'or'\110\105\103\97'end)((108-0x4d)==(-0x1c+59))..'\97\116',[(0x552-690)]=(function(e,o)return(e and'㒙㒣㒠㒝㒝㒛㒜㒟㒣㒗㒝㒢㒙㒙㒠㒤㒙')and'\48\159\158\188\10'or'\109\97'end)((0x497/235)==(-0x2f+53))..'\116\104',[(-32+0x550)]=(function(o,e)return((0x401/(0x1739/29))==(-0x29+44)and'\48'..'\195'or o..((not'\20\95\69'and'\90'..'\180'or e)))or'\199\203\95'end),["㒗㒡㒝㒜㒡㒡㒤㒢㒘㒙㒞㒦㒟㒗"]='\105\110'..(function(e,o)return(e and'㒡㒞㒙㒙㒣㒟㒗㒛㒜㒜㒠㒟㒣㒦')and'\90\115\138\115\15'or'\115\101'end)((1205/0xf1)==(-#'0nly 1337'+(0x71-(138+-0x41))))..'\114\116',["㒡㒗㒛㒤㒦㒗㒥㒛㒟"]='\117\110'..(function(e,o)return(e and'㒙㒢㒗㒝㒝㒚㒢㒜㒟㒙')or'\112\97'or'\20\38\154'end)((-#"I watch gay furry porn"+(2916/0x6c))==(((234201/0x21)/0x97)+-#'Fucking Retarted'))..'\99\107',["㒠㒚㒛㒡㒦㒝㒟㒘㒥㒥㒠㒚㒢"]='\115\101'..(function(e)return(e and'㒢㒚㒘㒟㒢㒝㒝㒘㒠㒜㒘')and'\110\112\99\104'or'\108\101'end)((((2746-0x56a)/0x28)+-#[[use luraph if want lost money]])==(1643/0x35))..'\99\116',["㒞㒝㒞㒘㒚㒘㒙㒝㒙㒘㒥㒜㒗㒤㒚㒜㒟㒜"]='\116\111\110'..(function(e,o)return(e and'㒠㒥㒢㒗㒢㒜㒙㒘㒙㒦㒜㒚㒛㒤㒜㒙㒢')and'\117\109\98'or'\100\97\120\122'end)((360/0x48)==(-#"this is a meme string"+(0x7e-100)))..'\101\114'},{["㒗㒞㒝㒡㒢㒣㒢㒘㒟㒜㒞㒝㒡㒣㒜"]=((getfenv))},((getfenv))()) end)()
+end
+end
+end
+elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+   game:GetService("ReplicatedStorage").Vehicles.GetNearestSpot:InvokeServer(game:GetService("Players").LocalPlayer.variables.carId.Value)
+   wait(0.5)
+   game:GetService("ReplicatedStorage").Vehicles.EnterVehicleEvent:InvokeServer()
+end
+   end
+end)
+example:AddToggle("Auto Upgrade Office", function(state)
+    _G.ofs = (state and true or false)
+    while _G.ofs do
+        wait()
+    if not game:GetService("Players").LocalPlayer:FindFirstChild("Office") then
+    game:GetService("ReplicatedStorage").Company.StartOffice:InvokeServer()
+    wait(0.2)
+    end
+    if game:GetService("Players").LocalPlayer.Office:GetAttribute("level") <16 then
+    game:GetService("ReplicatedStorage").Company.SkipOfficeQuest:InvokeServer()
+    game:GetService("ReplicatedStorage").Company.UpgradeOffice:InvokeServer()
+    end
+    end
+    end)
+    local example = library:CreateWindow({
+        text = "Teleports"
+      })
+      example:AddLabel("Teleports 1",function()
+      end)
+    example:AddDropdown({"Teleports","Beechwood","Beechwood Beach","Boss Airport","Bridgeview","Cedar Side","Central Bank","Central City","City Park","Coconut Park","Country Club","Da Hills","Doge Harbor"},function(state) --true/false, replaces the current title "Dropdown" with the option that t
+        if state == "Beechwood" then
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places.Beechwood.Position)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places.Beechwood.CFrame+Vector3.new(0,40,0))
+            end
+            elseif state == "Beechwood Beach" then
+                local location = "Beechwood Beach"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+                elseif state == "Boss Airport" then
+                    local location = "Boss Airport"
+                    local chr = game.Players.LocalPlayer.Character
+                    local hum = chr.Humanoid
+                    if hum.SeatPart == nil then
+                    chr:PivotTo(CFrame.new(-637.1304931640625, 38.99796676635742, 4325.2275390625)+Vector3.new(0,30,0))
+                    elseif hum.SeatPart ~= nil then
+                        hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(-637.1304931640625, 38.99796676635742, 4325.2275390625)+Vector3.new(0,40,0))
+                    end
+                elseif state == "Bridgeview" then
+                    local location = "Bridgeview"
+                    local chr = game.Players.LocalPlayer.Character
+                    local hum = chr.Humanoid
+                    if hum.SeatPart == nil then
+                    chr:PivotTo(CFrame.new(1354.4610595703125, 10.30431079864502, 1278.8033447265625)+Vector3.new(0,30,0))
+                    elseif hum.SeatPart ~= nil then
+                        hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(1354.4610595703125, 10.30431079864502, 1278.8033447265625)+Vector3.new(0,40,0))
+                    end
+            elseif state == "Cedar Side" then
+                local location = "Cedar Side"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Central Bank" then
+                local location = "Central Bank"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Central City" then
+                local location = "Central City"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "City Park" then
+                local location = "City Park"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Coconut Park" then
+                local location = "Coconut Park"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Country Club" then
+                local location = "Country Club"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Da Hills" then
+                local location = "Da Hills"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(2348.347412109375, 73.10881805419922, -1537.3157958984375)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(2348.347412109375, 73.10881805419922, -1537.3157958984375)+Vector3.new(0,40,0))
+                end
+            elseif state == "Doge Harbor" then
+                local location = "Doge Harbor"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(3335.737548828125, 24.955890655517578, 2773.038818359375)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(3335.737548828125, 24.955890655517578, 2773.038818359375)+Vector3.new(0,40,0))
+                end
+            end
+        end)
+        example:AddLabel("Teleports 2",function()
+        end)
+        example:AddDropdown({"Teleports","Gas Station","Gas Station 2","Harborview","Hawthorn Park","Hospital","Industrial District","Logistic District","Master Hotel","Military Base","Noll Cliffs","Nuclear Power Plant","OFF ROAD Test Track"},function(state) --true/false, replaces the current title "Dropdown" with the option that t
+        if state == "Gas Station" then
+            local location = ""
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(103.700256, 0, -640.599792)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(103.700256, 0, -640.599792)+Vector3.new(0,40,0))
+            end
+        elseif state == "Gas Station 2" then
+            local location = ""
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(930.7002563476562, 0, 643.4002075195312)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(930.7002563476562, 0, 643.4002075195312)+Vector3.new(0,40,0))
+            end
+        elseif state == "Harborview" then
+            local location = "Harborview"
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+            end
+        elseif state == "Hawthorn Park" then
+            local location = "Hawthorn Park"
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+            end
+        elseif state == "Hospital" then
+            local location = "Hospital"
+            local chr = game.Players.LocalPlayer.Character
+            local hum = chr.Humanoid
+            if hum.SeatPart == nil then
+            chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+            elseif hum.SeatPart ~= nil then
+                hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+            end
+        elseif state == "Industrial District" then 
+            local location = "Industrial District"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+        end
+    elseif state == "Logistic District" then 
+        local location = "Logistic District"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(588.2861938476562, 53.5777473449707, 2529.95361328125)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(588.2861938476562, 53.5777473449707, 2529.95361328125)+Vector3.new(0,40,0))
+        end
+    elseif state == "Master Hotel" then 
+        local location = "Master Hotel"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(2736.1591796875, 15.864909172058105, -202.09945678710938)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(CFrame.new(2736.1591796875, 15.864909172058105, -202.09945678710938)+Vector3.new(0,40,0))
+        end
+    elseif state == "Military Base" then 
+        local location = "Military Base"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+        end
+    elseif state == "Noll Cliffs" then 
+        local location = "Noll Cliffs"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+        end
+    elseif state == "Nuclear Power Plant" then 
+        local location = "Nuclear Power Plant"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+        end
+    elseif state == "OFF ROAD Test Track" then 
+        local location = "OFF ROAD Test Track"
+        local chr = game.Players.LocalPlayer.Character
+        local hum = chr.Humanoid
+        if hum.SeatPart == nil then
+        chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+        elseif hum.SeatPart ~= nil then
+            hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+        end
+        end
+        end)
+        example:AddLabel("Teleports 3",function()
+        end)
+        example:AddDropdown({"Teleports","Ocean Viewpoint","Oil Refinery","Old Town","Popular Street","Small Town","St. Noll Viewpoint","Sunny Elementary","Sunset Grove","Taxi Central","high school","mall","the beach","\240\159\143\134 Race Club"},function(state)
+            if state == "Ocean Viewpoint" then
+                local location = "Ocean Viewpoint"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+        
+            elseif state == "Oil Refinery" then 
+                local location = "Oil Refinery"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Old Town" then 
+                local location = "Old Town"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Popular Street" then 
+                local location = "Popular Street"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Small Town" then 
+                local location = "Small Town"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "St. Noll Viewpoint" then 
+                local location = "St. Noll Viewpoint"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Sunny Elementary" then 
+                local location = "Sunny Elementary"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Sunset Grove" then 
+                local location = "Sunset Grove"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "Taxi Central" then 
+                local location = "Taxi Central"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "high school" then 
+                local location = "high school"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "mall" then 
+                local location = "mall"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "the beach" then 
+                local location = "the beach"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            elseif state == "\240\159\143\134 Race Club" then
+                local location = "\240\159\143\134 Race Club"
+                local chr = game.Players.LocalPlayer.Character
+                local hum = chr.Humanoid
+                if hum.SeatPart == nil then
+                chr:PivotTo(CFrame.new(game:GetService("ReplicatedStorage").Places[location].Position)+Vector3.new(0,30,0))
+                elseif hum.SeatPart ~= nil then
+                    hum.SeatPart.Parent.Parent:PivotTo(game:GetService("ReplicatedStorage").Places[location].CFrame+Vector3.new(0,40,0))
+                end
+            end
+        end)
+local example = library:CreateWindow({
+  text = "Miscellaneous"
+})
+example:AddLabel("                Vehicle buyer",function()
+end)
+example:AddBox("Vehicle Name", function(object, focus)
+  if focus then
+      local car = tostring(object.Text)
+for i,v in pairs(require(game:GetService("ReplicatedStorage").ModuleLists.CarList)) do
+    if string.find(v.name,car) then
+       game:GetService("ReplicatedStorage").DataStore.PurchaseVehicle:InvokeServer(v.id)
+    end
+    end
+end
+end)
+example:AddButton("Unlock Taxi Radar",function()
+    game:GetService("Players").LocalPlayer.variables.vip.Value = true
+end)
+  example:AddButton("Show Players stats",function()
+    game:GetService("VirtualInputManager"):SendKeyEvent(true,"F9",false,game)
+    print("Players Owned Cars")
+    for i,v in pairs(game.Players:GetChildren()) do
+        if v.ClassName == "Player" then
+            print("------------------"..v.Name.." OwnedCars".."------------------")
+      local tables = {}
+      local racetable = {}
+        for a,b in pairs(v.Data.OwnedCars:GetChildren()) do
+            if b:IsA("BoolValue") and b.Value == true then
+               for c,d in pairs(require(game:GetService("ReplicatedStorage").ModuleLists.CarList)) do
+               if d.id == tonumber(b.Name) then
+               table.insert(tables,d.name..",")
+            end
+        end
+        end
+        end
 
-
+    warn(unpack(tables))
+    print("------------------"..v.Name.." Currencies".."------------------")
+    warn(v.variables.candy.Name..": "..v.variables.candy.Value,v.variables.rep.Name..": "..v.variables.rep.Value,v.Data.coconuts.Name..": "..v.Data.coconuts.Value)
+    print("------------------"..v.Name.." Race Best Times".."------------------")
+    for ok,p in pairs(v.Data.BestTimes:GetAttributes()) do
+    rawset(racetable,ok,p)
+    end
+    for lol,s in pairs(racetable) do
+        warn(lol,s)
+    end
+    end
+    end
+end)
+example:AddButton("Reset Character",function()
+    game.Players.LocalPlayer.Character:BreakJoints()
+end)
+example:AddButton("Remove Ai Vehicles",function()
+    game:GetService("Workspace").Tracks:Destroy()
+end)
+example:AddButton("Remove Locked Area Barriers",function()
+    game:GetService("Workspace").AreaLocked:Destroy()
+end)
+example:AddToggle("Donut God", function(state)
+_G.donut = (state and true or false)
+while _G.donut do
+    task.wait()
+pcall(function()
+local part = game.Players.LocalPlayer.Character.Humanoid.SeatPart
+part.RotVelocity = Vector3.new(0,part.RotVelocity.Y+10,0)
+end)
+end
+end)
