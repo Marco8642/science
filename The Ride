@@ -1,0 +1,38 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs"))()
+local example = library:CreateWindow({
+  text = "The Ride"
+})
+example:AddToggle("Auto Farm", function(state)
+getfenv().test = (state and true or false)
+game.Players.LocalPlayer.Character.Head.Anchored = false
+spawn(function()
+while getfenv().test do
+	pcall(function()
+task.wait()
+if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame.LookVector*400
+end
+end)
+end
+end)
+while getfenv().test do
+   task.wait()
+    pcall(function()
+if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+local hum = game.Players.LocalPlayer.Character.Humanoid
+if not workspace:FindFirstChild("justapart") then
+	local new = Instance.new("Part",workspace)
+	new.Name = "justapart"
+	new.Size = Vector3.new(10000,20,10000)
+	new.Anchored = true
+	new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+end
+hum.SeatPart.Parent.PrimaryPart = hum.SeatPart
+hum.SeatPart.Throttle = 1
+hum.SeatPart.Parent:PivotTo(workspace.justapart.CFrame+Vector3.new(0,13,0))
+task.wait(1)
+game.Players.LocalPlayer.Character.Head.Anchored = getfenv().test
+end
+end)
+end
+end)
