@@ -1,4 +1,4 @@
-    warn("Anti afk running")
+warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
@@ -10,18 +10,18 @@ local example = library:CreateWindow({
 })
 example:AddToggle("Auto Farm", function(state)
 getfenv().test = (state and true or false)
-game.Players.LocalPlayer.Character.Head.Anchored = false
+local hum = game.Players.LocalPlayer.Character.Humanoid
+hum.SeatPart.Parent.PrimaryPart = hum.SeatPart
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Anchored = false
 while getfenv().test do
    task.wait()
-   local hum = game.Players.LocalPlayer.Character.Humanoid
-   hum.SeatPart.Parent.PrimaryPart = hum.SeatPart
 if game.Players.LocalPlayer.Character.Humanoid.Sit == true and wefarming == nil then
     wefarming = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame
-
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Head.CFrame.LookVector*400
 task.wait(0.5)
-game.Players.LocalPlayer.Character.Head.Anchored= true
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(wefarming)
+task.wait()
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Anchored= getfenv().test
 end
 end
 end)
