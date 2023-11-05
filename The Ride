@@ -13,6 +13,7 @@ getfenv().test = (state and true or false)
 local hum = game.Players.LocalPlayer.Character.Humanoid
 hum.SeatPart.Parent.PrimaryPart = hum.SeatPart
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Anchored = false
+wefarming = nil
 while getfenv().test do
    task.wait()
 if game.Players.LocalPlayer.Character.Humanoid.Sit == true and wefarming == nil then
