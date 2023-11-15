@@ -11,15 +11,19 @@ local example = library:CreateWindow({
 example:AddToggle("Auto Farm", function(state)
 getfenv().test = (state and true or false)
 spawn(function()
-while getfenv().test do
-	pcall(function()
-task.wait()
-if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
-game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame.LookVector*400
-end
-end)
-end
-end)
+    while getfenv().test do
+        pcall(function()
+    task.wait()
+    if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+        if game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight") then
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight").Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight").CFrame.LookVector*400
+        else
+            game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame.LookVector*400
+        end
+        end
+    end)
+    end
+    end)
 while getfenv().test do
    task.wait()
     pcall(function()
