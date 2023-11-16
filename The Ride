@@ -20,7 +20,7 @@ if game.Players.LocalPlayer.Character.Humanoid.Sit == true and wefarming == nil 
     wefarming = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Head.CFrame.LookVector*400
 task.wait(0.5)
-game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(wefarming)
+game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame+Vector3.new(0,5000,0))
 task.wait()
 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Anchored= getfenv().test
 end
