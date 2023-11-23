@@ -1,0 +1,45 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs"))()
+local example = library:CreateWindow({
+  text = "Highway Racers: REBORN"
+})
+example:AddToggle("Auto Farm", function(state)
+getfenv().test = (state and true or false)
+
+while getfenv().test do
+   task.wait()
+    pcall(function()
+if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+local hum = game.Players.LocalPlayer.Character.Humanoid
+if not workspace:FindFirstChild("justapart") then
+	local new = Instance.new("Part",workspace)
+	new.Name = "justapart"
+	new.Size = Vector3.new(10000,20,10000)
+	new.Anchored = true
+	new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+end
+if not workspace:FindFirstChild("justapart2") then
+	local new = Instance.new("Part",workspace)
+	new.Name = "justapart2"
+	new.Size = Vector3.new(10000,20,10000)
+	new.Anchored = true
+	new.Position = workspace:FindFirstChild("justapart").Position+Vector3.new(100000,0,100000)
+end
+hum.SeatPart.Parent.PrimaryPart=hum.SeatPart.Parent.Body:FindFirstChild("#Weight")
+hum.SeatPart.Throttle = 1
+hum.SeatPart.Parent:PivotTo(workspace.justapart.CFrame+Vector3.new(0,13,0))
+task.wait(0.1)
+hum.SeatPart.Parent:PivotTo(workspace.justapart2.CFrame+Vector3.new(0,13,0))
+task.wait(0.1)
+end
+end)
+end
+end)
+example:AddButton("reset character", function(state)
+game.Players.LocalPlayer.Character:BreakJoints()
+end)
