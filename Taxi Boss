@@ -180,7 +180,8 @@ _G.stuck = _G.stuck+1
       _G.rat = nil
     local distance = math.huge
     for i,v in pairs(game:GetService("Workspace").NewCustomers:GetDescendants()) do
-       if v.Name == "Part"  and v:FindFirstChildOfClass("CFrameValue") and v:GetAttribute("Rating") < game:GetService("Players").LocalPlayer.variables.vehicleRating.Value and game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
+              if v.Name == "Part" and v:GetAttribute("GroupSize") ~= nil  and v:FindFirstChildOfClass("CFrameValue") and game.Players.LocalPlayer.variables.seatAmount.Value > v:GetAttribute("GroupSize") and v:GetAttribute("Rating") < game:GetService("Players").LocalPlayer.variables.vehicleRating.Value and game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
+
          print(v)
            local Dist = (v.Position-Vector3.new(v:FindFirstChildOfClass("CFrameValue").Value.X,v:FindFirstChildOfClass("CFrameValue").Value.Y,v:FindFirstChildOfClass("CFrameValue").Value.Z)).magnitude
     if Dist < distance then
