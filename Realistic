@@ -1,0 +1,64 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs", true))()
+local example = library:CreateWindow({
+  text = "Realistic Car Driving™"
+})
+example:AddToggle("Auto Farm", function(state)
+    getfenv().test = (state and true or false)
+    spawn(function()
+        while getfenv().test do
+            pcall(function()
+        task.wait()
+        if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            if game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight") then
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart=game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight")
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight").Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Body:FindFirstChild("#Weight").CFrame.LookVector*800
+            else
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame.LookVector*800
+            end
+            end
+        end)
+        end
+        end)
+    while getfenv().test do
+       task.wait()
+        pcall(function()
+    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+    local hum = game.Players.LocalPlayer.Character.Humanoid
+    if not workspace:FindFirstChild("justapart") then
+        local new = Instance.new("Part",workspace)
+        new.Name = "justapart"
+        new.Size = Vector3.new(10000,20,10000)
+        new.Anchored = true
+        new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+    end
+    hum.SeatPart.Throttle = 1
+    hum.SeatPart.Parent:PivotTo(workspace.justapart.CFrame+Vector3.new(0,13,0))
+    task.wait()
+    end
+    end)
+    end
+    end)
+example:AddToggle("Gamepass Cars", function(state)
+_G.gamepass = (state and true or false)
+if _G.firstrun ~= true then
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'InvokeServer' and self.Name == 'PurchaseCar' and _G.gamepass == true then
+return true
+	end
+	return namecall(self, ...) 
+end)
+end
+end)
