@@ -48,9 +48,9 @@ example:AddToggle("Auto Claim Rank Rewards", function(state)
 _G.reward = (state and true or false)
 while _G.reward do 
     wait()
-for i=1,20 do
+for i=1,32 do
 game:GetService("ReplicatedStorage").Network.Ranks_ClaimReward:FireServer(i)
-wait(0.1)
+task.wait(0.1)
 end
 end
 end)
