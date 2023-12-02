@@ -1,0 +1,50 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs", true))()
+local example = library:CreateWindow({
+  text = "Pet sim 99"
+})
+example:AddToggle("Auto Collect", function(state)
+_G.test = (state and true or false)
+while _G.test do
+    wait()
+if workspace.__THINGS.Lootbags:FindFirstChildOfClass("Model") then
+for i,v in pairs(workspace.__THINGS.Lootbags:GetChildren()) do
+if v.ClassName == "Model" then
+local test = v:FindFirstChildOfClass("MeshPart") or v:FindFirstChildOfClass("Part")
+test.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+end
+end
+elseif workspace.__THINGS.Orbs:FindFirstChildOfClass("Part") then
+    for i,v in pairs(workspace.__THINGS.Orbs:GetChildren()) do
+        if v.ClassName == "Part" then
+            v.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+        end
+    end
+end
+end
+end)
+example:AddToggle("Auto Farm", function(state)
+    _G.test2 = (state and true or false)
+    _G.range = 100
+    while _G.test2 do
+    task.wait()
+    pcall(function()
+    for i,v in pairs(workspace.__THINGS.Breakables:GetChildren()) do
+        if v.ClassName == "Model" and game:GetService("Players").LocalPlayer:DistanceFromCharacter(v:GetChildren()[1].Position) < _G.range  then
+            print(v.PrimaryPart)
+    game:GetService("ReplicatedStorage").Network.Breakables_PlayerDealDamage:FireServer(v.Name)
+    task.wait()
+        end
+    end
+    end)
+    end
+end)
+example:AddToggle("Auto Claim Rank Rewards", function(state)
+_G.reward = (state and true or false)
+while _G.reward do 
+    wait()
+for i=1,20 do
+game:GetService("ReplicatedStorage").Network.Ranks_ClaimReward:FireServer(i)
+wait(0.1)
+end
+end
+end)
