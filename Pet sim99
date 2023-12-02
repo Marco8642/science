@@ -44,7 +44,7 @@ example:AddToggle("Auto Farm", function(state)
     end)
     end
 end)
-example:AddToggle("Auto Complete Missions", function(state)
+example:AddToggle("Auto Claim Rank Rewards", function(state)
 _G.reward = (state and true or false)
 while _G.reward do 
     wait()
