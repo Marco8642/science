@@ -18,7 +18,7 @@ local UICorner_5 = Instance.new("UICorner")
 --Properties:
 
 ScreenGui2.Name = "ScreenGui2"
-ScreenGui2.Parent = game.CoreGui
+ScreenGui2.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui2.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 Frame.Parent = ScreenGui2
@@ -41,7 +41,7 @@ TextLabel.Font = Enum.Font.Unknown
 TextLabel.Text = "Warning"
 TextLabel.TextColor3 = Color3.fromRGB(255, 0, 0)
 TextLabel.TextScaled = true
-TextLabel.TextSize = 10.000
+TextLabel.TextSize = 5.000
 TextLabel.TextStrokeTransparency = 0.500
 TextLabel.TextWrapped = true
 
@@ -55,7 +55,7 @@ TextButton.BorderSizePixel = 0
 TextButton.Position = UDim2.new(0.206208423, 0, 0.698347092, 0)
 TextButton.Size = UDim2.new(0, 114, 0, 27)
 TextButton.Font = Enum.Font.Unknown
-TextButton.Text = "My Youtube"
+TextButton.Text = "Link"
 TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextButton.TextSize = 23.000
 TextButton.TextStrokeColor3 = Color3.fromRGB(0, 255, 255)
