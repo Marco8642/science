@@ -163,7 +163,7 @@
             TextColor3 = options.txtcolor,
             TextColor3 = (options.bartextcolor or Color3.fromRGB(255, 255, 255));
             TextSize = 17,
-            Font = Enum.Font.FredokaOneSemibold;
+            Font = Enum.Font.FredokaOne;
             Text = options.text or "window",
             Name = "Window",
             Parent = window.frame,
@@ -219,7 +219,7 @@
                 Position = UDim2.new(1, -25, 0, 0),
                 Size = UDim2.new(0, 25, 1, 0),
                 TextSize = 17,
-                Font = Enum.Font.FredokaOneSemibold,
+                Font = Enum.Font.FredokaOne,
                 Parent = label;
             })
    
