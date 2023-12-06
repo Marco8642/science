@@ -145,9 +145,6 @@
             Font = Enum.Font.FredokaOne;
             Parent = window.frame,
         });
-   local uicorner = self:Create("UICorner", {
-Parent = window.frame
-   });
         togglebutton.MouseButton1Click:connect(function()
             window.closed = not window.closed
             togglebutton.Text = (window.closed and "+" or "-")
