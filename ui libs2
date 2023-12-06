@@ -146,10 +146,8 @@
             Parent = window.frame,
         });
    local uicorner = self:Create("UICorner", {
-CornerRadius = Vector2.new(0.1, 5),
 Parent = window.frame
    });
-uicorner
         togglebutton.MouseButton1Click:connect(function()
             window.closed = not window.closed
             togglebutton.Text = (window.closed and "+" or "-")
