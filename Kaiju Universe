@@ -28,15 +28,6 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Kaiju Universe"
 })
-example:AddLabel("Autofarm Speed",function()
-end)
-example:AddBox("Speed", function(object, focus)
-    if focus then
-   
-        _G.tp = tonumber(object.Text)
-    end
-    end)
-
     example:AddLabel("Auto Use Skill",function()
     end)
     example:AddBox("Skill Name", function(object, focus)
@@ -113,176 +104,19 @@ _G.rat = nil
 		distance = Dist
 		_G.rat = v
 		end
+        task.wait()
 			end
 	end
+repeat wait()
 		local location = _G.rat.Position
-local hum = game.Players.LocalPlayer.Character.HumanoidRootPart
-local x = location.X
-local y = location.Y
-local z = location.Z
-
-                 game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-if x < hum.Position.X then
-    while x < hum.Position.X do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X-_G.tp,hum.Position.Y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if x > hum.Position.X then
-    while x > hum.Position.X do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-    local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X+_G.tp,hum.Position.Y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if y < hum.Position.Y then
-    while y < hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if y > hum.Position.Y then
-    while y > hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if z < hum.Position.Z then
-    while z < hum.Position.Z do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z-_G.tp))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if z > hum.Position.Z then
-    while z > hum.Position.Z do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,hum.Position.Y,hum.Position.Z+_G.tp))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if y < hum.Position.Y then
-    while y < hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-if y > hum.Position.Y then
-    while y > hum.Position.Y do
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
-        local CFrameEnd = CFrame.new(Vector3.new(hum.Position.X,y,hum.Position.Z))
-game.Players.LocalPlayer.Character.Parent.PrimaryPart = game.Players.LocalPlayer.Character.HumanoidRootPart
-              local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(0.05, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-
-local TweenValue = Instance.new("CFrameValue")
-TweenValue.Value = game.Players.LocalPlayer.Character.Parent:GetPrimaryPartCFrame()
-			
-TweenValue.Changed:Connect(function()
-	game.Players.LocalPlayer.Character.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-end)
-			
-local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrameEnd})
-OnTween:Play()
- OnTween.Completed:Wait()
-    end
-end
-                game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
+        local LocalPlayer = game:GetService("Players").LocalPlayer
+        local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
+        local ClickToMoveController = PlayerModule:GetClickToMoveController()
+        ClickToMoveController:SetShowPath(false)
+        ClickToMoveController:SetUserJumpEnabled(false)
+        ClickToMoveController:MoveTo(location,true)
+until game.Players.LocalPlayer:DistanceFromCharacter(_G.rat.Position) < 60 or _G.test == false
+    game.Players.LocalPlayer.Character.ClientRunner.KaijuControlEvent:FireServer(_G.skillname)
 end)
 end
 end)
@@ -347,31 +181,6 @@ end
 end)
 example:AddButton("Kill Yourself",function()
 game.Players.LocalPlayer.Character:BreakJoints()
-end)
-example:AddButton("Fps Boost",function()
-local decalsyeeted = true -- Leaving this on makes games look shitty but the fps goes up by at least 20.
-local g = game
-local w = g.Workspace
-local l = g.Lighting
-local t = w.Terrain
-t.WaterWaveSize = 0
-t.WaterWaveSpeed = 0
-t.WaterReflectance = 0
-t.WaterTransparency = 0
-l.GlobalShadows = false
-l.FogEnd = 9e9
-l.Brightness = 0
-settings().Rendering.QualityLevel = "Level01"
-for i,v in pairs(g:GetDescendants()) do
-    if v:IsA("Part") or v:IsA("Union") or v:IsA("MeshPart") then
-        v.Material = "Plastic"
-v.Reflectance = 0
-elseif v:IsA("Decal") and decalsyeeted then 
-v.Transparency = 1
-elseif v:IsA("ParticleEmitter") or v:IsA("Trail") then 
-v.Lifetime = NumberRange.new(0)
-    end
-end    
 end)
 spawn(function()
     while wait() do
