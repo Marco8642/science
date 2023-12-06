@@ -124,7 +124,7 @@
             Parent = window.container;
         })
       window.uicorner = self:Create("UICorner", {
-Parent = window
+Parent = window,
 CornerRadius = Vector2.new(0.1, 5)
 });
         self:Create("Frame", {
