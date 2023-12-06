@@ -125,7 +125,8 @@
         })
       window.uicorner = self:Create("UICorner", {
 Parent = window
-   });
+CornerRadius = Vector2.new(0.1, 5)
+});
         self:Create("Frame", {
             Name = 'Underline';
             Size = UDim2.new(1, 0, 0, 1),
