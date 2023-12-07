@@ -123,7 +123,7 @@
             PaddingTop = UDim.new(0, 5);
             Parent = window.container;
         })
-      uicorner = self:Create("UICorner", {
+      window.uicorner = self:Create("UICorner", {
 CornerRadius = UDim.new(0.1, 5),
 Parent = window.frame
 })
