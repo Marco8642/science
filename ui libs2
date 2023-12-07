@@ -159,7 +159,7 @@ Parent = window.frame
         end)
    
         self:Create("TextLabel", {
-            Size = UDim2.new(1, 0, 1, 0),
+            Size = UDim2.new(1, 0, 2, 0),
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             TextColor3 = options.txtcolor,
