@@ -124,7 +124,7 @@
             Parent = window.container;
         })
       window.uicorner = self:Create("UICorner", {
-CornerRadius = UDim.new(0.1, 0),
+CornerRadius = UDim.new(0.1, 5),
 Parent = window.frame
 })
         self:Create("Frame", {
@@ -159,12 +159,13 @@ Parent = window.frame
         end)
    
         self:Create("TextLabel", {
-            Size = UDim2.new(1, 0, 2, 0),
+            Size = UDim2.new(1, 0, 1.5, 0),
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             TextColor3 = options.txtcolor,
             TextColor3 = (options.bartextcolor or Color3.fromRGB(255, 255, 255));
             TextSize = 17,
+            TextYAlignment = 'Top',
             Font = Enum.Font.FredokaOne;
             Text = options.text or "window",
             Name = "Window",
