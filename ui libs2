@@ -124,9 +124,8 @@
             Parent = window.container;
         })
       window.uicorner = self:Create("UICorner", {
-Name = 'UICorner';
-Parent = window;
-CornerRadius = UDim.new.new(0.1, 5);
+CornerRadius = UDim.new.new(0.1, 5),
+Parent = window
 })
         self:Create("Frame", {
             Name = 'Underline';
