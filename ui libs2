@@ -9,7 +9,6 @@
         local mouse = game:GetService("Players").LocalPlayer:GetMouse();
         local inputService = game:GetService('UserInputService');
         local heartbeat = game:GetService("RunService").Heartbeat;
-        -- // credits to Ririchi / Inori for this cute drag function :)
         function dragger.new(frame)
             local s, event = pcall(function()
                 return frame.MouseEnter
@@ -165,7 +164,6 @@ Parent = window.frame
             TextColor3 = options.txtcolor,
             TextColor3 = (options.bartextcolor or Color3.fromRGB(255, 255, 255));
             TextSize = 17,
-            TextYAlignment = 'Top',
             Font = Enum.Font.FredokaOne;
             Text = options.text or "window",
             Name = "Window",
