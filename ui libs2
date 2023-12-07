@@ -124,7 +124,7 @@
             Parent = window.container;
         })
       window.uicorner = self:Create("UICorner", {
-CornerRadius = UDim.new(0.1, 5),
+CornerRadius = UDim.new(0.1, 0),
 Parent = window.frame
 })
         self:Create("Frame", {
