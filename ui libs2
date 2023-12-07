@@ -83,7 +83,7 @@
             Parent = self.gui,
             Active = true,
             BackgroundTransparency = 0,
-            Size = UDim2.new(0, 190, 0, 30),
+            Size = UDim2.new(0, 190, 0, 50),
             Position = UDim2.new(0, (15 + ((200 * self.windowcount) - 200)), 0, 15),
             BackgroundColor3 = options.barcolor,
             BorderSizePixel = 0;
