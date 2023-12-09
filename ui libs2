@@ -138,7 +138,7 @@
             Position = UDim2.new(1, -25, 0, 0),
             Size = UDim2.new(0, 25, 1, 0),
             Text = "-",
-            TextSize = 17,
+            TextSize = 12,
             TextColor3 = options.txtcolor,
             Font = Enum.Font.FredokaOne;
             Parent = window.frame,
@@ -159,7 +159,7 @@
             BorderSizePixel = 0;
             TextColor3 = options.txtcolor,
             TextColor3 = (options.bartextcolor or Color3.fromRGB(255, 255, 255));
-            TextSize = 17,
+            TextSize = 12,
             Font = Enum.Font.FredokaOne;
             Text = options.text or "window",
             Name = "Window",
@@ -215,7 +215,7 @@
                 BackgroundTransparency = 1;
                 Position = UDim2.new(1, -25, 0, 0),
                 Size = UDim2.new(0, 25, 1, 0),
-                TextSize = 17,
+                TextSize = 12,
                 Font = Enum.Font.FredokaOne,
                 Parent = label;
             })
