@@ -32,7 +32,9 @@ example:AddToggle("Use First Skill", function(state)
 getfenv().yeok = (state and true or false)
 while  getfenv().yeok do
 wait()
+ if game.Players.LocalPlayer:DistanceFromCharacter(getfenv().rat.Position) < 100 then
 game:GetService("VirtualInputManager"):SendKeyEvent(true,"One",false,game)
+end
 end
 end)
    example:AddLabel("Range to Farm",function()
