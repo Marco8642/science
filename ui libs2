@@ -138,7 +138,7 @@
             Position = UDim2.new(1, -25, 0, 0),
             Size = UDim2.new(0, 25, 1, 0),
             Text = "-",
-            TextSize = 12,
+            TextSize = 14,
             TextColor3 = options.txtcolor,
             Font = Enum.Font.FredokaOne;
             Parent = window.frame,
@@ -159,7 +159,7 @@
             BorderSizePixel = 0;
             TextColor3 = options.txtcolor,
             TextColor3 = (options.bartextcolor or Color3.fromRGB(255, 255, 255));
-            TextSize = 12,
+            TextSize = 14,
             Font = Enum.Font.FredokaOne;
             Text = options.text or "window",
             Name = "Window",
@@ -204,7 +204,7 @@
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Left;
                 LayoutOrder = self.Count;
-                TextSize = 10,
+                TextSize = 12,
                 Font = Enum.Font.FredokaOne,
                 Parent = self.container;
             })
@@ -215,7 +215,7 @@
                 BackgroundTransparency = 1;
                 Position = UDim2.new(1, -25, 0, 0),
                 Size = UDim2.new(0, 25, 1, 0),
-                TextSize = 12,
+                TextSize = 14,
                 Font = Enum.Font.FredokaOne,
                 Parent = label;
             })
@@ -244,7 +244,7 @@
                 BackgroundColor3 = options.boxcolor,
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Center;
-                TextSize = 10,
+                TextSize = 12,
                 Text = "",
                 Font = Enum.Font.FredokaOne,
                 LayoutOrder = self.Count;
@@ -271,7 +271,7 @@
                 BackgroundTransparency = 1;
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Left;
-                TextSize = 10,
+                TextSize = 12,
                 Font = Enum.Font.FredokaOne,
                 LayoutOrder = self.Count;
                 Parent = self.container;
@@ -294,7 +294,7 @@
                 BackgroundTransparency = 1;
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Left;
-                TextSize = 10,
+                TextSize = 12,
                 Font = Enum.Font.FredokaOne,
                 LayoutOrder = self.Count;
                 Parent = self.container;
@@ -315,7 +315,7 @@
                 BackgroundColor3 = options.boxcolor,
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Center;
-                TextSize = 10,
+                TextSize = 12,
                 Text = default,
                 Font = Enum.Font.FredokaOne,
                 BorderSizePixel = 0;
@@ -384,7 +384,7 @@
                         BackgroundColor3 = Color3.fromRGB(40, 40, 40);
                         TextColor3 = Color3.fromRGB(255, 255, 255);
                         BorderSizePixel = 0;
-                        TextSize = 10;
+                        TextSize = 12;
                         Font = Enum.Font.FredokaOne;
                         Size = UDim2.new(1, 0, 0, 21);
                         Parent = frame;
