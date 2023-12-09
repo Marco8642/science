@@ -271,7 +271,7 @@
                 BackgroundTransparency = 1;
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Left;
-                TextSize = 16,
+                TextSize = 10,
                 Font = Enum.Font.FredokaOne,
                 LayoutOrder = self.Count;
                 Parent = self.container;
@@ -294,7 +294,7 @@
                 BackgroundTransparency = 1;
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Left;
-                TextSize = 16,
+                TextSize = 10,
                 Font = Enum.Font.FredokaOne,
                 LayoutOrder = self.Count;
                 Parent = self.container;
@@ -315,7 +315,7 @@
                 BackgroundColor3 = options.boxcolor,
                 TextColor3 = Color3.fromRGB(255, 255, 255);
                 TextXAlignment = Enum.TextXAlignment.Center;
-                TextSize = 16,
+                TextSize = 10,
                 Text = default,
                 Font = Enum.Font.FredokaOne,
                 BorderSizePixel = 0;
