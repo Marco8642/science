@@ -365,7 +365,7 @@
    
                 frame = library:Create('Frame', {
                     Position = UDim2.new(0, 0, 1, 0);
-                    BackgroundColor3 = Color3.fromRGB(40, 40, 40);
+                    BackgroundColor3 = Color3.fromRGB(0, 255, 255);
                     Size = UDim2.new(0, dropdown.AbsoluteSize.X, 0, (count(options) * 21));
                     BorderSizePixel = 0;
                     Parent = dropdown;
