@@ -100,6 +100,7 @@ repeat wait()
         local LocalPlayer = game:GetService("Players").LocalPlayer
         local PlayerModule = require(LocalPlayer.PlayerScripts.PlayerModule)
         local ClickToMoveController = PlayerModule:GetClickToMoveController()
+        ClickToMoveController:UseDirectPath(true)
         ClickToMoveController:SetShowPath(false)
         ClickToMoveController:SetUserJumpEnabled(false)
         ClickToMoveController:MoveTo(getfenv().rat.Position,true)
