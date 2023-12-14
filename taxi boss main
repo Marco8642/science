@@ -1,3 +1,19 @@
+local taxi = game:GetService("MarketplaceService"):GetProductInfo(7305309231)
+print(taxi.Updated)
+if tostring(taxi.Updated):split("T")[1] ~= "2023-11-24" then
+local CoreGui = game:GetService("StarterGui")
+
+CoreGui:SetCore("SendNotification", {
+	Title = "Warning";
+	Text = "Taxi Boss seems to have updated test script on a alt first to check if the script is safe to use or  notify me on youtube note i am not responsible for any type of account bans";
+	Duration = 20;
+})
+CoreGui:SetCore("SendNotification", {
+	Title = "Warning";
+	Text = "for any type of account bans";
+	Duration = 20;
+})
+end
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
