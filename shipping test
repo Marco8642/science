@@ -115,8 +115,17 @@ OnTween:Play()
  ship.Storage.RemoteFunction:InvokeServer("DockShip")
  repeat wait()
 until ship:GetAttribute("IsDocked") == true or _G.test == false
-wait(2)
-wait()
+repeat wait()
+    local ship = game.Players.LocalPlayer.CurrentShip.Value
+    local args = {
+        [1] = "GetLoadingCargo",
+        [2] = "Container"
+    }
+    gotcargo = nil
+    for i,v in pairs(ship.Storage.RemoteFunction:InvokeServer(unpack(args))) do
+        gotcargo = v
+    end
+until gotcargo ~= nil or _G.test == false
 local ship = game.Players.LocalPlayer.CurrentShip.Value
 local args = {
     [1] = "GetLoadingCargo",
