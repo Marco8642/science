@@ -1,0 +1,277 @@
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if Method == 'FireServer' and self.Name == 'RemoteEvent' and tostring(Args[1]) == "ClientLaggy" then
+return;
+	end
+	return namecall(self, ...) 
+end)
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+spawn(function()
+while wait() do
+	pcall(function()
+if _G.ship == nil and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+for i,v in pairs(getgc(true)) do
+if type(v) == "table" and rawget(v,"ID") == game.Players.LocalPlayer.CurrentShip.Value:GetAttribute("ShipID") then
+_G.ship = v
+	end
+end
+end
+end)
+end
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs", true))()
+local example = library:CreateWindow({
+  text = "Shipping Lanes"
+})
+example:AddToggle("Auto Farm", function(state)
+_G.test = (state and true or false)
+local farmnum = 0
+while _G.test do
+	wait()
+	for i,v in pairs(workspace:GetDescendants()) do
+		pcall(function()
+	v.CanCollide = false
+	end)
+	end
+local check,errors = pcall(function()
+    _G.rat = nil
+    local distance = math.huge
+    for a,b in pairs(game:GetService("Workspace").Ports:GetDescendants()) do
+        if b.Name == "DockingArea"  then
+    local Dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position - b.Position).magnitude
+    if Dist < distance then
+    distance = Dist
+    _G.rat = b
+    end
+    end
+    end
+    if _G.rat.Parent.Parent.Name ~= "Rockfall Port" then
+game:GetService("ReplicatedStorage").RemoteStorage.RemoteFunction:InvokeServer("SpawnShip", _G.ship, "Rockfall Port")
+    wait(3)
+    game:GetService("Players").LocalPlayer.CurrentShip.Value.ControlPanel.VehicleSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+    end
+	repeat wait()
+	until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil or _G.test == false
+for i,v in pairs(workspace:GetDescendants()) do
+		pcall(function()
+	v.CanCollide = false
+	end)
+	end
+	wait(5)
+dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)).magnitude
+		print(dist/25/7)
+	repeat wait()
+	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/25/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+	dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)).magnitude
+	wait(1)
+	dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-6373.4052734375, 230.53976440429688, 1904.3013916015625)).magnitude
+	until dist < 100 or _G.test == false
+ dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-5466.9814453125, 230.81895446777344, 1618.270263671875)).magnitude
+		print(dist/25/7)
+repeat wait()
+ 	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/25/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(-5466.9814453125, 230.81895446777344, 1618.270263671875)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ wait(1)
+  dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-5466.9814453125, 230.81895446777344, 1618.270263671875)).magnitude
+ 	until dist < 100 or _G.test == false
+
+ wait(3)
+ local ship = game.Players.LocalPlayer.CurrentShip.Value
+ ship.Storage.RemoteFunction:InvokeServer("DockShip")
+ repeat wait()
+until ship:GetAttribute("IsDocked") == true or _G.test == false
+wait(2)
+wait()
+local ship = game.Players.LocalPlayer.CurrentShip.Value
+local args = {
+    [1] = "GetLoadingCargo",
+    [2] = "Container"
+}
+whatweneed = nil
+local value = 0
+local count = nil 
+for i,v in pairs(ship.Storage.RemoteFunction:InvokeServer(unpack(args))) do
+if type(v) == "table" and v.Port == "Ocean Fall Port" then
+local tvalue = v.Value
+if tvalue > value then
+value = tvalue
+count = v.Count
+whatweneed = i
+end
+end
+end
+print(value,count, whatweneed)
+local args = {
+    [1] = "LoadContainer",
+    [2] = whatweneed,
+    [3] = tostring(count)
+}
+
+ship.Storage.RemoteFunction:InvokeServer(unpack(args))
+wait(2)
+ship.Storage.RemoteEvent:FireServer("Undock")
+repeat wait()
+until game.Players.LocalPlayer.CurrentShip.Value:GetAttribute("IsDocked") == false or _G.test == false
+wait()
+dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-12308.9697265625, 270.3766784667969, -6376.62451171875)).magnitude
+		print(dist/25/7)
+repeat wait()
+	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/25/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(-12308.9697265625, 270.3766784667969, -6376.62451171875)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ wait(1)
+ 	dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(-12308.9697265625, 270.3766784667969, -6376.62451171875)).magnitude
+until dist < 100 or _G.test == false
+
+ dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(6537.8779296875, 262.49554443359375, -44690.4296875)).magnitude
+		print(dist/25/7)
+repeat wait()
+
+	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/25/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(6537.8779296875, 262.49554443359375, -44690.4296875)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ wait(1)
+  dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(6537.8779296875, 262.49554443359375, -44690.4296875)).magnitude
+ 	until dist < 100 or _G.test == false
+
+dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(16525.6640625, 230.3463134765625, -44779.72265625)).magnitude
+		print(dist/25/7)
+repeat wait()
+
+	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/25/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(16525.6640625, 230.3463134765625, -44779.72265625)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ wait(1)
+ dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-Vector3.new(16525.6640625, 230.3463134765625, -44779.72265625)).magnitude
+ 	until dist < 100 or _G.test == false
+
+   _G.rat = nil
+    local distance = math.huge
+    for a,b in pairs(workspace.Ports["Ocean Fall Port"].CargoLoaders:GetChildren()) do
+        if b.Name == "DockingArea" and b:FindFirstChild("Container")  then
+    local Dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position - b.Position).magnitude
+    if Dist < distance then
+    distance = Dist
+    _G.rat = b
+    end
+    end
+    end
+ dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-_G.rat.Position).magnitude
+ print(dist)
+ for i,v in pairs(workspace:GetDescendants()) do
+	pcall(function ()
+		v.CanCollide = false
+	end)
+end
+wait()
+ repeat wait()
+	local ship = game.Players.LocalPlayer.CurrentShip.Value
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/22/7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = ship:GetPrimaryPartCFrame()
+			
+TweenValue.Changed:Connect(function()
+	ship:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+			
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(_G.rat.Position)})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ wait(1)
+  dist = (game.Players.LocalPlayer.CurrentShip.Value.PrimaryPart.Position-_G.rat.Position).magnitude
+ 	until dist < 100 or _G.test == false
+repeat wait()
+    local text = game:GetService("Players").LocalPlayer.PlayerGui.ShipControlGui.ShipControls.Controls.Speed.text:split(" ")
+number = tonumber(text[1])
+until number == 0 or _G.test == false
+local ship = game.Players.LocalPlayer.CurrentShip.Value
+ship.Storage.RemoteFunction:InvokeServer("DockShip")
+repeat wait()
+until ship:GetAttribute("IsDocked") == true or _G.test == false
+wait()
+local args = {
+    [1] = "UnloadContainer",
+    [2] = whatweneed
+}
+
+ship.Storage.RemoteFunction:InvokeServer(unpack(args))
+wait()
+ ship.PrimaryPart.Anchored = false
+farmnum=farmnum+1
+warn(farmnum)
+	end)
+if errors ~= nil then
+	warn(errors)
+end
+end
+end)
