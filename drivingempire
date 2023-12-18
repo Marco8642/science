@@ -44,7 +44,7 @@ wait(5)
 end
 	end
 end)
-example:AddToggle("Auto Collect Gifts", function(state)
+example:AddToggle("Auto Collect WinterFest XP", function(state)
 	_G.ok = (state and true or false)
 	while _G.ok do
 	wait()
