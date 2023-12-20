@@ -32,7 +32,7 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     local example = library:CreateWindow({
       text = "Drag Project"
     })
-    example:AddToggle("Auto Delivery", function(state)
+    example:AddToggle("Super Money", function(state)
     getfenv().money = (state and true or false)
     while getfenv().money do
     wait()
