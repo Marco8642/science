@@ -1,4 +1,4 @@
-warn("Anti afk running")
+  warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
@@ -20,44 +20,22 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
 	
 if _G.auto == true then
     local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
-    local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
     for i,v in pairs(car:GetDescendants()) do
         pcall(function()
     v.Velocity = Vector3.new(0,0,0)
         end)
     end
-car:PivotTo(CFrame.new(-101.332451, 16.5833931, -1502.23022, -0.986765862, -0.00143595203, -0.162145391, -0.000634028576, 0.999987304, -0.00499734189, 0.162150517, -0.00482840184, -0.986754239))
-wait()
-car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*700
-task.wait(0.3)
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-wait(5)
-end
-	
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-if _G.auto == true then
-	
-car:PivotTo(CFrame.new(13.3234167, 16.6632862, -1513.59009, -0.999913752, -0.00429927418, -0.0124118999, -0.00426981645, 0.999988019, -0.0023988639, 0.0124220643, -0.00234566024, -0.99992007))
-wait()
-car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*700
-task.wait(0.3)
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-wait(6)
-end
-	
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-if _G.auto == true then
-	local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
-for i,v in pairs(car:GetDescendants()) do
-    pcall(function()
-v.Velocity = Vector3.new(0,0,0)
-    end)
-end
-wait()
-car:PivotTo(CFrame.new(10.1605892, 25.67099, -725.387939, -0.998815894, 0.00109943585, -0.0486378707, 0.000819623645, 0.999983013, 0.00577254081, 0.0486433916, 0.00572584057, -0.998799801))
-wait()
-car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*-200
-task.wait(.8)
+	for i,v in pairs(workspace:GetDescendants()) do
+		if string.find(v.Name,"Road") and v.ClassName == "Part" and v.Size.X > 700 and v.BrickColor == BrickColor.new("Sand green") and v.Parent.Name == "road segment" and workspace:FindPartOnRay(Ray.new(CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,10,0).p, CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,5,0).LookVector * 100)) == nil and _G.auto == true then
+			car:PivotTo(CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,3,0))
+			task.wait()
+			car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*600
+			task.wait(0.1)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+			wait(4)
+			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+		end
+		end
 
 end
 	end
