@@ -15,7 +15,7 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
         local Method = getnamecallmethod()
         local Args = {...}
     
-        if Method == 'FireServer' and tostring(Args[1]) == "Delivery" or  Method == 'FireServer' and string.find(self.Name,"Food") or or  Method == 'FireServer' and string.find(self.Name,"food")  then
+        if Method == 'FireServer' and tostring(Args[1]) == "Delivery" or  Method == 'FireServer' and string.find(self.Name,"Food") or Method == 'FireServer' and string.find(self.Name,"food")  then
     print(self)
     remote = self
         end
