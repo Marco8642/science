@@ -1,4 +1,4 @@
-local interface = game:GetService("Players").LocalPlayer.PlayerGui.Interface
+local interface = game:GetService("Players").LocalPlayer.PlayerGui
 spawn(function()
 while _G.auto do
     wait()
