@@ -10,7 +10,7 @@ warn("Anti afk running")
     local example = library:CreateWindow({
       text = "Drive World"
     })
-example:AddToggle("Auto Delivery[Trailer]", function(state)
+example:AddToggle("Auto Delivery[Cars]", function(state)
 getfenv().test = (state and true or false)
 while getfenv().test do
    wait()
@@ -27,7 +27,7 @@ for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
    if v.Name == "Owner" and v.Value == game.Players.LocalPlayer and game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").CompletionRegion.Primary.Position) > 25 then
 v.Parent:SetPrimaryPartCFrame(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,-20))
 v.Parent.Trailer.PrimaryPart.Anchored = true
-task.wait(1)
+task.wait(1.5)
 v.Parent.Trailer.PrimaryPart.Anchored = false
 repeat task.wait()
     until game:GetService("Players").LocalPlayer.PlayerGui.JobComplete.Enabled == true or getfenv().test == false
@@ -40,3 +40,33 @@ end
 end
 end
 end)
+example:AddToggle("Auto Delivery[Full-E]", function(state)
+    getfenv().test2 = (state and true or false)
+    while getfenv().test2 do
+       wait()
+    if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Jobs.Visible == false then
+        local num = math.random(1,9)
+    for i,v in pairs(game:GetService("Workspace").Jobs.TrailerDelivery.StartPoints:GetChildren()) do
+       if i == num then
+    game:GetService("ReplicatedStorage").Systems.Jobs.StartJob:InvokeServer("TrailerDelivery", v.Name)
+    end
+    end
+    task.wait(25)
+    elseif game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Jobs.Visible == true then
+    for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
+       if v.Name == "Owner" and v.Value == game.Players.LocalPlayer and game.Players.LocalPlayer:DistanceFromCharacter(game:GetService("Workspace").CompletionRegion.Primary.Position) > 25 then
+    v.Parent:SetPrimaryPartCFrame(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,-30))
+    v.Parent.Trailer.PrimaryPart.Anchored = true
+    task.wait(1.5)
+    v.Parent.Trailer.PrimaryPart.Anchored = false
+    repeat task.wait()
+        until game:GetService("Players").LocalPlayer.PlayerGui.JobComplete.Enabled == true or getfenv().test2 == false
+    game:GetService("ReplicatedStorage").Systems.Jobs.CashBankedEarnings:FireServer()
+    game:GetService("Players").LocalPlayer.PlayerGui.JobComplete.Enabled = false
+    game:GetService("Lighting").BackgroundBlur.Enabled = false
+    task.wait()
+    end
+    end
+    end
+    end
+    end)
