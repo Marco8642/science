@@ -1,19 +1,4 @@
-local taxi = game:GetService("MarketplaceService"):GetProductInfo(7305309231)
-print(taxi.Updated)
-if tostring(taxi.Updated):split("T")[1] ~= "2023-11-24" then
-local CoreGui = game:GetService("StarterGui")
 
-CoreGui:SetCore("SendNotification", {
-	Title = "Warning";
-	Text = "Taxi Boss seems to have updated test script on a alt first to check if the script is safe to use or  notify me on youtube note i am not responsible for any type of account bans";
-	Duration = 20;
-})
-CoreGui:SetCore("SendNotification", {
-	Title = "Warning";
-	Text = "for any type of account bans";
-	Duration = 20;
-})
-end
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -24,6 +9,56 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
+example:AddToggle("Super Auto Spin", function(state)
+_G.ok = (state and true or false)
+while _G.ok do
+    wait()
+if game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() < 2000 then
+for i=1,10000 do
+    task.spawn(function()
+    game:GetService("ReplicatedStorage").Christmas.OpenPresent:InvokeServer("legend")
+    end)
+end
+wait(15)
+end
+end
+end)
+example:AddToggle("Auto Collect Decorations", function(state)
+_G.xmass = (state and true or false)
+spawn(function()
+while _G.xmass do
+    wait()
+    pcall(function()
+    if not game:GetService("Workspace").Christmas:FindFirstChild("hologram") then
+    game:GetService("ReplicatedStorage").Christmas.ResetTree:InvokeServer()
+    wait(1)
+    end
+end)
+end
+end)
+while _G.xmass do
+    wait()
+    pcall(function()
+for i,v in pairs(game:GetService("Workspace").Christmas.DecorationHunt:GetDescendants()) do
+    if v.ClassName == "ProximityPrompt" and v.Parent.MeshId == game:GetService("Workspace").Christmas.hologram.MeshId then
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+ wait(4)
+     repeat wait()
+        fireproximityprompt(v)
+        wait(1)
+     until game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.xmass == false
+    wait(4)
+        game.Players.LocalPlayer.Character:MoveTo(game:GetService("Workspace").Christmas.TreeModel.Deliver.Position)
+repeat wait()
+        game.Players.LocalPlayer.Character:MoveTo(game:GetService("Workspace").Christmas.TreeModel.Deliver.Position)
+wait(0.1)
+until not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or _G.xmass == false
+wait(4)
+    end
+end
+end)
+end
+end)
 example:AddToggle("Auto Money", function(state)
 _G.test2 = (state and true or false)
 pcall(function()
