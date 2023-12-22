@@ -1,4 +1,3 @@
-
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -23,7 +22,7 @@ wait(15)
 end
 end
 end)
-example:AddToggle("Auto Collect Decorations", function(state)
+example:AddToggle("Auto Decorations", function(state)
 _G.xmass = (state and true or false)
 spawn(function()
 while _G.xmass do
