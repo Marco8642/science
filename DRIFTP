@@ -59,7 +59,7 @@ end
 end
 elseif game.PlaceId == 2637653456 and readfile("LegoLuaYTdp") == "" and readfile("isittrue") == "true" then
     game:GetService("TeleportService"):Teleport(6165038613)
-elseif game.PlaceId ~= 2637653456 then
+elseif game.PlaceId ~= 2637653456 and readfile("isittrue") == "true" then
     for i,v in pairs(workspace:GetChildren()) do
         if v.Name == "present" and v.ClassName == "Model" then
             game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChildOfClass("MeshPart").CFrame
