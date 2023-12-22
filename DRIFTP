@@ -1,13 +1,13 @@
-
 warn("Anti afk running")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
     warn("Anti afk ran")
     game:GetService("VirtualUser"):CaptureController()
     game:GetService("VirtualUser"):ClickButton2(Vector2.new())
     end)
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+    getfenv().grav = workspace.Gravity
+    local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
     local example = library:CreateWindow({
-      text = "Drift Paradise"
+      text = "Drive World"
     })
 example:AddToggle("Auto Farm", function(state)
     getfenv().look = (state and true or false)
@@ -86,3 +86,56 @@ game:GetService("TeleportService"):Teleport(2637653456)
 end
 end
 end)
+repeat wait()
+until game:IsLoaded()
+if readfile("isittrue") == "true" then
+print("game loaded")
+wait(5)
+print("script started")
+if game.PlaceId == 2637653456 and readfile("LegoLuaYTdp") ~= "" and readfile("isittrue") == "true" then
+    print(tostring(readfile("LegoLuaYTdp")))
+for i,v in pairs(getgc(true)) do
+if type(v) == "table" then
+    for a,b in pairs(v) do
+    if string.find(tostring(a),tostring(readfile("LegoLuaYTdp"))) then
+       if type(b) == "table" then
+        warn(a,b)
+for c,d in pairs(b) do
+    if c == 3 then
+print(c,d)
+game:GetService("TeleportService"):Teleport(d)
+
+end
+    end
+end
+end
+end
+end
+end
+elseif game.PlaceId == 2637653456 and readfile("LegoLuaYTdp") == "" and readfile("isittrue") == "true" then
+    game:GetService("TeleportService"):Teleport(6165038613)
+elseif game.PlaceId ~= 2637653456 then
+    for i,v in pairs(workspace:GetChildren()) do
+        if v.Name == "present" and v.ClassName == "Model" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChildOfClass("MeshPart").CFrame
+        end
+        end
+        wait(5)
+local justpickone
+for i,v in pairs(game:GetService("Players").LocalPlayer.PresentsFolder:GetChildren()) do
+    if v.Value == false then
+local text = v.Name:split("- ")[2]
+justpickone = text
+if justpickone == "Shimizu" then
+    justpickone = "Sihmizu"
+end
+warn(text)
+end
+end
+writefile("LegoLuaYTdp",tostring(justpickone))
+wait(1)
+print("Next Map: "..readfile("LegoLuaYTdp"))
+wait()
+game:GetService("TeleportService"):Teleport(2637653456)
+end
+end
