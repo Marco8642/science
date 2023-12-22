@@ -1,0 +1,88 @@
+
+warn("Anti afk running")
+    game:GetService("Players").LocalPlayer.Idled:connect(function()
+    warn("Anti afk ran")
+    game:GetService("VirtualUser"):CaptureController()
+    game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+    end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+    local example = library:CreateWindow({
+      text = "Drift Paradise"
+    })
+example:AddToggle("Auto Farm", function(state)
+    getfenv().look = (state and true or false)
+    if workspace:FindFirstChild("Letshopeitworks")  then
+        workspace:FindFirstChild("Letshopeitworks").Velocity = Vector3.new(0,0,0)
+    end
+    while getfenv().look do
+        task.wait()
+    if not workspace:FindFirstChild("Letshopeitworks") then
+        local part = Instance.new("Part",workspace)
+        part.Name = "Letshopeitworks"
+        part.Size = Vector3.new(10000,10,10000)
+        part.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position + Vector3.new(0,5000,0)
+        part.Anchored = true
+    end
+    workspace:FindFirstChild("Letshopeitworks").Velocity = workspace:FindFirstChild("Letshopeitworks").CFrame.LookVector*500
+    
+    game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent:PivotTo(workspace:FindFirstChild("Letshopeitworks").CFrame+Vector3.new(0,5,0))
+    wait(0.5)
+    end
+end)
+example:AddToggle("Auto Collect Presents", function(state)
+    getfenv().presents = (state and true or false)
+writefile("isittrue",tostring(getfenv().presents))
+repeat wait()
+until game:IsLoaded()
+if readfile("isittrue") == "true" then
+print("game loaded")
+wait(5)
+print("script started")
+if game.PlaceId == 2637653456 and readfile("LegoLuaYTdp") ~= "" and readfile("isittrue") == "true" then
+    print(tostring(readfile("LegoLuaYTdp")))
+for i,v in pairs(getgc(true)) do
+if type(v) == "table" then
+    for a,b in pairs(v) do
+    if string.find(tostring(a),tostring(readfile("LegoLuaYTdp"))) then
+       if type(b) == "table" then
+        warn(a,b)
+for c,d in pairs(b) do
+    if c == 3 then
+print(c,d)
+game:GetService("TeleportService"):Teleport(d)
+
+end
+    end
+end
+end
+end
+end
+end
+elseif game.PlaceId == 2637653456 and readfile("LegoLuaYTdp") == "" and readfile("isittrue") == "true" then
+    game:GetService("TeleportService"):Teleport(6165038613)
+elseif game.PlaceId ~= 2637653456 then
+    for i,v in pairs(workspace:GetChildren()) do
+        if v.Name == "present" and v.ClassName == "Model" then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v:FindFirstChildOfClass("MeshPart").CFrame
+        end
+        end
+        wait(5)
+local justpickone
+for i,v in pairs(game:GetService("Players").LocalPlayer.PresentsFolder:GetChildren()) do
+    if v.Value == false then
+local text = v.Name:split("- ")[2]
+justpickone = text
+if justpickone == "Shimizu" then
+    justpickone = "Sihmizu"
+end
+warn(text)
+end
+end
+writefile("LegoLuaYTdp",tostring(justpickone))
+wait(1)
+print("Next Map: "..readfile("LegoLuaYTdp"))
+wait()
+game:GetService("TeleportService"):Teleport(2637653456)
+end
+end
+end)
