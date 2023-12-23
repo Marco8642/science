@@ -39,6 +39,36 @@ wait(1)
 end
 end
 end)
+example:AddToggle("Auto Ice Race", function(state)
+    getfenv().test2 = (state and true or false)
+    while getfenv().test2 do
+    task.wait()
+if game:GetService("Players").LocalPlayer.PlayerGui.Races.Timer.Visible == true and game:GetService("Players").LocalPlayer.PlayerGui.Races.Timer.Text == "1" then
+task.wait(1)
+local checks = #game:GetService("Workspace").RaceProps.Checkpoints:GetChildren()
+for a=1,2 do
+for i=1,checks do
+local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-game:GetService("Workspace").RaceProps.Checkpoints[tostring(i)].Display:FindFirstChildOfClass("MeshPart").Position).magnitude
+local car =game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name.."'s Car"]
+ local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/500, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()        
+TweenValue.Changed:Connect(function()
+    car:PivotTo(TweenValue.Value)
+end)            
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").RaceProps.Checkpoints[tostring(i)].Display:FindFirstChildOfClass("MeshPart").CFrame})
+OnTween:Play()
+ OnTween.Completed:Wait()
+end
+end
+elseif game:GetService("Players").LocalPlayer.PlayerGui.Races.Timer.Visible == false and game:GetService("Players").LocalPlayer.PlayerGui.Races.WaitingForPlayers.Visible == false and not game:GetService("Workspace").RaceProps:FindFirstChild("Checkpoints") and game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(20.374475479125977, 17.12531089782715, -881.9990234375)) > 15 then
+    local car =game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name.."'s Car"]
+car:PivotTo(CFrame.new(20.374475479125977, 17.12531089782715, -881.9990234375))
+wait(1)
+end
+end
+end)
 example:AddToggle("Auto Candy", function(state)
     getfenv().xmass = (state and true or false)
     while getfenv().xmass do
