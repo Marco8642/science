@@ -1,4 +1,3 @@
-
 warn("Anti afk running")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
     warn("Anti afk ran")
@@ -70,3 +69,18 @@ example:AddToggle("Auto Delivery[Full-E]", function(state)
     end
     end
     end)
+    example:AddToggle("Auto Event Delivery", function(state)
+      getfenv().test3 = (state and true or false)
+      while getfenv().test3 do
+         wait()
+      game:GetService("ReplicatedStorage").Systems.Jobs.StartJob:InvokeServer("SantasHelper","WinterRally")
+      wait()
+      game:GetService("ReplicatedStorage").Systems.Jobs.Modules.SantasHelper.TrailerAcquired:FireServer("SantasSleigh")
+      wait(1)
+      game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(CFrame.new(-585.747437, 5.38555908, 537.634338, 0.792616963, 0, -0.609719872, 0, 1, 0, 0.609719872, 0, 0.792616963))
+      wait(25)
+      game:GetService("ReplicatedStorage").Systems.Jobs.CompleteJob:InvokeServer()
+      wait()
+      game:GetService("ReplicatedStorage").Systems.Jobs.CashBankedEarnings:FireServer()
+      end
+   end)
