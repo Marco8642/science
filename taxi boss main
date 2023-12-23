@@ -40,8 +40,12 @@ while _G.xmass do
     pcall(function()
 for i,v in pairs(game:GetService("Workspace").Christmas.DecorationHunt:GetDescendants()) do
     if v.ClassName == "ProximityPrompt" and v.Parent.MeshId == game:GetService("Workspace").Christmas.hologram.MeshId then
-  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
- wait(4)
+        dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Parent.Position).magnitude
+		local CFrameEnd = v.Parent.CFrame
+		local Time = dist/500
+		local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Time), {CFrame = CFrameEnd})
+		tween:Play()
+		tween.Completed:Wait()
      repeat wait()
         fireproximityprompt(v)
         wait(1)
