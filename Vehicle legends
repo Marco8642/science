@@ -32,22 +32,6 @@ OnTween:Play()
  OnTween.Completed:Wait()
 end
 end
-example:AddToggle("Auto Candy", function(state)
-getfenv().xmass = (state and true or false)
-while getfenv().xmass do
-    task.wait()
-for i,v in pairs(workspace.Christmas2023.Gifts:GetChildren()) do 
-    if v.ClassName == "Model" then
-        dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).magnitude
-    repeat wait()
-        pcall(function()
-        game.Players.LocalPlayer.Character:MoveTo(v.PrimaryPart.Position)
-        end)
-    until v.Parent == nil
-    end
-    end
-end
-end)
 elseif game:GetService("Players").LocalPlayer.PlayerGui.Races.Timer.Visible == false and not game:GetService("Workspace").RaceProps:FindFirstChild("Checkpoints") and game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-178.26217651367188, 17.12904930114746, -751.5301513671875)) > 15 then
     local car =game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name.."'s Car"]
 car:PivotTo(CFrame.new(-178.26217651367188, 17.12904930114746, -751.5301513671875))
@@ -55,4 +39,19 @@ wait(1)
 end
 end
 end)
-
+example:AddToggle("Auto Candy", function(state)
+    getfenv().xmass = (state and true or false)
+    while getfenv().xmass do
+        task.wait()
+    for i,v in pairs(workspace.Christmas2023.Gifts:GetChildren()) do 
+        if v.ClassName == "Model" then
+            dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).magnitude
+        repeat wait()
+            pcall(function()
+            game.Players.LocalPlayer.Character:MoveTo(v.PrimaryPart.Position)
+            end)
+        until v.Parent == nil
+        end
+        end
+    end
+    end)
