@@ -44,13 +44,13 @@ example:AddToggle("Auto Candy", function(state)
     while getfenv().xmass do
         task.wait()
     for i,v in pairs(workspace.Christmas2023.Gifts:GetChildren()) do 
-        if v.ClassName == "Model" then
+        if v.ClassName == "Model" and getfenv().xmass == true then
             dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).magnitude
         repeat wait()
             pcall(function()
             game.Players.LocalPlayer.Character:MoveTo(v.PrimaryPart.Position)
             end)
-        until v.Parent == nil
+        until v.Parent == nil or getfenv().xmass == false
         end
         end
     end
