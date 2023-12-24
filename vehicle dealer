@@ -1,0 +1,59 @@
+local vu = game:GetService("VirtualUser")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+   wait(1)
+   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
+local example = library:CreateWindow({
+  text = "Vehicle Dealership"
+})
+example:AddToggle("Auto Farm", function(state)
+getfenv().auto = (state and true or false)
+while getfenv().auto do
+    task.wait()
+    if not workspace:FindFirstChild("drivespace") then
+        local new = Instance.new("Part",workspace)
+        new.Name = "drivespace"
+        new.Size = Vector3.new(10000,50,10000)
+        new.Anchored = true
+        new.CFrame =CFrame.new(0,1000,0)
+    end
+local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent
+car:PivotTo(workspace:FindFirstChild("drivespace").CFrame+Vector3.new(0,0,0))
+car.Engine.Velocity = car.Engine.CFrame.LookVector*1000
+wait(2)
+end
+end)
+example:AddToggle("Auto Gingerbread", function(state)
+getfenv().test = (state and true or false)
+while getfenv().test do
+    wait()
+local function update()
+    local count = game:GetService("Players").LocalPlayer.PlayerGui.Menu.HuntEvent.ProgressBar.Count
+    local text = count.Text:split("/")
+    local num = tonumber(text[1])
+return num
+end
+for i,v in pairs(workspace:GetChildren()) do
+    if v.ClassName == "Model" and v:FindFirstChild("Part") and getfenv().test == true and update() < 80 then
+        warn(update())
+    for a,b in pairs(v:GetChildren()) do
+        if b.Name == "Part" and b.Transparency ~= 1 then
+            pcall(function ()
+            if b.MeshId == "rbxassetid://15680130591" then
+                repeat wait(0.1)  
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = b.CFrame
+                game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+    until b.Transparency == 1 or getfenv().test == false
+    end
+    end)
+end
+end
+    elseif v.Name == "Model" and v.ClassName == "Model" and #v:GetChildren() == 0 and getfenv().test == true and update() < 80 then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.WorldPivot
+       wait(0.1)
+end
+end
+end
+end)
