@@ -11,18 +11,23 @@ local example = library:CreateWindow({
 example:AddToggle("Auto Farm", function(state)
 getfenv().auto = (state and true or false)
 while getfenv().auto do
-    task.wait()
-    if not workspace:FindFirstChild("drivespace") then
-        local new = Instance.new("Part",workspace)
-        new.Name = "drivespace"
-        new.Size = Vector3.new(10000,50,10000)
-        new.Anchored = true
-        new.CFrame =CFrame.new(0,1000,0)
-    end
-local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent
-car:PivotTo(workspace:FindFirstChild("drivespace").CFrame+Vector3.new(0,0,0))
-car.Engine.Velocity = car.Engine.CFrame.LookVector*1000
-wait(2)
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent.Parent
+dist = (chr.HumanoidRootPart.Position-chr.HumanoidRootPart.Position+Vector3.new(1000,0,0)).Magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/350, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:SetPrimaryPartCFrame(TweenValue.Value)
+end)
+        
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=car.Engine.CFrame+car.Engine.CFrame.LookVector*1000})
+OnTween:Play()
+OnTween.Completed:Wait()
+wait()
 end
 end)
 example:AddToggle("Auto Gingerbread", function(state)
@@ -55,5 +60,39 @@ end
        wait(0.1)
 end
 end
+end
+end)
+
+example:AddToggle("Auto Upgrade Plot",function(state)
+    getfenv().buyer = (state and true or false )
+while getfenv().buyer do
+task.wait()
+-- purchase buttons
+local function plot()
+    for i,v in pairs(workspace.Tycoons:GetDescendants()) do
+    if v.Name == "Owner" and v.ClassName == "StringValue" and v.Value == game.Players.LocalPlayer.Name then
+    tycoon = v.Parent
+    end
+    end
+    return tycoon
+    end
+    -- purchase buttons
+    for i,v in pairs(plot().Dealership.Purchases:GetChildren()) do 
+    game:GetService("ReplicatedStorage").Remotes.Build:FireServer("BuyItem", v.Name)
+    wait(0.1)
+    end    
+end
+end)
+example:AddToggle("Annoying Popup Disabler",function(state)
+    getfenv().annoy = (state and true or false )
+if getfenv().annoy == true then
+-- annoying popup remover
+getfenv().fun =game:GetService("Players").LocalPlayer.PlayerGui.ChildAdded:Connect(function(ok)
+    if ok.Name == "Popup2" then
+        ok:Destroy()
+    end
+end)
+elseif getfenv().annoy == false then
+getfenv().fun:Disconnect()
 end
 end)
