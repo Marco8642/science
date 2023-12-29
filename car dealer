@@ -27,7 +27,6 @@ end)
 local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=car.Engine.CFrame+car.Engine.CFrame.LookVector*1000})
 OnTween:Play()
 OnTween.Completed:Wait()
-wait()
 end
 end)
 example:AddToggle("Auto Gingerbread", function(state)
