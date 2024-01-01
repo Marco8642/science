@@ -155,6 +155,7 @@ example:AddToggle("Auto Delivery",function(state)
     for i,v in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
     if v.ClassName == "Model" and v:GetAttribute("JobId") then
         v:Destroy()
+        task.wait()
     end
     end
 end
