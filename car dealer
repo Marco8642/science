@@ -148,12 +148,16 @@ example:AddToggle("Auto Delivery",function(state)
        for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
         if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
             game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
-            task.wait()
         end
         end
     task.wait(0.1)
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
+    for i,v in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
+    if v.ClassName == "Model" and v:GetAttribute("JobId") then
+        v:Destroy()
     end
+    end
+end
     end
     elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and getfenv().spawned ~= true then
         game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer(_G.remotetable)
