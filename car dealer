@@ -111,12 +111,20 @@ local customer
     end
     end
     end
+    textn = 1
+repeat wait()
+text = _G.rat.Parent.Name:split("")[textn]
+    textn=textn+1
+
+    warn(text,textn)
+until tonumber(text) == nil
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "AcceptOrder",["OrderId"] = customer:GetAttribute("OrderId")})
     wait()
-    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Specs"] = {["Springs"] = customer:GetAttribute("OrderSpecSprings"),["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Car"] = _G.rat.Parent.Name:split(tostring(_G.rat.Parent.Name:split("")[3]))[2],["RimColor"] = customer:GetAttribute("OrderSpecRimColor")},["Action"] = "CompleteOrder",["OrderId"] = customer:GetAttribute("OrderId")})
+    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Specs"] = {["Springs"] = customer:GetAttribute("OrderSpecSprings"),["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Car"] = text.._G.rat.Parent.Name:split(tostring(_G.rat.Parent.Name:split("")[textn-1]))[2],["RimColor"] = customer:GetAttribute("OrderSpecRimColor")},["Action"] = "CompleteOrder",["OrderId"] = customer:GetAttribute("OrderId")})
     wait()
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "CollectReward",["OrderId"] = customer:GetAttribute("OrderId")})
-    wait(1)
+    repeat wait()
+    until customer.Parent == nil or  getfenv().Customer == false
     end)
     end
 end)
@@ -129,21 +137,27 @@ example:AddToggle("Auto Delivery",function(state)
         task.wait()
     for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
     if v.Name == "DeliveryPart" and v.Transparency ~= 1 then
+        getfenv().spawned = false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
         game.Players.LocalPlayer.Character.Head.Anchored =true
         task.wait(0.1)
         game.Players.LocalPlayer.Character.Head.Anchored =false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
-       wait(2)
-        game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetAttribute("JobId"),["Action"] = "TryToCompleteJob"})
-    task.wait()
+       wait(1)
+       for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
+        if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
+            game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
+        end
+        end
+    task.wait(0.1)
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
     end
     end
-    elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+    elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and getfenv().spawned ~= true then
         game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer(_G.remotetable)
-    wait(1)
+        getfenv().spawned = true
+    wait(0.1)
     end
     end)
     end
