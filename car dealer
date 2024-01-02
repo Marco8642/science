@@ -144,15 +144,15 @@ example:AddToggle("Auto Delivery",function(state)
         game.Players.LocalPlayer.Character.Head.Anchored =false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
-       wait(1)
+       wait(0.1)
        for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
         if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
             game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
+            task.wait(0.1)
+            game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
         end
-        end
-    task.wait(0.1)
-    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
-    for i,v in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
+        end 
+        for i,v in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
     if v.ClassName == "Model" and v:GetAttribute("JobId") then
         v:Destroy()
         task.wait()
@@ -203,3 +203,41 @@ elseif getfenv().annoy == false then
 getfenv().fun:Disconnect()
 end
 end)
+local example = library:CreateWindow({
+    text = "Races"
+  })
+example:AddToggle("Auto Xmass Drift",function(state)
+    _G.oh = (state and true or false)
+
+    for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "DriftAsphalt" then
+            v.Velocity = v.CFrame.LookVector*0
+            end
+        end
+    
+    while _G.oh do
+        task.wait()
+    if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
+   if _G.velo ~= true then
+        for i,v in pairs(workspace:GetDescendants()) do
+        if v.Name == "DriftAsphalt" then
+            v.Velocity = v.CFrame.LookVector*1000
+            end
+        end
+        _G.velo = true
+    end
+    if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2055.981689453125, 654.3567504882812, 7831.22900390625)) > 20 then
+        local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    car:PivotTo(CFrame.new(-2055.981689453125, 654.3567504882812, 7831.22900390625))
+    end
+elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
+    local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    car:PivotTo(workspace.Races.Xmas.Main.CFrame)
+    wait(0.1)
+workspace.Races.RaceHandler.StartLobby:FireServer("Xmas")
+wait(1)
+    end
+end
+    end)
