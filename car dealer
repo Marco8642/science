@@ -128,31 +128,22 @@ until tonumber(text) == nil
 end)
 example:AddToggle("Auto Delivery",function(state)
     getfenv().deliver = (state and true or false)
-    if getfenv().deliver == true then
     spawn(function()
         while getfenv().deliver do
             task.wait()
             pcall(function()
-            repeat wait()
-            until not game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-            print("humanoid disappeared")
-            repeat wait()
-            until game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
-            print("humanoid appeared")
-            wait(1)
+        if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+            wait(5)
             getfenv().spawned = false
+        end
         end)
         end
         end)
-    elseif getfenv().deliver == false then
-        getfenv().didbrodie:Disconnect()
-        end
-        print(getfenv().didbrodie)
     while getfenv().deliver do
         wait()
         pcall(function()
     if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-        task.wait()
+        task.wait(0.1)
     for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
     if v.Name == "DeliveryPart" and v.Transparency ~= 1 then
         getfenv().spawned = false
@@ -163,18 +154,15 @@ example:AddToggle("Auto Delivery",function(state)
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
        wait(0.1)
-       for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
-        if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
-            game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
+
+            for a,b in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
+                if b.ClassName == "Model" and b:GetAttribute("JobId") then
+                    warn(b:GetAttribute("JobId"))
+                    task.wait()
+            game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = b:GetAttribute("JobId")})
             task.wait(0.1)
             game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
-        end
         end 
-        for i,v in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
-    if v.ClassName == "Model" and v:GetAttribute("JobId") then
-        v:Destroy()
-        task.wait()
-    end
     end
 end
     end
