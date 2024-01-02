@@ -234,7 +234,7 @@ example:AddToggle("Auto Xmass Drift",function(state)
 elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
     local chr = game.Players.LocalPlayer.Character
     local car = chr.Humanoid.SeatPart.Parent.Parent
-    car:PivotTo(workspace.Races.Xmas.Main.CFrame)
+    car:PivotTo(CFrame.new(-2068.947021484375, 656.533447265625, 7767.55810546875))
     wait(0.1)
 workspace.Races.RaceHandler.StartLobby:FireServer("Xmas")
 wait(1)
