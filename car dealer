@@ -151,7 +151,7 @@ example:AddToggle("Auto Delivery",function(state)
         game.Players.LocalPlayer.Character.Head.Anchored =true
         task.wait(0.1)
         game.Players.LocalPlayer.Character.Head.Anchored =false
-        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
+        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-20))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
        wait(0.1)
 
