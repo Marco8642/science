@@ -57,6 +57,7 @@ for i,v in pairs(workspace:GetChildren()) do
         repeat wait()
     game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
         until v:FindFirstChild("Part") or getfenv().test == false
+        wait(1)
     local test = nil
     for a,b in pairs(v:GetChildren()) do
     if b.ClassName == "MeshPart" and b.Transparency < 0.5 then
@@ -64,15 +65,15 @@ for i,v in pairs(workspace:GetChildren()) do
     end
     end
     if test ~= nil then
-        wait(1)
+    local ohye = update()
     repeat wait(0.1)
         game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
         game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
     until test.Transparency > 0.5 or getfenv().test == false
-    wait(2)
+repeat wait(0.1)
     game:GetService("ReplicatedStorage").Remotes.EventController.PerformAction:FireServer("AssembleCarPart", {})
-    wait(2)
-    end
+until ohye ~= update()
+end
     end
     end
 end
