@@ -42,36 +42,39 @@ OnTween:Play()
 OnTween.Completed:Wait()
 end
 end)
-example:AddToggle("Auto Gingerbread", function(state)
+example:AddToggle("Auto Barn Parts", function(state)
 getfenv().test = (state and true or false)
 while getfenv().test do
     wait()
 local function update()
-    local count = game:GetService("Players").LocalPlayer.PlayerGui.Menu.HuntEvent.ProgressBar.Count
+    local count = game:GetService("Players").LocalPlayer.PlayerGui.Menu.Event.Frame.PrizeFrame.ProgressBar.Count
     local text = count.Text:split("/")
     local num = tonumber(text[1])
 return num
 end
 for i,v in pairs(workspace:GetChildren()) do
-    if v.ClassName == "Model" and v:FindFirstChild("Part") and getfenv().test == true and update() < 80 then
-        warn(update())
+    if v.ClassName == "Model" and v:FindFirstChild("Owned") and update() ~= 12 and getfenv().test == true then
+        repeat wait()
+    game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
+        until v:FindFirstChild("Part") or getfenv().test == false
+    local test = nil
     for a,b in pairs(v:GetChildren()) do
-        if b.Name == "Part" and b.Transparency ~= 1 then
-            pcall(function ()
-            if b.MeshId == "rbxassetid://15680130591" then
-                repeat wait(0.1)  
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = b.CFrame
-                game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
-    until b.Transparency == 1 or getfenv().test == false
+    if b.ClassName == "MeshPart" and b.Transparency < 0.5 then
+        test = b
     end
-    end)
-end
-end
-    elseif v.Name == "Model" and v.ClassName == "Model" and #v:GetChildren() == 0 and getfenv().test == true and update() < 80 then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.WorldPivot
-       wait(0.1)
-end
-end
+    end
+    if test ~= nil then
+        wait(1)
+    repeat wait(0.1)
+        game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
+        game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+    until test.Transparency > 0.5 or getfenv().test == false
+    wait(2)
+    game:GetService("ReplicatedStorage").Remotes.EventController.PerformAction:FireServer("AssembleCarPart", {})
+    wait(2)
+    end
+    end
+    end
 end
 end)
 example:AddToggle("Auto Sell Cars",function(state)
@@ -151,10 +154,11 @@ example:AddToggle("Auto Delivery",function(state)
         game.Players.LocalPlayer.Character.Head.Anchored =true
         task.wait(0.1)
         game.Players.LocalPlayer.Character.Head.Anchored =false
-        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-20))
+        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
        wait(0.1)
-
+       for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
+        if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
             for a,b in pairs(workspace.ActionTasksGames.Jobs:GetChildren()) do
                 if b.ClassName == "Model" and b:GetAttribute("JobId") then
                     warn(b:GetAttribute("JobId"))
@@ -162,6 +166,8 @@ example:AddToggle("Auto Delivery",function(state)
             game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = b:GetAttribute("JobId")})
             task.wait(0.1)
             game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
+        end
+    end
         end 
     end
 end
