@@ -29,7 +29,7 @@ local chr = game.Players.LocalPlayer.Character
 local car = chr.Humanoid.SeatPart.Parent.Parent
 dist = (chr.HumanoidRootPart.Position-chr.HumanoidRootPart.Position+Vector3.new(1000,0,0)).Magnitude
 local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(dist/350, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
 
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()
@@ -57,26 +57,30 @@ example:AddToggle("Auto Barn Parts", function(state)
             repeat wait()
         game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
             until v:FindFirstChild("Part") or getfenv().test == false
-            wait(1)
-        elseif v.ClassName == "Model" and v:FindFirstChild("Part") and v:FindFirstChild("Owned") and update() ~= 12 and getfenv().test == true then
+        local test = nil
+        end
+    end
+    for i,v in pairs(workspace:GetChildren()) do
+        if v.ClassName == "Model" and v:FindFirstChild("Part") and v:FindFirstChild("Owned") and update() ~= 12 and getfenv().test == true then
+        game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
+        local ohye = update()
         local test = nil
         for a,b in pairs(v:GetChildren()) do
         if b.ClassName == "MeshPart" and b.Transparency < 0.5 then
             test = b
         end
         end
-        if test ~= nil then
-        local ohye = update()
-        repeat wait(0.1)
+        if test~= nil then
+        repeat task.wait()
             game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
             game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
         until test.Transparency > 0.5 or getfenv().test == false
-    repeat wait(0.1)
+    repeat task.wait()
         game:GetService("ReplicatedStorage").Remotes.EventController.PerformAction:FireServer("AssembleCarPart", {})
     until ohye ~= update()
     end
-        end
-        end
+end
+end
     end
     end)
 example:AddToggle("Auto Sell Cars",function(state)
