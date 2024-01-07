@@ -27,9 +27,9 @@ getfenv().auto = (state and true or false)
 while getfenv().auto do
 local chr = game.Players.LocalPlayer.Character
 local car = chr.Humanoid.SeatPart.Parent.Parent
-dist = (chr.HumanoidRootPart.Position-chr.HumanoidRootPart.Position+Vector3.new(1000,0,0)).Magnitude
+dist = (chr.HumanoidRootPart.Position-car.Engine.CFrame.LookVector*1000).Magnitude
 local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+local TweenInfoToUse = TweenInfo.new(dist/500, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
 
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()
