@@ -342,6 +342,9 @@ end
                for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
                 if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
                             repeat wait(0.1)
+                                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame)
+                                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame*CFrame.new(-30,30,-10))
+                                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame*CFrame.Angles(0,math.rad(90),0))
                     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
                             until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true or game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil or getfenv().deliver2 == false
                             game.Players.LocalPlayer.Character.Head.Anchored = false
@@ -372,7 +375,9 @@ end
                             end
                             for i,v in pairs(getgc(true)) do
                         if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil and getfenv().checkif == nil then
+                            task.wait()
                         if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil and getfenv().checkif == nil and isused(v.Id) ~= "Vehicle was already used" then
+                        task.wait()
                             table.insert(_G.usedids,v.Id)
                         whate = v
                         print("Vehicle has been changed",v)
