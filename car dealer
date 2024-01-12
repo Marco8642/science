@@ -314,6 +314,17 @@ end
                     end
                     end
                     end)
+                    spawn(function()
+                        print("bro spawned in")
+                        while getfenv().deliver2 do
+                        task.wait()
+                        if getfenv().checkif ~= nil then
+                        wait(40)
+                            getfenv().checkif = nil
+                        end
+                        end
+                          end)
+                          getfenv().checkif = nil
             while getfenv().deliver2 do
                 wait()
           
@@ -326,14 +337,16 @@ end
                 tppart = v
                 getfenv().spawned = false
                 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
-                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,30,-10))
                 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
                for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
                 if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
                             repeat wait(0.1)
                     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
                             until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true or game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil or getfenv().deliver2 == false
-                    local function getstars()
+                            game.Players.LocalPlayer.Character.Head.Anchored = false
+                            game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
+                            local function getstars()
                             local stars = 0
                             for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Frame.Stars:GetChildren()) do
                             if string.find(v.Name,"Star") and v.ImageColor3 == Color3.fromRGB(255, 189, 34) then
@@ -343,11 +356,11 @@ end
                         return stars
                         end
                         print(tonumber(getstars()).." Stars bonus")
-                        if tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true then
+                        if tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true and getfenv().checkif == nil then
                             whate = nil
                             for i,v in pairs(getgc(true)) do
-                        if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil then
-                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil then
+                        if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil and getfenv().checkif == nil then
+                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil and getfenv().checkif == nil and v.Id ~= _G.remotetable.Jobs[1].Id then
                         whate = v
                         print("Vehicle has been changed",v)
                         _G.remotetable = {["Truck"] = "DeliveryTruck",["Action"] = "StartDeliveryJob",["Jobs"] = {[1] = {["Id"] = whate.Id,["Image"] = "http://www.roblox.com/asset/?id=7962599980",["CFrame"] = CFrame.new(-1476.16199, 601.700134, 3489.31299, -1, 0, 0, 0, 1, 0, 0, 0, -1),["JobData"] = whate}}}
@@ -357,6 +370,7 @@ end
                         wait(0.5)
                         game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars").Enabled = false
                         end
+                        getfenv().checkif = true
                             end
                         end
                         end
@@ -388,4 +402,3 @@ end
             end
             end
         end)
-  
