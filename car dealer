@@ -355,12 +355,25 @@ end
                         end
                         return stars
                         end
+                        local function isused(hi)
+                            yeno = nil
+                            for i,v in pairs(_G.usedids) do
+                            if v == hi then
+                            yeno = "Vehicle was already used"
+                            end
+                            end
+                            return yeno
+                            end
                         print(tonumber(getstars()).." Stars bonus")
                         if tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true and getfenv().checkif == nil then
                             whate = nil
+                            if type(_G.usedids) ~= "table" then
+                                _G.usedids = {}
+                            end
                             for i,v in pairs(getgc(true)) do
                         if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil and getfenv().checkif == nil then
-                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil and getfenv().checkif == nil and v.Id ~= _G.remotetable.Jobs[1].Id then
+                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil and getfenv().checkif == nil and isused(v.Id) ~= "Vehicle was already used" then
+                            table.insert(_G.usedids,v.Id)
                         whate = v
                         print("Vehicle has been changed",v)
                         _G.remotetable = {["Truck"] = "DeliveryTruck",["Action"] = "StartDeliveryJob",["Jobs"] = {[1] = {["Id"] = whate.Id,["Image"] = "http://www.roblox.com/asset/?id=7962599980",["CFrame"] = CFrame.new(-1476.16199, 601.700134, 3489.31299, -1, 0, 0, 0, 1, 0, 0, 0, -1),["JobData"] = whate}}}
