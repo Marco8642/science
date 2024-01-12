@@ -148,6 +148,7 @@ example:AddToggle("Auto Delivery",function(state)
         end)
         end
         end)
+
     while getfenv().deliver do
         wait()
         pcall(function()
@@ -157,7 +158,7 @@ example:AddToggle("Auto Delivery",function(state)
     if v.Name == "DeliveryPart" and v.Transparency ~= 1 then
         getfenv().spawned = false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
-        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
+        game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,20,-10))
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
        for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
         if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
@@ -193,12 +194,14 @@ local function plot()
     return tycoon
     end
     -- purchase buttons
+    pcall(function()
     for i,v in pairs(plot().Dealership.Purchases:GetChildren()) do 
         if getfenv().buyer == true and v.TycoonButton.Button.Transparency == 0 then
     game:GetService("ReplicatedStorage").Remotes.Build:FireServer("BuyItem", v.Name)
     wait(0.3)
     end 
 end   
+end)
 end
 end)
 example:AddToggle("Annoying Popup Disabler",function(state)
@@ -219,13 +222,11 @@ local example = library:CreateWindow({
   })
 example:AddToggle("Auto Xmass Drift",function(state)
     _G.oh = (state and true or false)
-
     for i,v in pairs(workspace:GetDescendants()) do
         if v.Name == "DriftAsphalt" then
             v.Velocity = v.CFrame.LookVector*0
             end
         end
-    
     while _G.oh do
         task.wait()
     if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
@@ -253,3 +254,138 @@ wait(1)
     end
 end
     end)
+    local example = library:CreateWindow({
+        text = "Delivery Options"
+      })
+      example:AddLabel("Minimum Stars",function()
+      end)
+      example:AddBox("Enter Star Amount", function(object, focus)
+        if focus then
+       getfenv().stars = tonumber(object.Text)
+        end
+    end)
+    example:AddLabel("Minimum Reward Money",function()
+    end)
+    example:AddBox("Enter Minimum Reward", function(object, focus)
+        if focus then
+       getfenv().smaller = tonumber(object.Text)
+        end
+    end)
+        example:AddToggle("Auto Delivery",function(state)
+            getfenv().deliver2 = (state and true or false)
+            game.Players.LocalPlayer.Character.Head.Anchored = false
+            spawn(function()
+                while getfenv().deliver2 do
+                    task.wait()
+                    pcall(function()
+                if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Sit == false then
+                    wait(5)
+                    getfenv().spawned = false
+                end
+                end)
+                end
+                end)
+                local function gettruck()
+                    local truck = nil
+                    for i,v in pairs(workspace.Cars:GetChildren()) do
+                        if v.Name == "DeliveryTruck" and v:GetAttribute("JobId") == _G.remotetable.Jobs[1].Id then
+                          truck = v
+                    end
+                    end
+                    return truck or "no truck found"
+                    end
+                    print(gettruck())
+                    spawn(function()
+                        timeout = 0
+                            while getfenv().deliver2 do
+                        task.wait()
+                    if gettruck() ~= "no truck found" and game.Players.LocalPlayer.Character.Humanoid.SeatPart== nil and timeout < 10 then
+                    timeout = timeout + 1
+                    wait(1)
+                    elseif gettruck() ~= "no truck found" and game.Players.LocalPlayer.Character.Humanoid.SeatPart== nil and timeout >= 10 then
+                        timeout = 0
+                        warn("truck bugged and got destroyed")
+                        gettruck():Destroy()
+                        wait(1)
+                      elseif gettruck() ~= "no truck found" and game.Players.LocalPlayer.Character.Humanoid.SeatPart~= nil  then
+                        timeout = 0
+                        print("timeout reset")
+                        wait(1)
+                    end
+                    end
+                    end)
+            while getfenv().deliver2 do
+                wait()
+          
+            if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+                task.wait(0.1)
+    
+            for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
+            if v.Name == "DeliveryPart" and v.Transparency ~= 1 and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+                game.Players.LocalPlayer.Character.Head.Anchored = false
+                tppart = v
+                getfenv().spawned = false
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,0,-10))
+                game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.Angles(0,math.rad(90),0))
+               for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
+                if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
+                            repeat wait(0.1)
+                    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
+                            until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true or game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil or getfenv().deliver2 == false
+                    local function getstars()
+                            local stars = 0
+                            for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Frame.Stars:GetChildren()) do
+                            if string.find(v.Name,"Star") and v.ImageColor3 == Color3.fromRGB(255, 189, 34) then
+                            stars = stars+1
+                            end
+                        end
+                        return stars
+                        end
+                        print(tonumber(getstars()).." Stars bonus")
+                        if tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true then
+                            whate = nil
+                            for i,v in pairs(getgc(true)) do
+                        if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil then
+                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil then
+                        whate = v
+                        print("Vehicle has been changed",v)
+                        _G.remotetable = {["Truck"] = "DeliveryTruck",["Action"] = "StartDeliveryJob",["Jobs"] = {[1] = {["Id"] = whate.Id,["Image"] = "http://www.roblox.com/asset/?id=7962599980",["CFrame"] = CFrame.new(-1476.16199, 601.700134, 3489.31299, -1, 0, 0, 0, 1, 0, 0, 0, -1),["JobData"] = whate}}}
+                        if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
+                        wait(0.5)
+                        game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
+                        wait(0.5)
+                        game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars").Enabled = false
+                        end
+                            end
+                        end
+                        end
+                        end
+                        wait()
+                    if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
+                        game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars").Enabled = false
+                    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["JobId"] = game:GetService("Players").LocalPlayer.PlayerGui.MissionRewardStars:GetAttribute("JobId"),["Action"] = "CollectReward"})
+                
+                end                  
+            end
+                end 
+            end
+        end
+            elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and gettruck() == "no truck found" then
+                print(gettruck())
+                if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  tppart.CFrame
+                    game.Players.LocalPlayer.Character.Head.Anchored = true
+                    wait(1)
+                end
+                whate = nil
+                game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer(_G.remotetable)
+            local unstck = 0
+            repeat wait()
+                unstck=unstck+1
+            until gettruck() ~= "no truck found" or getfenv().deliver2 == false or unstck > 100
+            game.Players.LocalPlayer.Character.Head.Anchored = false
+            end
+            end
+        end)
+  
