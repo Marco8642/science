@@ -342,9 +342,11 @@ end
                for i,v in pairs(game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:GetChildren()) do
                 if v.ClassName == "Model" and v:GetAttribute("StockTurbo") then
                             repeat wait(0.1)
+                                pcall(function()
                                 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame)
                                 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame*CFrame.new(-30,30,-10))
                                 game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(tppart.CFrame*CFrame.Angles(0,math.rad(90),0))
+                                end)
                     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer({["Action"] = "TryToCompleteJob",["JobId"] = v.Name})
                             until game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true or game.Players.LocalPlayer.Character.Humanoid.SeatPart == nil or getfenv().deliver2 == false
                             game.Players.LocalPlayer.Character.Head.Anchored = false
@@ -406,8 +408,10 @@ end
             elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and gettruck() == "no truck found" then
                 print(gettruck())
                 if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
+                    pcall(function()
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =  tppart.CFrame
                     game.Players.LocalPlayer.Character.Head.Anchored = true
+                    end)
                     wait(1)
                 end
                 whate = nil
@@ -420,3 +424,4 @@ end
             end
             end
         end)
+
