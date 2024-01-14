@@ -217,43 +217,6 @@ elseif getfenv().annoy == false then
 getfenv().fun:Disconnect()
 end
 end)
-local example = library:CreateWindow({
-    text = "Races"
-  })
-example:AddToggle("Auto Xmass Drift",function(state)
-    _G.oh = (state and true or false)
-    for i,v in pairs(workspace:GetDescendants()) do
-        if v.Name == "DriftAsphalt" then
-            v.Velocity = v.CFrame.LookVector*0
-            end
-        end
-    while _G.oh do
-        task.wait()
-    if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
-   if _G.velo ~= true then
-        for i,v in pairs(workspace:GetDescendants()) do
-        if v.Name == "DriftAsphalt" then
-            v.Velocity = v.CFrame.LookVector*1000
-            end
-        end
-        _G.velo = true
-    end
-    if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2055.981689453125, 654.3567504882812, 7831.22900390625)) > 20 then
-        game:GetService("Players").LocalPlayer.PlayerGui.Animation.DriftPoints.Position = UDim2.new(0.5, 0,1, -130)
-        local chr = game.Players.LocalPlayer.Character
-    local car = chr.Humanoid.SeatPart.Parent.Parent
-    car:PivotTo(CFrame.new(-2055.981689453125, 654.3567504882812, 7831.22900390625))
-    end
-elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
-    local chr = game.Players.LocalPlayer.Character
-    local car = chr.Humanoid.SeatPart.Parent.Parent
-    car:PivotTo(CFrame.new(-2068.947021484375, 656.533447265625, 7767.55810546875))
-    wait(0.1)
-workspace.Races.RaceHandler.StartLobby:FireServer("Xmas")
-wait(1)
-    end
-end
-    end)
     local example = library:CreateWindow({
         text = "Delivery Options"
       })
@@ -269,6 +232,13 @@ end
     example:AddBox("Enter Minimum Reward", function(object, focus)
         if focus then
        getfenv().smaller = tonumber(object.Text)
+        end
+    end)
+    example:AddLabel("Maximum Reward Money",function()
+    end)
+    example:AddBox("Enter Maximum Reward", function(object, focus)
+        if focus then
+       getfenv().bigger = tonumber(object.Text)
         end
     end)
         example:AddToggle("Auto Delivery",function(state)
@@ -378,7 +348,7 @@ end
                             for i,v in pairs(getgc(true)) do
                         if type(v) == "table" and rawget(v,"MoneyReward") ~= nil and whate == nil and getfenv().checkif == nil then
                             task.wait()
-                        if tonumber(v.MoneyReward) > getfenv().smaller and whate == nil and getfenv().checkif == nil and isused(v.Id) ~= "Vehicle was already used" then
+                        if tonumber(v.MoneyReward) > getfenv().smaller and tonumber(v.MoneyReward) < getfenv().bigger and whate == nil and getfenv().checkif == nil and isused(v.Id) ~= "Vehicle was already used" then
                         task.wait()
                             table.insert(_G.usedids,v.Id)
                         whate = v
@@ -424,3 +394,40 @@ end
             end
             end
         end)
+        local example = library:CreateWindow({
+            text = "Races"
+          })
+        example:AddToggle("Auto Xmass Drift",function(state)
+            _G.oh = (state and true or false)
+            for i,v in pairs(workspace:GetDescendants()) do
+                if v.Name == "DriftAsphalt" then
+                    v.Velocity = v.CFrame.LookVector*0
+                    end
+                end
+            while _G.oh do
+                task.wait()
+            if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
+           if _G.velo ~= true then
+                for i,v in pairs(workspace:GetDescendants()) do
+                if v.Name == "DriftAsphalt" then
+                    v.Velocity = v.CFrame.LookVector*1000
+                    end
+                end
+                _G.velo = true
+            end
+            if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2055.981689453125, 654.3567504882812, 7831.22900390625)) > 20 then
+                game:GetService("Players").LocalPlayer.PlayerGui.Animation.DriftPoints.Position = UDim2.new(0.5, 0,1, -130)
+                local chr = game.Players.LocalPlayer.Character
+            local car = chr.Humanoid.SeatPart.Parent.Parent
+            car:PivotTo(CFrame.new(-2055.981689453125, 654.3567504882812, 7831.22900390625))
+            end
+        elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
+            local chr = game.Players.LocalPlayer.Character
+            local car = chr.Humanoid.SeatPart.Parent.Parent
+            car:PivotTo(CFrame.new(-2068.947021484375, 656.533447265625, 7767.55810546875))
+            wait(0.1)
+        workspace.Races.RaceHandler.StartLobby:FireServer("Xmas")
+        wait(1)
+            end
+        end
+            end)
