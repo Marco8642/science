@@ -1886,9 +1886,9 @@ function f.rightClick()
 		pcall(function()
 			for i,v in pairs(selection.List) do
                 if v:IsDescendantOf(workspace) then
-				setclipboard(tostring(v))
+				setclipboard(tostring(v:GetFullName()))
 			end
-            setclipboard("game."..tostring(v))
+            setclipboard("game."..tostring(v:GetFullName()))
         end
 		end)
 		rightClickContext:Hide()
