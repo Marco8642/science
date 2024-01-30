@@ -15,6 +15,7 @@ spawn(function()
     end
     end)
     spawn(function()
+warn("Anti Staff is now running")
         while wait() do
         for i,v in pairs(game.Players:GetPlayers()) do
         if v:GetRankInGroup(11987919) >149 then
