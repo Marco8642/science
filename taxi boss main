@@ -4,6 +4,26 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
    wait(1)
    vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 end)
+spawn(function()
+    local Players = game:GetService("Players")
+    local function onPlayerAdded(player)
+        if player:GetRankInGroup(11987919) >149 then
+            game.Players.LocalPlayer:Kick("Auto Kicked Due to Staff Member "..player.Name.." joined your game")
+        else
+            warn(player.Name,"just joined the game")
+        end
+    end
+    end)
+    spawn(function()
+        while wait() do
+        for i,v in pairs(game.Players:GetPlayers()) do
+        if v:GetRankInGroup(11987919) >149 then
+            game.Players.LocalPlayer:Kick("Auto Kicked Due to Staff Member "..v.Name.." is in your game")
+        end
+    end
+    wait(5)
+    end
+    end)
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
 local example = library:CreateWindow({
   text = "Taxi Boss"
