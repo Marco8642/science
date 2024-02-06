@@ -42,47 +42,7 @@ OnTween:Play()
 OnTween.Completed:Wait()
 end
 end)
-example:AddToggle("Auto Barn Parts", function(state)
-    getfenv().test = (state and true or false)
-    while getfenv().test do
-        wait()
-    local function update()
-        local count = game:GetService("Players").LocalPlayer.PlayerGui.Menu.Event.Frame.PrizeFrame.ProgressBar.Count
-        local text = count.Text:split("/")
-        local num = tonumber(text[1])
-    return num
-    end
-    for i,v in pairs(workspace:GetChildren()) do
-        if v.ClassName == "Model" and not v:FindFirstChild("Part") and v:FindFirstChild("Owned") and update() ~= 12 and getfenv().test == true then
-            repeat wait()
-        game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
-            until v:FindFirstChild("Part") or getfenv().test == false
-        local test = nil
-        end
-    end
-    for i,v in pairs(workspace:GetChildren()) do
-        if v.ClassName == "Model" and v:FindFirstChild("Part") and v:FindFirstChild("Owned") and update() ~= 12 and getfenv().test == true then
-        game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
-        local ohye = update()
-        local test = nil
-        for a,b in pairs(v:GetChildren()) do
-        if b.ClassName == "MeshPart" and b.Transparency < 0.5 then
-            test = b
-        end
-        end
-        if test~= nil then
-        repeat task.wait()
-            game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
-            game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
-        until test.Transparency > 0.5 or getfenv().test == false
-    repeat task.wait()
-        game:GetService("ReplicatedStorage").Remotes.EventController.PerformAction:FireServer("AssembleCarPart", {})
-    until ohye ~= update()
-    end
-end
-end
-    end
-    end)
+
 example:AddToggle("Auto Sell Cars",function(state)
     getfenv().Customer = (state and true or false)
     while getfenv().Customer do
@@ -132,6 +92,7 @@ until tonumber(text) == nil
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "CollectReward",["OrderId"] = customer:GetAttribute("OrderId")})
     repeat wait()
     until customer.Parent == nil or  getfenv().Customer == false
+    wait(5)
     end)
     end
 end)
@@ -397,37 +358,157 @@ end)
         local example = library:CreateWindow({
             text = "Races"
           })
-        example:AddToggle("Auto Xmass Drift",function(state)
-            _G.oh = (state and true or false)
-            for i,v in pairs(workspace:GetDescendants()) do
-                if v.Name == "DriftAsphalt" then
-                    v.Velocity = v.CFrame.LookVector*0
+            example:AddToggle("Auto OVAL Race",function(state)
+                _G.racetest = (state and true or false)
+                while _G.racetest do
+                    wait()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
+                    local chr = game.Players.LocalPlayer.Character
+                local car = chr.Humanoid.SeatPart.Parent.Parent
+                 car:PivotTo(CFrame.new(1056.281982421875, 603.333984375, 2519.3154296875))
+                chr.Head.Anchored = true
+                wait(1)
+                chr.Head.Anchored = false
+                wait(1)
+                workspace.Races.RaceHandler.StartLobby:FireServer("Race")
+                task.wait(15)
+                local ohString1 = "5"
+                local ohString2 = "VoteRace"
+                
+                workspace.Races.Race.Script.Vote:FireServer(ohString1, ohString2)
+                task.wait(15)
+                local ohString1 = "5"
+                local ohString2 = "VoteLapsOval"
+                
+                workspace.Races.Race.Script.Vote:FireServer(ohString1, ohString2)
+                repeat wait()
+                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
+                local function updategoal()
+                    local goal = nil
+                    local distance = math.huge
+                    for i,v in pairs(workspace.Races:GetDescendants()) do
+                        if v.Name == "GoalPart" and v.ClassName == "Part" then
+                         local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+                            if Dist < distance then
+                             distance = Dist
+                               goal = v
+                        end
                     end
                 end
-            while _G.oh do
-                task.wait()
-            if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
-           if _G.velo ~= true then
-                for i,v in pairs(workspace:GetDescendants()) do
-                if v.Name == "DriftAsphalt" then
-                    v.Velocity = v.CFrame.LookVector*1000
-                    end
+                return goal
                 end
-                _G.velo = true
-            end
-            if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2055.981689453125, 654.3567504882812, 7831.22900390625)) > 20 then
-                game:GetService("Players").LocalPlayer.PlayerGui.Animation.DriftPoints.Position = UDim2.new(0.5, 0,1, -130)
+                local goal = updategoal()
+                        repeat wait()
+                            local test = nil
+                        for i,v in pairs(game.Workspace.Races:GetDescendants()) do
+                        if v.Name == "Checkpoint" and v.ClassName == "MeshPart" and v.Transparency ~= 1 then
+                            test = v
+                            workspace.Gravity = 0
+                            local chr = game.Players.LocalPlayer.Character
+                            local car = chr.Humanoid.SeatPart.Parent.Parent
+                            dist = (chr.HumanoidRootPart.Position-v.Position).Magnitude
+                            local TweenService = game:GetService("TweenService")
+                            local TweenInfoToUse = TweenInfo.new(dist/420, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                            local TweenValue = Instance.new("CFrameValue")
+                            TweenValue.Value = car:GetPrimaryPartCFrame()     
+                            TweenValue.Changed:Connect(function()
+                            car:SetPrimaryPartCFrame(TweenValue.Value)
+                            end)
+                            local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
+                            OnTween:Play()
+                            OnTween.Completed:Wait()
+                        end
+                    end
+                    local v = goal
+                    local chr = game.Players.LocalPlayer.Character
+                    local car = chr.Humanoid.SeatPart.Parent.Parent
+                    dist = (chr.HumanoidRootPart.Position-v.Position).Magnitude
+                    local TweenService = game:GetService("TweenService")
+                    local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                    local TweenValue = Instance.new("CFrameValue")
+                    TweenValue.Value = car:GetPrimaryPartCFrame()     
+                    TweenValue.Changed:Connect(function()
+                    car:SetPrimaryPartCFrame(TweenValue.Value)
+                    end)
+                    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
+                    OnTween:Play()
+                    OnTween.Completed:Wait()
+                until test == nil
+                print("race done")
+                local v = goal
                 local chr = game.Players.LocalPlayer.Character
-            local car = chr.Humanoid.SeatPart.Parent.Parent
-            car:PivotTo(CFrame.new(-2055.981689453125, 654.3567504882812, 7831.22900390625))
-            end
-        elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
-            local chr = game.Players.LocalPlayer.Character
-            local car = chr.Humanoid.SeatPart.Parent.Parent
-            car:PivotTo(CFrame.new(-2068.947021484375, 656.533447265625, 7767.55810546875))
-            wait(0.1)
-        workspace.Races.RaceHandler.StartLobby:FireServer("Xmas")
-        wait(1)
-            end
-        end
+                local car = chr.Humanoid.SeatPart.Parent.Parent
+                dist = (chr.HumanoidRootPart.Position-workspace.Races.Race.Oval.GoalPart.Position).Magnitude
+                local TweenService = game:GetService("TweenService")
+                local TweenInfoToUse = TweenInfo.new(dist/200, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                local TweenValue = Instance.new("CFrameValue")
+                TweenValue.Value = car:GetPrimaryPartCFrame()     
+                TweenValue.Changed:Connect(function()
+                car:SetPrimaryPartCFrame(TweenValue.Value)
+                end)
+                local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.Races.Race.Oval.GoalPart.CFrame})
+                OnTween:Play()
+                OnTween.Completed:Wait()
+                workspace.Gravity = 196
+                end
+                end
+            end)
+            example:AddToggle("Auto Season 9 Race",function(state)
+                _G.racetest2 = (state and true or false)
+                while _G.racetest2 do
+                    wait()
+                if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
+                    local chr = game.Players.LocalPlayer.Character
+                local car = chr.Humanoid.SeatPart.Parent.Parent
+                 car:PivotTo(CFrame.new(-2270.044189453125, 603.0210571289062, 413.31793212890625))
+                chr.Head.Anchored = true
+                wait(1)
+                chr.Head.Anchored = false
+                wait(1)
+                workspace.Races.RaceHandler.StartLobby:FireServer("Season")
+                task.wait(15)
+                workspace.Races.Season.Script.Vote:FireServer("5", "Vote")
+                repeat wait()
+                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true
+                elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
+                        repeat wait()
+                            local test = nil
+                        for i,v in pairs(game.Workspace.Races:GetDescendants()) do
+                        if v.Name == "Checkpoint" and v.ClassName == "MeshPart" and v.Transparency ~= 1 then
+                            test = v
+                            workspace.Gravity = 0
+                            local chr = game.Players.LocalPlayer.Character
+                            local car = chr.Humanoid.SeatPart.Parent.Parent
+                            dist = (chr.HumanoidRootPart.Position-v.Position).Magnitude
+                            local TweenService = game:GetService("TweenService")
+                            local TweenInfoToUse = TweenInfo.new(dist/150, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                            local TweenValue = Instance.new("CFrameValue")
+                            TweenValue.Value = car:GetPrimaryPartCFrame()     
+                            TweenValue.Changed:Connect(function()
+                            car:SetPrimaryPartCFrame(TweenValue.Value)
+                            end)
+                            local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
+                            OnTween:Play()
+                            OnTween.Completed:Wait()
+                        end
+                    end
+                until test == nil
+                print("race done")
+                local chr = game.Players.LocalPlayer.Character
+                local car = chr.Humanoid.SeatPart.Parent.Parent
+                dist = (chr.HumanoidRootPart.Position-workspace.Races.Season.GoalPart.Position).Magnitude
+                local TweenService = game:GetService("TweenService")
+                local TweenInfoToUse = TweenInfo.new(dist/200, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                local TweenValue = Instance.new("CFrameValue")
+                TweenValue.Value = car:GetPrimaryPartCFrame()     
+                TweenValue.Changed:Connect(function()
+                car:SetPrimaryPartCFrame(TweenValue.Value)
+                end)
+                local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.Races.Season.GoalPart.CFrame})
+                OnTween:Play()
+                OnTween.Completed:Wait()
+                workspace.Gravity = 196
+                end
+                end
             end)
