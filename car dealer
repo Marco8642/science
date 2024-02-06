@@ -25,6 +25,7 @@ local example = library:CreateWindow({
 example:AddToggle("Auto Farm", function(state)
 getfenv().auto = (state and true or false)
 while getfenv().auto do
+workspace.Gravity = 0
 local chr = game.Players.LocalPlayer.Character
 local car = chr.Humanoid.SeatPart.Parent.Parent
 dist = (chr.HumanoidRootPart.Position-car.Engine.CFrame.LookVector*1000).Magnitude
@@ -40,6 +41,7 @@ end)
 local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=car.Engine.CFrame+car.Engine.CFrame.LookVector*1000})
 OnTween:Play()
 OnTween.Completed:Wait()
+workspace.Gravity = 196
 end
 end)
 
@@ -264,6 +266,7 @@ end)
     
             for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
             if v.Name == "DeliveryPart" and v.Transparency ~= 1 and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+                workspace.Gravity = 0
                 game.Players.LocalPlayer.Character.Head.Anchored = false
                 tppart = v
                 getfenv().spawned = false
@@ -351,6 +354,7 @@ end)
             repeat wait()
                 unstck=unstck+1
             until gettruck() ~= "no truck found" or getfenv().deliver2 == false or unstck > 100
+            workspace.Gravity = 196
             game.Players.LocalPlayer.Character.Head.Anchored = false
             end
             end
