@@ -382,7 +382,7 @@ end)
                 
                 workspace.Races.Race.Script.Vote:FireServer(ohString1, ohString2)
                 repeat wait()
-                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true
+                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true or _G.racetest == false
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
                 local function updategoal()
                     local goal = nil
@@ -434,7 +434,7 @@ end)
                     local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
                     OnTween:Play()
                     OnTween.Completed:Wait()
-                until test == nil
+                until test == nil or _G.racetest == false
                 print("race done")
                 local v = goal
                 local chr = game.Players.LocalPlayer.Character
@@ -470,7 +470,7 @@ end)
                 task.wait(15)
                 workspace.Races.Season.Script.Vote:FireServer("5", "Vote")
                 repeat wait()
-                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true
+                until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true or _G.racetest2 == false
                 elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
                         repeat wait()
                             local test = nil
@@ -493,7 +493,7 @@ end)
                             OnTween.Completed:Wait()
                         end
                     end
-                until test == nil
+                until test == nil or _G.racetest2 == false
                 print("race done")
                 local chr = game.Players.LocalPlayer.Character
                 local car = chr.Humanoid.SeatPart.Parent.Parent
