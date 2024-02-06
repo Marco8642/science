@@ -482,7 +482,7 @@ end)
                             local car = chr.Humanoid.SeatPart.Parent.Parent
                             dist = (chr.HumanoidRootPart.Position-v.Position).Magnitude
                             local TweenService = game:GetService("TweenService")
-                            local TweenInfoToUse = TweenInfo.new(dist/150, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                            local TweenInfoToUse = TweenInfo.new(dist/145, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
                             local TweenValue = Instance.new("CFrameValue")
                             TweenValue.Value = car:GetPrimaryPartCFrame()     
                             TweenValue.Changed:Connect(function()
