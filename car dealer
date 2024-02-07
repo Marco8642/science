@@ -119,6 +119,7 @@ example:AddToggle("Auto Delivery",function(state)
         task.wait(0.1)
     for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
     if v.Name == "DeliveryPart" and v.Transparency ~= 1 then
+        workspace.Gravity = 0
         getfenv().spawned = false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame*CFrame.new(-30,20,-10))
@@ -137,6 +138,7 @@ end
     end
     elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and getfenv().spawned ~= true then
         game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer(_G.remotetable)
+        workspace.Gravity = 196
         getfenv().spawned = true
     wait(0.1)
     end
@@ -516,3 +518,59 @@ end)
                 end
                 end
             end)
+            example:AddToggle("Auto Drift Race",function(state)
+            _G.racetest3 = (state and true or false)
+            if _G.racetest3 == false then
+            local distance = math.huge
+            for a,b in pairs(workspace.DriftTrack:GetDescendants()) do
+                if b.Name == "DriftAsphalt" and b.Parent.Name == "Model" then
+            local Dist = (Vector3.new(-2567.529296875, 601.9335327148438, 2018.6964111328125) - b.Position).magnitude
+            if Dist < distance then
+            distance = Dist
+            partvelo = b
+            end
+            end
+            end
+            partvelo.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector*0
+        end
+            while _G.racetest3 do
+                wait()
+            if game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == false then
+                local chr = game.Players.LocalPlayer.Character
+            local car = chr.Humanoid.SeatPart.Parent.Parent
+             car:PivotTo(CFrame.new(-2502.25146484375, 601.9251708984375, 2013.3966064453125))
+             car.Engine.Velocity = Vector3.new(0,0,0)
+             chr.Head.Anchored = true
+             car.Engine.Velocity = Vector3.new(0,0,0)
+             wait(1)
+             car.Engine.Velocity = Vector3.new(0,0,0)
+             chr.Head.Anchored = false
+             car.Engine.Velocity = Vector3.new(0,0,0)
+             wait(1)
+             workspace.Races.RaceHandler.StartLobby:FireServer("Drift")
+             partvelo = nil
+             repeat wait()
+             until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true or _G.racetest3 == false
+             elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
+    if partvelo == nil then
+local distance = math.huge
+for a,b in pairs(workspace.DriftTrack:GetDescendants()) do
+    if b.Name == "DriftAsphalt" and b.Parent.Name == "Model" then
+local Dist = (Vector3.new(-2567.529296875, 601.9335327148438, 2018.6964111328125) - b.Position).magnitude
+if Dist < distance then
+distance = Dist
+partvelo = b
+end
+end
+end
+partvelo.Velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.LookVector*1000
+end
+if game.Players.LocalPlayer:DistanceFromCharacter(partvelo.Position) > 10 then
+    local chr = game.Players.LocalPlayer.Character
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+    car:PivotTo(partvelo.CFrame)
+end
+task.wait()
+end
+end
+end)
