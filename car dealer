@@ -550,6 +550,11 @@ end)
              workspace.Races.RaceHandler.StartLobby:FireServer("Drift")
              partvelo = nil
              repeat wait()
+                if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2502.25146484375, 601.9251708984375, 2013.3966064453125)) > 10 then
+                car:PivotTo(CFrame.new(-2502.25146484375, 601.9251708984375, 2013.3966064453125))
+                wait(0.1)
+                workspace.Races.RaceHandler.StartLobby:FireServer("Drift")
+                end
              until game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true or _G.racetest3 == false
              elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == true then
     if partvelo == nil then
