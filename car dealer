@@ -552,6 +552,7 @@ end)
              repeat wait()
                 if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(-2502.25146484375, 601.9251708984375, 2013.3966064453125)) > 10 then
                 car:PivotTo(CFrame.new(-2502.25146484375, 601.9251708984375, 2013.3966064453125))
+                car.Engine.Velocity = Vector3.new(0,0,0)
                 wait(0.1)
                 workspace.Races.RaceHandler.StartLobby:FireServer("Drift")
                 end
