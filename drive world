@@ -147,3 +147,18 @@ end
 end
 end
 end)
+example:AddToggle("Unlock Locked Rewards", function(state)
+   getfenv().lockedr = (state and true or false)
+while  getfenv().lockedr do
+   wait(1)
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.EventShop.Frame.Rewards.Rewards.Content:GetDescendants()) do
+   if v.Name == "LockedOverlay" and v.Visible == true then
+      v.Visible = false
+      v.Parent.BuyButton.Visible = true
+      v.Parent.BuyButton.MouseButton1Down:Connect(function()
+game:GetService("ReplicatedStorage").Systems.EventShop.BuyReward:InvokeServer(v.Parent.Parent.Name)
+      end)
+   end
+end
+end
+end)
