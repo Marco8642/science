@@ -55,7 +55,7 @@ end
 	end	
 end)
 wait(4)
- game:GetService("Players").LocalPlayer.PlayerGui.Menus.TrailerMenuMobile.Visible = false
+ game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
 print(0)
@@ -86,7 +86,7 @@ if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == fa
 	break
 end
 end 
-trailerui = game:GetService("Players").LocalPlayer.PlayerGui.Menus.TrailerMenuMobile
+trailerui =  game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer
 for i,v in pairs(trailerui.ScrollingFrame:GetChildren()) do
 	if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == false then
 		gottrailer = v
