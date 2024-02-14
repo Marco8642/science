@@ -55,6 +55,7 @@ end
 	end	
 end)
 wait(4)
+ game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
 print(0)
@@ -84,7 +85,15 @@ if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == fa
 	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TrailerSpawn", {[1] = v.Name,[2] = workspace._Main.TrailerShops.TrailerShop.TrailerShopPad.TrailerShopPad,[3] = "Auto"})
 	break
 end
-end
+end 
+trailerui =  game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer
+for i,v in pairs(trailerui.ScrollingFrame:GetChildren()) do
+	if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == false then
+		gottrailer = v
+		game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TrailerSpawn", {[1] = v.Name,[2] = workspace._Main.TrailerShops.TrailerShop.TrailerShopPad.TrailerShopPad,[3] = "Auto"})
+		break
+	end
+	end
 repeat wait()
 	print(2)
 until car:FindFirstChild("Trailer") or 	gottrailer == nil or getfenv().delivery == false
@@ -301,4 +310,3 @@ wait(5)
 end
 end
 end)
-
