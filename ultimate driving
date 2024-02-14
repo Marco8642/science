@@ -27,7 +27,7 @@ wait(1)
 end
 while getfenv().delivery do
     task.wait()
-if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
     local ohString1 = "VehicleSpawn"
 local ohTable2 = {
 	[1] = "Freightliner",
