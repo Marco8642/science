@@ -75,6 +75,7 @@ if car:FindFirstChild("Trailer") then
 		print(1)
 	until not car:FindFirstChild("Trailer") or getfenv().delivery == false
 end
+if string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") then
 	fireproximityprompt(workspace._Main.TrailerShops.TrailerShop.TrailerShopPad.TrailerShopPad.TrailerShopPrompt)
 wait(1)
 local trailerui = game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer
@@ -105,6 +106,7 @@ if gottrailer == nil or string.find(game:GetService("Players").LocalPlayer.Playe
 	}
 	
 	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+end
 end
 if car:FindFirstChild("Trailer") and game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") and  getfenv().delivery == true then
 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") then
@@ -205,8 +207,7 @@ wait(1)
 until not workspace:FindFirstChild("NavigationBeam") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") or game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(workspace:WaitForChild("NavigationBeam").WorldPivot.X,workspace:WaitForChild("NavigationBeam").WorldPivot.Y,workspace:WaitForChild("NavigationBeam").WorldPivot.Z)) > 1000 or getfenv().delivery == false
 repeat wait()
 	print(5)
-until workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false or game.Players.LocalPlayer.Character.Humanoid.Sit == false
-if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
+until workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local croot = chr.HumanoidRootPart
@@ -308,7 +309,6 @@ repeat wait()
 until not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") or getfenv().delivery == false
 end
 wait(5)
-end
 end
 end
 end)
