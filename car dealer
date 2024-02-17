@@ -100,6 +100,8 @@ until tonumber(text) == nil
 end)
 example:AddToggle("Auto Delivery",function(state)
     getfenv().deliver = (state and true or false)
+    resetcharactervalue1=0
+    devpart2 = 1
     spawn(function()
         while getfenv().deliver do
             task.wait()
@@ -111,14 +113,28 @@ example:AddToggle("Auto Delivery",function(state)
         end)
         end
         end)
-
+        spawn(function()
+            while getfenv().deliver do
+                task.wait()
+           if devpart2 ~= nil then
+            print(resetcharactervalue1)
+            resetcharactervalue1=0
+            elseif devpart2 == nil and resetcharactervalue1 >= 20 then
+                resetcharactervalue1=0
+                game.Players.LocalPlayer.Character:BreakJoints()
+wait(1)
+            end
+        end
+                end)
     while getfenv().deliver do
         wait()
         pcall(function()
-    if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
-        task.wait(0.1)
+    if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+        task.wait(1)
+        devpart2 = nil
     for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
     if v.Name == "DeliveryPart" and v.Transparency ~= 1 then
+        devpart2 =v
         workspace.Gravity = 0
         getfenv().spawned = false
         game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:PivotTo(v.CFrame)
@@ -135,6 +151,9 @@ example:AddToggle("Auto Delivery",function(state)
         end 
     end
 end
+    end
+    if devpart2 == nil then
+        resetcharactervalue1=resetcharactervalue1+1
     end
     elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and getfenv().spawned ~= true then
         game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.JobRemoteHandler:FireServer(_G.remotetable)
@@ -208,6 +227,8 @@ end)
     end)
         example:AddToggle("Auto Delivery",function(state)
             getfenv().deliver2 = (state and true or false)
+            resetcharactervalue = 0
+            devpart = 1
             game.Players.LocalPlayer.Character.Head.Anchored = false
             spawn(function()
                 while getfenv().deliver2 do
@@ -219,6 +240,19 @@ end)
                 end
                 end)
                 end
+                end)
+
+                spawn(function()
+            while getfenv().deliver2 do
+                task.wait()
+           if devpart ~= nil then
+                resetcharactervalue=0
+            elseif devpart == nil and resetcharactervalue >= 20 then
+                resetcharactervalue=0
+                game.Players.LocalPlayer.Character:BreakJoints()
+wait(1)
+            end
+        end
                 end)
                 local function gettruck()
                     local truck = nil
@@ -262,12 +296,13 @@ end)
                           getfenv().checkif = nil
             while getfenv().deliver2 do
                 wait()
-          
+          local p,call = pcall(function()
             if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
                 task.wait(0.1)
-    
+     devpart = nil
             for i,v in pairs(workspace.ActionTasksGames.Jobs:GetDescendants()) do
             if v.Name == "DeliveryPart" and v.Transparency ~= 1 and game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+                devpart = v
                 workspace.Gravity = 0
                 game.Players.LocalPlayer.Character.Head.Anchored = false
                 tppart = v
@@ -331,6 +366,7 @@ end)
                         end
                         end
                         end
+                 
                         wait()
                     if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
                         game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars").Enabled = false
@@ -341,6 +377,11 @@ end)
                 end 
             end
         end
+        pcall(function()
+        if devpart == nil  then
+            resetcharactervalue=resetcharactervalue+1
+        end
+    end)
             elseif game.Players.LocalPlayer.Character.Humanoid.Sit == false and gettruck() == "no truck found" then
                 print(gettruck())
                 if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
@@ -359,6 +400,8 @@ end)
             workspace.Gravity = 196
             game.Players.LocalPlayer.Character.Head.Anchored = false
             end
+        end)
+        warn(p,call)
             end
         end)
         local example = library:CreateWindow({
