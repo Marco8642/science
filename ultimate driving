@@ -33,7 +33,7 @@ end
 	pcall(function()
 	for i,v in pairs(scroll:GetChildren()) do
 		if v.Name == "Job" and v:FindFirstChild("Task") and v:FindFirstChild("Task").Value ~= nil and job == nil then
-		if v:FindFirstChild("Task").Value:FindFirstChild("RewardCash").Value > 10000  then
+		if v:FindFirstChild("Task").Value:FindFirstChild("RewardCash").Value > 15000  then
 			game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "StartTask",[2] = v:FindFirstChild("Task").Value})
 		job = v
 		print(job)
@@ -46,7 +46,7 @@ wait(4)
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
 print(0)
-until game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") and workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false
+until game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") and workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false or not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker")
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local croot = chr.HumanoidRootPart
