@@ -15,27 +15,14 @@ workspace.Gravity = 196
 if game.Players.LocalPlayer.Team ~= game:GetService("Teams").Trucker then
 game:GetService("ReplicatedStorage").Events.Admin.ChangeTeam:InvokeServer("Trucker")
 wait(2)
-local ohString1 = "VehicleSpawn"
-local ohTable2 = {
-	[1] = "Freightliner",
-	[2] = "QuickSpawn",
-	[4] = false
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("VehicleSpawn", {[1] = "Freightliner",[2] = "QuickSpawn",[4] = false})
 wait(1)
 end
 while getfenv().delivery do
+	pcall(function()
     task.wait()
 if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
-    local ohString1 = "VehicleSpawn"
-local ohTable2 = {
-	[1] = "Freightliner",
-	[2] = "QuickSpawn",
-	[4] = false
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("VehicleSpawn", {[1] = "Freightliner",[2] = "QuickSpawn",[4] = false})
 wait(1)
 end
 	repeat wait()
@@ -100,12 +87,7 @@ repeat wait()
 until car:FindFirstChild("Trailer") or 	gottrailer == nil or getfenv().delivery == false
 wait(1)
 if gottrailer == nil or string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") then
-	local ohString1 = "TruckShipping"
-	local ohTable2 = {
-		[1] = "EndTask"
-	}
-	
-	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "EndTask"})
 end
 end
 if car:FindFirstChild("Trailer") and game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") and  getfenv().delivery == true then
@@ -190,24 +172,13 @@ car:FindFirstChild("Trailer"):PivotTo(workspace.NavigationBeam.WorldPivot*CFrame
 workspace.Gravity = 10
 repeat wait()
 	print(4)
-local ohString1 = "TruckShipping"
-local ohTable2 = {
-	[1] = "LoadTruck"
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
-local ohString1 = "TruckShipping"
-local ohTable2 = {
-	[1] = "LoadTruck",
-	[2] = true
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck"})
 wait(1)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck",[2] = true})
 until not workspace:FindFirstChild("NavigationBeam") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") or game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(workspace:WaitForChild("NavigationBeam").WorldPivot.X,workspace:WaitForChild("NavigationBeam").WorldPivot.Y,workspace:WaitForChild("NavigationBeam").WorldPivot.Z)) > 1000 or getfenv().delivery == false
 repeat wait()
 	print(5)
-until workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false
+until workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false  
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local croot = chr.HumanoidRootPart
@@ -286,19 +257,9 @@ workspace.Gravity = 10
 wait(5)
 repeat wait()
 	print(6)
-local ohString1 = "TruckShipping"
-local ohTable2 = {
-	[1] = "UnloadTruck"
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
-local ohString1 = "TruckShipping"
-local ohTable2 = {
-	[1] = "UnloadTruck",
-	[2] = true
-}
-
-game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer(ohString1, ohTable2)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "UnloadTruck"})
+wait(1)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping",{[1] = "UnloadTruck",[2] = true})
 until not workspace:FindFirstChild("NavigationBeam") or getfenv().delivery == false
 workspace.Gravity = 196
 repeat wait()
@@ -310,5 +271,6 @@ until not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstC
 end
 wait(5)
 end
+end)
 end
 end)
