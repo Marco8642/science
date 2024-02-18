@@ -393,6 +393,7 @@ repeat wait()
 	print("stand by while truck getting loaded")
 	car:PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,5,-70))
 game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck"})
+wait(1)
 until not workspace:FindFirstChild("NavigationBeam") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") or game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(workspace:WaitForChild("NavigationBeam").WorldPivot.X,workspace:WaitForChild("NavigationBeam").WorldPivot.Y,workspace:WaitForChild("NavigationBeam").WorldPivot.Z)) > 1000 or getfenv().delivery2 == false
 
 repeat wait()
@@ -497,5 +498,3 @@ end)
 end
 end
 end)
-
-
