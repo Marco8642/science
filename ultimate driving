@@ -9,7 +9,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Ultimate Driving"
 })
-example:AddToggle("Auto Delivery[Trucker]", function(state)
+example:AddToggle("Auto Delivery[Trailer]", function(state)
     getfenv().delivery = (state and true or false)
 workspace.Gravity = 196
 if game.Players.LocalPlayer.Team ~= game:GetService("Teams").Trucker then
@@ -283,3 +283,219 @@ end
 end)
 end
 end)
+example:AddToggle("Auto Delivery[Nuke]", function(state)
+    getfenv().delivery2 = (state and true or false)
+if game:GetService("Players").LocalPlayer.Values.Trucking.LifetimeTruckPoints.Value < 25000 and getfenv().delivery2 == true then
+	local CoreGui = game:GetService("StarterGui")
+    CoreGui:SetCore("SendNotification", {
+        Title = "Alert!";
+        Text = "You can't do this yet";
+        Duration = 5;
+    })
+	wait(5)
+elseif game:GetService("Players").LocalPlayer.Values.Trucking.LifetimeTruckPoints.Value > 25000 and getfenv().delivery2 == true then
+workspace.Gravity = 196
+if game.Players.LocalPlayer.Team ~= game:GetService("Teams").Trucker then
+game:GetService("ReplicatedStorage").Events.Admin.ChangeTeam:InvokeServer("Trucker")
+wait(2)
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("VehicleSpawn", {[1] = "NukeTruck",[2] = "QuickSpawn",[4] = false})
+wait(1)
+end
+while getfenv().delivery2 do
+	pcall(function()
+    wait()
+if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
+	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("VehicleSpawn", {[1] = "NukeTruck",[2] = "QuickSpawn",[4] = false})
+	wait(1)
+end
+	repeat wait()
+	game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = true
+	wait(0.1)
+	local scroll = game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Main.ScrollingFrame
+	pcall(function()
+				local thejob = nil
+		local money = 0
+		for i,v in pairs(scroll:GetChildren()) do
+			if v.Name == "Job" and v:FindFirstChild("Task") and v:FindFirstChild("Task").Value ~= nil and tonumber(v:FindFirstChild("Task").Value:FindFirstChild("RewardCash").Value) ~= nil then
+		local moneyb = tonumber(v:FindFirstChild("Task").Value:FindFirstChild("RewardCash").Value)
+		if moneyb > money then
+		money = moneyb
+		thejob = v:FindFirstChild("Task").Value
+		end
+		end
+		end
+		print("JobRewardMoney: "..thejob:FindFirstChild("RewardCash").Value)
+		game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "StartTask",[2] = thejob})
+end)
+wait()
+ game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
+print(0)
+until game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") and workspace:FindFirstChild("NavigationBeam") or getfenv().delivery2 == false or not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker")
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local croot = chr.HumanoidRootPart
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local primary = car.PrimaryPart
+local pos = workspace.NavigationBeam.WorldPivot
+local location = Vector3.new(pos.X,pos.Y,pos.Z)
+print(location)
+workspace.Gravity = 0
+local dist = (primary.Position-location+Vector3.new(0,1000,0)).magnitude
+print(dist/1500)
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.NavigationBeam.WorldPivot+Vector3.new(0,1000,0)})
+OnTween:Play()
+OnTween.Completed:Wait()
+for i,v in pairs(workspace:GetChildren()) do
+	if v.Name == "Garage" and v.ClassName == "Model" then
+		v:Destroy()
+	end
+end
+local part = workspace.NavigationBeam.WorldPivot
+local pos = Vector3.new(part.X,part.Y,part.Z)
+
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local croot = chr.HumanoidRootPart
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local primary = car.PrimaryPart
+local pos = workspace.NavigationBeam.WorldPivot
+local location = Vector3.new(pos.X,pos.Y,pos.Z)
+print(location)
+workspace.Gravity = 0
+local dist = (primary.Position-location).magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.NavigationBeam.WorldPivot*CFrame.new(0,5,-70)})
+OnTween:Play()
+OnTween.Completed:Wait()
+workspace.Gravity = 10
+repeat wait()
+	print("stand by while truck getting loaded")
+	car:PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,5,-70))
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck"})
+until not workspace:FindFirstChild("NavigationBeam") or string.find(game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.Bar_Task.Directions.Text,"compatible trailer") or game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(workspace:WaitForChild("NavigationBeam").WorldPivot.X,workspace:WaitForChild("NavigationBeam").WorldPivot.Y,workspace:WaitForChild("NavigationBeam").WorldPivot.Z)) > 1000 or getfenv().delivery2 == false
+
+repeat wait()
+	print(5)
+until workspace:FindFirstChild("NavigationBeam") or getfenv().delivery2 == false  
+
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local croot = chr.HumanoidRootPart
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local primary = car.PrimaryPart
+local pos = workspace.NavigationBeam.WorldPivot
+local location = Vector3.new(pos.X,pos.Y,pos.Z)
+print(location)
+workspace.Gravity = 0
+local dist = (primary.Position-primary.Position+Vector3.new(0,1000,0)).magnitude
+print(dist/250)
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/250, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=primary.CFrame+Vector3.new(0,1000,0)})
+OnTween:Play()
+OnTween.Completed:Wait()
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local croot = chr.HumanoidRootPart
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local primary = car.PrimaryPart
+local pos = workspace.NavigationBeam.WorldPivot
+local location = Vector3.new(pos.X,pos.Y,pos.Z)
+print(location)
+workspace.Gravity = 0
+local dist = (primary.Position-location+Vector3.new(0,1000,0)).magnitude
+print(dist/500)
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/250, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.NavigationBeam.WorldPivot+Vector3.new(0,1000,0)})
+OnTween:Play()
+OnTween.Completed:Wait()
+local part = workspace.NavigationBeam.WorldPivot
+local pos = Vector3.new(part.X,part.Y,part.Z)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local croot = chr.HumanoidRootPart
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local primary = car.PrimaryPart
+local pos = workspace.NavigationBeam.WorldPivot
+local location = Vector3.new(pos.X,pos.Y,pos.Z)
+print(location)
+workspace.Gravity = 0
+local dist = (primary.Position-location).magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()
+        
+TweenValue.Changed:Connect(function()
+car:PivotTo(TweenValue.Value)
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.NavigationBeam.WorldPivot*CFrame.new(0,50,-80)})
+OnTween:Play()
+OnTween.Completed:Wait()
+workspace.Gravity = 1
+wait()
+local credits = game.Players.LocalPlayer.leaderstats.Credits.Value
+
+repeat wait()
+game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "UnloadTruck"})
+wait(1)
+until not workspace:FindFirstChild("NavigationBeam") or getfenv().delivery2 == false
+
+workspace.Gravity = 196
+repeat wait()
+	print(8)
+until not workspace:FindFirstChild("NavigationBeam") or getfenv().delivery2 == false
+if credits == game.Players.LocalPlayer.leaderstats.Credits.Value then
+	print("job was a failure")
+elseif credits ~= game.Players.LocalPlayer.leaderstats.Credits.Value then
+	print("job was a success")
+end
+repeat wait()
+	print(9)
+until not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") or getfenv().delivery2 == false
+end)
+end
+end
+end)
+
+
