@@ -44,7 +44,7 @@ end
 		print("JobRewardMoney: "..thejob:FindFirstChild("RewardCash").Value)
 		game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "StartTask",[2] = thejob})
 end)
-wait(4)
+wait(1)
  game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
@@ -134,7 +134,7 @@ workspace.Gravity = 0
 local dist = (primary.Position-location+Vector3.new(0,1000,0)).magnitude
 print(dist/250)
 local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(dist/250, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
 
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()
@@ -172,9 +172,11 @@ local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace
 OnTween:Play()
 OnTween.Completed:Wait()
 car:FindFirstChild("Trailer"):PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,100,0))
-workspace.Gravity = 10
+workspace.Gravity = 0
 repeat wait()
 	print(4)
+	car:PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,100,-70))
+	car:FindFirstChild("Trailer"):PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,100,0))
 game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck"})
 wait(1)
 game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "LoadTruck",[2] = true})
@@ -278,7 +280,7 @@ repeat wait()
 	print(9)
 until not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") or getfenv().delivery == false
 end
-wait(5)
+wait()
 end
 end)
 end
@@ -327,7 +329,7 @@ end
 		print("JobRewardMoney: "..thejob:FindFirstChild("RewardCash").Value)
 		game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "StartTask",[2] = thejob})
 end)
-wait()
+wait(1)
  game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
