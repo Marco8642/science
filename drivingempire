@@ -17,7 +17,7 @@ local chr = game.Players.LocalPlayer.Character
 local car = chr.Humanoid.SeatPart.Parent
 		car.PrimaryPart = car.Weight
 car:PivotTo(CFrame.new(Vector3.new(-100.07780456542969, 15.585329055786133, -1618.3812255859375),Vector3.new(-32.031883239746094, 24.379409790039062, -1091.4705810546875)))
-local mathlock = 350
+local mathlock = 300
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 local location = Vector3.new(-32.031883239746094, 24.379409790039062, -1091.4705810546875)
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
