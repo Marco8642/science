@@ -1,4 +1,4 @@
-  warn("Anti afk running")
+warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
@@ -9,52 +9,73 @@ local example = library:CreateWindow({
   text = "Driving Empire"
 })
 example:AddToggle("Auto Farm", function(state)
-	_G.auto = (state and true or false)
-	game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-	while _G.auto do
-		wait()
-		local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
+	_G.testers = (state and true or false)
+--experimental auto farm
+while _G.testers do
+	task.wait()
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent
 		car.PrimaryPart = car.Weight
-			
-game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-	
-if _G.auto == true then
-    local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
-    for i,v in pairs(car:GetDescendants()) do
-        pcall(function()
-    v.Velocity = Vector3.new(0,0,0)
-        end)
-    end
-	for i,v in pairs(workspace:GetDescendants()) do
-		if string.find(v.Name,"Road") and v.ClassName == "Part" and v.Size.X > 700 and v.BrickColor == BrickColor.new("Sand green") and v.Parent.Name == "road segment" and workspace:FindPartOnRay(Ray.new(CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,10,0).p, CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,5,0).LookVector * 100)) == nil and _G.auto == true then
-			car:PivotTo(CFrame.new(v.Position,Vector3.new(v.Position))*CFrame.new(0,3,0))
-			task.wait()
-			car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*600
-			task.wait(0.1)
-			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
-			wait(4)
-			game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-		end
-		end
+car:PivotTo(CFrame.new(Vector3.new(-100.07780456542969, 15.585329055786133, -1618.3812255859375),Vector3.new(-32.031883239746094, 24.379409790039062, -1091.4705810546875)))
+local mathlock = 350
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+local location = Vector3.new(-32.031883239746094, 24.379409790039062, -1091.4705810546875)
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 
+local location = Vector3.new(11.930032730102539, 24.91741180419922, -732.8578491210938)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+local location = Vector3.new(79.72480773925781, 34.419010162353516, -59.68326950073242)
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(80.43889617919922, 34.45082092285156, 474.7792663574219)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(53.504276275634766, 34.399757385253906, 1525.7982177734375)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(-112.53301239013672, 28.197858810424805, 2313.957763671875)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(-262.3653259277344, 13.525763511657715, 3027.66650390625)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(-452.8047790527344, 13.539205551147461, 3937.51953125)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+
+local location = Vector3.new(-671.54150390625, 13.537410736083984, 4993.31591796875)
+repeat task.wait()
+	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+	car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 40
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
-	end
 end)
-example:AddToggle("Auto WinterFest XP", function(state)
-	_G.ok = (state and true or false)
-	while _G.ok do
-	wait()
-	for i,v in pairs(workspace:GetChildren()) do
-	if v.ClassName =="Model" and v:FindFirstChild("_Destructable_") and _G.ok == true then
-		warn(v:GetFullName())
-		dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.PrimaryPart.Position).magnitude
-		local CFrameEnd = v.PrimaryPart.CFrame
-		local Time = dist/500
-		local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Time), {CFrame = CFrameEnd})
-		tween:Play()
-		tween.Completed:Wait()
-		wait(0.1)
-		end
-	end
-	end
-end)
+
