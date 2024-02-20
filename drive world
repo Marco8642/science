@@ -94,9 +94,9 @@ repeat  wait()
    print("waiting for trailer")
 until game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:FindFirstChild("Trailer") or getfenv().test == false
 pcall(function()
-game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Trailer.PrimaryPart.Anchored = true
+game.Players.LocalPlayer.Character.Head.PrimaryPart.Anchored = true
 task.wait(1.5)
-game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Trailer.PrimaryPart.Anchored = false
+game.Players.LocalPlayer.Character.Head.PrimaryPart.Anchored = false
 end)
 end
 end
@@ -158,9 +158,9 @@ while getfenv().test2 do
      print("waiting for trailer")
   until game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent:FindFirstChild("Trailer") or getfenv().test2 == false
   pcall(function()
-  game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Trailer.PrimaryPart.Anchored = true
+  game.Players.LocalPlayer.Character.Head.PrimaryPart.Anchored = true
   task.wait(1.5)
-  game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Trailer.PrimaryPart.Anchored = false
+  game.Players.LocalPlayer.Character.Head.PrimaryPart.Anchored = false
   end)
   end
   end
