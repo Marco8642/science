@@ -35,29 +35,21 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     example:AddToggle("Super Money", function(state)
     getfenv().money = (state and true or false)
     while getfenv().money do
-    wait()
-    if  variablecheck ~= true then
-       local before = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-      fireproximityprompt(game:GetService("Workspace").Jobs.DeliverySystem.Clicker:FindFirstChildOfClass("ProximityPrompt"))
-      wait(1)
-    for i,v in pairs(workspace:GetDescendants()) do
-          if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
-      v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-      v.MaxActivationDistance = math.huge
-      v.RequiresLineOfSight = false
-      repeat wait()
-    fireproximityprompt(v)
-      until v.Parent == nil
-      print()
-          end
-          end
-          variablecheck = true
-        task.wait()
-    elseif variablecheck == true then
-      remote:FireServer("Delivery")
-      wait()
-    end
-    end
+    task.wait()
+        repeat task.wait()
+            fireproximityprompt(game:GetService("Workspace").Jobs.DeliverySystem.Clicker:FindFirstChildOfClass("ProximityPrompt"))
+        until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+            for i,v in pairs(workspace:GetDescendants()) do
+                  if v.ClassName == "ProximityPrompt" and v.Parent.Parent.Parent == workspace then
+              v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+              v.MaxActivationDistance = math.huge
+              v.RequiresLineOfSight = false
+              repeat task.wait()
+            fireproximityprompt(v)
+              until v.Parent == nil
+                  end
+                  end
+                end
     end)
     
     example:AddToggle("Auto Farm", function(state)
