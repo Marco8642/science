@@ -13,6 +13,82 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Ultimate Driving"
 })
+example:AddLabel("Auto Drive Speed", function(object, focus)
+end)
+example:AddBox("Enter Speed Value", function(object, focus)
+	if focus then
+		getfenv().autospeed = tonumber(object.Text)
+
+	end
+end)
+example:AddToggle("Auto Drive", function(state)
+	getfenv().drive = (state and true or false)
+	if getfenv().drive then
+		local plr = game.Players.LocalPlayer
+		local chr = plr.Character
+		local croot = chr.HumanoidRootPart
+		local seat = chr.Humanoid.SeatPart
+		local car = seat.Parent
+		car:PivotTo(CFrame.new(Vector3.new(-15307.2109375, 4.4645915031433105, -4566.3046875),Vector3.new(-9515.998046875, 4.491385459899902, -6827.9921875)))
+		game.Players.LocalPlayer.Character.Head.Anchored = true
+		wait(5)
+		game.Players.LocalPlayer.Character.Head.Anchored = false
+	end
+while getfenv().drive do
+	task.wait()
+	local plr = game.Players.LocalPlayer
+	local chr = plr.Character
+	local croot = chr.HumanoidRootPart
+	local seat = chr.Humanoid.SeatPart
+	local car = seat.Parent
+	car.PrimaryPart = car.Core["#Weight"]
+	local primary = car.PrimaryPart
+	primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
+	local location = Vector3.new(-9515.998046875, 4.491385459899902, -6827.9921875)
+	game.Players.LocalPlayer.Character.Head.Anchored = true
+	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+	wait()
+	game.Players.LocalPlayer.Character.Head.Anchored = false
+	repeat task.wait()
+		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
+		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+	
+	local location = Vector3.new(-9605.32421875, 4.466358184814453, -7117.33544921875)
+	game.Players.LocalPlayer.Character.Head.Anchored = true
+	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+	wait()
+	game.Players.LocalPlayer.Character.Head.Anchored = false
+	repeat task.wait()
+		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
+		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+	
+	local location = Vector3.new(-15402.7666015625, 4.467057704925537, -4844.3125)
+	game.Players.LocalPlayer.Character.Head.Anchored = true
+	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+	wait()
+	game.Players.LocalPlayer.Character.Head.Anchored = false
+	repeat task.wait()
+		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
+		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+	
+	local location = Vector3.new(-15307.2109375, 4.4645915031433105, -4566.3046875)
+	game.Players.LocalPlayer.Character.Head.Anchored = true
+	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+	wait()
+	game.Players.LocalPlayer.Character.Head.Anchored = false
+	repeat task.wait()
+		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
+		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+	
+end
+end)
+local example = library:CreateWindow({
+	text = "Trucker"
+  })
 example:AddToggle("Auto Delivery[Trailer]", function(state)
     getfenv().delivery = (state and true or false)
 local donotdo = {}
@@ -536,3 +612,7 @@ moneystat=example:AddLabel("Money Earned: $"..earnedmoney, function(self)
 end)
 delstat=example:AddLabel("Jobs Completed: "..jobscompleted, function(self)
 end)
+
+
+
+
