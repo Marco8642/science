@@ -45,43 +45,24 @@ while getfenv().drive do
 	local primary = car.PrimaryPart
 	primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
 	local location = Vector3.new(-9515.998046875, 4.491385459899902, -6827.9921875)
-	game.Players.LocalPlayer.Character.Head.Anchored = true
-	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	wait()
-	game.Players.LocalPlayer.Character.Head.Anchored = false
 	repeat task.wait()
 		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
-		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+			car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
 	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
-	
 	local location = Vector3.new(-9605.32421875, 4.466358184814453, -7117.33544921875)
-	game.Players.LocalPlayer.Character.Head.Anchored = true
-	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	wait()
-	game.Players.LocalPlayer.Character.Head.Anchored = false
 	repeat task.wait()
 		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
-		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+			car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
 	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
-	
 	local location = Vector3.new(-15402.7666015625, 4.467057704925537, -4844.3125)
-	game.Players.LocalPlayer.Character.Head.Anchored = true
-	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	wait()
-	game.Players.LocalPlayer.Character.Head.Anchored = false
 	repeat task.wait()
 		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
-		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+			car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
 	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
-	
 	local location = Vector3.new(-15307.2109375, 4.4645915031433105, -4566.3046875)
-	game.Players.LocalPlayer.Character.Head.Anchored = true
-	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	wait()
-	game.Players.LocalPlayer.Character.Head.Anchored = false
 	repeat task.wait()
 		primary.Velocity =primary.CFrame.LookVector*getfenv().autospeed
-		car.PrimaryPart.CFrame=CFrame.new(car.PrimaryPart.Position,location)
+			car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
 	until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
 	
 end
@@ -612,7 +593,3 @@ moneystat=example:AddLabel("Money Earned: $"..earnedmoney, function(self)
 end)
 delstat=example:AddLabel("Jobs Completed: "..jobscompleted, function(self)
 end)
-
-
-
-
