@@ -9,6 +9,8 @@ local earnedmoney = 0
 local jobscompleted = 0
 local moneystat
 local delstat
+local milestat
+local milesdriven = 0
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
 local example = library:CreateWindow({
   text = "Ultimate Driving"
@@ -23,6 +25,27 @@ example:AddBox("Enter Speed Value", function(object, focus)
 end)
 example:AddToggle("Auto Drive", function(state)
 	getfenv().drive = (state and true or false)
+	local cred =  game.Players.LocalPlayer.leaderstats.Credits.Value
+	if getfenv().drive == true then
+	getfenv().run1 = game.Players.LocalPlayer.leaderstats.Credits:GetPropertyChangedSignal("Value"):Connect(function()
+			earnedmoney=earnedmoney+tonumber(game.Players.LocalPlayer.leaderstats.Credits.Value-cred)
+			moneystat.Text = "Money Earned: $"..earnedmoney
+			cred =  game.Players.LocalPlayer.leaderstats.Credits.Value
+		end)
+	elseif getfenv().drive == false then
+		getfenv().run1:Disconnect()
+	end
+	local mile = game.Players.LocalPlayer.leaderstats["Miles Driven"].Value
+	if getfenv().drive == true then
+	getfenv().run2 = game.Players.LocalPlayer.leaderstats["Miles Driven"]:GetPropertyChangedSignal("Value"):Connect(function()
+			milesdriven=milesdriven+tonumber(game.Players.LocalPlayer.leaderstats["Miles Driven"].Value-mile)
+			milestat.Text = "Miles Driven: "..milesdriven
+			mile =  game.Players.LocalPlayer.leaderstats["Miles Driven"].Value
+			mileschangetest = "notnil"
+		end)
+	elseif getfenv().drive == false then
+		getfenv().run2:Disconnect()
+	end
 	if getfenv().drive then
 		local plr = game.Players.LocalPlayer
 		local chr = plr.Character
@@ -589,7 +612,9 @@ end)
 local example = library:CreateWindow({
   text = "Stats"
 })
-moneystat=example:AddLabel("Money Earned: $"..earnedmoney, function(self)
+moneystat=example:AddLabel("Money Earned: $"..earnedmoney, function()
 end)
-delstat=example:AddLabel("Jobs Completed: "..jobscompleted, function(self)
+milestat=example:AddLabel("Miles Driven: "..milesdriven, function()
+end)
+delstat=example:AddLabel("Jobs Completed: "..jobscompleted, function()
 end)
