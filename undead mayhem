@@ -1,0 +1,200 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Undead Mayhem"
+})
+
+example:AddToggle("Auto Farm Mobs", function(state)
+getfenv().auto = (state and true or false)
+while getfenv().auto do
+    wait()
+    pcall(function()
+if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+for i,v in pairs(workspace.ActiveZombies:GetChildren()) do
+    if v.ClassName == "Model" and v:FindFirstChild("HeadHitbox") and v.Humanoid.Health > 0 then
+local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+game:GetService("ReplicatedStorage").Events.Actions.Fire:FireServer(tool.Name, {[1] = {[1] = v.HeadHitbox,[2] = v.HeadHitbox.Position,[3] = v.HeadHitbox.CFrame.LookVector}}, {[1] = {[1] = tool.Name,[2] = v.HeadHitbox.Position,[3] = v.HeadHitbox.Position,[4] = v.HeadHitbox.Position,[5] = true,[6] = v.HeadHitbox,[7] = false,[8] = false}})
+task.wait()
+end
+end
+end
+end)
+end
+end)
+example:AddToggle("Auto Farm Mobs[Melee]", function(state)
+    getfenv().melee = (state and true or false)
+    while getfenv().melee do
+    task.wait()
+    pcall(function()
+    for i,v in pairs(workspace.ActiveZombies:GetChildren()) do
+        if v.ClassName == "Model" and v:FindFirstChild("HeadHitbox") and v:FindFirstChild("HeadHitbox").Position.Y > 10 and (workspace.LoadedMap.PlayerSpawns:FindFirstChild("Part").Position-v:FindFirstChild("HeadHitbox").Position).magnitude <600 then
+            repeat task.wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.PrimaryPart.CFrame*CFrame.new(0,3,3)
+    game:GetService("ReplicatedStorage").Events.Actions.MeleeRequest:FireServer()
+            until v.Humanoid.Health == 0
+end
+    end
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = workspace.LoadedMap.PlayerSpawns:FindFirstChild("Part").CFrame
+end)
+end
+    end)
+example:AddToggle("Auto Collect pickups", function(state)
+getfenv().loot = (state and true or false)
+while getfenv().loot do
+    task.wait()
+    pcall(function()
+for i,v in pairs(workspace.WeaponBlacklist:GetDescendants()) do
+    if v.Name == "TouchInterest" and v.Parent.Parent.Name == "PowerUp" then
+        v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+        task.wait()
+    end
+end
+end)
+end
+end)
+example:AddToggle("Auto Barricade", function(state)
+getfenv().barra =(state and true or false)
+while getfenv().barra do
+    wait()
+for i,v in pairs(workspace.Barricades:GetDescendants()) do
+    if v.ClassName == "Part" and v.Transparency ~= 0 and v.Parent.Name == "Covers"  then
+game:GetService("ReplicatedStorage").Events.Actions.RepairBarricade:FireServer(v.Parent.Parent)
+wait()
+    end
+ end
+end
+end)
+example:AddToggle("Auto Interact", function(state)
+    getfenv().interact = (state and true or false)
+while getfenv().interact do
+    wait()
+    pcall(function()
+for i,v in pairs(workspace.LoadedMap.Map.Map:GetDescendants()) do
+    if v.Name == "InteractionPart" and v:GetAttribute("Title")~= "Open Weapon Changer" and v:GetAttribute("Disabled") == false then
+repeat task.wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =v.CFrame
+game:GetService("ReplicatedStorage").Events.Actions.Interact:FireServer(v.Parent, v)
+game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
+until v:GetAttribute("Disabled") ==true
+    end
+end
+end)
+end
+end)
+local example = library:CreateWindow({
+    text = "Stuff"
+  })
+
+example:AddToggle("Auto Claim Rewards", function(state)
+    getfenv().claimer = (state and true or false)
+while getfenv().claimer do
+    wait()
+    pcall(function()
+for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.OpenableUi.Challenges.Back.Inside.ChallengesHolder:GetChildren()) do
+ if v.ClassName == "Frame" and v.Inside.ClaimButton.Visible == true then
+game:GetService("ReplicatedStorage").Events.Communication.ClaimChallenge:FireServer(v.Name)
+end
+end
+end)
+end
+end)
+example:AddToggle("Auto Spin", function(state)
+    getfenv().spin = (state and true or false)
+while getfenv().spin do
+    wait()
+game:GetService("ReplicatedStorage").Events.Actions.RollWheel:FireServer()
+end
+end)
+example:AddToggle("Auto Open Alpha Case", function(state)
+    getfenv().open1 = (state and true or false)
+while getfenv().open1 do
+    wait()
+    game:GetService("ReplicatedStorage").Events.Actions.OpenCase:InvokeServer("Alpha Case")
+end
+end)
+example:AddToggle("Auto Open Beta Case", function(state)
+    getfenv().open2 = (state and true or false)
+while getfenv().open2 do
+    wait()
+    game:GetService("ReplicatedStorage").Events.Actions.OpenCase:InvokeServer("Beta Case")
+end
+end)
+local example = library:CreateWindow({
+    text = "Voting"
+  })
+  example:AddDropdown({"Select Difficulty","EASY","MEDIUM","HARD"},function(state)
+    if state ~= "Select Difficulty" then
+        getfenv().selectdiff = state
+    end
+end)
+  example:AddToggle("Infinite Mode", function(state)
+    getfenv().infmode =(state and true or false)
+    while getfenv().infmode do
+    game:GetService("ReplicatedStorage").Events.Communication.Vote:FireServer("Cast", "Infinite")
+    wait(5)
+    end
+    end)
+  example:AddToggle("Auto Vote", function(state)
+  getfenv().difficulty =(state and true or false)
+while getfenv().difficulty do
+    wait()
+    pcall(function()
+if game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.MapVoteScreen.Visible == true then
+   for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.MapVoteScreen:GetDescendants()) do
+    if v.Name == "DifficultyLabel" and v.Text == getfenv().selectdiff then
+game:GetService("ReplicatedStorage").Events.Communication.Vote:FireServer("Cast", v.Parent.Name)
+wait(3)
+    end 
+end
+end
+end)
+end
+end)
+local example = library:CreateWindow({
+  text = "Weapons"
+})
+example:AddToggle("Auto Refill Ammo", function(state)
+    getfenv().refilla = (state and true or false)
+    local num = game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.CashFrame.Amount.Text
+    local refill = 0
+    while getfenv().refilla do
+    task.wait()
+    if num == game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.CashFrame.Amount.Text and refill <= 10 then
+    refill=refill+1
+        wait(1)
+    elseif refill >= 10 then
+      if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+        local tool = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+    game:GetService("ReplicatedStorage").Events.Actions.WeaponChange:FireServer(tool.Name, "AmmoRefill")
+    print("refill")
+      end
+    num = game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.CashFrame.Amount.Text
+    refill = 0
+    wait(1)
+    elseif num ~= game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.CashFrame.Amount.Text then
+    num = game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.CashFrame.Amount.Text
+    refill = 0
+    wait(1)
+    end
+    end
+    end)
+example:AddToggle("Auto Equipt Weapon", function(state)
+getfenv().equipt = (state and true or false)
+local weaponname = nil
+while getfenv().equipt do
+task.wait()
+if weaponname == nil and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+    weaponname= game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Name
+    wait()
+elseif weaponname ~= nil and not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+    game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChild(weaponname))
+    wait()
+end
+end
+end)
+
