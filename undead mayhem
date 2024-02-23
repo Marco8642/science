@@ -135,8 +135,11 @@ end)
   example:AddToggle("Infinite Mode", function(state)
     getfenv().infmode =(state and true or false)
     while getfenv().infmode do
+wait()
+if game:GetService("Players").LocalPlayer.PlayerGui.Gameplay.MapVoteScreen.VoteHolder:FindFirstChild("Infinite") then
     game:GetService("ReplicatedStorage").Events.Communication.Vote:FireServer("Cast", "Infinite")
     wait(5)
+end
     end
     end)
   example:AddToggle("Auto Vote", function(state)
