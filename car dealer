@@ -22,6 +22,40 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Vehicle Dealership"
 })
+example:AddToggle("Auto Extinguish Fire", function(state)
+    getfenv().fireman = (state and true or false)
+    while getfenv().fireman do
+        wait()
+        if not game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool") and not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+        game:GetService("ReplicatedStorage").Remotes.Switch:FireServer("FireDealership")
+        wait(10)
+        elseif game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool") then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool"))
+            wait(1)
+        elseif game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+        if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("FireGuide") then
+        local test = nil
+        for i,v in pairs(workspace:GetDescendants()) do
+            if v.Name == "FirePart" then
+            test = v
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame 
+            end
+        end
+    if test == nil then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=game:GetService("Players").LocalPlayer.PlayerGui.FireGuide.Adornee.CFrame
+    elseif test ~= nil then
+        for i,v in pairs(test.Parent:GetDescendants()) do
+            if v.ClassName == "Part" and v.CanCollide == true or  v.ClassName == "MeshPart" and v.CanCollide == true then
+                v.CanCollide = false
+            end
+        end
+        game:GetService("ReplicatedStorage").Remotes.TaskController.ActionGameDataReplication:FireServer("TryInteractWithItem", {["GameName"] = "FirefighterGame",["Action"] = "UpdatePlayerToolState",["Data"] = {["IsActive"] = true,["ToolName"] = "Extinguisher"}})
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=test.CFrame*CFrame.new(0,-3,5)
+        end
+    end
+    end
+    end
+    end)
 example:AddToggle("Auto Farm", function(state)
 getfenv().auto = (state and true or false)
 while getfenv().auto do
