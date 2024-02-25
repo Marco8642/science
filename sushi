@@ -1,0 +1,128 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+getfenv().grav = workspace.Gravity
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Sushi Restaurant"
+})
+example:AddToggle("Auto Farm", function(state)
+    getfenv().ore = (state and true or false)
+while getfenv().ore do
+    wait()
+if game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(33.763275146484375, 3.098024845123291, -16.893775939941406)) > 20 then
+    local seat = nil
+local distance = math.huge
+for i,v in pairs(workspace.Counter:GetDescendants()) do
+    if v.Name == "Seat" then
+local Dist = (Vector3.new(33.763275146484375, 3.098024845123291, -16.893775939941406) - v.Position).magnitude
+if Dist < distance then
+distance = Dist
+seat = v
+end
+end
+end
+game.Players.LocalPlayer.Character.Humanoid.Sit = false
+wait(1)
+game:GetService("ReplicatedStorage").MiscEvents.__comm__.RE.RequestSit:FireServer(seat.Parent)
+wait(1)
+else
+    local table = nil
+    local distance = math.huge
+    for i,v in pairs(workspace.Counter:GetDescendants()) do
+        if v.Name == "Table" then
+    local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+    if Dist < distance then
+    distance = Dist
+    table = v
+    end
+    end
+    end
+    local anyfoods = nil
+    for i, v in pairs(table.Parent.Plates:GetChildren()) do
+        if v.ClassName == "Model" and v:GetAttribute("AmountLeft") > 0 then
+            anyfoods = v
+            print(v)
+        end
+    end
+    if anyfoods == nil then
+        local gotfood = nil
+        for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+            if v.ClassName == "Tool" and v:GetAttribute("FromConveyor") then
+                gotfood = v
+                game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
+    wait()
+    game:GetService("ReplicatedStorage").MiscEvents.__comm__.RE.PlatePlaceRequest:FireServer(table, CFrame.new(table.Position-Vector3.new(3,0,0),game.Players.LocalPlayer.Character.HumanoidRootPart.Position))
+    wait()
+    
+            end
+        end
+        if gotfood == nil then
+            for i, v in pairs(workspace:GetChildren()) do
+                if v.Name == "ConveyorSystem" and v:GetAttribute("TotalDistance") >200 then
+                 for a,b in pairs(v.Plates:GetDescendants()) do
+                    if b.Name == "ClickDetector" then
+                        fireclickdetector(b,0)
+                        wait()
+                end
+            end
+            end
+            end
+            wait()
+        end
+    end
+    local function count()
+        local foods = nil
+        for i,v in pairs(table.Parent.Plates:GetDescendants()) do
+            if v.ClassName == "Part" and v:GetAttribute("ChopstickEdible") or v.ClassName == "MeshPart" and v:GetAttribute("ChopstickEdible") or v.ClassName == "Model" and v:GetAttribute("ChopstickEdible") then
+               foods = v
+               print(v,v.ClassName)
+            end
+        end
+        return foods
+        end
+        if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chopsticks") then
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Chopsticks"))
+            wait()
+        end
+        pcall(function()
+        game:GetService("ReplicatedStorage").MiscEvents.__comm__.RE.PlateEatRequest:FireServer(count())
+        end)
+        local stuff 
+        for i,v in pairs(table.Parent.Plates:GetDescendants()) do
+            if v.Name == "ClickDetector" and count() == nil then
+            print(v)
+            stuff = v.Parent.Parent.Name
+            print(stuff)
+        fireclickdetector(v,0)
+    local eatingtool = nil
+        repeat wait()
+            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+             if v.ClassName == "Tool" and v:FindFirstChild("FoodEatTool")  and not string.find(v.Name,"Chopsticks") then
+                eatingtool = v
+             end
+            end
+            warn(eatingtool)
+        until eatingtool ~= nil
+        repeat wait()
+            if eatingtool.Parent == game.Players.LocalPlayer.Backpack then
+                warn(eatingtool.Parent)
+            game.Players.LocalPlayer.Character.Humanoid:EquipTool(eatingtool)
+            wait(1)
+            end
+        until eatingtool.Parent == game.Players.LocalPlayer.Character
+        repeat wait()
+            if eatingtool.Parent == game.Players.LocalPlayer.Character then
+                warn(eatingtool,"Activate")
+            eatingtool:Activate()
+            end
+        until eatingtool.Parent == nil
+            wait()
+            end
+        end
+    end
+    end
+end)
