@@ -56,7 +56,7 @@ else
                 game.Players.LocalPlayer.Character.Humanoid:EquipTool(v)
     wait()
     game:GetService("ReplicatedStorage").MiscEvents.__comm__.RE.PlatePlaceRequest:FireServer(table, CFrame.new(table.Position-Vector3.new(3,0,0),game.Players.LocalPlayer.Character.HumanoidRootPart.Position))
-    wait()
+    wait(1)
     
             end
         end
