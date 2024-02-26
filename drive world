@@ -254,8 +254,8 @@ local example = library:CreateWindow({
    getfenv().xprace = (state and true or false)
    while getfenv().xprace do
       wait()
-   game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("weeklyRedwoodPass")
-   repeat wait()
+game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("soloAroundTheWorld")  
+ repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
    wait(5)
    for i,v in pairs(workspace.Races:GetDescendants()) do
