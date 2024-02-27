@@ -250,14 +250,21 @@ end)
 local example = library:CreateWindow({
    text = "Race Stuff"
  })
+ example:AddBox("Enter Race Time", function(object, focus)
+	if focus then
+   
+		getfenv().speed = tonumber(object.Text)
+	end
+end)
  example:AddToggle("Auto Farm [Race XP]", function(state)
    getfenv().xprace = (state and true or false)
    while getfenv().xprace do
       wait()
+   local time = getfenv().speed or 5
 game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("soloAroundTheWorld")  
  repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
-   wait(5)
+   wait(time)
    for i,v in pairs(workspace.Races:GetDescendants()) do
    if v.ClassName == "Model" and v.Parent.Name == "Checkpoints" then
       v:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
@@ -271,8 +278,9 @@ example:AddToggle("Auto Finish Race", function(state)
    getfenv().urace = (state and true or false)
    while getfenv().urace do
       wait()
+      local time = getfenv().speed or 5
   if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true then
-   wait(5)
+   wait(time)
    for i,v in pairs(workspace.Races:GetDescendants()) do
    if v.ClassName == "Model" and v.Parent.Name == "Checkpoints" then
       v:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
