@@ -42,6 +42,15 @@ wait(1)
 	end
 end
 end)
+if _G.testers == true then
+	local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent
+		car.PrimaryPart = car.Weight
+car:PivotTo(CFrame.new(Vector3.new(-1350.695068359375, 39.20840072631836, -4696.767578125),Vector3.new(-897.0067749023438, 26.426374435424805, -3902.751953125)))
+game.Players.LocalPlayer.Character.Head.Anchored = true
+wait(3)
+game.Players.LocalPlayer.Character.Head.Anchored = false
+end
 while _G.testers do
 	task.wait()
 	getfenv().reset = false
