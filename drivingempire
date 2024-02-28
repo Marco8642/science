@@ -71,7 +71,7 @@ if _G.testers == true and getfenv().reset == false then
 	until game.Players.LocalPlayer:DistanceFromCharacter(getfenv().location)< 30 or _G.testers == false or getfenv().reset == true
 end
 
-getfenv().location = Vector3.new(-632.3883666992188, 15.610160827636719, -3380.29541015625)
+getfenv().location = Vector3.new(-629.2661743164062, 15.578150749206543, -3310.5625)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
