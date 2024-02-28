@@ -22,7 +22,7 @@ spawn(function()
 	local timer = 0
 	while _G.testers do
 		task.wait()
-	if getfenv().location == pre then
+	if getfenv().location == pre and timer <= 10 then
      timer =timer + 1
 	 print(timer)
 	 wait(1)
@@ -31,7 +31,7 @@ spawn(function()
 		warn("vehicle is not stuck vehicle reset timer reset")
 		timer = 0
 		wait(1)
-	elseif timer > 10 then
+	elseif timer >= 10 then
 		warn("vehicle reset")
 getfenv().reset = true
 local chr = game.Players.LocalPlayer.Character
