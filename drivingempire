@@ -179,3 +179,55 @@ repeat task.wait()
 until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
 end
 end)
+example:AddToggle("Auto Farm[Helicopter]", function(state)
+	getfenv().helifarm = (state and true or false)
+	if getfenv().helifarm then
+		local chr = game.Players.LocalPlayer.Character
+		local car = chr.Humanoid.SeatPart.Parent
+			car.PrimaryPart = car.Weight
+			car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.UpVector*1000
+     wait(3)
+	end
+	while getfenv().helifarm do
+	wait()
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent
+	car.PrimaryPart = car.Weight
+local mathlock = getfenv().speed or 500
+getfenv().location = Vector3.new(-13859.18359375, 1181.971435546875, -11547.607421875)
+if getfenv().helifarm then
+repeat task.wait()
+mathlock = getfenv().speed or 500
+car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+end
+local mathlock = getfenv().speed or 500
+getfenv().location = Vector3.new(-14023.6533203125, 1682.490966796875, 12927.0751953125)
+if getfenv().helifarm then
+repeat task.wait()
+mathlock = getfenv().speed or 500
+car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+end
+local mathlock = getfenv().speed or 500
+getfenv().location = Vector3.new(23936.044921875, 1675.274658203125, 4146.3720703125)
+if getfenv().helifarm then
+repeat task.wait()
+mathlock = getfenv().speed or 500
+car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+end
+local mathlock = getfenv().speed or 500
+getfenv().location = Vector3.new(23936.044921875, 1675.274658203125, 4146.3720703125)
+if getfenv().helifarm then
+repeat task.wait()
+mathlock = getfenv().speed or 500
+car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+end
+end
+end)
