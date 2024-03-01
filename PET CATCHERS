@@ -1,26 +1,54 @@
+
+
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
 local example = library:CreateWindow({
   text = "Pet Catchers"
 })
-example:AddToggle("Auto catch", function(state)
+example:AddLabel("Minimum Star Pets", function()
+end)
+example:AddBox("Enter Pet Stars", function(object, focus)
+    if focus then
+   getfenv().stars1 = tonumber(object.Text)
+    end
+end)
+example:AddLabel("Cube Type To Catch Pets", function()
+end)
+example:AddDropdown({"Select Cube Type","Common","Rare","Epic","Legendary"},function(state) 
+    if state ~= "Catch Cube Type" then
+ getfenv().catchcube  = state
+    end
+end)
+example:AddToggle("Auto Catch Pets", function(state)
 getfenv().catch = (state and true or false)
 while getfenv().catch do
-    for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
-    if v.ClassName == "Model" and v.PrimaryPart ~= nil  and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position) < 100 then
+    task.wait()
+    local function getstars(pet)
+        local stars = 0
+        for i,v in pairs(pet:GetChildren()) do
+        if v.ClassName == "ImageLabel" and v.Visible == true then
+            stars = stars+1
+        end
+        end
+        return stars
+        end
         pcall(function()
+    for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
+    if v.ClassName == "Model" and getstars(v.Hitbox.WorldPetGui.Stars) > getfenv().stars1 then
             task.spawn(function()
-        game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, "Common")
+        game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, getfenv().catchcube)
         end)
-    end)
     task.wait()
     end
     end
+end)
     end
 end)
 local example = library:CreateWindow({
     text = "Pets"
   })
-  example:AddBox("Max Delete Stars", function(object, focus)
+  example:AddLabel("Max Pet Delete Stars", function()
+  end)
+  example:AddBox("Enter Star Value", function(object, focus)
     if focus then
    getfenv().stars = tonumber(object.Text)
     end
