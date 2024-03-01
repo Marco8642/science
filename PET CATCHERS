@@ -28,16 +28,20 @@ while getfenv().catch do
     task.wait()
     local function getstars(pet)
         local stars = 0
-        for i,v in pairs(pet:GetChildren()) do
-        if v.ClassName == "ImageLabel" and v.Visible == true then
+        for i,v in pairs(pet:GetDescendants()) do
+            if v.Name == "Stars" then
+            for a,b in pairs(v:GetChildren()) do
+        if b.ClassName == "ImageLabel" and b.Visible == true then
             stars = stars+1
+        end
+    end
         end
         end
         return stars
         end
-        pcall(function()
+        local p,call =pcall(function()
     for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
-    if v.ClassName == "Model" and getstars(v.Hitbox.WorldPetGui.Stars) >= getfenv().stars1 then
+    if v.ClassName == "Model" and getstars(v) >= getfenv().stars1 then
             task.spawn(function()
         game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, getfenv().catchcube)
         end)
@@ -45,6 +49,9 @@ while getfenv().catch do
     end
     end
 end)
+if p == false then
+warn(p,call)
+end
     end
 end)
 local example = library:CreateWindow({
