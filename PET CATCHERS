@@ -1,0 +1,52 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
+local example = library:CreateWindow({
+  text = "Pet Catchers"
+})
+example:AddToggle("Auto catch", function(state)
+getfenv().catch = (state and true or false)
+while getfenv().catch do
+    for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
+    if v.ClassName == "Model" and v.PrimaryPart ~= nil  and game.Players.LocalPlayer:DistanceFromCharacter(v.PrimaryPart.Position) < 100 then
+        pcall(function()
+            task.spawn(function()
+        game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, "Common")
+        end)
+    end)
+    task.wait()
+    end
+    end
+    end
+end)
+local example = library:CreateWindow({
+    text = "Pets"
+  })
+  example:AddBox("Max Delete Stars", function(object, focus)
+    if focus then
+   getfenv().stars = tonumber(object.Text)
+    end
+end)
+  example:AddToggle("Auto Delete", function(state)
+    getfenv().del = (state and true or false)
+    while getfenv().del do
+local function getstars(pet)
+local stars = 0
+for i,v in pairs(pet:GetChildren()) do
+if v.ClassName == "ImageLabel" and v.Visible == true then
+    stars = stars+1
+end
+end
+return stars
+end
+local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Main.Content.Pets.Grid.Content
+
+local delete = {}
+for i,v in pairs(inventory:GetChildren()) do
+if v.ClassName == "Frame" and getstars(v.Button.Stars) < getfenv().stars then
+    print(v)
+table.insert(delete,v.Name)
+end
+end
+game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Event:FireServer("MultiDelete", delete)
+wait(1)
+end
+end)
