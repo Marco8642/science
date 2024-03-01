@@ -33,7 +33,7 @@ while getfenv().catch do
         end
         pcall(function()
     for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
-    if v.ClassName == "Model" and getstars(v.Hitbox.WorldPetGui.Stars) > getfenv().stars1 then
+    if v.ClassName == "Model" and getstars(v.Hitbox.WorldPetGui.Stars) >= getfenv().stars1 then
             task.spawn(function()
         game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, getfenv().catchcube)
         end)
@@ -69,7 +69,7 @@ local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inve
 
 local delete = {}
 for i,v in pairs(inventory:GetChildren()) do
-if v.ClassName == "Frame" and getstars(v.Button.Stars) < getfenv().stars then
+if v.ClassName == "Frame" and getstars(v.Button.Stars) <= getfenv().stars then
     print(v)
 table.insert(delete,v.Name)
 end
