@@ -55,9 +55,65 @@ end
     end
 end)
 local example = library:CreateWindow({
+    text = "Fishing"
+  })
+  local function getmaps()
+    local map = {"Select Area To Fish"}
+for i,v in pairs(workspace.Map:GetDescendants()) do
+if string.find(v.Name,"pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) or string.find(v.Name,"Pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) then
+table.insert(map,v.Parent.Parent.Name)
+end
+end
+return map
+end
+example:AddDropdown(getmaps(),function(state) 
+    if state ~= "Select Area To Fish" then
+        _G.rat = nil
+local distance = math.huge
+for a,b in pairs(workspace.Map[state]:GetDescendants()) do
+    if b.ClassName == "Part" and workspace:Raycast(b.Position, Vector3.new(0, 50, 0)) == nil and string.find(b.Parent.Name,"pond") then
+local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
+if Dist < distance then
+distance = Dist
+_G.rat = b
+end
+end
+end
+print(state)
+getfenv().mapselected = state
+    end
+end)
+example:AddButton ("Tp to Fishing Location", function(state)
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.rat.CFrame+Vector3.new(0,10,0)
+end)
+example:AddToggle("Auto Fish", function(state)
+    getfenv().fish = (state and true or false)
+    while getfenv().fish do
+game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Event:FireServer("StartCastFishing")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Fishing.Progress.Visible == true or getfenv().fish == false
+repeat task.wait()
+until game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Fishing.Progress.Visible == false or getfenv().fish == false
+    end
+end)
+local example = library:CreateWindow({
     text = "Pets"
   })
-  example:AddLabel("Max Pet Delete Stars", function()
+  example:AddLabel("Egg Opener", function()
+  end)
+  example:AddDropdown({"Select Egg To Open","Mystery Egg","Rare","Elite Mystery Egg","Prismatic Mystery Egg"},function(state) 
+    if state ~= "Select Egg To Open" then
+        getfenv().egg = state
+    end
+end)
+example:AddToggle("Auto Open Eggs", function(state)
+    getfenv().eggopen = (state and true or false)
+    while getfenv().eggopen do
+wait()
+game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("TryHatchEgg", egg)
+    end
+end)
+  example:AddLabel("Delete Pets", function()
   end)
   example:AddBox("Enter Star Value", function(object, focus)
     if focus then
@@ -76,8 +132,10 @@ end
 end
 return stars
 end
-local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Main.Content.Pets.Grid.Content
 
+local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Main.Content.Pets.Grid.Content
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Visible = true
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Visible = false
 local delete = {}
 for i,v in pairs(inventory:GetChildren()) do
 if v.ClassName == "Frame" and getstars(v.Button.Stars) <= getfenv().stars then
@@ -86,6 +144,24 @@ table.insert(delete,v.Name)
 end
 end
 game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Event:FireServer("MultiDelete", delete)
-wait(1)
+wait(5)
+
 end
+end)
+local example = library:CreateWindow({
+    text = "Teleports"
+  })
+  local function getmaps1()
+    local map = {"Select Area To Teleport"}
+for i,v in pairs(workspace.Map:GetChildren()) do
+if v.ClassName == "Folder" then
+table.insert(map,v.Name)
+end
+end
+return map
+end
+example:AddDropdown(getmaps1(),function(state) 
+    if state ~= "Select Area To Teleport" then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=workspace.Map[state].Spawn.CFrame+Vector3.new(0,10,0)
+    end
 end)
