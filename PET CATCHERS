@@ -54,6 +54,36 @@ warn(p,call)
 end
     end
 end)
+example:AddToggle("Auto tp to legendary Pet", function(state)
+    getfenv().catch1 = (state and true or false)
+    while getfenv().catch1 do
+        task.wait()
+        local function getstars(pet)
+            local stars = 0
+            for i,v in pairs(pet:GetDescendants()) do
+                if v.Name == "Stars" then
+                for a,b in pairs(v:GetChildren()) do
+            if b.ClassName == "ImageLabel" and b.Visible == true then
+                stars = stars+1
+            end
+        end
+            end
+            end
+            return stars
+            end
+            local p,call =pcall(function()
+        for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
+        if v.ClassName == "Model" and getstars(v) >= 4 then
+          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.WorldPivot
+        task.wait(5)
+        end
+        end
+    end)
+    if p == false then
+    warn(p,call)
+    end
+        end
+    end)
 local example = library:CreateWindow({
     text = "Fishing"
   })
@@ -122,6 +152,15 @@ end)
 end)
   example:AddToggle("Auto Delete", function(state)
     getfenv().del = (state and true or false)
+    local func 
+for i,v in pairs(getgc(true)) do
+    if type(v) == "function" and getinfo(v).name ~= nil and getfenv(v).script == game:GetService("ReplicatedStorage").Client.Gui.Frames.Inventory then
+        if getinfo(v).name == "updateTray" then
+        print(getinfo(v).name)
+        func = v
+    end
+end
+end
     while getfenv().del do
 local function getstars(pet)
 local stars = 0
@@ -132,11 +171,9 @@ end
 end
 return stars
 end
-
-local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Main.Content.Pets.Grid.Content
-game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Visible = true
-game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Visible = false
+func()
 local delete = {}
+local inventory =game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory.Frame.Main.Content.Pets.Grid.Content
 for i,v in pairs(inventory:GetChildren()) do
 if v.ClassName == "Frame" and getstars(v.Button.Stars) <= getfenv().stars then
     print(v)
