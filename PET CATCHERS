@@ -54,6 +54,56 @@ warn(p,call)
 end
     end
 end)
+example:AddLabel("          Legendary Pet Stuff", function(state)
+end)
+example:AddToggle("Auto Best Cube", function(state)
+getfenv().catchlegend = (state and true or false)
+while getfenv().catchlegend do
+wait()
+    local cube = nil
+    local inventory = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory
+    for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
+     if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Legendary" then
+    print(v)
+    cube = v
+     end
+    end
+    if cube == nil then
+        for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
+            if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Epic" then
+           print(v)
+           cube = v
+            end
+           end
+        end
+        if cube == nil then
+            for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
+                if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Rare" then
+               print(v)
+               cube = v
+                end
+               end
+            end
+    warn(cube)
+    local p,call =pcall(function()
+        for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
+        if v.ClassName == "Model" and getstars(v) >= 4 then
+            task.spawn(function()
+                if cube ~= nil then
+                game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, cube)
+                elseif cube == nil then
+                    game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, "Common")
+                end
+        task.wait()
+            end)
+        end
+        end
+    end)
+    if p == false then
+    warn(p,call)
+    end
+end
+end)
 example:AddToggle("Auto tp to legendary Pet", function(state)
     getfenv().catch1 = (state and true or false)
     while getfenv().catch1 do
