@@ -174,8 +174,8 @@ local example = library:CreateWindow({
   local function getmaps()
     local map = {"Select Area To Fish"}
 for i,v in pairs(workspace.Map:GetDescendants()) do
-if string.find(v.Name,"Foam") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) or string.find(v.Name,"Pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) then
-table.insert(map,v.Parent.Parent.Name)
+if string.find(v.Name,"Foam") and v.ClassName == "Part" and v.Parent.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Parent.Name) then
+table.insert(map,v.Parent.Parent.Parent.Name)
 end
 end
 return map
@@ -185,7 +185,7 @@ example:AddDropdown(getmaps(),function(state)
         _G.rat = nil
 local distance = math.huge
 for a,b in pairs(workspace.Map[state]:GetDescendants()) do
-    if b.ClassName == "Part" and workspace:Raycast(b.Position, Vector3.new(0, 50, 0)) == nil and string.find(b.Parent.Name,"pond") then
+    if b.ClassName == "Part" and workspace:Raycast(b.Position, Vector3.new(0, 50, 0)) == nil and b.Name == "Foam" then
 local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
 if Dist < distance then
 distance = Dist
