@@ -215,7 +215,7 @@ local example = library:CreateWindow({
   })
   example:AddLabel("Egg Opener", function()
   end)
-  example:AddDropdown({"Select Egg To Open","Mystery Egg","Rare","Elite Mystery Egg","Prismatic Mystery Egg"},function(state) 
+  example:AddDropdown({"Select Egg To Open","Mystery Egg","Elite Mystery Egg","Prismatic Mystery Egg"},function(state) 
     if state ~= "Select Egg To Open" then
         getfenv().egg = state
     end
@@ -223,8 +223,10 @@ end)
 example:AddToggle("Auto Open Eggs", function(state)
     getfenv().eggopen = (state and true or false)
     while getfenv().eggopen do
-wait()
+        task.spawn(function()
+task.wait()
 game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("TryHatchEgg", egg)
+        end)
     end
 end)
   example:AddLabel("Delete Pets", function()
