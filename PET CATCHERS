@@ -134,12 +134,34 @@ example:AddToggle("Auto tp to legendary Pet", function(state)
             return stars
             end
             local p,call =pcall(function()
-        for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
-        if v.ClassName == "Model" and getstars(v) >= 4 then
-          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.WorldPivot
-        task.wait(5)
-        end
-        end
+                local function getmaps1()
+                    local map = {}
+                for i,v in pairs(workspace.Map:GetChildren()) do
+                if v.ClassName == "Folder" then
+                table.insert(map,v.Name)
+                end
+                end
+                return map
+                end
+                local map = nil
+                for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Notification:GetDescendants()) do
+                    if v.ClassName == "TextLabel" and string.find(v.Text,"Legendary")  then
+                    local test = v.Text:split("spawned in")
+                    local test2 = test[2]:split("!")
+                    local remove = string.gsub(tostring(test2[1]),tostring(test2[1]:split(">")[1]),"")
+                    print(remove)
+                    local remove2 = string.gsub(tostring(remove),tostring(test2[1]:split("<")[2]),"")
+                    local remove3 = string.gsub(tostring(remove2),"<","")
+                    local remove4 = string.gsub(tostring(remove3),">","")
+                    local remove5 = string.gsub(tostring(remove4),"/font","")
+                warn(remove5)
+                map = remove5
+                end
+                end
+                if map ~= nil then
+                    print("teleported to pet")
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=workspace.Map[map].Spawn.CFrame+Vector3.new(0,10,0)
+                end
     end)
     if p == false then
     warn(p,call)
@@ -152,7 +174,7 @@ local example = library:CreateWindow({
   local function getmaps()
     local map = {"Select Area To Fish"}
 for i,v in pairs(workspace.Map:GetDescendants()) do
-if string.find(v.Name,"pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) or string.find(v.Name,"Pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) then
+if string.find(v.Name,"Foam") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) or string.find(v.Name,"Pond") and v.ClassName == "Model" and v.Parent.Parent.Parent == workspace.Map and not table.find(map,v.Parent.Parent.Name) then
 table.insert(map,v.Parent.Parent.Name)
 end
 end
