@@ -224,9 +224,9 @@ example:AddToggle("Auto Open Eggs", function(state)
     getfenv().eggopen = (state and true or false)
     while getfenv().eggopen do
         task.spawn(function()
-task.wait()
 game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("TryHatchEgg", egg)
         end)
+        task.wait()
     end
 end)
   example:AddLabel("Delete Pets", function()
