@@ -4,6 +4,17 @@ warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+    local chr = game.Players.LocalPlayer.Character
+	if Method == 'TakeDamage' and self:IsDescendantOf(chr) and getfenv().godmode == true then
+return;
+	end
+	return namecall(self, ...) 
+end)
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
 local example = library:CreateWindow({
   text = "Pet Catchers"
@@ -21,6 +32,9 @@ example:AddDropdown({"Select Cube Type","Common","Rare","Epic","Legendary"},func
     if state ~= "Catch Cube Type" then
  getfenv().catchcube  = state
     end
+end)
+example:AddToggle("God Mode", function(state)
+getfenv().godmode = (state and true or false)
 end)
 example:AddToggle("Auto Catch Pets", function(state)
 getfenv().catch = (state and true or false)
