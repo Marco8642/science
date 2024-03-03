@@ -10,7 +10,7 @@ local namecall = mt.__namecall
 mt.__namecall = newcclosure(function(self, ...)
 	local Method = getnamecallmethod()
     local chr = game.Players.LocalPlayer.Character
-	if Method == 'TakeDamage' and self:IsDescendantOf(chr) and getfenv().godmode == true then
+	if Method == 'TakeDamage' and self:IsDescendantOf(chr) and getfenv().godmode == true  then
 return;
 	end
 	return namecall(self, ...) 
@@ -35,6 +35,20 @@ example:AddDropdown({"Select Cube Type","Common","Rare","Epic","Legendary"},func
 end)
 example:AddToggle("God Mode", function(state)
 getfenv().godmode = (state and true or false)
+while getfenv().godmode do
+    wait()
+local p,call = pcall(function()
+for i,v in pairs(workspace.Rendered.Enemies:GetDescendants()) do
+if v.Name == "TouchInterest" then
+    v:Destroy()
+    task.wait()
+end
+end
+end)
+if p == false then
+    warn(p,call)
+end
+end
 end)
 example:AddToggle("Auto Catch Pets", function(state)
 getfenv().catch = (state and true or false)
