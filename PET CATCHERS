@@ -60,37 +60,49 @@ example:AddToggle("Auto Best Cube", function(state)
 getfenv().catchlegend = (state and true or false)
 while getfenv().catchlegend do
 wait()
+local function getstars(pet)
+    local stars = 0
+    for i,v in pairs(pet:GetDescendants()) do
+        if v.Name == "Stars" then
+        for a,b in pairs(v:GetChildren()) do
+    if b.ClassName == "ImageLabel" and b.Visible == true then
+        stars = stars+1
+    end
+end
+    end
+    end
+    return stars
+    end
     local cube = nil
     local inventory = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Inventory
     for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
      if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Legendary" then
-    print(v)
     cube = v
+    task.wait()
      end
     end
     if cube == nil then
         for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
             if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Epic" then
-           print(v)
            cube = v
+           task.wait()
             end
            end
         end
         if cube == nil then
             for i,v in pairs(inventory.Frame.Main.Content.Items.List["Important Things"].Grid.Content:GetChildren()) do
                 if v.ClassName == "Frame" and v:GetAttribute("ItemType") == "Cube" and v.Name == "Rare" then
-               print(v)
                cube = v
+               task.wait()
                 end
                end
             end
-    warn(cube)
     local p,call =pcall(function()
         for i,v in pairs(workspace.Rendered.Pets.World:GetChildren()) do
         if v.ClassName == "Model" and getstars(v) >= 4 then
             task.spawn(function()
                 if cube ~= nil then
-                game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, cube)
+                game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, cube.Name)
                 elseif cube == nil then
                     game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("CapturePet", v.Name, "Common")
                 end
