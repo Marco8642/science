@@ -221,7 +221,7 @@ _G.rat = b
 end
 end
 end
-print(state)
+print(state,_G.rat)
 getfenv().mapselected = state
     end
 end)
@@ -298,6 +298,59 @@ game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Event:FireS
 wait(5)
 
 end
+end)
+local example = library:CreateWindow({
+    text = "Enemies"
+  })
+  example:AddLabel("Boss Config", function()
+  end)
+  example:AddBox("Enter SuperCharge number", function(object, focus)
+      if focus then
+        getfenv().supercharge = tonumber(object.Text)
+      end
+  end)
+  example:AddLabel("Select Boss To Farm", function()
+  end)
+  local function getbosses()
+    local boss = {"All Bosses"}
+    for i,v in pairs(workspace.Bosses:GetChildren()) do
+        if v.ClassName == "Model" then
+            table.insert(boss,v.Name)
+        end
+    end
+    return boss
+    end
+    example:AddDropdown(getbosses(),function(state) 
+    if state == "All Bosses" then
+    getfenv().boss = nil
+    elseif state ~= "All Bosses" then
+        getfenv().boss = state
+    end
+    end)
+    example:AddToggle("Auto Boss Farm", function(state)
+    getfenv().bossfight = (state and true or false)
+    local location = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+    while getfenv().bossfight do
+    wait()
+    if getfenv().boss ~= nil and workspace.Bosses:FindFirstChild(getfenv().boss).Display.SurfaceGui.BossDisplay.Cooldown.Visible == false then
+    game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("BossRequest", getfenv().boss, getfenv().supercharge)
+    wait(5)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
+    repeat wait()
+    until workspace.Bosses:FindFirstChild(getfenv().boss).Display.SurfaceGui.BossDisplay.Cooldown.Visible == true
+    elseif getfenv().boss == nil  then
+        for i,v in pairs(workspace.Bosses:GetDescendants()) do
+        if v.Name == "Cooldown" and v.Visible == false then
+            print(v.Parent.Parent.Parent.Parent.Name)
+            game:GetService("ReplicatedStorage").Shared.Framework.Network.Remote.Function:InvokeServer("BossRequest", v.Parent.Parent.Parent.Parent.Name, getfenv().supercharge)
+    wait(5)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(location)
+    repeat wait()
+    until v.Visible == true
+    end
+    end
+        end
+    end
 end)
 local example = library:CreateWindow({
     text = "Teleports"
