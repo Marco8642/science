@@ -213,7 +213,7 @@ example:AddDropdown(getmaps(),function(state)
         _G.rat = nil
 local distance = math.huge
 for a,b in pairs(workspace.Map[state]:GetDescendants()) do
-    if b.ClassName == "Part" and workspace:Raycast(b.Position, Vector3.new(0, 50, 0)) == nil and b.Name == "Foam" then
+    if b.ClassName == "Part" and workspace:Raycast(b.Position, Vector3.new(0, 10, 0)) == nil and b.Name == "Foam" then
 local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
 if Dist < distance then
 distance = Dist
