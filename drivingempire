@@ -22,7 +22,7 @@ spawn(function()
 	local timer = 0
 	while _G.testers do
 		task.wait()
-	if getfenv().location == pre then
+	if getfenv().location == pre and timer <= 10 then
      timer =timer + 1
 	 print(timer)
 	 wait(1)
@@ -31,12 +31,13 @@ spawn(function()
 		warn("vehicle is not stuck vehicle reset timer reset")
 		timer = 0
 		wait(1)
-	elseif timer > 10 then
+	elseif timer >= 10 then
 		warn("vehicle reset")
 getfenv().reset = true
 local chr = game.Players.LocalPlayer.Character
 local car = chr.Humanoid.SeatPart.Parent
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+car:PivotTo(CFrame.new(getfenv().location))
 timer = 0
 wait(1)
 	end
@@ -54,66 +55,90 @@ getfenv().location = Vector3.new(11.930032730102539, 24.91741180419922, -732.857
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(79.72480773925781, 34.419010162353516, -59.68326950073242)
 
 if _G.testers == true and getfenv().reset == false then
 repeat task.wait()
 	mathlock = getfenv().speed or 500
-	car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
-	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+	car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 end
 getfenv().location = Vector3.new(80.43889617919922, 34.45082092285156, 474.7792663574219)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(53.504276275634766, 34.399757385253906, 1525.7982177734375)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(-112.53301239013672, 28.197858810424805, 2313.957763671875)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(-262.3653259277344, 13.525763511657715, 3027.66650390625)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(-452.8047790527344, 13.539205551147461, 3937.51953125)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 getfenv().location = Vector3.new(-671.54150390625, 13.537410736083984, 4993.31591796875)
 if _G.testers == true and getfenv().reset == false then
 	repeat task.wait()
 		mathlock = getfenv().speed or 500
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
 		car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+		car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+	until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 	end
 end
 end)
@@ -134,49 +159,49 @@ local location = Vector3.new(11.930032730102539, 24.91741180419922, -732.8578491
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 local location = Vector3.new(79.72480773925781, 34.419010162353516, -59.68326950073242)
 
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(80.43889617919922, 34.45082092285156, 474.7792663574219)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(53.504276275634766, 34.399757385253906, 1525.7982177734375)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(-112.53301239013672, 28.197858810424805, 2313.957763671875)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(-262.3653259277344, 13.525763511657715, 3027.66650390625)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(-452.8047790527344, 13.539205551147461, 3937.51953125)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 
 local location = Vector3.new(-671.54150390625, 13.537410736083984, 4993.31591796875)
 repeat task.wait()
 	game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
 	car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location) < 30
+until game.Players.LocalPlayer:DistanceFromCharacter(location) < 50
 end
 end)
 example:AddToggle("Auto Farm[Helicopter]", function(state)
@@ -200,7 +225,7 @@ repeat task.wait()
 mathlock = getfenv().speed or 500
 car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
 car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 end
 local mathlock = getfenv().speed or 500
 getfenv().location = Vector3.new(-14023.6533203125, 1682.490966796875, 12927.0751953125)
@@ -209,7 +234,7 @@ repeat task.wait()
 mathlock = getfenv().speed or 500
 car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
 car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 end
 local mathlock = getfenv().speed or 500
 getfenv().location = Vector3.new(23936.044921875, 1675.274658203125, 4146.3720703125)
@@ -218,7 +243,7 @@ repeat task.wait()
 mathlock = getfenv().speed or 500
 car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
 car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 end
 local mathlock = getfenv().speed or 500
 getfenv().location = Vector3.new(23936.044921875, 1675.274658203125, 4146.3720703125)
@@ -227,7 +252,13 @@ repeat task.wait()
 mathlock = getfenv().speed or 500
 car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
 car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 30 or _G.testers == false or getfenv().reset == true
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or _G.testers == false or getfenv().reset == true
 end
 end
+end)
+local example = library:CreateWindow({
+  text = "Misc"
+})
+example:AddButton("Remove Speed traps", function()
+	workspace.Speedtraps:Destroy()
 end)
