@@ -73,8 +73,8 @@ example:AddToggle("Auto Extinguish Fire", function(state)
             local function eggfinder(egg)
                 local isegg = nil
                 for i,v in pairs(egg:GetChildren()) do
-                    if string.find(v.Name,"Egg") or v.Name == "Tunnel" or v.Name == "Devil" or v.Name == "Bat" then
-                        isegg = v
+                    if v.ClassName == "Part" and v:GetAttribute("Collection") == "Egg" then
+                        isegg = v.Parent:FindFirstChildOfClass("MeshPart")
                     end
                 end
                 return isegg
