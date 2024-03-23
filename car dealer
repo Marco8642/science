@@ -71,14 +71,14 @@ example:AddToggle("Auto Extinguish Fire", function(state)
         while getfenv().autoextfind do
             task.wait()
             local function eggfinder(egg)
-            local isegg = nil
-            for i,v in pairs(egg:GetChildren()) do
-                if string.find(v.Name,"Egg") then
-                    isegg = v
+                local isegg = nil
+                for i,v in pairs(egg:GetChildren()) do
+                    if string.find(v.Name,"Egg") or v.Name == "Tunnel" or v.Name == "Devil" or v.Name == "Bat" then
+                        isegg = v
+                    end
                 end
+                return isegg
             end
-            return isegg
-        end
         for i,v in pairs(workspace:GetChildren()) do
             if v.Name == "Model" and eggfinder(v) ~= nil and eggfinder(v).Transparency == 0 or v.ClassName == "Model" and #v:GetChildren() == 0 then
                 local timeout = 0
@@ -89,6 +89,7 @@ example:AddToggle("Auto Extinguish Fire", function(state)
                 if eggfinder(v) then
                     repeat task.wait()
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =v.WorldPivot
+
         game:GetService("ReplicatedStorage").Remotes.Collectibles.TryToCollect:FireServer(v.Part)
                     until eggfinder(v).Transparency == 1 or getfenv().autoextfind == false
                 end
