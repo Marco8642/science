@@ -477,7 +477,9 @@ wait(1)
             game.Players.LocalPlayer.Character.Head.Anchored = false
             end
         end)
+        if p == false then
         warn(p,call)
+        end
             end
         end)
         local example = library:CreateWindow({
