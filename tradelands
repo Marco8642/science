@@ -139,7 +139,7 @@ if string.find(game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").
    tween.Completed:Wait()
     repeat wait(0.5)
         pcall(function()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.rat.CFrame*CFrame.new(0,0,3)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.rat.CFrame*CFrame.new(0,0,5)
         game.Players.LocalPlayer.Character.ActiveGear.ToolScript.Swing:FireServer("left")
         end)
         until _G.rat:FindFirstChild("Broken").Value == true or not game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") or getfenv().trees == false
