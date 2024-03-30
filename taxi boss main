@@ -29,13 +29,51 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
+example:AddToggle("Auto Collect Eggs", function(state)
+getfenv().eggs = (state and true or false)
+while getfenv().eggs do
+    wait()
+    pcall(function()
+for i,v in pairs(game:GetService("Workspace").Easter.EggHunt:GetDescendants()) do
+    if v.Name == "EggPrompt" and getfenv().eggs then
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+wait(5)
+        fireproximityprompt(v)
+        wait(0.1)
+    end
+end
+end)
+end
+end)
+example:AddToggle("Super spin wheel[lag]", function(state)
+    getfenv().superspin = (state and true or false)
+    while  getfenv().superspin  do
+    wait()
+    if game:GetService("Players").LocalPlayer.Data.eggs.Value >= 2 and game:GetService("Stats").PerformanceStats.Ping:GetValue() <5000 then
+    wait()
+    for i=1,10000 do
+       task.spawn(function()
+    game:GetService("ReplicatedStorage").SpinWheel:InvokeServer()
+    end)
+    end
+    wait(10)
+    end
+    end
+end)
+example:AddToggle("Auto spin wheel", function(state)
+    getfenv().superspin2 = (state and true or false)
+    while  getfenv().superspin2  do
+        wait()
+        game:GetService("ReplicatedStorage").SpinWheel:InvokeServer()
+    end
+end)
 example:AddToggle("Auto Money", function(state)
-_G.test2 = (state and true or false)
+getfenv().test2 = (state and true or false)
 pcall(function()
 game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
 game:GetService("ReplicatedStorage").Quests.Contracts.CancelContract:InvokeServer(game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChildOfClass("StringValue").Name)
 end)
-while _G.test2 do
+while getfenv().test2 do
     wait()
     if not  game:GetService("Players").LocalPlayer.ActiveQuests:FindFirstChild("contractBuildMaterial") then
         game:GetService("ReplicatedStorage").Quests.Contracts.StartContract:InvokeServer("contractBuildMaterial")
@@ -58,7 +96,7 @@ writefile("taxibossautomoney.txt",game:HttpGet("https://pastebin.com/raw/HuKppzE
 loadstring(game:HttpGet("https://pastebin.com/raw/HuKppzEV"))()
   end)
   example:AddToggle("Auto Customers[Beta]", function(state)
-    _G.customersfarm = (state and true or false)
+    getfenv().customersfarm = (state and true or false)
     pcall(function()
        game:GetService("Workspace").GaragePlate:Destroy()
        end)
@@ -67,12 +105,12 @@ loadstring(game:HttpGet("https://pastebin.com/raw/HuKppzEV"))()
              v:Destroy()
           end
        end
-    _G.numbers = 0
-    _G.stuck = 0
+    getfenv().numbers = 0
+    getfenv().stuck = 0
     local testvalue = 1
     local  ohsoso = false
     local antiban = 0
-    while _G.customersfarm do
+    while getfenv().customersfarm do
         wait()
         pcall(function()
     if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
@@ -108,26 +146,26 @@ loadstring(game:HttpGet("https://pastebin.com/raw/HuKppzEV"))()
                      game:GetService("VirtualInputManager"):SendKeyEvent(true,304,false,game)
                      car.PrimaryPart.Velocity = Vector3.new(0,0,0)
          end
-    until not game:GetService("Workspace").ParkingMarkers:FindFirstChild("destinationPart") or _G.customersfarm == false
+    until not game:GetService("Workspace").ParkingMarkers:FindFirstChild("destinationPart") or getfenv().customersfarm == false
     antiban = 0
     game:GetService("VirtualInputManager"):SendKeyEvent(false,304,false,game)
-    _G.numbers=_G.numbers+1
+    getfenv().numbers=getfenv().numbers+1
                     testvalue = 1
                      task.wait()
     
     elseif  workspace:Raycast(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, Vector3.new(0, -100, 0),raycastParams).Instance.Name == "Terrain" and ohsoso == false then
-       _G.rat = nil
+       getfenv().rat = nil
        local distance = math.huge
        for i,v in pairs(game:GetService("Workspace").World:GetDescendants()) do
           if string.find(v.Name,"road") and v.ClassName == "Part" or string.find(v.Name,"Road") and v.ClassName == "Part"    then
               local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude
        if Dist < distance then
        distance = Dist
-       _G.rat = v
+       getfenv().rat = v
        end
        end
        end
-    car:PivotTo(_G.rat.CFrame)
+    car:PivotTo(getfenv().rat.CFrame)
      ohsoso = true
     elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == true  then
     warn("Tester")
@@ -136,19 +174,19 @@ loadstring(game:HttpGet("https://pastebin.com/raw/HuKppzEV"))()
     print(testvalue)
     testvalue = testvalue-.02 
     if testvalue < 0 then
-         _G.rat = nil
+         getfenv().rat = nil
        local distance = math.huge
        for i,v in pairs(game:GetService("Workspace").World:GetDescendants()) do
           if string.find(v.Name,"road") and v.ClassName == "Part" or string.find(v.Name,"Road") and v.ClassName == "Part"  then
               local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-v.Position).magnitude
        if Dist < distance then
        distance = Dist
-       _G.rat = v
+       getfenv().rat = v
        end
        end
        end
-    car:PivotTo(_G.rat.CFrame)
-_G.stuck = _G.stuck+1
+    car:PivotTo(getfenv().rat.CFrame)
+getfenv().stuck = getfenv().stuck+1
         testvalue = 1 
     end
     pcall(function()
@@ -198,7 +236,7 @@ _G.stuck = _G.stuck+1
     end
     end)
     elseif game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
-      _G.rat = nil
+      getfenv().rat = nil
     local distance = math.huge
     for i,v in pairs(game:GetService("Workspace").NewCustomers:GetDescendants()) do
               if v.Name == "Part" and v:GetAttribute("GroupSize") ~= nil  and v:FindFirstChildOfClass("CFrameValue") and game.Players.LocalPlayer.variables.seatAmount.Value > v:GetAttribute("GroupSize") and v:GetAttribute("Rating") < game:GetService("Players").LocalPlayer.variables.vehicleRating.Value and game:GetService("Players").LocalPlayer.variables.inMission.Value == false then
@@ -207,15 +245,15 @@ _G.stuck = _G.stuck+1
            local Dist = (v.Position-Vector3.new(v:FindFirstChildOfClass("CFrameValue").Value.X,v:FindFirstChildOfClass("CFrameValue").Value.Y,v:FindFirstChildOfClass("CFrameValue").Value.Z)).magnitude
     if Dist < distance then
     distance = Dist
-    _G.rat = v
+    getfenv().rat = v
     end
     end
     end
        for ok,ya in pairs(game:GetService("Workspace").Vehicles:GetDescendants()) do
                  if ya.Name == "Player" and ya.Value == game.Players.LocalPlayer  then
-    ya.Parent.Parent:SetPrimaryPartCFrame(_G.rat.CFrame*CFrame.new(0,3,0))
+    ya.Parent.Parent:SetPrimaryPartCFrame(getfenv().rat.CFrame*CFrame.new(0,3,0))
     wait(1)
-    fireproximityprompt(_G.rat.Client.PromptPart.CustomerPrompt)
+    fireproximityprompt(getfenv().rat.Client.PromptPart.CustomerPrompt)
     wait(3)
     end
     end
@@ -229,14 +267,14 @@ _G.stuck = _G.stuck+1
     end
   end)
 example:AddToggle("Auto Trophies", function(state)
-  _G.Trophies = (state and true or false)
+  getfenv().Trophies = (state and true or false)
 game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
-_G.showui = _G.Trophies
+getfenv().showui = getfenv().Trophies
  spawn(function()
-      if _G.showui == false and game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
+      if getfenv().showui == false and game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
 game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.Rep:Destroy()
 else
-while _G.showui do
+while getfenv().showui do
     task.wait()
 if not game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money:FindFirstChild("Rep") then
 local oh = game:GetService("Players").LocalPlayer.PlayerGui.ScreenGui.Money.CashLabel:Clone()
@@ -250,7 +288,7 @@ end
 end
 end
 end) 
-       while _G.Trophies  do
+       while getfenv().Trophies  do
             task.wait()
             pcall(function()
       if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
@@ -283,14 +321,14 @@ firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races
         end
 end)
 example:AddToggle("Auto TimeTrial Medals", function(state)
-  _G.medals = (state and true or false)
+  getfenv().medals = (state and true or false)
   game:GetService("ReplicatedStorage").Race.LeaveRace:InvokeServer()
-  while _G.medals  do
+  while getfenv().medals  do
        task.wait()
  if game.Players.LocalPlayer.Character.Humanoid.Sit == true then
    for round=1,3 do
    for what,races in pairs(game:GetService("Workspace").Races:GetChildren()) do
-     if races.ClassName == "Folder" and _G.medals then
+     if races.ClassName == "Folder" and getfenv().medals then
 game:GetService("ReplicatedStorage").Race.TimeTrial:InvokeServer(races.Name, round)
 wait()
 if game:GetService("Players").LocalPlayer.variables.race.Value == "none" then
@@ -307,7 +345,7 @@ for i,v in pairs(game:GetService("Workspace").Races[races.Name].detects:GetChild
                firetouchinterest(b.Parent.Parent.PrimaryPart,v,1)
    end
 end
-until game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue") or _G.medals == false
+until game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue") or getfenv().medals == false
 repeat wait()
  for i,v in pairs(game:GetService("Workspace").Races[races.Name].detects:GetChildren()) do
    if v.ClassName == "Part" and v:FindFirstChild("TouchInterest") then
@@ -321,7 +359,7 @@ end
 firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue").finish,0)
                firetouchinterest(b.Parent.Parent.PrimaryPart,game:GetService("Workspace").Races[races.Name].timeTrial:FindFirstChildOfClass("IntValue").finish,1)
 end)
-until game:GetService("Players").LocalPlayer.variables.race.Value == "none" or _G.medals == false
+until game:GetService("Players").LocalPlayer.variables.race.Value == "none" or getfenv().medals == false
 end
 end 
 end
@@ -337,8 +375,8 @@ end
    end
 end)
 example:AddToggle("Auto Upgrade Office", function(state)
-    _G.ofs = (state and true or false)
-    while _G.ofs do
+    getfenv().ofs = (state and true or false)
+    while getfenv().ofs do
         wait()
     if not game:GetService("Players").LocalPlayer:FindFirstChild("Office") then
     game:GetService("ReplicatedStorage").Company.StartOffice:InvokeServer()
@@ -760,8 +798,8 @@ example:AddButton("Remove Locked Area Barriers",function()
     game:GetService("Workspace").AreaLocked:Destroy()
 end)
 example:AddToggle("Donut God", function(state)
-_G.donut = (state and true or false)
-while _G.donut do
+getfenv().donut = (state and true or false)
+while getfenv().donut do
     task.wait()
 pcall(function()
 local part = game.Players.LocalPlayer.Character.Humanoid.SeatPart
