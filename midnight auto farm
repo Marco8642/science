@@ -9,30 +9,75 @@ local example = library:CreateWindow({
   text = "Midnight"
 })
 example:AddToggle("Auto Farm", function(state)
-    getfenv().test = (state and true or false)
-    check = 2
-    workspace.Gravity = 196
-    game:GetService("VirtualInputManager"):SendKeyEvent(false,"W",false,game)
-    spawn(function()
-        while getfenv().test do
-        task.wait()
-        local hum = game.Players.LocalPlayer.Character.Humanoid
-        hum.SeatPart.Parent.PrimaryPart.Velocity = Vector3.new(hum.SeatPart.Parent.PrimaryPart.Velocity.X,-50,hum.SeatPart.Parent.PrimaryPart.Velocity.Z)
-        hum.SeatPart.Parent.PrimaryPart.Velocity = hum.SeatPart.Parent.PrimaryPart.CFrame.LookVector*500
-        hum.SeatPart.Parent.PrimaryPart.Velocity = Vector3.new(hum.SeatPart.Parent.PrimaryPart.Velocity.X,-50,hum.SeatPart.Parent.PrimaryPart.Velocity.Z)
-        end
-    end)
-    while getfenv().test do
-       task.wait()
-       if check > 3 then
-        check = 2
-       end
-       local hum = game.Players.LocalPlayer.Character.Humanoid
-       hum.SeatPart.Parent.PrimaryPart=hum.SeatPart.Parent.Body:FindFirstChild("#Weight")
-       hum.SeatPart.Parent:PivotTo(CFrame.new(tonumber(check)..tonumber("843.672119140625"),-20.704404830932617, -1647.72900390625))
-task.wait()
-    game:GetService("VirtualInputManager"):SendKeyEvent(true,"E",false,game)
-    task.wait(1.5)
-    check=check+1
+getfenv().auto = true
+while getfenv().auto do
+local hum = game.Players.LocalPlayer.Character.Humanoid
+local car = hum.SeatPart.Parent
+ car.PrimaryPart=car.Body:FindFirstChild("#Weight")
+if getfenv().first ~= true then
+    if workspace.Workspace:FindFirstChild("Buildings") then
+    workspace.Workspace.Buildings:Destroy()
+    end
+car:PivotTo(CFrame.new(Vector3.new(-7594.541015625, -3.513848304748535, 5130.95263671875),Vector3.new(-6205.29833984375, -3.5030133724212646, 8219.853515625)))
+wait()
+end
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+getfenv().first = true
+ local location = Vector3.new(-6205.29833984375, -3.5030133724212646, 8219.853515625)
+ repeat task.wait()
+    mathlock = getfenv().speed or 500
+    
+    car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+    
+    car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+    
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().auto == false 
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+local location = Vector3.new(-7594.541015625, -3.513848304748535, 5130.95263671875)
+repeat task.wait()
+    mathlock = getfenv().speed or 500
+    
+    car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
+    
+    car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
+    
+until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().auto == false 
+car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+end
+end)
+example:AddToggle("Auto Collect Eggs", function(state)
+getfenv().eggs = (state and true or false)
+while wait() do
+local eggloc = {
+    Vector3.new(3373.783203125, -16.658212661743164, 1037.22119140625),
+    Vector3.new(3512.350341796875, -16.29255485534668, 1040.7640380859375),
+    Vector3.new(113.66627502441406, 44.6970100402832, 60.06822967529297),
+    Vector3.new(-7323.07666015625, 26.0887451171875, -5139.36328125),
+    Vector3.new(-7428.23095703125, -12.607297897338867, -1172.157958984375),
+    Vector3.new(-7017.0703125, -22.187244415283203, -561.7033081054688),
+    Vector3.new(-6120.32666015625, 10.926513671875, 504.7085266113281),
+    Vector3.new(-5928.7216796875, 3.703087568283081, 453.381591796875),
+    Vector3.new(413.4071350097656, -1.3849788904190063, 6931.57861328125),
+    Vector3.new(193.2349090576172, -22.772045135498047, 7860.169921875)
+}
+if #workspace.EasterEggs:GetChildren() == 0 then
+for num = 1,10 do
+    if getfenv().eggs then
+    local pos = Vector3.new(eggloc[num].X, eggloc[num].Y, eggloc[num].Z)
+    print(pos)
+    game.Players.LocalPlayer.Character:MoveTo(pos)
+    wait(0.1)
+end
+end
+elseif #workspace.EasterEggs:GetChildren() > 0  then
+    if getfenv().eggs then
+    for i,v in pairs(workspace.EasterEggs:GetChildren()) do
+repeat wait()
+    game.Players.LocalPlayer.Character:MoveTo(v.Position)
+fireproximityprompt(v:FindFirstChildOfClass("ProximityPrompt"))
+until v.Parent == nil or #workspace.EasterEggs:GetChildren() == 0 or getfenv().eggs == false
+end
+end
+end
 end
 end)
