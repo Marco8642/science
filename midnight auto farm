@@ -10,6 +10,7 @@ local example = library:CreateWindow({
 })
 example:AddToggle("Auto Farm", function(state)
 getfenv().auto = true
+getfenv().first = false
 while getfenv().auto do
 local hum = game.Players.LocalPlayer.Character.Humanoid
 local car = hum.SeatPart.Parent
