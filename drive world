@@ -332,14 +332,14 @@ end)
    spawn(function()
 while getfenv().xprace do
 task.wait()
-if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true then
+if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true and getfenv().lookat ~= nil then
 local speed = getfenv().speed or 500
 
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local car = chr.Humanoid.SeatPart.Parent.Parent
 local carp = car.PrimaryPart
-carp.Velocity = carp.CFrame.LookVector*speed
+carp.Velocity = getfenv().lookat.CFrame.LookVector*speed
 end
 end
    end)
@@ -353,12 +353,12 @@ game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireSe
       for i,v in pairs(workspace.Races:GetDescendants()) do
          if v.ClassName == "Model"  and v:FindFirstChild("Forcefield") and v:FindFirstChild("Forcefield").Transparency ~= 1  then
             local speed = getfenv().speed or 500
-
+            getfenv().lookat = v:FindFirstChild("Forcefield")
             local plr = game.Players.LocalPlayer
             local chr = plr.Character
             local car = chr.Humanoid.SeatPart.Parent.Parent
             local carp = car.PrimaryPart
-            local location = v:FindFirstChild("Forcefield").Position-Vector3.new(0,10,0)
+            local location = v:FindFirstChild("Forcefield").Position
             local dist = (carp.Position-location).magnitude
             print(dist/speed)
             local TweenService = game:GetService("TweenService")
@@ -383,14 +383,14 @@ example:AddToggle("Auto Finish Race", function(state)
    spawn(function()
       while getfenv().urace do
       task.wait()
-      if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true then
+      if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true and getfenv().lookat ~= nil then
       local speed = getfenv().speed or 500
       
       local plr = game.Players.LocalPlayer
       local chr = plr.Character
       local car = chr.Humanoid.SeatPart.Parent.Parent
       local carp = car.PrimaryPart
-      carp.Velocity = carp.CFrame.LookVector*speed
+      carp.Velocity = getfenv().lookat.CFrame.LookVector*speed
       end
       end
          end)
@@ -402,12 +402,13 @@ example:AddToggle("Auto Finish Race", function(state)
       local test = nil
    for i,v in pairs(workspace.Races:GetDescendants()) do
       if v.ClassName == "Model"  and v:FindFirstChild("Forcefield") and v:FindFirstChild("Forcefield").Transparency ~= 1  then
+         getfenv().lookat = v:FindFirstChild("Forcefield")
          local speed = getfenv().speed or 500
          local plr = game.Players.LocalPlayer
          local chr = plr.Character
          local car = chr.Humanoid.SeatPart.Parent.Parent
          local carp = car.PrimaryPart
-         local location = v:FindFirstChild("Forcefield").Position-Vector3.new(0,10,0)
+         local location = v:FindFirstChild("Forcefield").Position
          local dist = (carp.Position-location).magnitude
          print(dist/speed)
          local TweenService = game:GetService("TweenService")
