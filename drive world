@@ -348,6 +348,10 @@ end
 game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("soloAroundTheWorld")  
  repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
+   local plr = game.Players.LocalPlayer
+   local chr = plr.Character
+   local car = chr.Humanoid.SeatPart.Parent.Parent
+   local carp = car.PrimaryPart
    repeat task.wait()
       local test = nil
       for i,v in pairs(workspace.Races:GetDescendants()) do
@@ -376,6 +380,7 @@ game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireSe
       end
       end
       until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == false or getfenv().xprace == false or test == nil
+      carp.Velocity = Vector3.new(0,0,0)
    end
 end)
 example:AddToggle("Auto Finish Race", function(state)
@@ -398,6 +403,10 @@ example:AddToggle("Auto Finish Race", function(state)
       wait()
   if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true then
    wait()
+   local plr = game.Players.LocalPlayer
+   local chr = plr.Character
+   local car = chr.Humanoid.SeatPart.Parent.Parent
+   local carp = car.PrimaryPart
    repeat task.wait()
       local test = nil
    for i,v in pairs(workspace.Races:GetDescendants()) do
@@ -426,6 +435,7 @@ example:AddToggle("Auto Finish Race", function(state)
    end
    end
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == false or getfenv().urace == false or test == nil
+   carp.Velocity = Vector3.new(0,0,0)
 end
    end
 end)
