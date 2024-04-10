@@ -1,0 +1,65 @@
+
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Delivery"
+})
+example:AddToggle("Auto Delivery Farm", function(state)
+getfenv().delivery = (state and true or false)
+spawn(function()
+    getfenv().notstarted =true
+    while getfenv().delivery do
+        task.wait()
+        pcall(function()
+    if getfenv().notstarted == true then
+        repeat task.wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-740.6412963867188, 2.9980249404907227, -1599.902099609375)
+        until game:GetService("Players").LocalPlayer.PlayerGui.Jobs.JobPayment.WorkXp.PackageQuality.Visible == true or getfenv().delivery == false
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-740.6412963867188, 2.9980249404907227, -1599.902099609375)
+    getfenv().notstarted = false
+    end
+    print("work")
+    local hum = game.Players.LocalPlayer.Character.Humanoid
+    hum.Sit = false
+    hum:MoveTo(Vector3.new(-740.6412963867188, 2.9980249404907227, -1599.902099609375))
+    hum.MoveToFinished:wait()
+    hum:MoveTo(Vector3.new(-583.6974487304688, 2.9980251789093018, -1605.9891357421875))
+    hum.MoveToFinished:wait()
+    end)
+    end
+    end)
+local function getvan()
+    local van = nil
+    for i,v in pairs(workspace.DeliveryJob.Vans:GetChildren()) do
+        if v.Name == "Van" and v:findFirstChild("Owner") and v:findFirstChild("Owner").Value == game.Players.LocalPlayer.Name then
+    van = v
+        end
+    end
+    return van
+    end
+while getfenv().delivery do
+task.wait()
+if game.Players.LocalPlayer.Team ~= game:GetService("Teams").DeliveryDriver then
+    local CoreGui = game:GetService("StarterGui")
+    CoreGui:SetCore("SendNotification", {
+        Title = "Incorrect Job";
+        Text = "Change to Delivery Driver Job to auto farm";
+        Duration = 5;
+    })
+	wait(5)
+elseif game.Players.LocalPlayer.Team == game:GetService("Teams").DeliveryDriver then
+pcall(function()
+if workspace.DeliveryJob:findFirstChild("Box") then
+fireclickdetector(workspace.DeliveryJob.Box.ClickDetector,0)
+elseif workspace.DeliveryJob:findFirstChild("Destination") and not workspace.DeliveryJob:findFirstChild("Box") then
+    fireclickdetector(workspace.DeliveryJob.Destination.ClickDetector,0)
+end
+end)
+end
+end
+end)
