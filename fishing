@@ -1,0 +1,67 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
+local example = library:CreateWindow({
+  text = "Fishing Simulator"
+})
+example:AddToggle("Auto Farm Mobs", function(state)
+_G.test = (state and true or false)
+while _G.test do
+   task.wait()
+   pcall(function()
+      local plr = game.Players.LocalPlayer.UserId
+for i,v in pairs(game:GetService("ReplicatedStorage").ToolsCache[plr]:GetChildren()) do
+    if v:GetAttribute("type") == "Spears" then
+spear = v.Name
+    end
+    end
+    for i,v in pairs(workspace:GetChildren()) do
+      if v.ClassName == "Model" and v:FindFirstChild("Hitbox")  then
+   repeat wait()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.PrimaryPart.CFrame*CFrame.new(0,0,20)   
+game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.SpearThrown:FireServer(spear,v.PrimaryPart.CFrame, v.PrimaryPart.Position, tonumber("1696341607.0"..math.random(100000,1000000)))
+game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.MonsterHit:FireServer(v, spear, true)
+task.wait(2)
+   until v.Health.Value == 0 or _G.test == false or v.Parent == nil
+      end
+      end
+   end)
+end
+end)
+example:AddToggle("Auto Sell Loot", function(state)
+_G.sell = (state and true or false)
+while _G.sell do
+game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellEverything")
+wait(1)
+end
+end)
+example:AddToggle("Auto Collect Loot", function(state)
+   _G.loot = (state and true or false)
+   while _G.loot do
+      task.wait()
+      pcall(function()
+    for i,v in pairs(game:GetService("Workspace").DroppedItems:GetChildren()) do
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.PrimaryPart.CFrame
+      wait(0.1)
+       end
+      end)
+      end
+   end)
+   example:AddToggle("Anti-Mob Damage", function(state)
+      _G.damage = (state and true or false)
+      while _G.damage do
+          wait()
+          pcall(function()
+      for i,v in pairs(workspace:GetChildren()) do
+          if v.ClassName == "Model" and v:FindFirstChild("Hitbox") and v.Hitbox:FindFirstChild("TouchInterest") then
+         v.Hitbox:FindFirstChild("TouchInterest"):Destroy()
+      task.wait()
+         end
+          end
+         end)
+      end
+   end)
