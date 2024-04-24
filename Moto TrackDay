@@ -1,0 +1,37 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Moto TrackDay"
+})
+example:AddToggle("Auto farm", function(state)
+	getfenv().auto = (state and true or false)
+	game:GetService("VirtualInputManager"):SendKeyEvent(false,"W",false,game)
+while getfenv().auto do
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+if not workspace:FindFirstChild("justanormalpart") then
+	local new = Instance.new("Part",workspace)
+	new.Name = "justanormalpart"
+	new.Anchored = true
+	new.Size = Vector3.new(10000,10,10000)
+	new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+	  end
+	car.PrimaryPart = car.Body.Weight
+	car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,10,1000))
+local time = tick()
+repeat task.wait()
+	if getfenv().auto then
+	  game:GetService("VirtualInputManager"):SendKeyEvent(true,"W",false,game)
+	  car:PivotTo(CFrame.new(car.PrimaryPart.Position,workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,10,-1000).Position))
+	end
+until game.Players.LocalPlayer:DistanceFromCharacter(workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,10,-1000).Position) <50 or getfenv().auto == false
+game:GetService("VirtualInputManager"):SendKeyEvent(false,"W",false,game)
+end
+end)
