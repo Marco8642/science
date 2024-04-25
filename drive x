@@ -30,7 +30,7 @@ local speed = getfenv().speed or 500
     car:PivotTo(btp)
 	local dist = (car.Position-CFrame.new(3684.16064, btp.Y, 5218.7002, 0.892006218, -1.99982014e-06, -0.452023149, -1.04510639e-06, 1, -6.4865294e-06, 0.452023149, 6.25843677e-06, 0.892006218).Position).magnitude
 	local TweenService = game:GetService("TweenService")
-	local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+	local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
 	
 	local TweenValue = Instance.new("CFrameValue")
 	TweenValue.Value = car.CFrame
