@@ -1,0 +1,47 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Drive X"
+})
+example:AddBox("Enter Vehicle Speed", function(object, focus)
+	if focus then
+		getfenv().speed = tonumber(object.Text)
+	end
+end)
+example:AddToggle("Auto Drive", function(state)
+    getfenv().auto = (state and true or false)
+    if getfenv().auto then
+        local plr = game.Players.LocalPlayer
+        local car = plr.ReplicationFocus
+        car:PivotTo(CFrame.new(1379.66675, 11.4645128, 4048.70239, 0.890385091, 3.00397096e-06, -0.455208093, 3.91161279e-07, 1, 7.36422589e-06, 0.455208093, -6.73505656e-06, 0.890385091))
+        wait(1)
+    btp = car.CFrame
+    end
+while getfenv().auto do
+    game:GetService("VirtualInputManager"):SendKeyEvent(getfenv().auto,"W",false,game)
+	local plr = game.Players.LocalPlayer
+local speed = getfenv().speed or 500
+	local car = plr.ReplicationFocus
+    car:PivotTo(btp)
+	local dist = (car.Position-CFrame.new(3684.16064, btp.Y, 5218.7002, 0.892006218, -1.99982014e-06, -0.452023149, -1.04510639e-06, 1, -6.4865294e-06, 0.452023149, 6.25843677e-06, 0.892006218).Position).magnitude
+	local TweenService = game:GetService("TweenService")
+	local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, true, 0)
+	
+	local TweenValue = Instance.new("CFrameValue")
+	TweenValue.Value = car.CFrame
+				
+	TweenValue.Changed:Connect(function()
+		car:PivotTo(TweenValue.Value)
+	end)
+				
+	local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(3684.16064, btp.Y, 5218.7002, 0.892006218, -1.99982014e-06, -0.452023149, -1.04510639e-06, 1, -6.4865294e-06, 0.452023149, 6.25843677e-06, 0.892006218)})
+	OnTween:Play()
+	 OnTween.Completed:Wait()
+     game:GetService("VirtualInputManager"):SendKeyEvent(getfenv().auto,"W",false,game)
+end
+end)
