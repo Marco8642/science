@@ -143,7 +143,7 @@ end
 end)
 print(p,call)
 wait(1)
- game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Touch.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
 print(0)
@@ -175,7 +175,7 @@ if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == fa
 	break
 end
 end 
-trailerui =  game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer
+trailerui =  game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Touch.MenuSelectTrailer
 for i,v in pairs(trailerui.ScrollingFrame:GetChildren()) do
 	if v.ClassName == "ImageButton" and v.Visible == true and v.Locked.Visible == false then
 		gottrailer = v
@@ -409,7 +409,7 @@ game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("Vehicle
 wait(1)
 end
 while getfenv().delivery2 do
-	pcall(function()
+local p,call =pcall(function()
     wait()
 if game.Players.LocalPlayer.Character.Humanoid.Sit == false then
 	game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("VehicleSpawn", {[1] = "NukeTruck",[2] = "QuickSpawn",[4] = false})
@@ -435,7 +435,7 @@ end
 		game:GetService("ReplicatedStorage").Events.RemoteFunction:InvokeServer("TruckShipping", {[1] = "StartTask",[2] = thejob})
 end)
 wait(1)
- game.Players.LocalPlayer.PlayerGui.TopBar.TopBarFrame.RightFrameTouch.TopRight.MenuSelectTrailer.Visible = false
+game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Touch.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.MenuSelectTrailer.Visible = false
 game:GetService("Players").LocalPlayer.PlayerGui.TopRight.Container.NewTasksTrucker.Visible = false
 print(0)
@@ -606,6 +606,7 @@ repeat wait()
 	print(9)
 until not game:GetService("Players").LocalPlayer.Tasks.Trucker.Active:FindFirstChild("Trucker") or getfenv().delivery2 == false
 end)
+print(p,call)
 end
 end
 end)
