@@ -53,13 +53,20 @@ if game.Players.LocalPlayer.Team ~= game:GetService("Teams").DeliveryDriver then
     })
 	wait(5)
 elseif game.Players.LocalPlayer.Team == game:GetService("Teams").DeliveryDriver then
+if game.Players.LocalPlayer.Character:FindFirstChild("Box") then
+	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+	if v.Name == "Box" then
+		print("Box Got Destroyed")
+v:Destroy()
+	end
+	end
+end
 pcall(function()
 if workspace.DeliveryJob:findFirstChild("Box") then
 fireclickdetector(workspace.DeliveryJob.Box.ClickDetector,0)
-wait(1)
 elseif workspace.DeliveryJob:findFirstChild("Destination") and not workspace.DeliveryJob:findFirstChild("Box") then
     fireclickdetector(workspace.DeliveryJob.Destination.ClickDetector,0)
-	wait(1)
+
 end
 end)
 end
