@@ -56,8 +56,10 @@ elseif game.Players.LocalPlayer.Team == game:GetService("Teams").DeliveryDriver 
 pcall(function()
 if workspace.DeliveryJob:findFirstChild("Box") then
 fireclickdetector(workspace.DeliveryJob.Box.ClickDetector,0)
+wait(1)
 elseif workspace.DeliveryJob:findFirstChild("Destination") and not workspace.DeliveryJob:findFirstChild("Box") then
     fireclickdetector(workspace.DeliveryJob.Destination.ClickDetector,0)
+	wait(1)
 end
 end)
 end
