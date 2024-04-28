@@ -28,6 +28,8 @@ game:GetService("ReplicatedStorage").Events.CaughtFish:FireServer(true)
         task.wait()
         for i,v in pairs(workspace.FallenCandy:GetDescendants()) do
             if v.ClassName == "ProximityPrompt" then
+                task.wait()
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
             fireproximityprompt(v)
             end
         end
