@@ -165,7 +165,7 @@ text = _G.rat.Parent.Name:split("")[textn]
 until tonumber(text) == nil
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "AcceptOrder",["OrderId"] = customer:GetAttribute("OrderId")})
     wait()
-    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Specs"] = {["Springs"] = customer:GetAttribute("OrderSpecSprings"),["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Car"] = text.._G.rat.Parent.Name:split(tostring(_G.rat.Parent.Name:split("")[textn-1]))[2],["RimColor"] = customer:GetAttribute("OrderSpecRimColor")},["Action"] = "CompleteOrder",["OrderId"] = customer:GetAttribute("OrderId")})
+    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["OrderId"] = customer:GetAttribute("OrderId"),["Action"] = "CompleteOrder",["Specs"] = {["Car"] = text.._G.rat.Parent.Name:split(tostring(_G.rat.Parent.Name:split("")[textn-1]))[2],["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Springs"] = customer:GetAttribute("OrderSpecSprings"),["RimColor"] = customer:GetAttribute("OrderSpecRimColor")}})
     wait()
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "CollectReward",["OrderId"] = customer:GetAttribute("OrderId")})
     repeat wait()
