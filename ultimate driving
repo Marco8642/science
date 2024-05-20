@@ -359,7 +359,7 @@ local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace
 OnTween:Play()
 OnTween.Completed:Wait()
 car:FindFirstChild("Trailer"):PivotTo(workspace.NavigationBeam.WorldPivot*CFrame.new(0,50,0))
-workspace.Gravity = 10
+workspace.Gravity = 0
 wait(5)
 local credits = game.Players.LocalPlayer.leaderstats.Credits.Value
 repeat wait()
