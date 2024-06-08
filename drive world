@@ -472,7 +472,7 @@ end)
 while getfenv().xprace do
 task.wait()
 if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true and getfenv().lookat ~= nil then
-local speed = getfenv().speed or 500
+local speed = getfenv().speed or 250
 
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
@@ -484,7 +484,7 @@ end
    end)
    while getfenv().xprace do
       wait()
-game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("soloAroundTheWorld")  
+game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("GoldRushCrown")
  repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
    local plr = game.Players.LocalPlayer
@@ -495,7 +495,7 @@ game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireSe
       local test = nil
       for i,v in pairs(workspace.Races:GetDescendants()) do
          if v.ClassName == "Model"  and v:FindFirstChild("Forcefield") and v:FindFirstChild("Forcefield").Transparency ~= 1  then
-            local speed = getfenv().speed or 500
+            local speed = getfenv().speed or 250
             getfenv().lookat = v:FindFirstChild("Forcefield")
             local plr = game.Players.LocalPlayer
             local chr = plr.Character
@@ -528,7 +528,7 @@ example:AddToggle("Auto Finish Race", function(state)
       while getfenv().urace do
       task.wait()
       if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true and getfenv().lookat ~= nil then
-      local speed = getfenv().speed or 500
+      local speed = getfenv().speed or 250
       
       local plr = game.Players.LocalPlayer
       local chr = plr.Character
@@ -551,7 +551,7 @@ example:AddToggle("Auto Finish Race", function(state)
    for i,v in pairs(workspace.Races:GetDescendants()) do
       if v.ClassName == "Model"  and v:FindFirstChild("Forcefield") and v:FindFirstChild("Forcefield").Transparency ~= 1  then
          getfenv().lookat = v:FindFirstChild("Forcefield")
-         local speed = getfenv().speed or 500
+         local speed = getfenv().speed or 250
          local plr = game.Players.LocalPlayer
          local chr = plr.Character
          local car = chr.Humanoid.SeatPart.Parent.Parent
