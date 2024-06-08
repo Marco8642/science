@@ -450,10 +450,10 @@ game:GetService("ReplicatedStorage").Systems.Contracts.PrecalculateRoutes:Invoke
    wait(2)
    game:GetService("ReplicatedStorage").Systems.Contracts.StartContract:InvokeServer(getfenv().contract)
    print("Contract Started")
-   wait(5)
+   wait(10)
    game:GetService("ReplicatedStorage").Systems.Contracts.PickupCargo:InvokeServer()
    print("Got Cargo")
-   wait(35)
+   wait(65)
    game:GetService("ReplicatedStorage").Systems.Contracts.DropoffCargo:InvokeServer()
    warn("Completed")
 end
