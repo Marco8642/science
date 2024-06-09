@@ -581,7 +581,7 @@ wait(1)
                 end
                 end
             end)
-            example:AddToggle("Auto Season 10 Race",function(state)
+            example:AddToggle("Auto Season 11 Race",function(state)
                 _G.racetest2 = (state and true or false)
                 while _G.racetest2 do
                     wait()
@@ -589,7 +589,7 @@ wait(1)
                     getfenv().firsttime = true
                     local chr = game.Players.LocalPlayer.Character
                 local car = chr.Humanoid.SeatPart.Parent.Parent
-                 car:PivotTo(CFrame.new(-2780.792236328125, 602.1199340820312, 4493.97021484375))
+                 car:PivotTo(CFrame.new(362.793488, 602.011719, 1777.29346))
                 chr.Head.Anchored = true
                 wait(1)
                 chr.Head.Anchored = false
