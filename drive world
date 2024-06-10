@@ -218,7 +218,7 @@ elseif getfenv().methodt == "Tweening" then
    for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
       if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
    local TweenService = game:GetService("TweenService")
-   local TweenInfoToUse = TweenInfo.new(dist/400, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+   local TweenInfoToUse = TweenInfo.new(dist/400, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
    
    local TweenValue = Instance.new("CFrameValue")
    TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
@@ -242,7 +242,7 @@ if getfenv().methodt == "Teleport" then
       for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
          if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
       local TweenService = game:GetService("TweenService")
-      local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+      local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
       
       local TweenValue = Instance.new("CFrameValue")
       TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
@@ -353,8 +353,10 @@ pcall(function()
       elseif getfenv().methodt == "Tweening" then
          for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
             if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
+               v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,1000,0))
+               v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,1000,100))
          local TweenService = game:GetService("TweenService")
-         local TweenInfoToUse = TweenInfo.new(dist/400, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+         local TweenInfoToUse = TweenInfo.new(dist/400, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
          
          local TweenValue = Instance.new("CFrameValue")
          TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
@@ -363,7 +365,7 @@ pcall(function()
             v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
          end)
                   
-         local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100)})
+         local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,1000,100)})
          OnTween:Play()
           OnTween.Completed:Wait()
          end
@@ -377,19 +379,21 @@ pcall(function()
          elseif getfenv().methodt == "Tweening" then
             for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
                if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
-            local TweenService = game:GetService("TweenService")
-            local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
-            
-            local TweenValue = Instance.new("CFrameValue")
-            TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
-                     
-            TweenValue.Changed:Connect(function()
-               v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
-            end)
-
-            local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100)})
-            OnTween:Play()
-             OnTween.Completed:Wait()
+                  v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,1000,0))
+                  v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,1000,100))
+                  local TweenService = game:GetService("TweenService")
+                  local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                  
+                  local TweenValue = Instance.new("CFrameValue")
+                  TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
+                           
+                  TweenValue.Changed:Connect(function()
+                     v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+                  end)
+                           
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,1000,100)})
+                  OnTween:Play()
+                   OnTween.Completed:Wait()
             end
             end
          end
@@ -561,10 +565,9 @@ example:AddToggle("Auto Finish Race", function(state)
          print(dist/speed)
          local TweenService = game:GetService("TweenService")
          local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
-         
+
          local TweenValue = Instance.new("CFrameValue")
          TweenValue.Value = car:GetPrimaryPartCFrame()
-                 
          TweenValue.Changed:Connect(function()
          car:PivotTo(TweenValue.Value)
          end)
