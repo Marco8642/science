@@ -1,0 +1,93 @@
+_G.test = true
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+while _G.test do
+    wait()
+    if not game:GetService("Workspace")["Puntos de Trabajo"]["Port Colombia"]:FindFirstChildOfClass("Part") then
+        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-61726.46484375, 85, 2413.074951171875)
+    )
+    task.wait()
+    game.Players.LocalPlayer.Character.Head.Anchored = true
+    wait(1)
+    game.Players.LocalPlayer.Character.Head.Anchored = false
+end
+    if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui") then
+        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(-61726.46484375, 85, 2413.074951171875)
+    )
+    task.wait()
+
+        local jobprox = nil
+    local distance = math.huge
+    for i,v in pairs(game:GetService("Workspace")["Puntos de Trabajo"]["Port Colombia"]:GetChildren()) do
+        if v.ClassName == "Part" and v:FindFirstChildOfClass("ProximityPrompt") and not game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui")  then
+    local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+    if Dist < distance then
+    distance = Dist
+    jobprox = v
+    end
+    end
+    end
+wait(1)
+        fireproximityprompt(jobprox:FindFirstChildOfClass("ProximityPrompt"))
+    repeat wait()
+    until game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui")
+    end
+    if game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui") then
+        wait(0.5)
+        repeat wait(0.1)
+        for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.JobGui.Frame.ChooseJob.Oversized.SelectButton.MouseButton1Click)) do
+            v:Fire()
+            end
+           until game:GetService("Players").LocalPlayer.PlayerGui.JobGui.Frame:FindFirstChild("OversizedFrame")
+           for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.JobGui.Frame.OversizedFrame:GetChildren()) do
+            if v.Name ~= "Bed_Industrial_Log_Carrier" then
+                v:Destroy()
+            end
+        end
+    wait()
+            repeat wait()
+                pcall(function()
+                local loc =game:GetService("Players").LocalPlayer.PlayerGui.JobGui.Frame.OversizedFrame["Bed_Industrial_Log_Carrier"].InfoFrame.LOCKED
+                loc.Visible = false
+                mousemoverel(loc.AbsolutePosition.X+10,loc.AbsolutePosition.Y+40,1,true,game,0)
+                wait(0.1)
+                    mouse1click()
+                    wait(0.1)
+                end)
+            until game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer") or not game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui")
+        end
+    if not game:GetService("Workspace")["Delivery_Points"].Sawmill:FindFirstChild("Sawmill_Detector") then
+ 
+        game.Players.LocalPlayer.Character:MoveTo(Vector3.new(19233.404296875, 3000, -6995.3759765625)
+)
+    wait()
+    game.Players.LocalPlayer.Character.Head.Anchored = true
+    wait(2)
+    game.Players.LocalPlayer.Character.Head.Anchored = false
+    wait()
+    elseif game:GetService("Workspace")["Delivery_Points"].Sawmill:FindFirstChild("Sawmill_Detector") and game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui") then
+     game.Players.LocalPlayer.PlayerGui:FindFirstChild("JobGui"):Destroy()
+     game.Players.LocalPlayer.Character:MoveTo(Vector3.new(19233.404296875, 3000, -6995.3759765625)
+)
+    wait(1)
+    for i,v in pairs(game:GetService("Workspace")["Delivery_Points"].Sawmill:GetChildren()) do
+        if v.ClassName == "Part" and v:FindFirstChildOfClass("ProximityPrompt") then
+    fireproximityprompt(v:FindFirstChildOfClass("ProximityPrompt"))
+        end
+        end
+   repeat wait()
+   until game:GetService("Players").LocalPlayer.PlayerGui.CollectGui.Dialog.Visible == true or not   game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer")
+repeat wait()
+    local loc =game:GetService("Players").LocalPlayer.PlayerGui.CollectGui.Dialog.Content.Footer.Normal
+    mousemoverel(loc.AbsolutePosition.X+10,loc.AbsolutePosition.Y+40,1,true,game,0)
+    wait(0.1)
+    mouse1click()
+               wait(0.1)
+until not   game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer") or game:GetService("Players").LocalPlayer.PlayerGui.CollectGui.Dialog.Visible == false
+    wait(1)
+    end
+    end
