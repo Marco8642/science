@@ -1,10 +1,15 @@
-_G.test = true
 warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Trucking Empire"
+})
+example:AddToggle("Auto Farm", function(state)
+  _G.test = (state and true or false)
 while _G.test do
   wait()
 pcall(function()   
@@ -28,7 +33,6 @@ end
   local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
   if Dist < distance then
   distance = Dist
-
   jobprox = v
   end
   end
@@ -98,7 +102,7 @@ end
        wait(0.1)
        mouse1click()
                   wait(0.1)
-   until not   game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer") or game:GetService("Players").LocalPlayer.PlayerGui.CollectGui.Dialog.Visible == false  or _G.test == false
+   until not  game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer") or game:GetService("Players").LocalPlayer.PlayerGui.CollectGui.Dialog.Visible == false  or _G.test == false
     
   elseif game:GetService("Workspace")["Delivery_Points"].Sawmill:FindFirstChild("Sawmill_Detector") and game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer.Name.."'s Trailer") then
    local car = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent
@@ -128,3 +132,4 @@ until not   game:GetService("Workspace"):FindFirstChild(game.Players.LocalPlayer
   end
   end)
   end
+end)
