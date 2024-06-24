@@ -142,7 +142,7 @@ local example = library:CreateWindow({
 end)
 example:AddLabel("Select Delivering Method", function(object, focus)
 end)
-example:AddDropdown({"Teleport","Tweening"},function(state)
+example:AddDropdown({"Tweening","Teleport"},function(state)
    print(state)
 getfenv().methodt = state
  end)
@@ -472,6 +472,19 @@ local example = library:CreateWindow({
 end)
  example:AddToggle("Auto Farm [Race XP]", function(state)
    getfenv().xprace = (state and true or false)
+   local function getrace()
+      local plr = game.Players.LocalPlayer
+      local data = game:GetService("ReplicatedStorage").PlayerData[plr.Name]
+      local race = nil
+      for i,v in pairs(data.Tasks.Challenges.List:GetChildren()) do
+      if v.ClassName == "Folder" and v:GetAttribute("AvailableTime") ~= nil and v:GetAttribute("AvailableTime")-workspace:GetServerTimeNow() <= 0 and v:GetAttribute("ExpireTime")-workspace:GetServerTimeNow() > 0 then
+         local time = v:GetAttribute("AvailableTime")-workspace:GetServerTimeNow()
+      local expire = v:GetAttribute("ExpireTime")-workspace:GetServerTimeNow()
+      race = v.Name
+      end
+      end
+      return race
+      end
    spawn(function()
 while getfenv().xprace do
 task.wait()
@@ -488,7 +501,7 @@ end
    end)
    while getfenv().xprace do
       wait()
-game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("GoldRushCrown")
+game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer(getrace())
  repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
    local plr = game.Players.LocalPlayer
