@@ -78,10 +78,12 @@ local num = #getfenv().partfind.Parent.Checkpoints:GetChildren()
 print(num)
 for i,v in pairs(getfenv().partfind.Parent.Checkpoints:GetDescendants()) do
 if v.Name == "TouchInterest" then
-  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
-  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+v.Parent.CFrame = getfenv().partfind.CFrame
 end
 end
+car:PivotTo(getfenv().partfind.CFrame)
+car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*500
+task.wait(0.01)
 end
 end
 end)
