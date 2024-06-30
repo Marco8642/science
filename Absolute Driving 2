@@ -1,0 +1,81 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Absolute Driving 2"
+})
+example:AddToggle("Auto farm[Fly]", function(state)
+getfenv().test = (state and true or false)
+if getfenv().test == false then
+    local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+local time = tick()
+repeat task.wait()
+    car:PivotTo(CFrame.new(2265.46435546875, 35.04264450073242, -542.4513549804688))
+until tick()-time > 2
+end
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car.PrimaryPart = car.Body["#Weight"]
+local location = car.PrimaryPart.CFrame
+while getfenv().test do
+  task.wait()
+  local plr = game.Players.LocalPlayer
+  local chr = plr.Character
+  local car = chr.Humanoid.SeatPart.Parent
+  if not workspace:FindFirstChild("justanormalpart") then
+local new = Instance.new("Part",workspace)
+new.Name = "justanormalpart"
+new.Anchored = true
+new.Size = Vector3.new(10000,10,10000)
+new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+  end
+  if getfenv().test then
+  car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame+Vector3.new(0,10,0))
+  task.wait(1)
+  end
+end
+end)
+example:AddToggle("Auto Farm[Drive]", function(state)
+    getfenv().test = (state and true or false)
+    if getfenv().test == false then
+        local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local car = chr.Humanoid.SeatPart.Parent
+    local time = tick()
+    repeat task.wait()
+        car:PivotTo(CFrame.new(2265.46435546875, 35.04264450073242, -542.4513549804688))
+        car.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0,0,0)
+        car.PrimaryPart.Velocity = Vector3.new(0,0,0)
+    until tick()-time > 2
+    end
+    local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local car = chr.Humanoid.SeatPart.Parent
+    car.PrimaryPart = car.Body["#Weight"]
+    local location = car.PrimaryPart.CFrame
+    while getfenv().test do
+      task.wait()
+      local plr = game.Players.LocalPlayer
+      local chr = plr.Character
+      local car = chr.Humanoid.SeatPart.Parent
+      if not workspace:FindFirstChild("justanormalpart") then
+    local new = Instance.new("Part",workspace)
+    new.Name = "justanormalpart"
+    new.Anchored = true
+    new.Size = Vector3.new(10000,10,10000)
+    new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+      end
+      if getfenv().test then
+      car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame+Vector3.new(0,10,0))
+      car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*600
+      task.wait()
+      end
+    end
+    end)
