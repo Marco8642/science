@@ -71,8 +71,7 @@ car.PrimaryPart = car.Body["#Weight"]
 car:PivotTo(getfenv().partfind.CFrame)
 for i,v in pairs(workspace.Game.Races:GetDescendants()) do
 if v.Name == "TouchInterest" then
-  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
-  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+  v.Parent.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 end
 end
 end
