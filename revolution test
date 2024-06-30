@@ -77,13 +77,11 @@ local num = #getfenv().partfind.Parent.Checkpoints:GetChildren()
 print(num)
 for i,v in pairs(getfenv().partfind.Parent.Checkpoints:GetDescendants()) do
 if v.Name == "TouchInterest" then
- v.Parent.CheckpointFlags:ClearAllChildren()
-v.Parent.CFrame = getfenv().partfind.CFrame
+car:PivotTo(v.Parent.CFrame)
+car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*700
+task.wait(0.05)
 end
 end
-car:PivotTo(getfenv().partfind.CFrame)
-car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*500
-task.wait(0.1)
 end
 end
 end)
