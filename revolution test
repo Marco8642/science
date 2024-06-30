@@ -1,0 +1,87 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Racing Revolution"
+})
+example:AddBox("Enter Vehicle Speed", function(object, focus)
+	if focus then
+		getfenv().speed = tonumber(object.Text)
+	end
+end)
+example:AddToggle("Auto farm", function(state)
+getfenv().test = (state and true or false)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car.PrimaryPart = car.Body["#Weight"]
+local location = car.PrimaryPart.CFrame
+while getfenv().test do
+  task.wait()
+  local plr = game.Players.LocalPlayer
+  local chr = plr.Character
+  local car = chr.Humanoid.SeatPart.Parent
+  if not workspace:FindFirstChild("justanormalpart") then
+local new = Instance.new("Part",workspace)
+new.Name = "justanormalpart"
+new.Anchored = true
+new.Size = Vector3.new(10000,10,10000)
+new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+  end
+  car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,1000))
+local loc = workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,-1000)
+  repeat task.wait()
+    local speed = getfenv().speed or 500
+    car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+  car.PrimaryPart.Velocity = car.PrimaryPart.CFrame.LookVector*speed
+  car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+  car:PivotTo(CFrame.new(car.PrimaryPart.Position,loc.Position))
+  car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-10,car.PrimaryPart.Velocity.Z)
+  until getfenv().test == false or game.Players.LocalPlayer:DistanceFromCharacter(loc.Position) < 100
+end
+end)
+local example = library:CreateWindow({
+   text = "Racing"
+ })
+example:AddToggle("Auto Race", function(state)
+getfenv().race = (state and true or false)
+getfenv().partfind = nil
+while getfenv().race do
+  task.wait()
+if getfenv().partfind == nil  then
+local distance = math.huge
+for a,b in pairs(workspace.Game.Races:GetDescendants()) do
+    if b.ClassName == "Part" and b.Name == "StartingArea" then
+local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
+if Dist < distance then
+distance = Dist
+getfenv().partfind = b
+end
+end
+end
+elseif getfenv().partfind ~= nil and game:GetService("Players").LocalPlayer.PlayerGui.RaceGui.RaceInfoFrame.Visible == false and game.Players.LocalPlayer:DistanceFromCharacter(getfenv().partfind.Position) > 15 then
+  local plr = game.Players.LocalPlayer
+  local chr = plr.Character
+  local car = chr.Humanoid.SeatPart.Parent
+  car.PrimaryPart = car.Body["#Weight"]
+  car:PivotTo(getfenv().partfind.CFrame)
+  task.wait(1)
+elseif getfenv().partfind ~= nil and game:GetService("Players").LocalPlayer.PlayerGui.RaceGui.RaceInfoFrame.Visible == true then
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+local num = #getfenv().partfind.Parent.Checkpoints:GetChildren()
+print(num)
+for i,v in pairs(getfenv().partfind.Parent.Checkpoints:GetDescendants()) do
+if v.Name == "TouchInterest" then
+  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
+  firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+end
+end
+end
+end
+end)
