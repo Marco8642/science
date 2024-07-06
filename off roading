@@ -1,0 +1,105 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Off-Roading Epic"
+})
+
+example:AddBox("Enter Auto Drive Speed", function(object, focus)
+	if focus then
+		getfenv().speed = tonumber(object.Text)
+	end
+end)
+example:AddToggle("Auto Drive", function(state)
+getfenv().test = (state and true or false)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car.PrimaryPart = car.Body["#Weight"]
+local location = car.PrimaryPart.CFrame
+while getfenv().test do
+  task.wait()
+  local plr = game.Players.LocalPlayer
+  local chr = plr.Character
+  local car = chr.Humanoid.SeatPart.Parent
+  if not workspace:FindFirstChild("justanormalpart") then
+local new = Instance.new("Part",workspace)
+new.Name = "justanormalpart"
+new.Anchored = true
+new.Size = Vector3.new(10000,10,10000)
+new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+  end
+  car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,1000))
+  local pos = workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,-1000)
+  repeat task.wait()
+	local speed = getfenv().speed or 100
+	car:PivotTo(CFrame.new(car.PrimaryPart.Position,Vector3.new(pos.X,pos.Y,pos.Z)))
+  car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
+  until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(pos.X,pos.Y,pos.Z)) < 100 or getfenv().test == false
+end
+end)
+example:AddToggle("Auto Delivery", function(state)
+	getfenv().deliver = (state and true or false)
+getfenv().rat = nil
+getfenv().rat2 = nil
+local distance = math.huge
+for a,b in pairs(workspace.Content.DeliveryStuff.DeliveryStarts:GetChildren()) do
+    if b.ClassName == "Part" then
+local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.Position).magnitude
+if Dist < distance then
+distance = Dist
+getfenv().rat = b.Name
+getfenv().rat2 = b.CFrame
+end
+end
+end
+print(getfenv().rat)
+while getfenv().deliver do
+	task.wait()
+	if not workspace.Content.DeliveryStuff.DeliveryStarts:FindFirstChild(getfenv().rat) and getfenv().rat2 ~= nil then
+		local plr = game.Players.LocalPlayer
+		local chr = plr.Character
+		local car = chr.Humanoid.SeatPart.Parent
+		car:PivotTo(getfenv().rat2+Vector3.new(0,10,0))
+	elseif workspace.Content.DeliveryStuff.DeliveryStarts:FindFirstChild(getfenv().rat) then
+if game:GetService("Players").LocalPlayer:GetAttribute("ActiveDelivery") ~= true then
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car:PivotTo(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].CFrame+Vector3.new(0,10,0))
+if workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer") then
+workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].CFrame+Vector3.new(0,10,0))
+end
+fireproximityprompt(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].Proximity)
+elseif game:GetService("Players").LocalPlayer:GetAttribute("ActiveDelivery") == true then
+	repeat task.wait()
+		local test = nil
+		local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+		for i,v in pairs(workspace.Content.DeliveryStuff.DeliveryCheckpoints:GetDescendants()) do
+			if v.Name == "TouchInterest" and v.Parent:FindFirstChild("Front") and v.Parent.Front.Color3 == Color3.fromRGB(0,255,0) then
+				task.wait(0.05)
+				firetouchinterest(car.Body["#Weight"],v.Parent,0)
+				firetouchinterest(car.Body["#Weight"],v.Parent,1)
+				test = v
+			end
+			end
+		until test == nil
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car:PivotTo(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0))
+if workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer") then
+workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0))
+end
+end
+wait(1)
+	fireproximityprompt(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.Prompt)
+end
+end
+end)
