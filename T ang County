@@ -1,0 +1,48 @@
+
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "T ang County"
+})
+example:AddToggle("Auto Farm[Trucker]", function(state)
+  getfenv().auto = (state and true or false)
+while getfenv().auto do
+  wait()
+  pcall(function()
+    local plr = game.Players.LocalPlayer
+local chr = plr.Character
+if game:GetService("Players").LocalPlayer.PlayerGui.PackagesUI:FindFirstChildOfClass("BillboardGui") then
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+car.PrimaryPart = car.Body["#Weight"]
+car:PivotTo(game:GetService("Players").LocalPlayer.PlayerGui.PackagesUI:FindFirstChildOfClass("BillboardGui").Adornee.CFrame*CFrame.new(0,10,-20))
+wait(2)
+local text = game:GetService("Players").LocalPlayer.PlayerGui.TruckingJobUI.interaction.title.Text
+if game:GetService("Players").LocalPlayer.PlayerGui.TruckingJobUI.interaction.Visible == true and string.find(text,"Load") and not string.find(text,"Unload") then
+  game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Shared"):WaitForChild("Network"):WaitForChild("RemoteFunctions"):WaitForChild("ClientCoalRequester"):InvokeServer("LoadCoal")
+elseif game:GetService("Players").LocalPlayer.PlayerGui.TruckingJobUI.interaction.Visible == true and string.find(text,"Unload")  then
+game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Shared"):WaitForChild("Network"):WaitForChild("RemoteFunctions"):WaitForChild("ClientCoalRequester"):InvokeServer("UnloadCoal")
+end
+elseif not game:GetService("Players").LocalPlayer.PlayerGui.PackagesUI:FindFirstChildOfClass("BillboardGui") then
+  game:GetService("ReplicatedStorage").TeamSwitch:FireServer("Civilian")
+  wait(1)
+  game:GetService("ReplicatedStorage").TeamSwitch:FireServer("Trucker") game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Shared"):WaitForChild("Network"):WaitForChild("RemoteFunctions"):WaitForChild("ClientRequestCoalTrucks"):InvokeServer()
+  wait(1)
+  game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Shared"):WaitForChild("Network"):WaitForChild("RemoteFunctions"):WaitForChild("ClientRequestCoalJob"):InvokeServer(workspace:WaitForChild("TruckingJob"):WaitForChild("Coal"):WaitForChild("routeA"),"2012 Shacman M3000 4X2")
+  wait(2)
+  repeat task.wait()
+  until workspace.SpanwedCars[game.Players.LocalPlayer.Name.."'s Car"] or getfenv().auto == false
+  repeat wait()
+  workspace.SpanwedCars[game.Players.LocalPlayer.Name.."'s Car"].DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
+  until chr.Humanoid.SeatPart ~= nil or getfenv().auto == false
+end
+end)
+end
+end)
