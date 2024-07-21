@@ -501,7 +501,7 @@ end
    end)
    while getfenv().xprace do
       wait()
-game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer(getrace())
+game:GetService("ReplicatedStorage").Systems.Races.StartTaskChallengeRace:FireServer("GoldRushCrown")
  repeat wait()
    until game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Race.Visible == true or getfenv().xprace == false
    local plr = game.Players.LocalPlayer
