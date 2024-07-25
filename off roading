@@ -9,7 +9,7 @@ local example = library:CreateWindow({
   text = "Off-Roading Epic"
 })
 
-example:AddBox("Enter Auto Drive Speed", function(object, focus)
+example:AddBox("Enter Speed Value", function(object, focus)
 	if focus then
 		getfenv().speed = tonumber(object.Text)
 	end
@@ -71,11 +71,12 @@ local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local car = chr.Humanoid.SeatPart.Parent
 car:PivotTo(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].CFrame+Vector3.new(0,10,0))
-if workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer") then
-workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].CFrame+Vector3.new(0,10,0))
+if workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer") then
+workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].CFrame+Vector3.new(0,10,0))
 end
 fireproximityprompt(workspace.Content.DeliveryStuff.DeliveryStarts[getfenv().rat].Proximity)
 elseif game:GetService("Players").LocalPlayer:GetAttribute("ActiveDelivery") == true then
+  wait(2)
 	repeat task.wait()
 		local test = nil
 		local plr = game.Players.LocalPlayer
@@ -83,23 +84,80 @@ local chr = plr.Character
 local car = chr.Humanoid.SeatPart.Parent
 		for i,v in pairs(workspace.Content.DeliveryStuff.DeliveryCheckpoints:GetDescendants()) do
 			if v.Name == "TouchInterest" and v.Parent:FindFirstChild("Front") and v.Parent.Front.Color3 == Color3.fromRGB(0,255,0) then
-				task.wait(0.05)
-				firetouchinterest(car.Body["#Weight"],v.Parent,0)
-				firetouchinterest(car.Body["#Weight"],v.Parent,1)
+        repeat task.wait()
+        local speed = getfenv().speed or 150
+        local plr = game.Players.LocalPlayer
+        local chr = plr.Character
+        local car = chr.Humanoid.SeatPart.Parent
+        local dist = (v.Parent.Position-chr.HumanoidRootPart.Position).magnitude
+        local TweenService = game:GetService("TweenService")
+        local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+        local TweenValue = Instance.new("CFrameValue")
+        TweenValue.Value = car:GetPrimaryPartCFrame()
+                
+        TweenValue.Changed:Connect(function()
+        car:PivotTo(TweenValue.Value)
+        end)
+        getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.Parent.CFrame+Vector3.new(0,10,0)})
+        getfenv().tween:Play()
+        local dist = (v.Parent.Position-chr.HumanoidRootPart.Position).magnitude
+        local trail = workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer")
+        local TweenService = game:GetService("TweenService")
+        local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+        local TweenValue = Instance.new("CFrameValue")
+        TweenValue.Value = trail:GetPrimaryPartCFrame()
+        TweenValue.Changed:Connect(function()
+          trail:PivotTo(TweenValue.Value)
+        end)
+        getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.Parent.CFrame+Vector3.new(0,10,0)})
+        getfenv().tween:Play()
+        repeat task.wait()
+        until getfenv().tween.PlaybackState == Enum.PlaybackState.Cancelled or getfenv().tween.PlaybackState == Enum.PlaybackState.Completed or getfenv().tween.PlaybackState == Enum.PlaybackState.Paused
+      until not v.Parent:FindFirstChild("Front")
 				test = v
 			end
 			end
 		until test == nil
+  local speed = getfenv().speed or 140
+    local plr = game.Players.LocalPlayer
+    local chr = plr.Character
+    local car = chr.Humanoid.SeatPart.Parent
+
+    local dist = (workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.Position-chr.HumanoidRootPart.Position).magnitude
+    local TweenService = game:GetService("TweenService")
+    local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+    local TweenValue = Instance.new("CFrameValue")
+    TweenValue.Value = car:GetPrimaryPartCFrame()
+            
+    TweenValue.Changed:Connect(function()
+    car:PivotTo(TweenValue.Value)
+    end)
+    getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0)})
+    getfenv().tween:Play()
+    local dist = (workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.Position-chr.HumanoidRootPart.Position).magnitude
+    local trail = workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer")
+    local TweenService = game:GetService("TweenService")
+    local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+    local TweenValue = Instance.new("CFrameValue")
+    TweenValue.Value = trail:GetPrimaryPartCFrame()
+    TweenValue.Changed:Connect(function()
+      trail:PivotTo(TweenValue.Value)
+    end)
+    getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0)})
+    getfenv().tween:Play()
+    repeat task.wait()
+    until getfenv().tween.PlaybackState == Enum.PlaybackState.Cancelled or getfenv().tween.PlaybackState == Enum.PlaybackState.Completed or getfenv().tween.PlaybackState == Enum.PlaybackState.Paused
+    repeat task.wait()
 local plr = game.Players.LocalPlayer
 local chr = plr.Character
 local car = chr.Humanoid.SeatPart.Parent
 car:PivotTo(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0))
-if workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer") then
-workspace.Content.Vehicles:FindFirstChild(plr.Name.."sTrailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0))
+if workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer") then
+workspace.Content.Vehicles[plr.UserId.." Trailers"]:FindFirstChild(plr.Name.."Trailer"):PivotTo(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.CFrame+Vector3.new(0,10,0))
 end
-end
-wait(1)
 	fireproximityprompt(workspace.Content.DeliveryStuff.DeliveryCheckpoints[getfenv().rat].Finish.Prompt)
+until game:GetService("Players").LocalPlayer:GetAttribute("ActiveDelivery") ~= true or getfenv().deliver == false
+end
 end
 end
 end)
