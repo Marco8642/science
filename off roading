@@ -85,7 +85,7 @@ local car = chr.Humanoid.SeatPart.Parent
 		for i,v in pairs(workspace.Content.DeliveryStuff.DeliveryCheckpoints:GetDescendants()) do
 			if v.Name == "TouchInterest" and v.Parent:FindFirstChild("Front") and v.Parent.Front.Color3 == Color3.fromRGB(0,255,0) then
         repeat task.wait()
-        local speed = getfenv().speed or 150
+        local speed = getfenv().speed or 140
         local plr = game.Players.LocalPlayer
         local chr = plr.Character
         local car = chr.Humanoid.SeatPart.Parent
