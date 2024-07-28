@@ -91,7 +91,7 @@ example:AddToggle("Auto Contracts", function(state)
                   TweenValue.Changed:Connect(function()
                   plane:SetPrimaryPartCFrame(TweenValue.Value)
                   end)
-                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.CFrame})
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Parent.Highlight.WorldPivot})
                   OnTween:Play()
                   OnTween.Completed:Wait()
                   workspace:FindFirstChild("justanormalpart").CFrame = CFrame.new(plane.PrimaryPart.CFrame.X,v.Parent.CFrame.Y-30,plane.PrimaryPart.CFrame.Z)
@@ -116,7 +116,7 @@ example:AddToggle("Auto Contracts", function(state)
                   TweenValue.Changed:Connect(function()
                   plane:SetPrimaryPartCFrame(TweenValue.Value)
                   end)
-                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.CFrame})
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Highlight.WorldPivot})
                   OnTween:Play()
                   OnTween.Completed:Wait()
                   workspace:FindFirstChild("justanormalpart").CFrame = CFrame.new(plane.PrimaryPart.CFrame.X,v.CFrame.Y-30,plane.PrimaryPart.CFrame.Z)
@@ -130,10 +130,15 @@ example:AddToggle("Auto Contracts", function(state)
                   plane.PrimaryPart.Anchored = false
               end
           end
+        elseif hascontract() == nil then
+          game:GetService("ReplicatedStorage").SpawnVehicle:FireServer(getfenv().plane, workspace.Spawners, "Original", true)
+          wait(0.5)
+          repeat task.wait()
+          until game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil
         end
       end)
       if p == false then
-        --warn(p,call)
+        warn(p,call)
           end
         end
 end)
