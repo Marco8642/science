@@ -71,6 +71,7 @@ example:AddToggle("Auto Contracts", function(state)
     new.Size = Vector3.new(10000,10,10000)
     new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
       end
+      print(hascontract())
       while getfenv().contracts do
           task.wait(0.1)
           local p,call = pcall(function()
@@ -79,7 +80,8 @@ example:AddToggle("Auto Contracts", function(state)
           local v = findmark()
           if v ~= nil and getfenv().contracts == true then
               task.wait()
-              if v.Parent.ClassName == "Part" and game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 70 then
+              if v.ClassName == "Part" and game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Highlight.WorldPivot.Position) > 70 then
+                print(v.Parent)
                   repeat task.wait()
                    if v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Position) < 70 or getfenv().contracts == false then
                     plane.PrimaryPart.Anchored = false
@@ -105,7 +107,7 @@ example:AddToggle("Auto Contracts", function(state)
               plane.PrimaryPart.Anchored = false
           elseif v.ClassName ~= "Part" and game.Players.LocalPlayer:DistanceFromCharacter(v.Position) > 70 then
               repeat task.wait()
-                if v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Position) < 70 or getfenv().contracts == false then
+                if v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Highlight.WorldPivot.Position) < 70 or getfenv().contracts == false then
               local test = v.Parent
               local test = v.Parent
               plane.PrimaryPart.Anchored = false
@@ -119,14 +121,15 @@ example:AddToggle("Auto Contracts", function(state)
                   local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Highlight.WorldPivot})
                   OnTween:Play()
                   OnTween.Completed:Wait()
+                  
                   workspace:FindFirstChild("justanormalpart").CFrame = CFrame.new(plane.PrimaryPart.CFrame.X,v.CFrame.Y-30,plane.PrimaryPart.CFrame.Z)
                   plane.PrimaryPart.Anchored = true
                 end
-                  until v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Position) < 70 or getfenv().contracts == false
+                  until v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Highlight.WorldPivot.Position) < 70 or getfenv().contracts == false
                   local time = tick()
                   repeat task.wait()
                     plane.PrimaryPart.Anchored = true
-                  until v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 70 or getfenv().contracts == false or tick()-time > 2
+                  until v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Highlight.WorldPivot.Position) > 70 or getfenv().contracts == false or tick()-time > 2
                   plane.PrimaryPart.Anchored = false
               end
           end
