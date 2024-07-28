@@ -103,7 +103,7 @@ example:AddToggle("Auto Contracts", function(state)
                 plane.PrimaryPart.Anchored = true
               until v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 70 or getfenv().contracts == false or tick()-time > 2
               plane.PrimaryPart.Anchored = false
-          elseif v.Parent.ClassName ~= "Part" and game.Players.LocalPlayer:DistanceFromCharacter(v.Position) > 70 then
+          elseif v.ClassName ~= "Part" and game.Players.LocalPlayer:DistanceFromCharacter(v.Position) > 70 then
               repeat task.wait()
                 if v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Position) < 70 or getfenv().contracts == false then
               local test = v.Parent
