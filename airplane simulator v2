@@ -1,3 +1,4 @@
+
 local vu = game:GetService("VirtualUser")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
    vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -22,45 +23,45 @@ example:AddToggle("Auto Contracts", function(state)
       return contract
           end
           local function findmark()
-              local check = nil
-              for i,v in pairs(workspace:GetDescendants()) do
-                          if v.Name == "LocationMarker" then
-                              check = v
-                              task.wait()
-                     end
-                      end
-              return check
-                  end
-          if     game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
-              getfenv().plane = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Name
-          end
-          spawn(function()
-          while getfenv().contracts do
-              task.wait(1)
-              pcall(function()
-              if hascontract() == nil or findmark() == nil then
-                  if game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.Main:FindFirstChildOfClass("Frame") then
-                      firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.Main:FindFirstChildOfClass("Frame").Button.Activated)
-                          end
-              wait(3)
-              if func == nil then
-              for i,v in pairs(getgc(true)) do
-                  if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.ContractsUI then
-                      if getinfo(v).name == "OnMark" then
-                      warn(getinfo(v).name)
-                      func = v
-                      v()
-                      task.wait()
-                      end
-                  end
-                  end
-              elseif func ~= nil and findmark() == nil then
-                  func()
-              end
-              end
-          end)
-          end
-      end)
+            local check = nil
+            for i,v in pairs(workspace:GetDescendants()) do
+                        if v.Name == "LocationMarker" then
+                            check = v
+                            task.wait()
+                   end
+                    end
+            return check
+                end
+        if     game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
+            getfenv().plane = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.Parent.Name
+        end
+        spawn(function()
+        while getfenv().contracts do
+            task.wait(0.1)
+            pcall(function()
+            if hascontract() == nil or findmark() == nil then
+                if game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.Main:FindFirstChildOfClass("Frame") then
+                    firesignal(game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.Main:FindFirstChildOfClass("Frame").Button.Activated)
+                        end
+            task.wait(3)
+            if func == nil then
+            for i,v in pairs(getgc(true)) do
+                if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerGui.Main.OnClick.Contracts.Frame.ContractsUI then
+                    if getinfo(v).name == "OnMark" then
+                    warn(getinfo(v).name)
+                    func = v
+                    v()
+                    task.wait()
+                    end
+                end
+                end
+            elseif func ~= nil and findmark() == nil then
+                func()
+            end
+            end
+        end)
+        end
+    end)
       local plr = game.Players.LocalPlayer
       local chr = plr.Character
       local car = chr.Humanoid.SeatPart.Parent
@@ -86,8 +87,28 @@ example:AddToggle("Auto Contracts", function(state)
                    if v.Parent ~= test or game.Players.LocalPlayer:DistanceFromCharacter(v.Position) < 70 or getfenv().contracts == false then
                     plane.PrimaryPart.Anchored = false
                     local test = v.Parent
+                    local TweenService = game:GetService("TweenService")
+                    local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                    local TweenValue = Instance.new("CFrameValue")
+                    TweenValue.Value = plane:GetPrimaryPartCFrame()
+                    TweenValue.Changed:Connect(function()
+                    plane:SetPrimaryPartCFrame(TweenValue.Value)
+                    end)
+                    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= plane.PrimaryPart.CFrame+Vector3.new(0,1000,0)})
+                    OnTween:Play()
+                    OnTween.Completed:Wait()
                   local TweenService = game:GetService("TweenService")
                   local TweenInfoToUse = TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                  local TweenValue = Instance.new("CFrameValue")
+                  TweenValue.Value = plane:GetPrimaryPartCFrame()
+                  TweenValue.Changed:Connect(function()
+                  plane:SetPrimaryPartCFrame(TweenValue.Value)
+                  end)
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Highlight.WorldPivot+Vector3.new(0,1000,0)})
+                  OnTween:Play()
+                  OnTween.Completed:Wait()
+                  local TweenService = game:GetService("TweenService")
+                  local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
                   local TweenValue = Instance.new("CFrameValue")
                   TweenValue.Value = plane:GetPrimaryPartCFrame()
                   TweenValue.Changed:Connect(function()
@@ -111,8 +132,28 @@ example:AddToggle("Auto Contracts", function(state)
               local test = v.Parent
               local test = v.Parent
               plane.PrimaryPart.Anchored = false
+              local TweenService = game:GetService("TweenService")
+              local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+              local TweenValue = Instance.new("CFrameValue")
+              TweenValue.Value = plane:GetPrimaryPartCFrame()
+              TweenValue.Changed:Connect(function()
+              plane:SetPrimaryPartCFrame(TweenValue.Value)
+              end)
+              local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= plane.PrimaryPart.CFrame+Vector3.new(0,1000,0)})
+              OnTween:Play()
+              OnTween.Completed:Wait()
                   local TweenService = game:GetService("TweenService")
                   local TweenInfoToUse = TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+                  local TweenValue = Instance.new("CFrameValue")
+                  TweenValue.Value = plane:GetPrimaryPartCFrame()
+                  TweenValue.Changed:Connect(function()
+                  plane:SetPrimaryPartCFrame(TweenValue.Value)
+                  end)
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Highlight.WorldPivot+Vector3.new(0,1000,0)})
+                  OnTween:Play()
+                  OnTween.Completed:Wait()
+                  local TweenService = game:GetService("TweenService")
+                  local TweenInfoToUse = TweenInfo.new(0, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
                   local TweenValue = Instance.new("CFrameValue")
                   TweenValue.Value = plane:GetPrimaryPartCFrame()
                   TweenValue.Changed:Connect(function()
@@ -121,7 +162,6 @@ example:AddToggle("Auto Contracts", function(state)
                   local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value= v.Parent.Highlight.WorldPivot})
                   OnTween:Play()
                   OnTween.Completed:Wait()
-                  
                   workspace:FindFirstChild("justanormalpart").CFrame = CFrame.new(plane.PrimaryPart.CFrame.X,v.CFrame.Y-30,plane.PrimaryPart.CFrame.Z)
                   plane.PrimaryPart.Anchored = true
                 end
