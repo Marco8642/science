@@ -5,7 +5,6 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     
     ]]
     end
-getfenv().money = false
         warn("Anti afk running")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
     warn("Anti afk ran")
@@ -22,16 +21,26 @@ getfenv().money = false
     while getfenv().money do
     task.wait()
         repeat task.wait()
-            fireproximityprompt(game:GetService("Workspace").Jobs.DeliverySystem.Clicker:FindFirstChildOfClass("ProximityPrompt"))
+            local prox = game:GetService("Workspace").Jobs.DeliverySystem.Clicker:FindFirstChildOfClass("ProximityPrompt")
+            prox.Parent.CanCollide = false
+            prox.Parent.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            prox.MaxActivationDistance = math.huge
+            prox.RequiresLineOfSight = false
+            prox.HoldDuration = 0
+            prox:InputHoldBegin()
+            prox:InputHoldEnd()
         until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
             for i,v in pairs(workspace:GetDescendants()) do
                   if v.ClassName == "ProximityPrompt" and string.find(tostring(v.Parent.Name),"Prox") and v.Parent.Parent.Parent == workspace then
               v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+              v.Parent.CanCollide = false
               v.MaxActivationDistance = math.huge
               v.RequiresLineOfSight = false
               repeat task.wait()
 				if game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) < 10 then
-            fireproximityprompt(v)
+                    v.HoldDuration = 0
+                    v:InputHoldBegin()
+                    v:InputHoldEnd()
 				end
               until v.Parent == nil or v.Enabled == false or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 10
                   end
