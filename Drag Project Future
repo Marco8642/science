@@ -44,15 +44,18 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     while getfenv().test do
         pcall(function()
     task.wait()
+    if getfenv().money ~= true then
     if game.Players.LocalPlayer.Character.Humanoid.SeatPart ~= nil then
     game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.Velocity = game.Players.LocalPlayer.Character.Humanoid.SeatPart.Parent.PrimaryPart.CFrame.LookVector*400
     end
+end
     end)
     end
     end)
     while getfenv().test do
        task.wait()
         pcall(function()
+            if getfenv().money ~= true then
             if not game:GetService("Players").LocalPlayer.OwnedCars:FindFirstChild("HondeEX5") then
                 game:GetService("ReplicatedStorage").KeteLoL.Beli:FireServer("HondeEX5")
                 wait()
@@ -79,6 +82,7 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     game:GetService("Workspace")["Folder"..game.Players.LocalPlayer.Name]:FindFirstChildOfClass("Model").DriveSeat:Sit(game.Players.LocalPlayer.Character.Humanoid)
     wait(1)
     end
+end
     end)
     end
     end)
