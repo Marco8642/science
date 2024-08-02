@@ -5,6 +5,7 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     
     ]]
     end
+getfenv().money = false
         warn("Anti afk running")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
     warn("Anti afk ran")
