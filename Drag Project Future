@@ -16,33 +16,37 @@ if not game.Players.LocalPlayer:FindFirstChild("PlayerScripts") then
     local example = library:CreateWindow({
       text = "Drag Project"
     })
-    example:AddToggle("Super Money", function(state)
+    example:AddToggle("Auto Food Delivery", function(state)
     getfenv().money = (state and true or false)
     while getfenv().money do
     task.wait()
         repeat task.wait()
             local prox = game:GetService("Workspace").Jobs.DeliverySystem.Clicker:FindFirstChildOfClass("ProximityPrompt")
-            prox.Parent.CanCollide = false
-            prox.Parent.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-            prox.MaxActivationDistance = math.huge
+            if prox.Enabled == true then
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=prox.Parent.CFrame*CFrame.new(0,0,5)
             prox.RequiresLineOfSight = false
             prox.HoldDuration = 0
+            wait(0.1)
             prox:InputHoldBegin()
+            wait()
             prox:InputHoldEnd()
-        until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool")
+            end
+        until game.Players.LocalPlayer.Backpack:FindFirstChildOfClass("Tool") or getfenv().money == false
             for i,v in pairs(workspace:GetDescendants()) do
                   if v.ClassName == "ProximityPrompt" and string.find(tostring(v.Parent.Name),"Prox") and v.Parent.Parent.Parent == workspace then
-              v.Parent.Parent:PivotTo(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.Parent.CFrame
               v.Parent.CanCollide = false
               v.MaxActivationDistance = math.huge
               v.RequiresLineOfSight = false
+              wait()
               repeat task.wait()
 				if game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) < 10 then
                     v.HoldDuration = 0
                     v:InputHoldBegin()
+                    wait()
                     v:InputHoldEnd()
 				end
-              until v.Parent == nil or v.Enabled == false or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 10
+              until v.Parent == nil or v.Enabled == false or game.Players.LocalPlayer:DistanceFromCharacter(v.Parent.Position) > 10 or getfenv().money == false
                   end
                   end
                 end
