@@ -43,7 +43,7 @@ for i=1,checks do
 local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-game:GetService("Workspace").RaceProps.Checkpoints[tostring(i)].Display.Checkpoint.Position).magnitude
 local car =game:GetService("Workspace").Vehicles[game.Players.LocalPlayer.Name.."'s Car"]
 local TweenService = game:GetService("TweenService")
-local TweenInfoToUse = TweenInfo.new(dist/300, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
+local TweenInfoToUse = TweenInfo.new(dist/200, Enum.EasingStyle.Sine, Enum.EasingDirection.InOut, 0, false, 0)
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()        
 TweenValue.Changed:Connect(function()
