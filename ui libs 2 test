@@ -1,6 +1,6 @@
 local function guinamer()
 local HttpService = game:GetService("HttpService")
-local guinamer = HttpService:GenerateGUID(true)
+local guinamer = HttpService:GenerateGUID(false)
 return guinamer
 end
  local library = {
