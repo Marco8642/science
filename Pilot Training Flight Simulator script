@@ -1,0 +1,1 @@
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/Pilot%20Training%20Flight%20Simulator", true))()
