@@ -1,0 +1,61 @@
+local mt = getrawmetatable(game);
+setreadonly(mt,false)
+local namecall = mt.__namecall
+
+mt.__namecall = newcclosure(function(self, ...)
+	local Method = getnamecallmethod()
+	local Args = {...}
+
+	if self.Name == 'DoesPlayerOwnGamepass' and Method == "InvokeServer" and _G.enabler == true or Method == "IsInGroup" and _G.enabler == true then
+      return true
+  elseif self.Name == 'SpawnAircraftRequest' and Method == "InvokeServer" then
+    print(Args[1])
+    _G.plane = Args[1]
+    end
+	return namecall(self, ...) 
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
+local example = library:CreateWindow({
+  text = "Free Planes"
+})
+example:AddToggle("Bypass GP Spawner", function(state)
+  _G.enabler = (state and true or false)
+end)
+example:AddButton("Get in Plane", function()
+_G.planes = nil
+local distance = math.huge
+for a,b in pairs(game:GetService("Workspace").Aircraft:GetChildren()) do
+    if b.Name == tostring(_G.plane)  then
+local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.PrimaryPart.Position).magnitude
+if Dist < distance then
+distance = Dist
+_G.planes = b
+end
+end
+end
+for i,v in pairs(_G.planes:GetDescendants()) do
+    if v.Name == "PilotSeat" and v.ClassName == "Seat" then
+v.Disabled = false
+v:Sit(game.Players.LocalPlayer.Character.Humanoid)
+    end
+    end
+end)
+example:AddButton("Get in Plane v2", function()
+_G.planes = nil
+local distance = math.huge
+for a,b in pairs(game:GetService("Workspace").Aircraft:GetChildren()) do
+    if b.ClassName == "Model"  then
+local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - b.PrimaryPart.Position).magnitude
+if Dist < distance then
+distance = Dist
+_G.planes = b
+end
+end
+end
+for i,v in pairs(_G.planes:GetDescendants()) do
+    if v.Name == "PilotSeat" and v.ClassName == "Seat" then
+v.Disabled = false
+v:Sit(game.Players.LocalPlayer.Character.Humanoid)
+    end
+    end
+end)
