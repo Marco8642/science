@@ -1,9 +1,5 @@
 
-local function hook(func,stuff)
-    hookfunction(func,function()
-        return unpack(stuff)
-        end)
-    end
+
 for i,v in pairs(getgc(true)) do
     if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Code.controllers.antiCheatController then
     warn(getinfo(v).name)
