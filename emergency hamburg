@@ -1,16 +1,24 @@
-local testfunc 
+local function funcnil()
+local func = nil
+for i,v in pairs(getgc(true)) do
+    if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Code.controllers.antiCheatController and tostring(getinfo(v).name) ~= nil and  tostring(getinfo(v).name) ~= "" then
+func = v
+    end
+end
+end
 repeat task.wait()
     for i,v in pairs(getgc(true)) do
-        if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Code.controllers.antiCheatController then
-            testfunc =v
+        if type(v) == "function" and getfenv(v).script == game:GetService("Players").LocalPlayer.PlayerScripts.Code.controllers.antiCheatController  then
         warn(getinfo(v).name)
         hookfunction(v,function()
             return 
             end)
+         
         end
     end
 wait(1)
-until testfunc == nil
+print(funcnil())
+until funcnil() == nil
 wait(2)
 warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
