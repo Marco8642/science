@@ -8,6 +8,30 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Fishing Simulator"
 })
+example:AddToggle("Auto Fish", function(state)
+   getfenv().fish = (state and true or false)
+   while getfenv().fish do
+      task.wait()
+      local chr = game.Players.LocalPlayer.Character
+      if not chr:FindFirstChildOfClass("Tool") or chr:FindFirstChildOfClass("Tool") and chr:FindFirstChildOfClass("Tool"):GetAttribute("type") ~= "Rods" then
+      local plr = game.Players.LocalPlayer.UserId
+      for i,v in pairs(game:GetService("ReplicatedStorage").ToolsCache[plr]:GetChildren()) do
+          if v:GetAttribute("type") == "Rods" then
+      rod = v
+          end
+          end
+        game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("EquipTool"):FireServer(rod)
+        
+         end
+      game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("CastFishingLine"):FireServer()
+      task.wait(1)
+      task.spawn(function()
+      game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("FishBiting"):InvokeServer()
+      end)
+      task.wait(2.1)
+      game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("FishCaught"):FireServer()
+      end
+end)
 example:AddToggle("Auto Farm Mobs", function(state)
 _G.test = (state and true or false)
 while _G.test do
@@ -20,9 +44,9 @@ spear = v.Name
     end
     end
     for i,v in pairs(workspace:GetChildren()) do
-      if v.ClassName == "Model" and v:FindFirstChild("Hitbox")  then
+      if v.ClassName == "Model" and v:FindFirstChild("Hitbox") and _G.test  then
    repeat wait()
- game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.PrimaryPart.CFrame*CFrame.new(0,0,20)   
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame=v.PrimaryPart.CFrame*CFrame.new(0,0,20)   
 game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.SpearThrown:FireServer(spear,v.PrimaryPart.CFrame, v.PrimaryPart.Position, tonumber("1696341607.0"..math.random(100000,1000000)))
 game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.MonsterHit:FireServer(v, spear, true)
 task.wait(2)
@@ -45,9 +69,12 @@ example:AddToggle("Auto Collect Loot", function(state)
       task.wait()
       pcall(function()
     for i,v in pairs(game:GetService("Workspace").DroppedItems:GetChildren()) do
+      if v.ClassName == "Model" and v.PrimaryPart ~= nil and v.PrimaryPart.Transparency ~= 1 then
+      repeat task.wait()
       game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.PrimaryPart.CFrame
-      wait(0.1)
+      until v.Parent == nil or v.PrimaryPart == nil or _G.loot == false
        end
+      end
       end)
       end
    end)
