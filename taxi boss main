@@ -29,44 +29,6 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
-example:AddToggle("Auto Collect Eggs", function(state)
-getfenv().eggs = (state and true or false)
-while getfenv().eggs do
-    wait()
-    pcall(function()
-for i,v in pairs(game:GetService("Workspace").Easter.EggHunt:GetDescendants()) do
-    if v.Name == "EggPrompt" and getfenv().eggs then
-game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
-wait(5)
-        fireproximityprompt(v)
-        wait(0.1)
-    end
-end
-end)
-end
-end)
-example:AddToggle("Super spin wheel[lag]", function(state)
-    getfenv().superspin = (state and true or false)
-    while  getfenv().superspin  do
-    wait()
-    if game:GetService("Players").LocalPlayer.Data.eggs.Value >= 2 and game:GetService("Stats").PerformanceStats.Ping:GetValue() <5000 then
-    wait()
-    for i=1,10000 do
-       task.spawn(function()
-    game:GetService("ReplicatedStorage").SpinWheel:InvokeServer()
-    end)
-    end
-    wait(10)
-    end
-    end
-end)
-example:AddToggle("Auto spin wheel", function(state)
-    getfenv().superspin2 = (state and true or false)
-    while  getfenv().superspin2  do
-        wait()
-        game:GetService("ReplicatedStorage").SpinWheel:InvokeServer()
-    end
-end)
 example:AddToggle("Auto Money", function(state)
 getfenv().test2 = (state and true or false)
 pcall(function()
