@@ -4,6 +4,31 @@ warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+local function getrarity(value)
+   local rarity = nil
+   for i,v in pairs(require(game:GetService("ReplicatedStorage").CloudFrameShared.Rodux.Reducer.gameValues.rarity)) do
+   if type(v) == "table" and v.displayName == value  then
+   rarity = v.id
+   end
+   end
+   return rarity
+   end
+   local function getSize(value)
+      for i,v in pairs(require(game:GetService("ReplicatedStorage").CloudFrameShared.Rodux.Reducer.gameValues.fishSizes)) do
+      if type(v) == "table" and v.displayName == value then
+      size = v.id
+      end
+      end
+      return size
+      end
+      local function getMutation(value)
+         for i,v in pairs(require(game:GetService("ReplicatedStorage").CloudFrameShared.Rodux.Reducer.gameValues.fishMutations)) do
+         if type(v) == "table" and v.displayName == value or type(v) == "table" and i == value then
+      size = v.id
+      end
+      end
+      return size
+      end
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
 local example = library:CreateWindow({
   text = "Fishing Simulator"
@@ -32,6 +57,22 @@ example:AddToggle("Auto Fish", function(state)
       game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("FishCaught"):FireServer()
       end
 end)
+example:AddToggle("Auto Collect Chests", function(state)
+   getfenv().chests = (state and true or false)
+   while getfenv().chests do
+      task.wait()
+      pcall(function()
+   for i,v in pairs(workspace:GetDescendants()) do
+      if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
+      repeat task.wait()
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+      fireproximityprompt(v)
+      until v.Enabled == false or getfenv().chests == false
+   end
+   end
+end)
+end
+end)
 example:AddToggle("Auto Farm Mobs", function(state)
 _G.test = (state and true or false)
 while _G.test do
@@ -54,6 +95,28 @@ task.wait(2)
       end
       end
    end)
+end
+end)
+example:AddToggle("Auto Sell [None Mutated]", function(state)
+getfenv().sellthem = (state and true or false)
+while getfenv().sellthem do
+   task.wait()
+   local plr = game:GetService("Players").LocalPlayer
+local plrgui = plr.PlayerGui
+local inven = plrgui.Interface.Inventory.Inventory
+local list = inven.Frame.Backpack.List.Container
+for i,v in pairs(list:GetDescendants()) do
+    if v:GetAttribute("size") ~= nil  and v:GetAttribute("mutation")== nil then
+      game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellOne", "Fish", v.Parent.Parent.Parent.Parent.Parent.Name)
+
+end
+end
+local plr = game.Players.LocalPlayer.UserId
+for i2,v2 in pairs(game:GetService("ReplicatedStorage").ToolsCache[plr]:GetChildren()) do
+   if v2:GetAttribute("size") ~= nil  and v2:GetAttribute("mutation") == nil then
+     game:GetService("ReplicatedStorage").CloudFrameShared.DataStreams.processGameItemSold:InvokeServer("SellOne", "Fish", v2:GetAttribute("inventoryKey"))
+   end
+   end
 end
 end)
 example:AddToggle("Auto Sell Loot", function(state)
