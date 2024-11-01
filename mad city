@@ -848,19 +848,7 @@ end)
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1613.8153076171875, 42.44813537597656, 690.4595947265625)
 			end
 		  end)
-		  local example = library:CreateWindow({
-			text = "Server Stuff"
-		  })
-
-		  example:AddButton("Server Crasher",function()
-		  for i=1,math.huge do
-			  task.wait()
-			  task.spawn(function()
-		  game:GetService("ReplicatedStorage").Event:FireServer("SpawnVehicle", "Camaro")
-			  end)
-		  end
-
-		end)
+		 
 spawn(function()
 	_G.noshow = true
 while _G.noshow do
