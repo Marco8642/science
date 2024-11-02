@@ -92,7 +92,7 @@ end
 end)
 example:AddButton("Remove Lazers", function()
 for i,v in pairs(workspace:GetDescendants()) do
-    if string.find(v.Name,"azers") and v.ClassName == "Model" then
+    if string.find(v.Name,"asers") and v.ClassName == "Model" then
         v:ClearAllChildren()
     end
 end
