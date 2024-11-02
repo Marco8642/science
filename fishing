@@ -33,10 +33,17 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Fishing Simulator"
 })
+example:AddLabel("      Select Fishing Method", function(state)
+end)
+example:AddDropdown({"Method 1","Method 2"},function(state) 
+    getfenv().fmethod = state
+   
+end)
 example:AddToggle("Auto Fish", function(state)
    getfenv().fish = (state and true or false)
    while getfenv().fish do
       task.wait()
+      pcall(function()
       local chr = game.Players.LocalPlayer.Character
       if not chr:FindFirstChildOfClass("Tool") or chr:FindFirstChildOfClass("Tool") and chr:FindFirstChildOfClass("Tool"):GetAttribute("type") ~= "Rods" then
       local plr = game.Players.LocalPlayer.UserId
@@ -48,13 +55,21 @@ example:AddToggle("Auto Fish", function(state)
         game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("EquipTool"):FireServer(rod)
         
          end
+            if  getfenv().fmethod == "Method 1" then
       game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("CastFishingLine"):FireServer()
+         elseif  getfenv().fmethod  == "Method 2" then
+           local chr = game.Players.LocalPlayer.Character
+chr:FindFirstChildOfClass("Tool"):Activate()
+wait()
+chr:FindFirstChildOfClass("Tool"):Deactivate()
+         end
       task.wait(1)
       task.spawn(function()
       game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("FishBiting"):InvokeServer()
       end)
       task.wait(2.1)
       game:GetService("ReplicatedStorage"):WaitForChild("CloudFrameShared"):WaitForChild("DataStreams"):WaitForChild("FishCaught"):FireServer()
+   end)
       end
 end)
 example:AddToggle("Auto Collect Chests", function(state)
