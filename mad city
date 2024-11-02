@@ -83,9 +83,10 @@ end)
 example:AddButton("Rob Stores", function()
 for i,v in pairs(game:GetService("Workspace").ObjectSelection:GetDescendants()) do 
 if v.Name == "Cash" and v:IsA("MeshPart") or v.Name == "Steal" and v:IsA("Part") or v.Name == "SmashCash" and v:IsA("Part") or v.Name == "ATM" and v:IsA("Part") or v.Name == "StealTV" and v:IsA("Part") then
+repeat task.wait()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame+Vector3.new(0,5,0)
 v:FindFirstChildOfClass("Script").Event:FireServer() 
-wait(0.1)
+until v.Name == "Nope"
 end
 end
 end)
@@ -184,13 +185,10 @@ game:GetService("Workspace").Ignore.Safezone:ClearAllChildren()
 
 example:AddButton("Get Jetpack",function()
 workspace.ObjectSelection.BossKey.Nope.BossKey.Event:FireServer()
-
-local CFrameEnd = game:GetService("Workspace").ObjectSelection.TakeJetpack.TakeJetpack.CFrame
-local Time = 5 -- Time in seconds
-local tween =  game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart, TweenInfo.new(Time), {CFrame = CFrameEnd})
-tween:Play()
-tween.Completed:Wait()
+repeat task.wait()
+ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").ObjectSelection.TakeJetpack.TakeJetpack.CFrame
 game:GetService("Workspace").ObjectSelection.TakeJetpack.TakeJetpack.TakeJetpack.Event:FireServer()
+until game.Players.LocalPlayer.Character:FindFirstChild("Jetpack")
 end)
 example:AddButton("Get SilverKey",function()
 game:GetService("Workspace").ObjectSelection.SilverKey.Nope.SilverKey.Event:FireServer()
