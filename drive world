@@ -4,6 +4,7 @@ warn("Anti afk ran")
 game:GetService("VirtualUser"):CaptureController()
 game:GetService("VirtualUser"):ClickButton2(Vector2.new())
 end)
+if getrawmetatable ~= nil then
 local mt = getrawmetatable(game);
 setreadonly(mt,false)
 local namecall = mt.__namecall
@@ -16,6 +17,7 @@ return;
 	end
 	return namecall(self, ...) 
 end)
+end
 getfenv().grav = workspace.Gravity
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
 local example = library:CreateWindow({
@@ -238,7 +240,8 @@ elseif getfenv().methodt == "Tweening" then
    TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
             
    TweenValue.Changed:Connect(function()
-      v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+            v.Parent:PivotTo(TweenValue.Value)
+      v.Parent.PrimaryPart.Velocity = Vector3.new(0,0,0)
    end)
             
    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100)})
@@ -262,7 +265,8 @@ if getfenv().methodt == "Teleport" then
       TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
                
       TweenValue.Changed:Connect(function()
-         v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+               v.Parent:PivotTo(TweenValue.Value)
+      v.Parent.PrimaryPart.Velocity = Vector3.new(0,0,0)
       end)
                
       local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100)})
@@ -277,7 +281,7 @@ elseif game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Jobs.Visible
 for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
    if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
       v.Parent:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,-120))
-      v.Parent.Trailer:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100))
+      v.Parent.Trailer:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,50))
       wait(5)
 repeat task.wait()
    pcall(function()
@@ -298,6 +302,14 @@ while getfenv().test2 do
    local plr = game.Players.LocalPlayer
    local cash = game:GetService("ReplicatedStorage").PlayerData[plr.Name].Cash
 print(cash)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent.Parent
+for i,v in pairs(car:GetDescendants()) do
+    if v.Name == "TouchInterest" then
+        v:Destroy()
+    end
+    end
    if game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Jobs.Visible == false then
       local num = math.random(1,#workspace.Jobs.Trucking.StartPoints:GetChildren())
 	  local chosenone = nil
@@ -367,8 +379,8 @@ pcall(function()
       elseif getfenv().methodt == "Tweening" then
          for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
             if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
-               v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,1000,0))
-               v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,1000,100))
+               v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,500,0))
+               v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,500,100))
          local TweenService = game:GetService("TweenService")
          local TweenInfoToUse = TweenInfo.new(dist/400, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
          
@@ -376,10 +388,11 @@ pcall(function()
          TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
                   
          TweenValue.Changed:Connect(function()
-            v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+                  v.Parent:PivotTo(TweenValue.Value)
+      v.Parent.PrimaryPart.Velocity = Vector3.new(0,0,0)
          end)
                   
-         local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,1000,100)})
+         local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,500,100)})
          OnTween:Play()
           OnTween.Completed:Wait()
          end
@@ -393,8 +406,8 @@ pcall(function()
          elseif getfenv().methodt == "Tweening" then
             for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
                if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
-                  v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,1000,0))
-                  v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,1000,100))
+                  v.Parent:PivotTo(v.Parent.PrimaryPart.CFrame+Vector3.new(0,500,0))
+                  v.Parent.Trailer:PivotTo(v.Parent.PrimaryPart.CFrame*CFrame.new(0,500,100))
                   local TweenService = game:GetService("TweenService")
                   local TweenInfoToUse = TweenInfo.new(7, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
                   
@@ -402,10 +415,11 @@ pcall(function()
                   TweenValue.Value = v.Parent:GetPrimaryPartCFrame()
                            
                   TweenValue.Changed:Connect(function()
-                     v.Parent:SetPrimaryPartCFrame(TweenValue.Value)
+                           v.Parent:PivotTo(TweenValue.Value)
+      v.Parent.PrimaryPart.Velocity = Vector3.new(0,0,0)
                   end)
                            
-                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,1000,100)})
+                  local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,500,100)})
                   OnTween:Play()
                    OnTween.Completed:Wait()
             end
@@ -416,7 +430,7 @@ pcall(function()
 elseif game:GetService("Players").LocalPlayer.PlayerGui.Score.Frame.Jobs.Visible == true then
 for i,v in pairs(game:GetService("Workspace").Cars:GetDescendants()) do
    if v.Name == "Owner" and v.Value == game.Players.LocalPlayer then
-      v.Parent:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,-130))
+      v.Parent:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,60))
       v.Parent.Trailer:PivotTo(game:GetService("Workspace").CompletionRegion.Primary.CFrame*CFrame.new(0,5,100))
       wait(5)
 repeat task.wait()
@@ -471,9 +485,21 @@ game:GetService("ReplicatedStorage").Systems.Contracts.PrecalculateRoutes:Invoke
    wait(10)
    game:GetService("ReplicatedStorage").Systems.Contracts.PickupCargo:InvokeServer()
    print("Got Cargo")
-   wait(65)
+   if getfenv().contract == "Steel" then
+      warn("waiting 35 seconds")
+      local time = tick()
+      repeat task.wait()
+      until tick()-time >= 35 or getfenv().contracta == false
+   elseif getfenv().contract == "Wood" then
+      warn("waiting 70 seconds")
+ local time = tick()
+ repeat task.wait()
+ until tick()-time >= 70 or getfenv().contracta == false
+   end
+   if getfenv().contracta  then
    game:GetService("ReplicatedStorage").Systems.Contracts.DropoffCargo:InvokeServer()
    warn("Completed")
+   end
 end
  end)
 local example = library:CreateWindow({
