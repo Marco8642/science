@@ -22,4 +22,18 @@ end
 wait(2)
 print("Start")
 queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/mad%20city%20store"))
-game:GetService("TeleportService"):Teleport(game.PlaceId)
+_G.playercount = 28
+local serverfound = nil
+    local cursor
+    placeId = game.PlaceId
+    repeat
+        local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
+        for _, v in pairs(response.data) do
+           if v.playing < _G.playercount and v.id ~= game.JobId then
+           serverfound = v.id
+           print(v.playing)
+        end
+        end
+        cursor = response.nextPageCursor
+    until not cursor or serverfound ~= nil
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
