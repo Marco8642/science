@@ -9,7 +9,7 @@ return check
 end
 local time = tick()
 repeat task.wait()
-until game:IsLoaded() and check() ~= nil or tick()-time >= 15
+until game:IsLoaded() and check() ~= nil or tick()-time >= 10
 print("loading done now starting robbing")
 for i,v in pairs(game:GetService("Workspace").ObjectSelection:GetDescendants()) do 
 if v.Name == "Cash" and v:IsA("MeshPart") or v.Name == "Steal" and v:IsA("Part") or v.Name == "SmashCash" and v:IsA("Part") or v.Name == "ATM" and v:IsA("Part") or v.Name == "StealTV" and v:IsA("Part") then
