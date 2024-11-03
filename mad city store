@@ -11,5 +11,6 @@ until v.Name == "Nope"
 end
 end
 wait(2)
+print("Start")
 queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/mad%20city%20store"))
 game:GetService("TeleportService"):Teleport(game.PlaceId)
