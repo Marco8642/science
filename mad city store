@@ -1,3 +1,7 @@
+repeat task.wait()
+until game:IsLoaded()
+print("loading done now starting robbing")
+wait(5)
 for i,v in pairs(game:GetService("Workspace").ObjectSelection:GetDescendants()) do 
 if v.Name == "Cash" and v:IsA("MeshPart") or v.Name == "Steal" and v:IsA("Part") or v.Name == "SmashCash" and v:IsA("Part") or v.Name == "ATM" and v:IsA("Part") or v.Name == "StealTV" and v:IsA("Part") then
 repeat task.wait()
@@ -6,3 +10,5 @@ v:FindFirstChildOfClass("Script").Event:FireServer()
 until v.Name == "Nope"
 end
 end
+wait(2)
+queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/mad%20city%20store"))()
