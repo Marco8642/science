@@ -36,4 +36,5 @@ local serverfound = nil
         end
         cursor = response.nextPageCursor
     until not cursor or serverfound ~= nil
+print(serverfound)
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
