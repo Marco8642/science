@@ -1,0 +1,8 @@
+for i,v in pairs(game:GetService("Workspace").ObjectSelection:GetDescendants()) do 
+if v.Name == "Cash" and v:IsA("MeshPart") or v.Name == "Steal" and v:IsA("Part") or v.Name == "SmashCash" and v:IsA("Part") or v.Name == "ATM" and v:IsA("Part") or v.Name == "StealTV" and v:IsA("Part") then
+repeat task.wait()
+	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame+Vector3.new(0,5,0)
+v:FindFirstChildOfClass("Script").Event:FireServer() 
+until v.Name == "Nope"
+end
+end
