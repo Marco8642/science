@@ -71,7 +71,7 @@ end
 
 function OrionLib:IsRunning()
 	if gethui then
-		return true
+		return Orion.Parent == gethui()
 	else
 		return Orion.Parent == game:GetService("CoreGui")
 	end
@@ -463,7 +463,7 @@ function OrionLib:Init()
 	end	
 end	
 
-function OrionLib:MakeWindow(WindowConfig)
+function MakeWindow(WindowConfig)
 	local FirstTab = true
 	local Minimized = false
 	local Loaded = false
