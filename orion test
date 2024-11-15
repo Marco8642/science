@@ -463,7 +463,8 @@ function OrionLib:Init()
 	end	
 end	
 
-function MakeWindow(WindowConfig)
+function OrionLib:MakeWindow(WindowConfig)
+	pcall(function()
 	local FirstTab = true
 	local Minimized = false
 	local Loaded = false
@@ -1719,6 +1720,7 @@ function MakeWindow(WindowConfig)
 
 	
 	return TabFunction
+end)
 end   
 
 function OrionLib:Destroy()
