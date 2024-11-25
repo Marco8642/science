@@ -95,14 +95,4 @@ example:AddButton("Gun mod", function()
     end
     end
 end)
-example:AddButton("Inf money", function()
-if game:GetService("Players").LocalPlayer.PlayerGui.HUD.PlayerStatsFrame.BalanceLabel.Text ~= "$∞" then
-game:GetService("ReplicatedStorage").Remotes.PurchaseAmmunition:InvokeServer(".223 Remington HP", -1e308)
-wait(1)
-for i=1,50 do
-    task.spawn(function()
-game:GetService("ReplicatedStorage").Remotes.PurchaseAmmunition:InvokeServer(".223 Remington HP", 1e307)
-    end)
-end
-end
-end)
+
