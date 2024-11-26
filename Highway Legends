@@ -1,0 +1,28 @@
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Highway Legends"
+})
+example:AddToggle("Auto Farm", function(state)
+getfenv().auto = (state and true or false)
+while getfenv().auto do
+    task.wait()
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent
+car.PrimaryPart = car.Body["#Weight"]
+for i,v in pairs(workspace.Highway:GetDescendants()) do
+    if v.Name == "Body" and v:IsA("BasePart") then
+        car.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0,10000,0)
+        car:PivotTo(v.CFrame)
+        task.wait()
+                car.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0,0,0)
+        end
+        
+end
+end
+end)
