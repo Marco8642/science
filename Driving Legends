@@ -1,0 +1,31 @@
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Driving Legends"
+})
+
+example:AddBox("Enter Speed Value", function(object, focus)
+	if focus then
+		getfenv().autospeed = tonumber(object.Text)
+	end
+end)
+example:AddToggle("Auto Farm", function(state)
+   getfenv().drive = (state and true or false)
+   while getfenv().drive do
+      local plr = game.Players.LocalPlayer
+      local speed = getfenv().autospeed or 500
+   local chr = plr.Character
+   local car = chr.Humanoid.SeatPart.Parent
+      if  getfenv().new == nil then
+          getfenv().new = Instance.new("Part",workspace)
+          getfenv().new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+          getfenv().new.Anchored = true
+          getfenv().new.Size = Vector3.new(10000,10,10000)
+         end
+   local plr = game.Players.LocalPlayer
+   local chr = plr.Character
+   local car = chr.Humanoid.SeatPart.Parent
+   car:PivotTo(getfenv().new.CFrame+Vector3.new(0,10,0))
+   car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
+   task.wait()
+   end
+   end)
