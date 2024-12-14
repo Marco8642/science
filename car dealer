@@ -8,6 +8,15 @@ spawn(function()
         end
         end
         end)
+      local function races()
+        local tab = {"None"}
+        for i,v in pairs(workspace.Races:GetChildren()) do
+        if v:IsA("Model") then
+            table.insert(tab,v.Name)
+    end
+    end
+    return tab
+    end
     local vu = game:GetService("VirtualUser")
     game:GetService("Players").LocalPlayer.Idled:connect(function()
        vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -805,15 +814,6 @@ end
     local example = library:CreateWindow({
         text = "Teleports"
       })
-      local function races()
-        local tab = {"None"}
-        for i,v in pairs(workspace.Races:GetChildren()) do
-        if v:IsA("Model") then
-            table.insert(tab,v.Name)
-    end
-    end
-    return tab
-    end
     example:AddDropdown(races(),function(state)
        print(state)
        local chr = game.Players.LocalPlayer.Character
