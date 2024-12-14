@@ -103,6 +103,7 @@ spawn(function()
      getfenv().autobattle = (state and true or false)
      while getfenv().autobattle do
      task.wait() 
+pcall(function()
       local chr = game.Players.LocalPlayer.Character
       local car = chr.Humanoid.SeatPart.Parent.Parent
     for i,v in pairs(workspace.Collectibles.Brawlhalla2024:GetDescendants()) do
@@ -111,6 +112,7 @@ spawn(function()
     wait(0.1)
     end
     end
+end)
     end
     end)
     example:AddToggle("Auto Extinguish Fire", function(state)
