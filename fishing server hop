@@ -1,6 +1,6 @@
 repeat task.wait()
 until game:IsLoaded()
-wait(10)
+wait(20)
 print("game loaded")
 local plrgui = game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
 repeat task.wait()
