@@ -26,6 +26,7 @@ local serverfound = nil
     local cursor
     placeId = game.PlaceId
     repeat
+pcall(function()
         local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
         for _, v in pairs(response.data) do
            if v.playing < v.maxPlayers  then
@@ -34,5 +35,6 @@ local serverfound = nil
         end
         end
         cursor = response.nextPageCursor
+end)
     until not cursor or serverfound ~= nil
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
