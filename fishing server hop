@@ -1,9 +1,11 @@
 repeat task.wait()
 until game:IsLoaded()
-print("game loaded")
 wait(10)
-
-local interface = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Interface")
+print("game loaded")
+local plrgui = game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
+repeat task.wait()
+until plrgui
+local interface = plrgui:FindFirstChild("Interface")
 repeat task.wait()
 warn("why")
 until interface and interface.Enabled
