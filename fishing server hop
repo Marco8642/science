@@ -9,7 +9,7 @@ until interface
 repeat task.wait()
 until interface.MainMenu.Enabled
 repeat task.wait()
-if nterface.MainMenu.Enabled then
+if interface.MainMenu.Enabled then
    local button = interface.MainMenu.Menu.MainScreen.Menu.Play
    button.Selectable = true
            GuiService.SelectedObject = button
@@ -18,7 +18,7 @@ if nterface.MainMenu.Enabled then
 wait()
  GuiService.SelectedObject = nil
  end
- until nterface.MainMenu.Enabled == false
+ until interface.MainMenu.Enabled == false
 print("Done Loading")
 for i,v in pairs(workspace:GetDescendants()) do
          if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
