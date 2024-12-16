@@ -92,7 +92,7 @@ if  game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Bobber.Rope
             wait(0.1)
             until  game:GetService("Players").LocalPlayer.PlayerGui.Interface.Fishing.FishingMeter.Visible  or game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Bobber.RopeConstraint.Length < 1 
             repeat task.wait()
-if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Fishing.FishingMeter.Mover.Rotation < -18 and game:GetService("Players").LocalPlayer.PlayerGui.Interface.Fishing.FishingMeter.Visible then
+if game:GetService("Players").LocalPlayer.PlayerGui.Interface.Fishing.FishingMeter.Mover.Rotation < -17 and game:GetService("Players").LocalPlayer.PlayerGui.Interface.Fishing.FishingMeter.Visible then
            local Camera = workspace.Camera
 
             game:GetService("VirtualInputManager"):SendMouseButtonEvent(Camera.ViewportSize.X/2,Camera.ViewportSize.Y/2,0, true, game, 1)
