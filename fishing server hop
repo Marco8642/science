@@ -5,7 +5,8 @@ print("game loaded")
 repeat task.wait()
 until game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
 print("Done Loading")
-wait(5)
+wait()
+pcall(function()
  for i,v in pairs(workspace:GetDescendants()) do
          if v.ClassName == "ProximityPrompt" and v.Parent ~= nil and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open"  then
             local timer = tick()
@@ -19,16 +20,15 @@ print(v:GetFullName())
      
       end
       end
+end)
       queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
-
-_G.playercount = 25
 local serverfound = nil
     local cursor
     placeId = game.PlaceId
     repeat
         local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
         for _, v in pairs(response.data) do
-           if v.playing < _G.playercount  then
+           if v.playing < v.maxPlayers  then
            serverfound = v.id
            print(v.playing)
         end
