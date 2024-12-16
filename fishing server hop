@@ -1,4 +1,7 @@
-      for i,v in pairs(workspace:GetDescendants()) do
+repeat task.wait()
+until game:IsLoaded()
+wait(10)
+for i,v in pairs(workspace:GetDescendants()) do
          if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
             pcall(function()
             local timer = tick()
