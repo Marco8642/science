@@ -5,6 +5,7 @@ wait(10)
 
 local interface = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Interface")
 repeat task.wait()
+warn("why")
 until interface and interface.Enabled
 print("interface")
    local player = game.Players.LocalPlayer
