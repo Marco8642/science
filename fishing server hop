@@ -29,7 +29,7 @@ local serverfound = nil
 pcall(function()
         local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
         for _, v in pairs(response.data) do
-           if v.playing < v.maxPlayers  then
+           if v.playing < v.maxPlayers and tostring(v.id) ~= tostring(game.JobId) then
            serverfound = v.id
            print(v.playing)
         end
