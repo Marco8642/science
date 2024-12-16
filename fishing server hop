@@ -1,0 +1,11 @@
+      for i,v in pairs(workspace:GetDescendants()) do
+         if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
+            pcall(function()
+            local timer = tick()
+            repeat task.wait()
+         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
+         fireproximityprompt(v)
+         until v.Enabled == false or getfenv().chests == false or tick()-time > 5
+      end)
+      end
+      end
