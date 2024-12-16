@@ -28,16 +28,17 @@ wait()
  end
  until interface.MainMenu.Enabled == false
 print("Done Loading")
-wait(10)
-for i,v in pairs(workspace:GetDescendants()) do
-         if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
-            pcall(function()
+wait(5)
+ for i,v in pairs(workspace:GetDescendants()) do
+         if v.ClassName == "ProximityPrompt" and v.Parent ~= nil and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open"  then
             local timer = tick()
             repeat task.wait()
+                    local p,call =pcall(function()
          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
          fireproximityprompt(v)
-         until v.Enabled == false or getfenv().chests == false or tick()-time > 5
-      end)
+          end)
+         until v.Enabled == false or tick()-timer > 1.5
+     
       end
       end
       queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
