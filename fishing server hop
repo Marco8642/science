@@ -8,6 +8,7 @@ until plrgui
 local interface = plrgui:FindFirstChild("Interface")
 repeat task.wait()
 warn("why")
+interface = plrgui:FindFirstChild("Interface")
 until interface and interface.Enabled
 print("interface")
    local player = game.Players.LocalPlayer
