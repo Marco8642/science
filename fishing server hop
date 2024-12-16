@@ -1,33 +1,9 @@
 repeat task.wait()
 until game:IsLoaded()
-wait(15)
-print("game loaded")
-local plrgui = game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
-repeat task.wait()
-until plrgui
-local interface = plrgui:FindFirstChild("Interface")
-repeat task.wait()
-warn("why")
-interface = plrgui:FindFirstChild("Interface")
-until interface and interface.Enabled
-print("interface")
-   local player = game.Players.LocalPlayer
-repeat task.wait()
-until interface.MainMenu.Enabled
-print("interface loaded")
-    local VIM = game:GetService("VirtualInputManager")
-   local GuiService = game:GetService("GuiService")
-repeat task.wait()
-if interface.MainMenu.Enabled then
-   local button = interface.MainMenu.Menu.MainScreen.Menu.Play
-   button.Selectable = true
-           GuiService.SelectedObject = button
-           VIM:SendKeyEvent(true, Enum.KeyCode.Return, false, player.PlayerGui)
-           VIM:SendKeyEvent(false, Enum.KeyCode.Return, false, player.PlayerGui)
 wait()
- GuiService.SelectedObject = nil
- end
- until interface.MainMenu.Enabled == false
+print("game loaded")
+repeat task.wait()
+until game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
 print("Done Loading")
 wait(5)
  for i,v in pairs(workspace:GetDescendants()) do
