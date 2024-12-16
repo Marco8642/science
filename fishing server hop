@@ -22,6 +22,8 @@ print(v:GetFullName())
       end
 end)
       queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
+repeat task.wait()
+pcall(function()
 local serverfound = nil
     local cursor
     placeId = game.PlaceId
@@ -38,3 +40,6 @@ pcall(function()
 end)
     until not cursor or serverfound ~= nil
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
+wait(5)
+end)
+until not game.Players.LocalPlayer:FindFirstChild("PlayerScripts")
