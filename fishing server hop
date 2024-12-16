@@ -13,6 +13,7 @@ wait(5)
                     local p,call =pcall(function()
          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Parent.CFrame
          fireproximityprompt(v)
+print(v:GetFullName())
           end)
          until v.Enabled == false or tick()-timer > 1.5
      
