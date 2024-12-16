@@ -1,13 +1,16 @@
 repeat task.wait()
 until game:IsLoaded()
+print("game loaded")
     local VIM = game:GetService("VirtualInputManager")
    local GuiService = game:GetService("GuiService")
 local interface = game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Interface")
 repeat task.wait()
 until interface
+print("interface")
    local player = game.Players.LocalPlayer
 repeat task.wait()
 until interface.MainMenu.Enabled
+print("interface loaded")
 repeat task.wait()
 if interface.MainMenu.Enabled then
    local button = interface.MainMenu.Menu.MainScreen.Menu.Play
