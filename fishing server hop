@@ -43,7 +43,7 @@ wait(5)
       end
       queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
 
-_G.playercount = 5
+_G.playercount = 10
 local serverfound = nil
     local cursor
     placeId = game.PlaceId
