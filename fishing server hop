@@ -9,3 +9,20 @@
       end)
       end
       end
+      queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))
+
+_G.playercount = 5
+local serverfound = nil
+    local cursor
+    placeId = game.PlaceId
+    repeat
+        local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
+        for _, v in pairs(response.data) do
+           if v.playing < _G.playercount  then
+           serverfound = v.id
+           print(v.playing)
+        end
+        end
+        cursor = response.nextPageCursor
+    until not cursor or serverfound ~= nil
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
