@@ -5,5 +5,6 @@ wait(1)
 
     game:GetService("ReplicatedStorage").Remotes.QuestClaim:FireServer("survival5")
    wait(0.1)
-   game.Players.LocalPlayer:Kick("Your bones:",game:GetService("Players").LocalPlayer:findFirstChild("Bones").Value)
+   local value = game:GetService("Players").LocalPlayer:findFirstChild("Bones").Value
+   game.Players.LocalPlayer:Kick("Your bones:",value)
    game:GetService("TeleportService"):Teleport(game.PlaceId)
