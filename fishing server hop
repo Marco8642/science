@@ -1,6 +1,6 @@
 repeat task.wait()
 until game:IsLoaded()
-wait(20)
+wait(15)
 print("game loaded")
 local plrgui = game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
 repeat task.wait()
@@ -28,6 +28,7 @@ wait()
  end
  until interface.MainMenu.Enabled == false
 print("Done Loading")
+wait(5)
 for i,v in pairs(workspace:GetDescendants()) do
          if v.ClassName == "ProximityPrompt" and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open" and getfenv().chests then
             pcall(function()
