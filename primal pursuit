@@ -8,14 +8,22 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Primal Pursuit 🦖"
 })
-example:AddToggle("Inf Bones/XP ", function(state)
-    getfenv().inf =(state and true or false)
-    while getfenv().inf do
-        task.wait()
-    task.spawn(function()
-    game:GetService("ReplicatedStorage").Remotes.QuestClaim:FireServer("survival5")
-    end)
-    end
+example:AddToggle("Auto Collect Candy Cane ", function(state)
+getfenv().collect = (state and true or false)
+while getfenv().collect do
+task.wait()
+if workspace.CurrentMap:FindFirstChild("ItemFolder") then
+for i,v in pairs(workspace.CurrentMap.ItemFolder:GetDescendants()) do
+if v.Name == "TouchInterest" then
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
+firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+end
+end
+end
+end
+end)
+example:AddButton("Auto Bones[server hop]", function(state)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/bones"))()
 end)
 example:AddToggle("Infinite Ammo ", function(state)
     getfenv().ammo =(state and true or false)
