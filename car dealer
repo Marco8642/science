@@ -31,8 +31,8 @@ spawn(function()
     mt.__namecall = newcclosure(function(self, ...)
         local Method = getnamecallmethod()
         local Args = {...}
-        if Method == 'FireServer' and self.Name == "JobRemoteHandler" and rawget(...,"Action") == "StartDeliveryJob" then
-     _G.remotetable = ...
+        if Method == 'FireServer' and self.Name == "JobRemoteHandler" and rawget(...,"Action") == "StartDeliveryJob" or  Method == 'FireServer' and self.Name == "NPCHandler" and rawget(...,"Action") == "DeclineOrder"  then
+     return
       elseif   Method == 'FireServer' and self.Name == "StartLobby" then
         _G.remotetable1 = Args
         _G.remote1 = self
@@ -51,7 +51,7 @@ spawn(function()
     local starman
     local miniman
     local maxman
-    
+    getfenv().grav = workspace.Gravity
     local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
     local example = library:CreateWindow({
       text = "Vehicle Dealership"
@@ -64,6 +64,9 @@ spawn(function()
     
     example:AddToggle("Auto Farm", function(state)
       getfenv().auto = (state and true or false)
+      wait(1)
+      workspace.Gravity = getfenv().grav
+
       while getfenv().auto do
         task.wait()
       local chr = game.Players.LocalPlayer.Character
@@ -73,14 +76,18 @@ spawn(function()
           new.Name = "justapart"
           new.Size = Vector3.new(10000,20,10000)
           new.Anchored = true
-          new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,500,0)
+          new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1000,0)
       end
       car:PivotTo(workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,7,1000))
       local pos = workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,7,-1000)
       repeat task.wait()
         local speed =  getfenv().speed or 300
+        workspace.Gravity = 500
+                car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
         car:PivotTo(CFrame.new(car.PrimaryPart.Position,Vector3.new(pos.X,car.PrimaryPart.Position.Y,pos.Z)))
+                car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
         car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
+        car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
       until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(pos.X,pos.Y,pos.Z)) < 200 or getfenv().test == false
       end
       end)
@@ -91,12 +98,17 @@ spawn(function()
             pcall(function()
             for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
             if v.ClassName == "Model" and v:GetAttribute("State") == "Ready" then
+            repeat task.wait()
+                  local chr = game.Players.LocalPlayer.Character
+  chr.Humanoid.Sit = false
+  chr.HumanoidRootPart.CFrame = v.Door.CFrame
             game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.OpenHouseDoor:FireServer(v:GetAttribute("Id"))
+            until v:GetAttribute("State") ~= "Ready" or  getfenv().xmass == false
             game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.GiveDeliveries:FireServer()
             wait(0.1)
             end
             end
-        end)
+            end)
             end
     end)
     example:AddToggle("Auto BattlePoints", function(state)
@@ -801,18 +813,6 @@ end
     end
     end
     end)
-    if readfile("cdtdelivery.txt") ~= nil then
-    starman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[1])
-    getfenv().stars = tonumber(readfile("cdtdelivery.txt"):split(" ")[1])
-    miniman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[2])
-    getfenv().smaller = tonumber(readfile("cdtdelivery.txt"):split(" ")[2])
-    maxman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[3])
-    getfenv().bigger = tonumber(readfile("cdtdelivery.txt"):split(" ")[3])
-    warn("_____________________________________Config Loaded_____________________________________")
-    print("Stars: "..getfenv().stars)
-    print("Minimum reward money: "..getfenv().smaller)
-    print("Maximum reward money: "..getfenv().bigger)
-    end
     local example = library:CreateWindow({
         text = "Teleports"
       })
@@ -827,4 +827,15 @@ end
     end
     end
      end)
-    
+     if readfile("cdtdelivery.txt") ~= nil then
+        starman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[1])
+        getfenv().stars = tonumber(readfile("cdtdelivery.txt"):split(" ")[1])
+        miniman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[2])
+        getfenv().smaller = tonumber(readfile("cdtdelivery.txt"):split(" ")[2])
+        maxman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[3])
+        getfenv().bigger = tonumber(readfile("cdtdelivery.txt"):split(" ")[3])
+        warn("_____________________________________Config Loaded_____________________________________")
+        print("Stars: "..getfenv().stars)
+        print("Minimum reward money: "..getfenv().smaller)
+        print("Maximum reward money: "..getfenv().bigger)
+        end
