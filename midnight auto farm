@@ -56,3 +56,30 @@ until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
 end)
+example:AddToggle("Auto Farm[Event]", function(state)
+getfenv().autobreak =(state and true or false)
+local hum = game.Players.LocalPlayer.Character.Humanoid
+local car = hum.SeatPart.Parent
+getfenv().carname = car:GetAttribute("CarName")
+while getfenv().autobreak do
+task.wait()
+pcall(function()
+local hum = game.Players.LocalPlayer.Character.Humanoid
+if hum.SeatPart == nil then
+game:GetService("ReplicatedStorage").SpawnCar:FireServer(getfenv().carname)
+local time = tick()
+repeat wait()
+until hum.SeatPart ~= nil or tick()-time > 5
+end
+local car = hum.SeatPart.Parent
+ car.PrimaryPart=car.Body:FindFirstChild("#Weight")
+for i,v in pairs(workspace.NPCVehicles.Vehicles:GetChildren()) do
+if v.Name == "Sleigh" and v:FindFirstChild("Part") then
+car:PivotTo(v:FindFirstChild("Part").CFrame)
+car.PrimaryPart.AssemblyLinearVelocity=car.PrimaryPart.CFrame.LookVector*500
+task.wait()
+end
+end
+end)
+end
+end)
