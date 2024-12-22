@@ -111,18 +111,34 @@ spawn(function()
             end)
             end
     end)
-    example:AddToggle("Auto BattlePoints", function(state)
+    example:AddToggle("Auto BattlePoints/Shelby", function(state)
      getfenv().autobattle = (state and true or false)
+     local chr = game.Players.LocalPlayer.Character
+
+     local tpb = chr.HumanoidRootPart.CFrame
      while getfenv().autobattle do
-     task.wait() 
+     task.wait(1) 
 pcall(function()
       local chr = game.Players.LocalPlayer.Character
       local car = chr.Humanoid.SeatPart.Parent.Parent
-    for i,v in pairs(workspace.Collectibles.Brawlhalla2024:GetDescendants()) do
+    for i,v in pairs(workspace.Collectibles:GetDescendants()) do
     if v.Name == "Part" and v.BillboardGui.Enabled then
+        local chr = game.Players.LocalPlayer.Character
+        if chr.Humanoid.SeatPart == nil then
+            chr.HumanoidRootPart.CFrame = v.CFrame
+        elseif chr.Humanoid.SeatPart ~= nil then
+        local car = chr.Humanoid.SeatPart.Parent.Parent
     car:PivotTo(v.CFrame)
+        end
     wait(0.1)
     end
+    end
+    local chr = game.Players.LocalPlayer.Character
+    if chr.Humanoid.SeatPart == nil then
+        chr.HumanoidRootPart.CFrame = tpb
+    elseif chr.Humanoid.SeatPart ~= nil then
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+car:PivotTo(tpb)
     end
 end)
     end
@@ -818,11 +834,15 @@ end
       })
     example:AddDropdown(races(),function(state)
        print(state)
-       local chr = game.Players.LocalPlayer.Character
-       local car = chr.Humanoid.SeatPart.Parent.Parent
     for i,v in pairs(workspace.Races:GetChildren()) do
     if v.Name == state and v:FindFirstChildOfClass("UnionOperation") then
+        local chr = game.Players.LocalPlayer.Character
+        if chr.Humanoid.SeatPart == nil then
+            chr.HumanoidRootPart.CFrame = v:FindFirstChildOfClass("UnionOperation").CFrame
+        elseif chr.Humanoid.SeatPart ~= nil then
+        local car = chr.Humanoid.SeatPart.Parent.Parent
     car:PivotTo(v:FindFirstChildOfClass("UnionOperation").CFrame)
+        end
     break
     end
     end
