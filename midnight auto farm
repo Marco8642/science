@@ -77,17 +77,10 @@ local car = hum.SeatPart.Parent
  car.PrimaryPart=car.Body:FindFirstChild("#Weight")
 for i,v in pairs(workspace.NPCVehicles.Vehicles:GetChildren()) do
 if v.Name == "Sleigh" and v:FindFirstChild("Part") and v:FindFirstChild("Part"):FindFirstChild("Weld") and (v:FindFirstChild("Part").Position-Vector3.new(5487.0732421875, 128.1932830810547, 1802.0748291015625)).magnitude > 1000 then
-local timeout = tick()
-repeat task.wait()
-car:PivotTo(v:FindFirstChild("Part").CFrame)
-car.PrimaryPart.AssemblyLinearVelocity=car.PrimaryPart.CFrame.LookVector*500
-until not v:FindFirstChild("Part"):FindFirstChild("Weld") or getfenv().auto == false  or tick()-timeout >= 1
+game:GetService("ReplicatedStorage").BindableEvents.HitSleigh:Fire(v:FindFirstChild("Part"), car.PrimaryPart)
 task.wait()
 end
 end
-local hum = game.Players.LocalPlayer.Character.Humanoid
-local car = hum.SeatPart.Parent
-car:PivotTo(getfenv().tpb)
 end)
 end
 end)
