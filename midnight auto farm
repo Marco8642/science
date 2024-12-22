@@ -61,6 +61,7 @@ getfenv().autobreak =(state and true or false)
 local hum = game.Players.LocalPlayer.Character.Humanoid
 local car = hum.SeatPart.Parent
 getfenv().carname = car:GetAttribute("CarName")
+getfenv().tpb = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
 while getfenv().autobreak do
 task.wait()
 pcall(function()
@@ -80,6 +81,9 @@ car.PrimaryPart.AssemblyLinearVelocity=car.PrimaryPart.CFrame.LookVector*500
 task.wait()
 end
 end
+local hum = game.Players.LocalPlayer.Character.Humanoid
+local car = hum.SeatPart.Parent
+car:PivotTo(getfenv().tpb)
 end)
 end
 end)
