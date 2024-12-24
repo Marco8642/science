@@ -24,4 +24,26 @@ for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
             wait(2)
            local test = "Cookies Amount: "..game:GetService("Players").LocalPlayer.PlayerGui.Menu.Christmas2024.Currency.Amount.Text
 print(test)
+game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/cdt%20cookies", true)
 game.Players.LocalPlayer:Kick(test)
+repeat task.wait()
+pcall(function()
+local serverfound = nil
+    local cursor
+    placeId = game.PlaceId
+    repeat
+pcall(function()
+        local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
+        for _, v in pairs(response.data) do
+           if v.playing < v.maxPlayers and tostring(v.id) ~= tostring(game.JobId) then
+           serverfound = v.id
+           print(v.playing)
+        end
+        end
+        cursor = response.nextPageCursor
+end)
+    until not cursor or serverfound ~= nil
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
+wait(5)
+end)
+until not game.Players.LocalPlayer:FindFirstChild("PlayerScripts")
