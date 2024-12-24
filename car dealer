@@ -1,13 +1,4 @@
-spawn(function()
-    for i,v in pairs(workspace:GetDescendants()) do
-        if v.ClassName == "Model" then
-        spawn(function()
-            game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,5)
-            end)
-        wait()
-        end
-        end
-        end)
+
       local function races()
         local tab = {"None"}
         for i,v in pairs(workspace.Races:GetChildren()) do
@@ -31,8 +22,9 @@ spawn(function()
     mt.__namecall = newcclosure(function(self, ...)
         local Method = getnamecallmethod()
         local Args = {...}
-        if Method == 'FireServer' and self.Name == "JobRemoteHandler" and rawget(...,"Action") == "StartDeliveryJob" or  Method == 'FireServer' and self.Name == "NPCHandler" and rawget(...,"Action") == "DeclineOrder"  then
-     return
+        if Method == 'FireServer' and self.Name == "JobRemoteHandler" and rawget(...,"Action") == "StartDeliveryJob"   then
+            print(Args)
+            _G.remotetable = ...
       elseif   Method == 'FireServer' and self.Name == "StartLobby" then
         _G.remotetable1 = Args
         _G.remote1 = self
@@ -44,6 +36,8 @@ spawn(function()
         _G.remote3 = self
       elseif Method == 'Raycast' and getfenv().race or Method == 'Ray' and _G.racetest  then
         Args[2] = Vector3.new(0,-1000,0)
+      elseif  Method == 'FireServer' and self.Name == "NPCHandler" and rawget(...,"Action") == "DeclineOrder" then
+        return
         end
         return namecall(self, ...) 
     end)
@@ -830,8 +824,20 @@ end
     end
     end)
     local example = library:CreateWindow({
-        text = "Teleports"
+        text = "Misc"
       })
+      example:AddButton("Force Load Map", function(state)
+        for i,v in pairs(workspace:GetDescendants()) do
+            if v.ClassName == "Model" then
+            spawn(function()
+                game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
+                end)
+            wait()
+            end
+            end
+      end)
+      example:AddLabel("Race Teleports", function(state)
+      end)
     example:AddDropdown(races(),function(state)
        print(state)
     for i,v in pairs(workspace.Races:GetChildren()) do
