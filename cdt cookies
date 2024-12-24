@@ -1,16 +1,21 @@
 repeat task.wait()
 until game:IsLoaded() and game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and game.Players.LocalPlayer.Character ~= nil and game.Players.LocalPlayer.Character.PrimaryPart ~= nil
+          warn("to1")
+          spawn(function()
           for i,v in pairs(workspace:GetDescendants()) do
             if v.ClassName == "Model" then
             spawn(function()
                 game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
                 end)
-            wait()
+            task.wait()
             end
             end
+            end)
+            warn("to")
   wait(2)
 for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
             if v.ClassName == "Model" and v:GetAttribute("State") == "Ready" then
+            print("check")
             repeat task.wait()
                   local chr = game.Players.LocalPlayer.Character
   chr.Humanoid.Sit = false
@@ -18,9 +23,11 @@ for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
             game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.OpenHouseDoor:FireServer(v:GetAttribute("Id"))
             until v:GetAttribute("State") ~= "Ready" or  getfenv().xmass == false
             game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.GiveDeliveries:FireServer()
+            print("check1")
             wait(0.1)
             end
             end
+            print("done")
             wait(2)
            local test = "Cookies Amount: "..game:GetService("Players").LocalPlayer.PlayerGui.Menu.Christmas2024.Currency.Amount.Text
 print(test)
