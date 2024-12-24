@@ -77,7 +77,7 @@ for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
             wait(2)
            local test = "Cookies Amount: "..game:GetService("Players").LocalPlayer.PlayerGui.Menu.Christmas2024.Currency.Amount.Text
 print(test)
-game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/cdt%20cookies", true)
+queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/cdt%20cookies", true))
 game.Players.LocalPlayer:Kick(test)
 repeat task.wait()
 pcall(function()
