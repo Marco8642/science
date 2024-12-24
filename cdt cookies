@@ -14,7 +14,7 @@ until game:IsLoaded() and game:GetService("Players").LocalPlayer:FindFirstChild(
             warn("to")
   wait(2)
 repeat task.wait()
-until game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro").Enabled
+until game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro").Enabled and game:GetService("Players").LocalPlayer.PlayerGui.Intro.UpdateScreen.Visible
       wait()
   local VIM = game:GetService("VirtualInputManager")
             local GuiService = game:GetService("GuiService")
