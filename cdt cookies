@@ -15,7 +15,23 @@ until game:IsLoaded() and game:GetService("Players").LocalPlayer:FindFirstChild(
   wait(2)
 repeat task.wait()
 until game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro") and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Intro").Enabled
-            local VIM = game:GetService("VirtualInputManager")
+      wait()
+  local VIM = game:GetService("VirtualInputManager")
+            local GuiService = game:GetService("GuiService")
+            local player = game.Players.LocalPlayer
+            local button = game:GetService("Players").LocalPlayer.PlayerGui.Intro.UpdateScreen.Continue
+
+            local RunService = game:GetService("RunService")
+            button.Selectable = true
+            wait()
+                    GuiService.SelectedObject = button
+                    VIM:SendKeyEvent(true, Enum.KeyCode.Return, false, player.PlayerGui)
+                    VIM:SendKeyEvent(false, Enum.KeyCode.Return, false, player.PlayerGui)
+                    wait()
+            GuiService.SelectedObject = nil
+wait(1)
+
+local VIM = game:GetService("VirtualInputManager")
             local GuiService = game:GetService("GuiService")
             local player = game.Players.LocalPlayer
             local button = game:GetService("Players").LocalPlayer.PlayerGui.Intro.ChooseDealership.ScrollingFrame.Dealership1.Choose
