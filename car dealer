@@ -60,7 +60,6 @@
       getfenv().auto = (state and true or false)
       wait(1)
       workspace.Gravity = getfenv().grav
-
       while getfenv().auto do
         task.wait()
       local chr = game.Players.LocalPlayer.Character
@@ -105,6 +104,65 @@
             end)
             end
     end)
+example:AddButton("Xmass Delivery[Server Hop]",function(state)
+repeat task.wait()
+until game:IsLoaded() and game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") and game.Players.LocalPlayer.Character ~= nil and game.Players.LocalPlayer.Character.PrimaryPart ~= nil
+          warn("to1")
+          spawn(function()
+          for i,v in pairs(workspace:GetDescendants()) do
+            if v.ClassName == "Model" then
+            spawn(function()
+                game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
+                end)
+            task.wait()
+            end
+            end
+            end)
+            warn("to")
+  wait(2)
+for i,v in pairs(workspace.Christmas2024.Houses:GetChildren()) do
+            if v.ClassName == "Model" and v:GetAttribute("State") == "Ready" then
+            print("check")
+            repeat task.wait()
+                  local chr = game.Players.LocalPlayer.Character
+  chr.Humanoid.Sit = false
+  chr.HumanoidRootPart.CFrame = v.Door.CFrame
+            game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.OpenHouseDoor:FireServer(v:GetAttribute("Id"))
+            until v:GetAttribute("State") ~= "Ready" or  getfenv().xmass == false
+            game:GetService("ReplicatedStorage").Remotes.Services.Christmas2024ServiceRemotes.GiveDeliveries:FireServer()
+            print("check1")
+            wait(0.1)
+            end
+            end
+            print("done")
+            wait(2)
+           local test = "Cookies Amount: "..game:GetService("Players").LocalPlayer.PlayerGui.Menu.Christmas2024.Currency.Amount.Text
+print(test)
+queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/cdt%20cookies", true))
+game.Players.LocalPlayer:Kick(test)
+repeat task.wait()
+pcall(function()
+local serverfound = nil
+    local cursor
+    placeId = game.PlaceId
+    repeat
+pcall(function()
+        local response = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://games.roblox.com/v1/games/" .. placeId .. "/servers/Public?sortOrder=Asc&limit=100" .. (cursor and "&cursor=" .. cursor or "")))
+        for _, v in pairs(response.data) do
+           if v.playing < v.maxPlayers and tostring(v.id) ~= tostring(game.JobId) then
+           serverfound = v.id
+           print(v.playing)
+        end
+        end
+        cursor = response.nextPageCursor
+end)
+    until not cursor or serverfound ~= nil
+game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
+wait(5)
+end)
+until not game.Players.LocalPlayer:FindFirstChild("PlayerScripts")
+
+end)
     example:AddToggle("Auto BattlePoints/Shelby", function(state)
      getfenv().autobattle = (state and true or false)
      local chr = game.Players.LocalPlayer.Character
