@@ -99,4 +99,4 @@ end)
 game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, serverfound, game.Players.LocalPlayer)
 wait(5)
 end)
-until not game.Players.LocalPlayer:FindFirstChild("PlayerScripts")
+until not game
