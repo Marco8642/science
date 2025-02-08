@@ -34,20 +34,35 @@ if getfenv().first ~= true then
     if workspace.Workspace:FindFirstChild("Buildings") then
     workspace.Workspace.Buildings:Destroy()
     end
-car:PivotTo(CFrame.new(Vector3.new(-7594.541015625, -3.513848304748535, 5130.95263671875),Vector3.new(-6205.29833984375, -3.5030133724212646, 8219.853515625)))
-wait(5)
 
+if BobTheBuilder == nil then
+BobTheBuilder = Instance.new("Part",workspace)
+BobTheBuilder.Size = Vector3.new(10000,10,10000)
+BobTheBuilder.Position = Vector3.new(-7594.541015625, 7, 5130.95263671875)
+BobTheBuilder.Anchored = true
+BobTheBuilder2 = Instance.new("Part",workspace)
+BobTheBuilder2.Size = Vector3.new(10000,10,10000)
+BobTheBuilder2.CFrame = BobTheBuilder.CFrame*CFrame.new(0,0,-1000)
+BobTheBuilder2.Anchored = true
+BobTheBuilder3 = Instance.new("Part",workspace)
+BobTheBuilder3.Size = Vector3.new(10000,10,10000)
+BobTheBuilder3.CFrame = BobTheBuilder2.CFrame*CFrame.new(0,0,-1000)
+BobTheBuilder3.Anchored = true
 end
+car:PivotTo(BobTheBuilder.CFrame*CFrame.new(0,5,1000))
+wait(5)
+end
+
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 getfenv().first = true
- local location = Vector3.new(-6205.29833984375, -3.5030133724212646, 8219.853515625)
+ local location = BobTheBuilder2.CFrame*CFrame.new(0,5,-1300).Position
  repeat task.wait()
     mathlock = getfenv().speed or 500
     car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
     car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
 until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().auto == false 
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
-local location = Vector3.new(-7594.541015625, -3.513848304748535, 5130.95263671875)
+local location = BobTheBuilder.CFrame*CFrame.new(0,5,1000).Position
 repeat task.wait()
     mathlock = getfenv().speed or 500
     car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
@@ -56,31 +71,7 @@ until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
 end)
-example:AddToggle("Auto Farm[Event]", function(state)
-getfenv().autobreak =(state and true or false)
-local hum = game.Players.LocalPlayer.Character.Humanoid
-local car = hum.SeatPart.Parent
-getfenv().carname = car:GetAttribute("CarName")
-getfenv().tpb = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-while getfenv().autobreak do
-task.wait()
-pcall(function()
-local hum = game.Players.LocalPlayer.Character.Humanoid
-if hum.SeatPart == nil then
-game:GetService("ReplicatedStorage").SpawnCar:FireServer(getfenv().carname)
-local time = tick()
-repeat wait()
-until hum.SeatPart ~= nil or tick()-time > 5
-end
 
-local car = hum.SeatPart.Parent
- car.PrimaryPart=car.Body:FindFirstChild("#Weight")
-for i,v in pairs(workspace.NPCVehicles.Vehicles:GetChildren()) do
-if v.Name == "Sleigh" and v:FindFirstChild("Part") and v:FindFirstChild("Part"):FindFirstChild("Weld") and (v:FindFirstChild("Part").Position-Vector3.new(5487.0732421875, 128.1932830810547, 1802.0748291015625)).magnitude > 1000 then
-game:GetService("ReplicatedStorage").BindableEvents.HitSleigh:Fire(v:FindFirstChild("Part"), car.PrimaryPart)
-task.wait()
-end
-end
-end)
-end
-end)
+
+
+
