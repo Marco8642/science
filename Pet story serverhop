@@ -1,0 +1,11 @@
+repeat task.wait()
+until game:IsLoaded()
+wait(5)
+for i=1,100 do
+local ohVector31 = game.Players.LocalPlayer.Character.PrimaryPart.Position
+game:GetService("ReplicatedStorage").Remotes.TreatTouched:FireServer(ohVector31)
+end
+wait(2)
+game.Players.LocalPlayer:Kick("Treats Amount: "..game.Players.LocalPlayer.PlayerGui.MainGui.Layout.StatGui.Treats.TreatAmount.Text)
+wait(1)
+game:GetService("TeleportService"):Teleport(game.PlaceId)
