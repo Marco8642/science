@@ -6,6 +6,7 @@ local ohVector31 = game.Players.LocalPlayer.Character.PrimaryPart.Position
 game:GetService("ReplicatedStorage").Remotes.TreatTouched:FireServer(ohVector31)
 end
 wait(2)
+queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/ok/Pet%20story%20serverhop"))
 game.Players.LocalPlayer:Kick("Treats Amount: "..game.Players.LocalPlayer.PlayerGui.MainGui.Layout.StatGui.Treats.TreatAmount.Text)
 wait(1)
-game:GetService("TeleportService"):Teleport(game.PlaceId)
+game:GetService("TeleportService"):Teleport(7126404880)
