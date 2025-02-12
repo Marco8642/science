@@ -1,12 +1,13 @@
 repeat task.wait()
-until game:IsLoaded()
-wait(5)
+until game:IsLoaded() and game.Players.LocalPlayer.Character ~= nil and game.Players.LocalPlayer.Character.PrimaryPart ~= nil
+wait()
 for i=1,100 do
 local ohVector31 = game.Players.LocalPlayer.Character.PrimaryPart.Position
 game:GetService("ReplicatedStorage").Remotes.TreatTouched:FireServer(ohVector31)
+task.wait()
 end
-wait(2)
+wait()
 queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/ok/Pet%20story%20serverhop"))
 game.Players.LocalPlayer:Kick("Treats Amount: "..game.Players.LocalPlayer.PlayerGui.MainGui.Layout.StatGui.Treats.TreatAmount.Text)
-wait(1)
+wait()
 game:GetService("TeleportService"):Teleport(7126404880)
