@@ -1,0 +1,64 @@
+local function getBox(value)
+local box = nil
+for i,v in pairs(game:GetService("ReplicatedStorage").MysteryBoxes:GetChildren()) do
+if string.find(v.Name,value) then
+box = v.Name
+end
+end
+return box
+end
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+local justatable = {}
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2", true))()
+local example = library:CreateWindow({
+text = "Pet Story"
+})
+local function getBox(value)
+    local box = nil
+    for i,v in pairs(game:GetService("ReplicatedStorage").MysteryBoxes:GetChildren()) do
+    if string.find(v.Name,value) then
+    box = v.Name
+    end
+    end
+    return box
+    end
+example:AddBox("Enter Mystery Box Name", function(object, focus)
+     if focus then
+        getfenv().box = getBox(tostring(object.Text))
+     end
+    end)
+    example:AddToggle("Auto Open Box", function(state)
+        getfenv().auto1 = (state and true or false)
+        while getfenv().auto1 do
+        task.wait()
+        game:GetService("ReplicatedStorage").Remotes.Boxes.RequestBoxUnlock:InvokeServer(getfenv().box)
+        end
+    end)
+    example:AddToggle("Auto Kill Enemies", function(state)
+        getfenv().auto = (state and true or false)
+    while getfenv().auto do
+        wait()
+        pcall(function()
+        for i,v in pairs(workspace:GetDescendants()) do
+        if  v:IsA("Humanoid") and not v:IsDescendantOf(game.Players.LocalPlayer.Character) then
+        v.Health = 0
+        task.wait()
+        end
+        end
+    end)
+        end
+    end)
+    example:AddButton("Auto Farm Treats[ServerHop]", function(state)
+    if game.PlaceId == 7126404880 then
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/ok/Pet%20story%20serverhop"))() 
+        else
+        queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/ok/Pet%20story%20serverhop"))
+game:GetService("TeleportService"):Teleport(7126404880)
+        end
+    end)
+   
