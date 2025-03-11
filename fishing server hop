@@ -7,6 +7,7 @@ pcall(function()
 if game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ErrorPrompt.Visible and getfenv().success ~= true then
 queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
 game:GetService("TeleportService"):Teleport(game.PlaceId)
+wait(5)
 end
 end)
 end
