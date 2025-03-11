@@ -1,9 +1,21 @@
+
 repeat task.wait()
 until game:IsLoaded()
+spawn(function()
+while task.wait() do
+pcall(function()
+if game:GetService("CoreGui").RobloxPromptGui.promptOverlay.ErrorPrompt.Visible and getfenv().success ~= true then
+queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
+game:GetService("TeleportService"):Teleport(game.PlaceId)
+end
+end)
+end
+end)
 wait()
 print("game loaded")
 repeat task.wait()
 until game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
+getfenv().success = true
 print("Done Loading")
 wait(5)
 pcall(function()
