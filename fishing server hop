@@ -16,7 +16,6 @@ wait()
 print("game loaded")
 repeat task.wait()
 until game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
-getfenv().success = true
 print("Done Loading")
 wait(5)
 pcall(function()
@@ -34,6 +33,7 @@ print(v:GetFullName())
       end
       end
 end)
+getfenv().success = true
       queueonteleport(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/fishing%20server%20hop", true))
 repeat task.wait()
 pcall(function()
