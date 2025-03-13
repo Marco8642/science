@@ -17,6 +17,19 @@ repeat task.wait()
 until game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui")
 print("Done Loading")
 wait(5)
+spawn(function()
+while task.wait() do
+pcall(function()
+if game:GetService("Players") and game.Players.LocalPlayer.Character ~= nil then
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+if v:IsA("BillboardGui") then
+v:Destroy()
+end
+end
+end
+end)
+end
+end)
 pcall(function()
  for i,v in pairs(workspace:GetDescendants()) do
          if v.ClassName == "ProximityPrompt" and v.Parent ~= nil and v.Parent.Name == "HumanoidRootPart" and not v.Parent.Parent:GetAttribute("OpenParticlesType") and v.Enabled and v.ActionText == "Open"  then
