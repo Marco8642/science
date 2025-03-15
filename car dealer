@@ -70,24 +70,31 @@ example:AddToggle("Auto Farm", function(state)
       new.Anchored = true
       new.Position = game.Players.LocalPlayer.Character.HumanoidRootPart.Position+Vector3.new(0,1000,0)
   end
-  car:PivotTo(workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,7,1000))
-  local pos = workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,7,-1000)
-  repeat task.wait()
-    local speed =  getfenv().speed or 300
-    workspace.Gravity = 500
-            car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
-    car:PivotTo(CFrame.new(car.PrimaryPart.Position,Vector3.new(pos.X,car.PrimaryPart.Position.Y,pos.Z)))
-            car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
+  car:PivotTo(workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,10,1000))
+  local pos = workspace:FindFirstChild("justapart").CFrame*CFrame.new(0,10,-1000)
+  local dist = (car.PrimaryPart.Position-pos.Position).magnitude
     car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
-    car.PrimaryPart.Velocity = Vector3.new(car.PrimaryPart.Velocity.X,-100,car.PrimaryPart.Velocity.Z) 
-  until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(pos.X,pos.Y,pos.Z)) < 200 or getfenv().test == false
+    local speed =  getfenv().speed or 300
+     local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, true, 0)
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car.WorldPivot
+TweenValue.Changed:Connect(function()
+    car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
+	car:PivotTo(TweenValue.Value)
+    car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
+end)		
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
+OnTween:Play()
+ OnTween.Completed:Wait()
+ car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*speed
   end
   end)
-      example:AddToggle("Auto Open VW Kit", function(state)
+      example:AddToggle("Auto Open Vehicle Kit", function(state)
 getfenv().open = (state and true or false)
 while getfenv().open do
 task.wait()
-game:GetService("ReplicatedStorage").Remotes.Services.VolkswagenEventServiceRemotes.ClaimFreePack:InvokeServer()
+game:GetService("ReplicatedStorage").Remotes.Services.CarKitEventServiceRemotes.ClaimFreePack:InvokeServer()
 end
  end)
 example:AddToggle("Auto Extinguish Fire", function(state)
@@ -425,11 +432,13 @@ wait(1)
                             game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0)
                             local function getstars()
                             local stars = 0
-                            for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Frame.Stars:GetChildren()) do
+                            if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") then
+                            for i,v in pairs(game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars",1).Frame.Stars:GetChildren()) do
                             if string.find(v.Name,"Star") and v.ImageColor3 == Color3.fromRGB(255, 189, 34) then
                             stars = stars+1
                             end
                         end
+                    end
                         return stars
                         end
                         local function isused(hi)
@@ -442,7 +451,7 @@ wait(1)
                             return yeno
                             end
                         print(tonumber(getstars()).." Stars bonus")
-                        if tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("MissionRewardStars").Enabled == true and getfenv().checkif == nil then
+                        if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars") and tonumber(getstars()) < getfenv().stars and game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("MissionRewardStars").Enabled == true and getfenv().checkif == nil then
                             whate = nil
                             if type(_G.usedids) ~= "table" then
                                 _G.usedids = {}
@@ -631,10 +640,11 @@ local postest2 = Vector3.new(postest.X,postest.Y,postest.Z)
     end
     if test ~= nil then
     print(tonumber(test.Parent.Name),#test.Parent.Parent:GetChildren())
-    if tonumber(test.Parent.Name) == #test.Parent.Parent:GetChildren() then
+    if tonumber(test.Parent.Name) == #test.Parent.Parent:GetChildren() and updategoal1() ~= nil then
     local v = updategoal1()
     local chr = game.Players.LocalPlayer.Character
     local car = chr.Humanoid.SeatPart.Parent.Parent
+        local test = CFrame.new(v.Position.X,chr.PrimaryPart.Position.Y,v.Position.Z)
     dist = (chr.HumanoidRootPart.Position-v.Position).Magnitude
     local TweenService = game:GetService("TweenService")
     local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
@@ -643,7 +653,7 @@ local postest2 = Vector3.new(postest.X,postest.Y,postest.Z)
     TweenValue.Changed:Connect(function()
     car:PivotTo(TweenValue.Value)
     end)
-    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
+    local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=test})
     OnTween:Play()
     OnTween.Completed:Wait()
   end
@@ -776,7 +786,7 @@ task.wait()
 end
 end
 end)
-             example:AddToggle("Auto VW Points Farm",function(state)
+             example:AddToggle("AutoFarm[laps|checkpoints]",function(state)
             _G.racetest = (state and true or false)
             while _G.racetest do
                 wait()
