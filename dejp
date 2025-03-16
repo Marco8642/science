@@ -1,6 +1,3 @@
-
-
-
 warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
