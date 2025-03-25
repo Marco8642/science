@@ -1,1 +1,2 @@
+getfenv().death = true -- toggle false to not die after getting bonds
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/ok/dead%20rails"))()
