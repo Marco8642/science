@@ -1,4 +1,15 @@
 
+for i,v in pairs(workspace:GetDescendants()) do
+	if v.ClassName == "Model" or v:IsA("BasePart") then
+	spawn(function()
+	if v:IsA("Model") then
+		game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
+		else
+		game.Players.LocalPlayer:RequestStreamAroundAsync(v.Position,1)
+		end
+		end)
+	end
+	end
 	warn("Anti afk running")
 	game:GetService("Players").LocalPlayer.Idled:connect(function()
 	warn("Anti afk ran")
