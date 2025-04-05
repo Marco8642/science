@@ -171,6 +171,9 @@ game:GetService("ReplicatedStorage").Event.PrivateServer:InvokeServer("ChangeLap
 		end
 	  end)
       wait(5)
+      spawn(function()
+      while task.wait() do
+      if getfenv().egggs ~= false then
         for i,v in pairs(workspace:GetDescendants()) do
 	if v.ClassName == "Model" or v:IsA("BasePart") then
 	spawn(function()
@@ -182,3 +185,7 @@ game:GetService("ReplicatedStorage").Event.PrivateServer:InvokeServer("ChangeLap
 		end)
 	end
 	end
+    wait(5)
+    end
+    end
+    end)
