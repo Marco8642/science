@@ -1,15 +1,4 @@
 
-for i,v in pairs(workspace:GetDescendants()) do
-	if v.ClassName == "Model" or v:IsA("BasePart") then
-	spawn(function()
-	if v:IsA("Model") then
-		game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
-		else
-		game.Players.LocalPlayer:RequestStreamAroundAsync(v.Position,1)
-		end
-		end)
-	end
-	end
 	warn("Anti afk running")
 	game:GetService("Players").LocalPlayer.Idled:connect(function()
 	warn("Anti afk ran")
@@ -30,15 +19,16 @@ for i,v in pairs(workspace:GetDescendants()) do
 		getfenv().egggs = (state and true or false)
 		while getfenv().egggs do
 			task.wait()
-		for i,v in pairs(workspace.Eggs:GetDescendants()) do
-			if v.Name == "TouchInterest" then
-            pcall(function()
-			firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
-			firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
-            end)
-			task.wait()
-			end
-			end
+		for i,v in pairs(workspace.Eggs:GetChildren()) do
+if v:IsA("Model") then
+repeat task.wait()
+game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
+task.wait()
+game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot+Vector3.new(0,20,0))
+until v.Parent == nil
+end
+end
+
 		end
 	  end)
 	  example:AddToggle("Auto Drive", function(state)
@@ -172,22 +162,3 @@ end)
 game:GetService("ReplicatedStorage").Event.PrivateServer:InvokeServer("ChangeLaps", getfenv().selectedrace, tonumber(object.Text))
 		end
 	  end)
-      wait(5)
-      spawn(function()
-      while task.wait() do
-      if getfenv().egggs ~= false then
-        for i,v in pairs(workspace:GetDescendants()) do
-	if v.ClassName == "Model" or v:IsA("BasePart") then
-	spawn(function()
-	if v:IsA("Model") then
-		game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
-		else
-		game.Players.LocalPlayer:RequestStreamAroundAsync(v.Position,1)
-		end
-		end)
-	end
-	end
-    wait(5)
-    end
-    end
-    end)
