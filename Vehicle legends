@@ -170,7 +170,7 @@ end)
 game:GetService("ReplicatedStorage").Event.PrivateServer:InvokeServer("ChangeLaps", getfenv().selectedrace, tonumber(object.Text))
 		end
 	  end)
-      wait(1)
+      wait(5)
         for i,v in pairs(workspace:GetDescendants()) do
 	if v.ClassName == "Model" or v:IsA("BasePart") then
 	spawn(function()
