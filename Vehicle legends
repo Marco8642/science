@@ -34,7 +34,7 @@ for i,v in pairs(workspace:GetDescendants()) do
 if v:IsA("Model") and getfenv().egggs  then
 repeat task.wait()
 game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot)
-task.wait()
+wait()
 game.Players.LocalPlayer.Character:PivotTo(v.WorldPivot+Vector3.new(0,20,0))
 until v.Parent == nil or getfenv().egggs  == false
 end
