@@ -32,8 +32,10 @@ for i,v in pairs(workspace:GetDescendants()) do
 			task.wait()
 		for i,v in pairs(workspace.Eggs:GetDescendants()) do
 			if v.Name == "TouchInterest" then
+            pcall(function()
 			firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,0)
 			firetouchinterest(game.Players.LocalPlayer.Character.HumanoidRootPart,v.Parent,1)
+            end)
 			task.wait()
 			end
 			end
