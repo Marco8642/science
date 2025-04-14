@@ -47,10 +47,15 @@ BobTheBuilder2.Anchored = true
 BobTheBuilder3 = Instance.new("Part",workspace)
 BobTheBuilder3.Size = Vector3.new(10000,10,10000)
 BobTheBuilder3.CFrame = BobTheBuilder2.CFrame*CFrame.new(0,0,-1000)
-BobTheBuilder3.Anchored = true
+BobTheBuilder3.Anchored = true 
 end
 car:PivotTo(BobTheBuilder.CFrame*CFrame.new(0,5,1000))
 wait(5)
+for i,v in pairs(workspace.Buildings:GetDescendants()) do
+    if v:IsA("BasePart") and (v.Position-BobTheBuilder.Position).magnitude < 500 then
+    v.CanCollide = false
+    end
+    end   
 end
 
 car.PrimaryPart.Velocity = Vector3.new(0,0,0)
@@ -72,6 +77,28 @@ car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
 end)
 
-
-
+example:AddToggle("Auto Collect Eggs[Event]", function(state)
+getfenv().easter = (state and true or false)
+if getfenv().easter  then
+for i,v in pairs(workspace:GetDescendants()) do
+if v:IsA("Model") and #v:GetChildren() == 0 then
+local timeout = tick()
+task.spawn(function()
+    game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
+end)
+task.wait()
+end
+end
+end
+while getfenv().easter do
+task.wait()
+for i,v in pairs(workspace.EasterEggs:GetDescendants()) do
+if v.Name == "TouchInterest" then
+game.Players.LocalPlayer.Character.PrimaryPart.CFrame=v.Parent.CFrame
+game.Players.LocalPlayer.Character.PrimaryPart.CFrame=v.Parent.CFrame+Vector3.new(0,5,0)
+break
+end
+end
+end
+end)
 
