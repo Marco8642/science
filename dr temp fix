@@ -1,0 +1,17 @@
+local function train()
+local test = nil
+for i,v in pairs(workspace:GetChildren()) do
+if v:IsA("Model") and v:GetAttribute("Stopped") ~= nil then
+test = v
+end
+end
+return test
+end
+repeat task.wait()
+until train() ~= nil
+train().Name ="Train"
+train().RequiredComponents.Controls.ConductorSeat.Parent = train().RequiredComponents
+train().RequiredComponents.Name = "TrainControls"
+local promise = Instance.new("Folder",game:GetService("ReplicatedStorage").Packages)
+promise.Name = "RemotePromise"
+game:GetService("ReplicatedStorage").Shared.Network.RemotePromise.Remotes.Parent = promise
