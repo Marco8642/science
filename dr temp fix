@@ -23,4 +23,9 @@ if game.Players.LocalPlayer.Character.Humanoid.Health > 10 then
 healthout = tick()
 end
 until game.Players.LocalPlayer.Character.Humanoid.Health < 10 and tick()-healthout > 60
+      repeat task.wait()
+                    local plr = game.Players.LocalPlayer
+                local chr = plr.Character
+          chr:PivotTo(CFrame.new(-2047.5, -78, -49429, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+          until not game
 end)
