@@ -16,3 +16,11 @@ local promise = Instance.new("Folder",game:GetService("ReplicatedStorage").Packa
 promise.Name = "RemotePromise"
 game:GetService("ReplicatedStorage").Shared.Network.RemotePromise.Remotes.Parent = promise
 queueonteleport([[loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/dr%20temp%20fix"))()]])
+spawn(function()
+local healthout = tick()
+repeat task.wait()
+if game.Players.LocalPlayer.Character.Humanoid.Health > 10 then
+healthout = tick()
+end
+until game.Players.LocalPlayer.Character.Humanoid.Health < 10 and tick()-healthout > 60
+end)
