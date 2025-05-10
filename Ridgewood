@@ -27,6 +27,12 @@ local chr = plr.Character
 local car = chr.Humanoid.SeatPart.Parent
 car.PrimaryPart = car.Body["#Weight"]
 local location = car.PrimaryPart.CFrame
+if sethiddenproperty ~= nil then
+pcall(function()
+sethiddenproperty(workspace,"StreamingTargetRadius","100000")
+sethiddenproperty(workspace,"StreamingMinRadius","100000")
+end)
+end
 while getfenv().test do
   task.wait()
   local plr = game.Players.LocalPlayer
