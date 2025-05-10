@@ -1,0 +1,51 @@
+
+warn("Anti afk running")
+game:GetService("Players").LocalPlayer.Idled:connect(function()
+warn("Anti afk ran")
+game:GetService("VirtualUser"):CaptureController()
+game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+end)
+if sethiddenproperty ~= nil then
+pcall(function()
+sethiddenproperty(workspace,"StreamingTargetRadius","100000")
+sethiddenproperty(workspace,"StreamingMinRadius","100000")
+end)
+end
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/main/ui%20libs2"))()
+local example = library:CreateWindow({
+  text = "Ridgewood"
+})
+  example:AddBox("Vehicle Speed Value", function(object, focus)
+    if focus then
+   getfenv().speed = tonumber(object.Text)
+    end
+end)
+example:AddToggle("Auto farm", function(state)
+getfenv().test = (state and true or false)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local car = chr.Humanoid.SeatPart.Parent
+car.PrimaryPart = car.Body["#Weight"]
+local location = car.PrimaryPart.CFrame
+while getfenv().test do
+  task.wait()
+  local plr = game.Players.LocalPlayer
+  local chr = plr.Character
+  local car = chr.Humanoid.SeatPart.Parent
+  if not workspace:FindFirstChild("justanormalpart") then
+local new = Instance.new("Part",workspace)
+new.Name = "justanormalpart"
+new.Anchored = true
+new.Size = Vector3.new(10000,10,10000)
+new.Position = chr.HumanoidRootPart.Position+Vector3.new(0,5000,0)
+  end
+     car:PivotTo(workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,1000))
+    local pos = workspace:FindFirstChild("justanormalpart").CFrame*CFrame.new(0,7,-1000)
+    repeat task.wait()
+    local testspeed = getfenv().speed or 200
+      car:PivotTo(CFrame.new(car.PrimaryPart.Position,Vector3.new(pos.X,car.PrimaryPart.Position.Y,pos.Z)))
+      car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*testspeed
+    until game.Players.LocalPlayer:DistanceFromCharacter(Vector3.new(pos.X,pos.Y,pos.Z)) < 200 or getfenv().test == false
+  task.wait()
+end
+end)
