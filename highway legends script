@@ -1,1 +1,121 @@
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/Highway%20Legends"))()
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Highway Legends Script Viewer</title>
+<style>
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #eee;
+    margin: 0; padding: 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  h1 {
+    margin: 0;
+    color: #ff6600;
+  }
+  #script-container {
+    background: #222;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    white-space: pre-wrap;
+  }
+  button {
+    background-color: #ff6600;
+    border: none;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    margin: 20px auto;
+  }
+  button:hover {
+    background-color: #e05500;
+  }
+  footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9em;
+    color: #888;
+  }
+  a {
+    color: #ff6600;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Highway Legends Script Viewer</h1>
+  <p>View and copy the official script from GitHub</p>
+  <p>
+    <a href="https://github.com/Marco8642/science/blob/main/highway%20legends%20script" target="_blank" rel="noopener noreferrer">
+      View on GitHub
+    </a>
+  </p>
+</header>
+
+<pre id="script-container">Loading script...</pre>
+
+<button id="copy-btn">Copy Script</button>
+
+<footer>
+  &copy; 2025 Highway Legends. Made by Hesandu.
+</footer>
+
+<script>
+  // GitHub raw URL for the script text
+  const rawUrl = "https://raw.githubusercontent.com/Marco8642/science/main/highway%20legends%20script";
+
+  const scriptContainer = document.getElementById("script-container");
+  const copyBtn = document.getElementById("copy-btn");
+
+  // Fetch script text from GitHub raw URL
+  fetch(rawUrl)
+    .then(response => {
+      if (!response.ok) throw new Error("Failed to load script.");
+      return response.text();
+    })
+    .then(text => {
+      scriptContainer.textContent = text;
+    })
+    .catch(err => {
+      scriptContainer.textContent = "Error loading script: " + err.message;
+    });
+
+  // Copy script text to clipboard
+  copyBtn.addEventListener("click", () => {
+    const text = scriptContainer.textContent;
+    if (!text) return;
+
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => {
+        copyBtn.textContent = "Copy Script";
+      }, 2000);
+    }).catch(() => {
+      alert("Failed to copy script.");
+    });
+  });
+</script>
+
+</body>
+</html>
