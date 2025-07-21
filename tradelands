@@ -156,3 +156,46 @@ else
 end
 end
 end)
+example:AddToggle("Auto Fishing", function(state)
+getfenv().fishing = ( state and true or false )
+local function sound(value)
+    local sound = nil
+for i,v in pairs(value:GetChildren()) do
+    if v:IsA("Sound") and v.Playing and v.Volume > 0.7 then
+        sound = v
+end
+end
+return sound
+end
+while getfenv().fishing do
+    task.wait()
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local tool =  chr:FindFirstChildOfClass("Tool")
+if tool and tool:FindFirstChild("ItemName") and tool.ItemName.Value == "Fishing Rod" then
+   test = nil
+--   for i2,v2 in pairs(tool:GetDescendants()) do
+--       if v2:IsA("Sound") and v2.Parent:IsA("BasePart") and tonumber(v2.Parent.Name) ~= nil and v2.Playing and getfenv().gotrid ~= true then
+--           v2:Destroy()
+--           getfenv().gotrid = true
+--           end
+--           end
+    for i,v in pairs(tool:GetChildren()) do
+        if v:IsA("BasePart") and tonumber(v.Name) ~= nil and sound(v) then
+            print(v)
+            test = v
+            tool.ToolScript.Swing:FireServer("left", {})
+task.wait(3)
+elseif  v:IsA("BasePart") and tonumber(v.Name) ~= nil and not sound(v) then
+    test = v
+        end
+    end
+    if not test then
+       -- getfenv().gotrid = false
+tool.ToolScript.Swing:FireServer("left", {})
+task.wait(3)
+             print(tool)  
+        end
+end
+end
+end)
