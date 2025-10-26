@@ -77,28 +77,52 @@ car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
 end)
 
-example:AddToggle("Auto Collect Eggs[Event]", function(state)
-getfenv().easter = (state and true or false)
-if getfenv().easter  then
-for i,v in pairs(workspace:GetDescendants()) do
-if v:IsA("Model") and #v:GetChildren() == 0 then
-local timeout = tick()
-task.spawn(function()
-    game.Players.LocalPlayer:RequestStreamAroundAsync(v.WorldPivot.Position,1)
-end)
+example:AddToggle("Auto Collect Pumpkins[Event]", function(state)
+getfenv().pumpkin = (state and true or false)
+while getfenv().pumpkin do
 task.wait()
+local service = game:GetService("CollectionService")
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local seat = chr.Humanoid.SeatPart
+local car = seat.Parent
+local prim = chr.PrimaryPart
+local maxdistance = math.huge
+local chosen
+for i,v in pairs(service:GetTagged("Detail_Bigger")) do
+if v.PrimaryPart and getfenv().pumpkin then
+local dist = (v.PrimaryPart.Position-seat.Position).magnitude
+if dist < maxdistance then
+maxdistance = dist
+chosen = v.PrimaryPart
 end
 end
 end
-while getfenv().easter do
-task.wait()
-for i,v in pairs(workspace.EasterEggs:GetDescendants()) do
-if v.Name == "TouchInterest" then
-game.Players.LocalPlayer.Character.PrimaryPart.CFrame=v.Parent.CFrame
-game.Players.LocalPlayer.Character.PrimaryPart.CFrame=v.Parent.CFrame+Vector3.new(0,5,0)
-break
-end
-end
-end
-end)
+if chosen then
+    local mesh = chosen.Parent:FindFirstChildOfClass("MeshPart")
+    local test = mesh.CFrame-Vector3.new(0,5,0)
+--local velo = chr.PrimaryPart.Velocity
+         local LocalPlayer = game.Players.LocalPlayer
+         local chr = LocalPlayer.Character
+          local pos = test
+          local speed = getfenv().speed or 500
+          local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position- pos.Position).magnitude
+         local TweenService = game:GetService("TweenService")
+         local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+         
+         local TweenValue = Instance.new("CFrameValue")
+         TweenValue.Value = chr:GetPrimaryPartCFrame()
+                     
+         TweenValue.Changed:Connect(function()
+             car:PivotTo(TweenValue.Value)
+             local test = car.PrimaryPart.Velocity
+              car.PrimaryPart.Velocity = Vector3.zero
+         end)
+                     
+         getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
+         getfenv().tween:Play()
+         getfenv().tween.Completed:Wait()
 
+end
+end
+end)
