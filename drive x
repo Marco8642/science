@@ -47,5 +47,64 @@ local speed = getfenv().speed or 500
      game:GetService("VirtualInputManager"):SendKeyEvent(getfenv().auto,"W",false,game)
 end
 end)
+example:AddToggle("Auto Bridge Trail Race", function(state)
+    getfenv().autorace = (state and true or false)
 
 
+local plr = game:GetService("Players").LocalPlayer
+local CarSerivce = require(plr.PlayerScripts.TS.CarService.CarService_Client).CarSerivce
+local CarInfo = CarSerivce.ActiveCar
+local CarState = CarInfo.CarState.State
+local CarConfig = CarState.Config
+local CarGears = CarConfig.Physics.Transmission.Gears
+local GearValue = #CarGears
+local maxSpeed = CarGears[GearValue][1]
+while getfenv().autorace do
+    task.wait()
+  if not workspace.RaceCheckpoints:FindFirstChildOfClass("Model") then  
+local ohString1 = "BridgeTrail"
+local ohBoolean2 = true
+
+game:GetService("ReplicatedStorage")["events-shared/Definations/Networking/RaceDefinations@GeneralEvents"].EnterRaceQueue:FireServer(ohString1, ohBoolean2)
+task.wait(1)
+  else
+for i,v in pairs(workspace.RaceCheckpoints:GetChildren()) do
+    if v:IsA("Model") and v:FindFirstChild("Ring").Transparency < 1 then
+local dist = (CarInfo.Body.Position-v.WorldPivot.Position).magnitude
+		 local TweenService = game:GetService("TweenService")
+		 local TweenInfoToUse = TweenInfo.new(dist/maxSpeed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+		 
+		 local TweenValue = Instance.new("CFrameValue")
+		 TweenValue.Value = CarInfo.Body.CFrame
+					 
+		 TweenValue.Changed:Connect(function()
+			 CarInfo.Body.CFrame = TweenValue.Value
+			   --CarInfo.Body.AssemblyLinearVelocity = CarInfo.Body.CFrame.LookVector*speed
+				CarInfo.Body.AssemblyLinearVelocity = Vector3.zero
+		 end) 
+		 getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.WorldPivot})
+		 getfenv().tween:Play()
+		getfenv().tween.Completed:Wait()
+end
+end
+end
+end
+
+end)
+example:AddToggle("Auto Collect Pumpkins", function(state)
+    getfenv().auto1 = (state and true or false)
+local collect = game:GetService("CollectionService")
+while getfenv().auto1 do
+    task.wait()
+    local plr = game.Players.LocalPlayer
+local prim = plr.ReplicationFocus
+
+for i,v in pairs(collect:GetTagged("HaloweenPumpkin")) do
+    if v:IsA("Part") and v:findFirstChild("TouchInterest") then
+firetouchinterest(prim,v,0)
+firetouchinterest(prim,v,1)
+task.wait()
+    end
+end
+end
+end)
