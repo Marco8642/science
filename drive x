@@ -62,7 +62,7 @@ local maxSpeed = CarGears[GearValue][1]
 while getfenv().autorace do
     task.wait()
   if not workspace.RaceCheckpoints:FindFirstChildOfClass("Model") then  
-local ohString1 = "BridgeTrail"
+local ohString1 = "Bridge_Trail"
 local ohBoolean2 = true
 
 game:GetService("ReplicatedStorage")["events-shared/Definations/Networking/RaceDefinations@GeneralEvents"].EnterRaceQueue:FireServer(ohString1, ohBoolean2)
