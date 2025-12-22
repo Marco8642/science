@@ -175,7 +175,7 @@ local ticker = tick()
       if gate and gate.Name == "Gate" then
        speed = 100000
       end
-      local pos = CFrame.new(gate.WorldPivot.Position)+Vector3.new(0,0,0)
+      local pos = CFrame.new(gate.WorldPivot.Position)+Vector3.new(0,2,0)
 		  local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position- pos.Position).magnitude
 		 local TweenService = game:GetService("TweenService")
 		 local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
@@ -222,6 +222,7 @@ local ticker = tick()
 		 getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
 		 getfenv().tween:Play()
 				   getfenv().tween.Completed:Wait()
+task.wait(1)
   end
   local gate = workspace.Camera:findFirstChild("Gate") or workspace.Camera:findFirstChild("SupplyDropRegion") 
   if test ~= workspace.Camera:FindFirstChild("Gate") and gate and plr:DistanceFromCharacter(gate.WorldPivot.Position) > 100  and getfenv().auto
