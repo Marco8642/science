@@ -1,14 +1,15 @@
-local mt = getrawmetatable(game);
-setreadonly(mt,false)
-local namecall = mt.__namecall
-mt.__namecall = newcclosure(function(self, ...)
-    local Method = getnamecallmethod()
-    local Args = {...}
-    if Method == 'FireServer' and self.Name == "FireAircraftEvent" and Args[2] == "Crash"   then
-return 
-    end
-    return namecall(self, ...) 
-end)
+    -- local mt = getrawmetatable(game);
+    -- setreadonly(mt,false)
+    -- local namecall = mt.__namecall
+    -- mt.__namecall = newcclosure(function(self, ...)
+    --     local Method = getnamecallmethod()
+    --     local Args = {...}
+    --     if Method == 'FireServer' and self.Name == "FireAircraftEvent" and Args[2] == "Crash"   then
+    -- return 
+    --     end
+    --     return namecall(self, ...) 
+    -- end)
+
 warn("Anti afk running")
 game:GetService("Players").LocalPlayer.Idled:connect(function()
 warn("Anti afk ran")
@@ -174,7 +175,7 @@ local ticker = tick()
       if gate and gate.Name == "Gate" then
        speed = 100000
       end
-      local pos = CFrame.new(gate.WorldPivot.Position)+Vector3.new(0,2,0)
+      local pos = CFrame.new(gate.WorldPivot.Position)+Vector3.new(0,0,0)
 		  local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position- pos.Position).magnitude
 		 local TweenService = game:GetService("TweenService")
 		 local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
@@ -197,7 +198,25 @@ local ticker = tick()
                  plane:PivotTo(TweenValue.Value)
            end
                plane.PrimaryPart = plane.Main
+-- local Event = game:GetService("ReplicatedStorage").Modules.Network.ReplicateAircraft
+-- local check1 = test.X
+-- local check2 = test.Z
+-- if check1 > 100 then
+--    check1 = 100
+--  elseif check2 > 100 then
+--      check2 = 100
+--  end
+--  if check1 < -100 then
+--    check1 = -100
+--  elseif check2 < -100 then
+--      check2 = -100
+--  end
+-- Event:FireServer(
+--     Vector3int16.new(check1, test.Y, check2)
+-- )
+			   --plane.PrimaryPart.AssemblyLinearVelocity = Vector3.zero
 
+			 
 		 end)
 					 
 		 getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
