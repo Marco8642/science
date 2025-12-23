@@ -47,66 +47,81 @@ example:AddDropdown({"Velocity - New","Tweening"},function(state)
     getfenv().method = state
      end)
 example:AddToggle("Auto Farm", function(state)
-getfenv().auto = true
-getfenv().first = false
-spawn(function()
-    while getfenv().auto do
-    for i,v in pairs(workspace:GetChildren()) do
-        if v.ClassName == "Model" and v:FindFirstChild("Container") or v.Name == "PortCraneOversized" then
-            v:Destroy()
-        end
-    end
-    wait(1)
+getfenv().auto = (state and true or false)
+if getfenv().auto then
+if not game.ReplicatedStorage:FindFirstChild("mrbackupfolder") then
+local folder = Instance.new("Folder",game.ReplicatedStorage)
+folder.Name = "mrbackupfolder"
 end
-end)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+for i,v in pairs(workspace:GetChildren()) do
+    if v.ClassName == "Model" and  not string.find(v.Name,plr.Name) and  not string.find(v.Name,plr.DisplayName) and not string.find(v.Name,"Gift") and v.Name ~= "" or
+    v.ClassName == "Folder" and not string.find(v.Name,plr.Name) and  not string.find(v.Name,plr.DisplayName) and not string.find(v.Name,"Gift") and v.Name ~= "" or v:IsA("MeshPart") then
+        v.Parent = game.ReplicatedStorage:FindFirstChild("mrbackupfolder")
+end
+end
+task.wait()
+else
+    if getfenv().tween then
+        getfenv().tween:Cancel()
+    end
+for i,v in pairs(game.ReplicatedStorage:FindFirstChild("mrbackupfolder"):GetChildren()) do
+v.Parent = workspace
+task.wait()
+
+end
+task.wait()
+end
 while getfenv().auto do
-local hum = game.Players.LocalPlayer.Character.Humanoid
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local hum = chr.Humanoid
 local car = hum.SeatPart.Parent
+getfenv().car = car
+if not _G.ooga then
+local new = Instance.new("Part",workspace)
+new.Anchored = true
+new.Size = Vector3.new(10000,10,10000)
+_G.ooga = new
+end
  car.PrimaryPart=car.Body:FindFirstChild("#Weight")
-if getfenv().first ~= true then
-    if workspace.Workspace:FindFirstChild("Buildings") then
-    workspace.Workspace.Buildings:Destroy()
-    end
 
-if BobTheBuilder == nil then
-BobTheBuilder = Instance.new("Part",workspace)
-BobTheBuilder.Size = Vector3.new(10000,10,10000)
-BobTheBuilder.Position = Vector3.new(-7594.541015625, 7, 5130.95263671875)
-BobTheBuilder.Anchored = true
-BobTheBuilder2 = Instance.new("Part",workspace)
-BobTheBuilder2.Size = Vector3.new(10000,10,10000)
-BobTheBuilder2.CFrame = BobTheBuilder.CFrame*CFrame.new(0,0,-1000)
-BobTheBuilder2.Anchored = true
-BobTheBuilder3 = Instance.new("Part",workspace)
-BobTheBuilder3.Size = Vector3.new(10000,10,10000)
-BobTheBuilder3.CFrame = BobTheBuilder2.CFrame*CFrame.new(0,0,-1000)
-BobTheBuilder3.Anchored = true 
-end
-car:PivotTo(BobTheBuilder.CFrame*CFrame.new(0,5,1000))
-wait(5)
-for i,v in pairs(workspace.Buildings:GetDescendants()) do
-    if v:IsA("BasePart") and (v.Position-BobTheBuilder.Position).magnitude < 500 then
-    v.CanCollide = false
+local frames = {
+    CFrame.new(105.419128, -26.0098934, 7965.37988, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(2751.86499, -26.0098934, 3694.63354, 3.34978104e-05, 0.951051414, -0.309032798, -1, 3.34978104e-05, -5.31971455e-06, 5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-8821.48438, -26.0098934, 2042.49939, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-6408.62109, -26.0098934, -727.765198, 3.34978104e-05, 0.951051414, -0.309032798, -1, 3.34978104e-05, -5.31971455e-06, 5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-6099.79639, -26.00989345, -1027.94556, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-6066.70068, -26.0098934, 493.255524, 3.34978104e-05, 0.951051414, -0.309032798, -1, 3.34978104e-05, -5.31971455e-06, 5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(132.786133, -26.0098934, 15.2286377, 3.34978104e-05, 0.951051414, -0.309032798, -1, 3.34978104e-05, -5.31971455e-06, 5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-7692.85449, -26.0098934, -4668.61963, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(-7692.85449, -26.0098934, -4668.61963, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414),
+    CFrame.new(4887.24609, -26.0098934, 1222.96826, -3.36170197e-05, 0.951051414, -0.309032798, -1, -3.36170197e-05, 5.31971455e-06, -5.31971455e-06, 0.309032798, 0.951051414)
+}
+for i,v in pairs(frames) do
+           local speed = getfenv().speed or 300
+            local pos = v+Vector3.new(0,5,0)
+          local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position-pos.Position).magnitude
+		 local TweenService = game:GetService("TweenService")
+		 local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+		
+		 local TweenValue = Instance.new("CFrameValue")
+		 TweenValue.Value = getfenv().car:GetPrimaryPartCFrame()
+					 
+		 TweenValue.Changed:Connect(function()
+         local test = TweenValue.Value.Position
+             _G.ooga.Position =test-Vector3.new(0,14,0)
+             getfenv().car:PivotTo(CFrame.new(_G.ooga.Position+Vector3.new(0,7,0),pos.Position))
+             local velo = getfenv().car.PrimaryPart.CFrame.LookVector*speed
+             getfenv().car.PrimaryPart.AssemblyLinearVelocity = velo
+		 end)
+					 
+		 getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
+		 getfenv().tween:Play()
+		repeat task.wait(0)
+		until getfenv().tween.PlaybackState == Enum.PlaybackState.Cancelled or getfenv().tween.PlaybackState == Enum.PlaybackState.Completed or getfenv().tween.PlaybackState == Enum.PlaybackState.Paused
     end
-    end   
-end
-
-car.PrimaryPart.Velocity = Vector3.new(0,0,0)
-getfenv().first = true
- local location = BobTheBuilder2.CFrame*CFrame.new(0,5,-1300).Position
- repeat task.wait()
-    mathlock = getfenv().speed or 500
-    car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
-    car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().auto == false 
-car.PrimaryPart.Velocity = Vector3.new(0,0,0)
-local location = BobTheBuilder.CFrame*CFrame.new(0,5,1000).Position
-repeat task.wait()
-    mathlock = getfenv().speed or 500
-    car.PrimaryPart.Velocity =car.PrimaryPart.CFrame.LookVector*mathlock
-    car:PivotTo(CFrame.new(car.PrimaryPart.Position,location))
-until game.Players.LocalPlayer:DistanceFromCharacter(location)< 50 or getfenv().auto == false 
-car.PrimaryPart.Velocity = Vector3.new(0,0,0)
 end
 end)
 example:AddToggle("Auto Deliver[Event]", function(state)
@@ -254,3 +269,59 @@ repeat task.wait()
 end
 end
 end)
+
+
+-- example:AddToggle("Auto Collect Pumpkins[Event]", function(state)
+-- getfenv().pumpkin = (state and true or false)
+-- while getfenv().pumpkin do
+-- task.wait()
+-- local service = game:GetService("CollectionService")
+-- local plr = game.Players.LocalPlayer
+-- local chr = plr.Character
+-- local seat = chr.Humanoid.SeatPart
+-- local car = seat.Parent
+-- local prim = chr.PrimaryPart
+-- local maxdistance = math.huge
+-- local chosen
+-- for i,v in pairs(service:GetTagged("Detail_Bigger")) do
+-- if v.PrimaryPart and getfenv().pumpkin then
+-- local dist = (v.PrimaryPart.Position-seat.Position).magnitude
+-- if dist < maxdistance then
+-- maxdistance = dist
+-- chosen = v.PrimaryPart
+-- end
+-- end
+-- end
+-- if chosen then
+--     local mesh = chosen.Parent:FindFirstChildOfClass("MeshPart")
+--     local test = mesh.CFrame-Vector3.new(0,5,0)
+-- --local velo = chr.PrimaryPart.Velocity
+--          local LocalPlayer = game.Players.LocalPlayer
+--          local chr = LocalPlayer.Character
+--           local pos = test
+--           local speed = getfenv().speed or 500
+--           local dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position- pos.Position).magnitude
+--          local TweenService = game:GetService("TweenService")
+--          local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+         
+--          local TweenValue = Instance.new("CFrameValue")
+--          TweenValue.Value = chr:GetPrimaryPartCFrame()
+                     
+--          TweenValue.Changed:Connect(function()
+--              car:PivotTo(TweenValue.Value)
+--              local test = car.PrimaryPart.Velocity
+--               car.PrimaryPart.Velocity = Vector3.zero
+--          end)
+                     
+--          getfenv().tween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=pos})
+--          getfenv().tween:Play()
+--          getfenv().tween.Completed:Wait()
+
+-- end
+-- end
+-- end)
+
+
+
+
+
