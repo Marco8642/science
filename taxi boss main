@@ -29,7 +29,7 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco
 local example = library:CreateWindow({
   text = "Taxi Boss"
 })
-example:AddToggle("Auto Destroy Pumpkins", function(state)
+example:AddToggle("Auto Collect [Event]", function(state)
 getfenv().candy =(state and true or false)
 local function findCar()
     local car = nil
@@ -40,19 +40,37 @@ local function findCar()
     end
     return car
     end
+
     print(findCar())
     while getfenv().candy do
     task.wait()
     pcall(function()
-    for i,v in pairs(workspace.Pumpkins:GetDescendants()) do
-     if v.Name == "TouchInterest" then
-     firetouchinterest(findCar().PrimaryPart,v.Parent,0)
-      firetouchinterest(findCar().PrimaryPart,v.Parent,0)
-      task.wait(0.2)
-      end
+    for i,v in pairs(workspace.SpawnedSnowPiles:GetChildren()) do
+     firetouchinterest(findCar().PrimaryPart,v,0)
+      firetouchinterest(findCar().PrimaryPart,v,0)
       end
       end)
       end
+    end)
+    example:AddToggle("Auto Open Winter", function(state)
+getfenv().open =(state and true or false)
+while getfenv().open do
+local Event = game:GetService("ReplicatedStorage").Christmas.OpenPresent
+Event:InvokeServer(
+    "winter"
+)
+task.wait(0.2)
+end
+    end)
+    example:AddToggle("Auto Open Aurora", function(state)
+getfenv().open1 =(state and true or false)
+while getfenv().open1 do
+local Event = game:GetService("ReplicatedStorage").Christmas.OpenPresent
+Event:InvokeServer(
+    "aurora"
+)
+task.wait(0.2)
+end
     end)
 example:AddToggle("Auto Collect Parts", function(state)
     getfenv().partcollector = (state and true or false)
@@ -814,4 +832,3 @@ part.RotVelocity = Vector3.new(0,part.RotVelocity.Y+10,0)
 end)
 end
 end)
-
