@@ -37,6 +37,9 @@ mt.__namecall = newcclosure(function(self, ...)
     Args[2] = Vector3.new(0,-1000,0)
   elseif  Method == 'FireServer' and self.Name == "NPCHandler" and rawget(...,"Action") == "DeclineOrder" then
     return
+  elseif Method == 'Fire' and self.Name == "FullscreenReward" and getfenv().deluxe1
+  or Method == 'Fire' and self.Name == "FullscreenReward" and getfenv().deluxe then
+    return
     end
     return namecall(self, ...) 
 end)
@@ -185,11 +188,11 @@ local customer = nil
     local plr = game.Players.LocalPlayer
     local guis = plr.PlayerGui
     local menu = guis.Menu
-    local req = guis.Dialogue.CarSpec.Frame.Frame
+    --local req = guis.Dialogue.CarSpec.Frame.Frame
 
-    for i,v in pairs(menu.Inventory.CarShop.Frame.Frame:GetDescendants()) do
-        if v.Name == "PriceValue" and tonumber(string.gsub(v.Value,",",""):split("$")[2]) ~= nil and tonumber(string.gsub(v.Value,",",""):split("$")[2]) > tonumber(text[1]) and tonumber(string.gsub(v.Value,",",""):split("$")[2]) < tonumber(text[2]) then
-    local ok =tonumber(string.gsub(v.Value,",",""):split("$")[2])
+    for i,v in pairs(require(game:GetService("ReplicatedStorage").Data.CarShopEntries).CarsInShop) do
+        if v.PriceValue  and v.PriceValue  > tonumber(text[1]) and v.PriceValue  < tonumber(text[2]) then
+    local ok =v.PriceValue 
     if ok < num then
     num = ok
     _G.rat = v
@@ -197,15 +200,15 @@ local customer = nil
     end
     end
     textn = 1
-repeat wait()
-text = _G.rat.Parent.Name:split("")[textn]
-    textn=textn+1
+-- repeat wait()
+-- text = _G.rat.Parent.Name:split("")[textn]
+--     textn=textn+1
 
-    warn(text,textn)
-until tonumber(text) == nil
+--     warn(text,textn)
+-- until tonumber(text) == nil
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "AcceptOrder",["OrderId"] = customer:GetAttribute("OrderId")})
     wait()
-    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["OrderId"] = customer:GetAttribute("OrderId"),["Action"] = "CompleteOrder",["Specs"] = {["Car"] = text.._G.rat.Parent.Name:split(tostring(_G.rat.Parent.Name:split("")[textn-1]))[2],["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Springs"] = customer:GetAttribute("OrderSpecSprings"),["RimColor"] = customer:GetAttribute("OrderSpecRimColor")}})
+    game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["OrderId"] = customer:GetAttribute("OrderId"),["Action"] = "CompleteOrder",["Specs"] = {["Car"] = _G.rat.Id,["Color"] = customer:GetAttribute("OrderSpecColor"),["Rims"] = customer:GetAttribute("OrderSpecRims"),["Springs"] = customer:GetAttribute("OrderSpecSprings"),["RimColor"] = customer:GetAttribute("OrderSpecRimColor")}})
     wait()
     game:GetService("ReplicatedStorage").Remotes.DealershipCustomerController.NPCHandler:FireServer({["Action"] = "CollectReward",["OrderId"] = customer:GetAttribute("OrderId")})
     repeat wait()
@@ -596,6 +599,7 @@ elseif game:GetService("Players").LocalPlayer.PlayerGui.Menu.Race.Visible == tru
   repeat task.wait()
   until game:GetService("Players").LocalPlayer.PlayerGui.RaceStart.GO.ImageTransparency ~= 1 or getfenv().firsttime == false or _G.racetest == false
   getfenv().firsttime = false
+  warn("passed")
 local function updategoal()
     local goal = nil
     local distance = math.huge
@@ -620,6 +624,21 @@ end
 end
 return goal
 end
+
+local function updategoal2()
+    local goal = nil
+    local distance = math.huge
+    for i,v in pairs(workspace.Races:GetDescendants()) do
+        if v.Name == "GoalPart" and v.ClassName == "Part" then
+         local Dist = (game.Players.LocalPlayer.Character.HumanoidRootPart.Position - v.Position).magnitude
+            if Dist < distance then
+             distance = Dist
+               goal = v
+        end
+    end
+end
+return goal
+end
 local goal = updategoal()
         repeat wait()
             local test = nil
@@ -636,7 +655,8 @@ local goal = updategoal()
             local TweenValue = Instance.new("CFrameValue")
             TweenValue.Value = car:GetPrimaryPartCFrame()     
             TweenValue.Changed:Connect(function()
-            car:PivotTo(TweenValue.Value)
+                car.PrimaryPart.Velocity = Vector3.zero
+            car:PivotTo(CFrame.new(TweenValue.Value.Position))
             end)
             local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=v.CFrame+Vector3.new(0,5,0)})
             OnTween:Play()
@@ -652,7 +672,8 @@ local postest2 = Vector3.new(postest.X,postest.Y,postest.Z)
             TweenValue.Value = car:GetPrimaryPartCFrame()     
             getfenv().stopper = TweenValue.Changed:Connect(function()
             if v.Parent.Parent:FindFirstChild(tonumber(v.Parent.Name)+1) and not v.Parent.Parent:FindFirstChild(tonumber(v.Parent.Name)+1):FindFirstChildOfClass("MeshPart")     then
-            car:PivotTo(TweenValue.Value)
+            car.PrimaryPart.Velocity = Vector3.zero
+                car:PivotTo(CFrame.new(TweenValue.Value.Position))
             else
                 warn("abnormal")
                 print("-------------------------------------------------------------------")
@@ -680,7 +701,8 @@ local postest2 = Vector3.new(postest.X,postest.Y,postest.Z)
     local TweenValue = Instance.new("CFrameValue")
     TweenValue.Value = car:GetPrimaryPartCFrame()     
     TweenValue.Changed:Connect(function()
-    car:PivotTo(TweenValue.Value)
+        car.PrimaryPart.Velocity = Vector3.zero
+    car:PivotTo(CFrame.new(TweenValue.Value.Position))
     end)
     local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=test})
     OnTween:Play()
@@ -702,7 +724,8 @@ local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.E
 local TweenValue = Instance.new("CFrameValue")
 TweenValue.Value = car:GetPrimaryPartCFrame()     
 TweenValue.Changed:Connect(function()
-car:PivotTo(TweenValue.Value)
+    car.PrimaryPart.Velocity = Vector3.zero
+car:PivotTo(CFrame.new(TweenValue.Value.Position))
 end)
 local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(v.Position.X,game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y,v.Position.Z)})
 OnTween:Play()
@@ -719,12 +742,45 @@ repeat task.wait()
     car.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0,0,0)
 until tick()-time >= 1 or _G.racetest == false
 workspace.Gravity = 196
+elseif not updategoal()  and not test and updategoal2() then
+   local speed =  getfenv().speed or 200
+local v = updategoal2()
+local postest = CFrame.new(v.Position.X,game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y,v.Position.Z)*CFrame.new(0,0,-100)
+local postest2 = Vector3.new(postest.X,postest.Y,postest.Z)
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent.Parent
+dist = (chr.HumanoidRootPart.Position-postest2).Magnitude
+local TweenService = game:GetService("TweenService")
+local TweenInfoToUse = TweenInfo.new(dist/speed, Enum.EasingStyle.Linear, Enum.EasingDirection.InOut, 0, false, 0)
+local TweenValue = Instance.new("CFrameValue")
+TweenValue.Value = car:GetPrimaryPartCFrame()     
+TweenValue.Changed:Connect(function()
+    car.PrimaryPart.Velocity = Vector3.zero
+car:PivotTo(CFrame.new(TweenValue.Value.Position))
+end)
+local OnTween = TweenService:Create(TweenValue, TweenInfoToUse, {Value=CFrame.new(v.Position.X,game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y,v.Position.Z)})
+OnTween:Play()
+OnTween.Completed:Wait()
+wait(1)
+car:PivotTo(CFrame.new(v.Position.X,game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y,v.Position.Z))
+wait()
+local chr = game.Players.LocalPlayer.Character
+local car = chr.Humanoid.SeatPart.Parent.Parent
+car.PrimaryPart.AssemblyLinearVelocity = car.PrimaryPart.CFrame.LookVector*350
+wait(1)
+local time = tick()
+repeat task.wait()
+    car.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0,0,0)
+until tick()-time >= 1 or _G.racetest == false
+workspace.Gravity = 196 
 end
+
 end
 --end)
 if p == false then
   warn(p,call)
 end
+
 end
 end)
 example:AddToggle("Auto Drift Race",function(state)
@@ -878,16 +934,16 @@ end)
 local example = library:CreateWindow({
     text = "Misc"
   })
-    example:AddButton("Make Obtainable[Cosmetic]", function(state)
-    local plr = game.Players.LocalPlayer
-local carid = plr:GetAttribute("MostRelevantCarInstance")
-print(carid)
-for i,v in pairs(game:GetService("ReplicatedStorage").Customization:GetDescendants()) do
-    if  not v:GetAttribute("MoneyPrice") then
-        v:SetAttribute("MoneyPrice",0.00000)
-    end
-end
-    end)
+--     example:AddButton("Make Obtainable[Cosmetic]", function(state)
+--     local plr = game.Players.LocalPlayer
+-- local carid = plr:GetAttribute("MostRelevantCarInstance")
+-- print(carid)
+-- for i,v in pairs(game:GetService("ReplicatedStorage").Customization:GetDescendants()) do
+--     if  not v:GetAttribute("MoneyPrice") then
+--         v:SetAttribute("MoneyPrice",0.00000)
+--     end
+-- end
+--     end)
   example:AddButton("Force Load Map", function(state)
     for i,v in pairs(workspace:GetDescendants()) do
         if v.ClassName == "Model" then
@@ -901,20 +957,81 @@ end
   example:AddLabel("Race Teleports", function(state)
   end)
 example:AddDropdown(races(),function(state)
-   print(state)
+  if state ~= "None" then
 for i,v in pairs(workspace.Races:GetChildren()) do
-if v.Name == state and v:FindFirstChildOfClass("UnionOperation") then
+if v.Name == state and v:FindFirstChildOfClass("UnionOperation")   then
     local chr = game.Players.LocalPlayer.Character
     if chr.Humanoid.SeatPart == nil then
         chr.HumanoidRootPart.CFrame = v:FindFirstChildOfClass("UnionOperation").CFrame
     elseif chr.Humanoid.SeatPart ~= nil then
+        local chr = game.Players.LocalPlayer.Character
+
     local car = chr.Humanoid.SeatPart.Parent.Parent
 car:PivotTo(v:FindFirstChildOfClass("UnionOperation").CFrame)
     end
 break
+elseif v:IsA("Model") then 
+    local chr = game.Players.LocalPlayer.Character
+    if chr.Humanoid.SeatPart == nil then
+        chr.HumanoidRootPart.CFrame = v:GetPivot()
+    elseif chr.Humanoid.SeatPart ~= nil then
+        local chr = game.Players.LocalPlayer.Character
+
+    local car = chr.Humanoid.SeatPart.Parent.Parent
+car:PivotTo(v:GetPivot())
+    end
+end
 end
 end
  end)
+    example:AddToggle("Auto Spin Standard",function(state)
+           getfenv().spinner = (state and true or false)
+while getfenv().spinner do
+	task.spawn(function()
+local Event = game:GetService("ReplicatedStorage").Databases.Spinners.Spin
+Event:InvokeServer(
+    "Standard",
+    ""
+)
+end)
+task.wait()
+end
+   end)
+   example:AddToggle("Auto Spin Hyper",function(state)
+           getfenv().spinner1 = (state and true or false)
+while getfenv().spinner1 do
+	task.spawn(function()
+local Event = game:GetService("ReplicatedStorage").Databases.Spinners.Spin
+Event:InvokeServer(
+    "Hyper",
+    "Free"
+)
+end)
+task.wait()
+end
+   end)
+   example:AddToggle("Auto Open Delux Custom Crate", function(state)
+    getfenv().deluxe = (state and true or false)
+    workspace.Gravity = 196
+    while getfenv().deluxe do
+local Event = game:GetService("ReplicatedStorage").Remotes.Services.ConsumableServiceRemotes.Consume
+Event:InvokeServer(
+    "DecorationKitDeluxe"
+)
+task.wait()
+	end
+	end)
+example:AddToggle("Auto Open Custom Crate", function(state)
+    getfenv().deluxe1 = (state and true or false)
+    workspace.Gravity = 196
+    while getfenv().deluxe1 do
+local Event = game:GetService("ReplicatedStorage").Remotes.Services.ConsumableServiceRemotes.Consume
+Event:InvokeServer(
+    "DecorationKit"
+)
+task.wait()
+	end
+	end)
  if readfile("cdtdelivery.txt") ~= nil then
     starman.Text = tostring(readfile("cdtdelivery.txt"):split(" ")[1])
     getfenv().stars = tonumber(readfile("cdtdelivery.txt"):split(" ")[1])
