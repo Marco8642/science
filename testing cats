@@ -33,10 +33,12 @@ until getfenv().testing
 getfenv().testing = nil
 end
 end
+task.wait(1)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Marco8642/science/refs/heads/main/testing%20cats"))()
 
 
 ]])
+
 game.Players.LocalPlayer:kick()
 task.wait(1)
 game:GetService("TeleportService"):Teleport(game.PlaceId)
