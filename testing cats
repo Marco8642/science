@@ -20,6 +20,7 @@ test = v
 end
 end
 until test 
+task.wait(2)
 warn("done")
 for i,v in pairs(workspace.LeafPiles:GetDescendants()) do
 if v:IsA("ProximityPrompt")  then
