@@ -1,0 +1,41 @@
+queueonteleport([[
+    repeat task.wait()
+    until game:GetService("Players") and workspace:FindFirstChild("LeafPiles") and #workspace:FindFirstChild("LeafPiles"):GetChildren() >= 10
+    warn("here")
+repeat task.wait()
+until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character.PrimaryPart
+local Event = game:GetService("ReplicatedStorage").Remotes.SendVFXReliable
+Event.OnClientEvent:Connect(function(t1,t2,t3)
+if t1 == "LeafEventVFX" then
+getfenv().testing = true
+end
+end)
+local plr = game.Players.LocalPlayer
+local chr = plr.Character
+local test 
+repeat task.wait()
+for i,v in pairs(workspace.LeafPiles:GetDescendants()) do
+if v:IsA("ProximityPrompt")  then
+test = v
+end
+end
+until test 
+warn("done")
+for i,v in pairs(workspace.LeafPiles:GetDescendants()) do
+if v:IsA("ProximityPrompt")  then
+repeat task.wait(0.1)
+chr:PivotTo(v.Parent.CFrame)
+task.wait()
+fireproximityprompt(v)
+task.wait()
+until getfenv().testing
+getfenv().testing = nil
+end
+end
+
+
+]])
+game.Players.LocalPlayer:kick()
+task.wait(1)
+game:GetService("TeleportService"):Teleport(game.PlaceId)
+
